@@ -1,16 +1,1 @@
-CREATE DATABASE CoinShell
 
-USE CoinShell
-CREATE TABLE Fiat_Currency(
-Id int identity(1,1) not null,
-CurrencyName Nvarchar(3) not null);
-
-USE CoinShell
-CREATE TABLE Members(
-Id int identity(1,1) not null,
-CustomizedUserName nvarchar(50) not null,
-E-Mail nvarchar(50) not null,
-Password nvarchar(50) not null,
-isPremium nvarcahr(1) not null,
-JoinTime Date not null,
-)
