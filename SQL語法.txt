@@ -1,16 +1,195 @@
-CREATE DATABASE CoinShell
+(IF NOT EXISTS (SELECT * FROM  sysdatabases where name='CoinShell')
+CREATE DATABASE CoinShell)
 
 USE CoinShell
 CREATE TABLE Fiat_Currency(
-Id int identity(1,1) not null,
-CurrencyName Nvarchar(3) not null);
+Id int identity(1,1) NOT NULL,
+CurrencyName NVARCHAR(3) NOT NULL);
+
+CREATE TABLE List_Of_Cryptocurrency(
+Id int identity(1,1) NOT NULL PRIMARY KEY,
+Crypocurrency NVARCHAR(50) NOT NULL
+)
 
 USE CoinShell
 CREATE TABLE Members(
-Id int identity(1,1) not null,
-CustomizedUserName nvarchar(50) not null,
-E-Mail nvarchar(50) not null,
-Password nvarchar(50) not null,
-isPremium nvarcahr(1) not null,
-JoinTime Date not null,
+Id int identity(1,1) PRIMARY KEY NOT NULL,
+CustomizedUserName NVARCHAR(50) NOT NULL,
+CustomizedUserAvatar NVARCHAR(max) NOT NULL,
+E_Mail NVARCHAR(50) NOT NULL UNIQUE,
+Password NVARCHAR(50) NOT NULL,
+MyShell money ,
+IsPremium NVARCHAR(2) NOT NULL,
+JoinTime Date NOT NULL,
+
+Recommender  NVARCHAR(50)  /*這個地方應該要參照Members的欄位，不能讓使用者填一個不存在的E_mail*/
 )
+
+
+
+/*CREATE TABLE Recommender(
+Id int UNIQUE NOT NULL ,
+)*/
+
+Use CoinShell
+CREATE TABLE CNY_Cryptocurrency(
+Fiat_Currency int References List_Of_Cryptocurrency(Id), 
+Date date NOT NULL  Primary KEY,
+Name_of_Cryptocurrency NVARCHAR(10),
+Symbol_of_Cryptocurrency NVARCHAR(10),
+Slug_of_Cryptocurrency NVARCHAR(30),
+Max_Supply int,
+Circulating_Supply int,
+Price_of_Cryptocurrency money,
+Percent_Change_1h decimal(12,8),
+Percent_Change_24h decimal(12,8),
+Percent_Change_7d decimal(12,8),
+Percent_Change_30d decimal(12,8),
+Percent_Change_60d decimal(12,8),
+Percent_Change_90d decimal(12,8),
+Market_Cap money ,
+Fully_Diluted_Market_Cap money ,
+
+)
+
+Use CoinShell
+
+CREATE TABLE EUR_Cryptocurrency(
+Fiat_Currency int References List_Of_Cryptocurrency(Id), 
+Date date NOT NULL Primary KEY,
+Name_of_Cryptocurrency NVARCHAR(10),
+Symbol_of_Cryptocurrency NVARCHAR(10),
+Slug_of_Cryptocurrency NVARCHAR(30),
+Max_Supply int,
+Circulating_Supply int,
+Price_of_Cryptocurrency money,
+Percent_Change_1h decimal(12,8),
+Percent_Change_24h decimal(12,8),
+Percent_Change_7d decimal(12,8),
+Percent_Change_30d decimal(12,8),
+Percent_Change_60d decimal(12,8),
+Percent_Change_90d decimal(12,8),
+Market_Cap money ,
+Fully_Diluted_Market_Cap money ,
+)
+
+
+Use CoinShell
+
+CREATE TABLE JPY_Cryptocurrency(
+Fiat_Currency int References List_Of_Cryptocurrency(Id), 
+Date date NOT NULL Primary KEY,
+Name_of_Cryptocurrency NVARCHAR(10),
+Symbol_of_Cryptocurrency NVARCHAR(10),
+Slug_of_Cryptocurrency NVARCHAR(30),
+Max_Supply int,
+Circulating_Supply int,
+Price_of_Cryptocurrency money,
+Percent_Change_1h decimal(12,8),
+Percent_Change_24h decimal(12,8),
+Percent_Change_7d decimal(12,8),
+Percent_Change_30d decimal(12,8),
+Percent_Change_60d decimal(12,8),
+Percent_Change_90d decimal(12,8),
+Market_Cap money ,
+Fully_Diluted_Market_Cap money ,
+)
+
+Use CoinShell
+
+CREATE TABLE TWD_Cryptocurrency(
+Fiat_Currency int References List_Of_Cryptocurrency(Id), 
+Date date NOT NULL Primary KEY,
+Name_of_Cryptocurrency NVARCHAR(10),
+Symbol_of_Cryptocurrency NVARCHAR(10),
+Slug_of_Cryptocurrency NVARCHAR(30),
+Max_Supply int,
+Circulating_Supply int,
+Price_of_Cryptocurrency money,
+Percent_Change_1h decimal(12,8),
+Percent_Change_24h decimal(12,8),
+Percent_Change_7d decimal(12,8),
+Percent_Change_30d decimal(12,8),
+Percent_Change_60d decimal(12,8),
+Percent_Change_90d decimal(12,8),
+Market_Cap money ,
+Fully_Diluted_Market_Cap money ,
+)
+
+
+Use CoinShell
+
+CREATE TABLE USD_Cryptocurrency(
+Fiat_Currency int References List_Of_Cryptocurrency(Id), 
+Date date NOT NULL Primary KEY,
+Name_of_Cryptocurrency NVARCHAR(10),
+Symbol_of_Cryptocurrency NVARCHAR(10),
+Slug_of_Cryptocurrency NVARCHAR(30),
+Max_Supply int,
+Circulating_Supply int,
+Price_of_Cryptocurrency money,
+Percent_Change_1h decimal(12,8),
+Percent_Change_24h decimal(12,8),
+Percent_Change_7d decimal(12,8),
+Percent_Change_30d decimal(12,8),
+Percent_Change_60d decimal(12,8),
+Percent_Change_90d decimal(12,8),
+Market_Cap money ,
+Fully_Diluted_Market_Cap money ,
+)
+
+
+Use CoinShell
+
+CREATE TABLE Sets_of_Investmen(
+Id int references Members(Id),
+Order_of_Sets int NOT NULL unique ,
+Element_of_Set1 NVARCHAR(50),
+Element_of_Set2 NVARCHAR(50),
+Element_of_Set3 NVARCHAR(50),
+Element_of_Set4 NVARCHAR(50),
+Element_of_Set5 NVARCHAR(50),
+Element_of_Set6 NVARCHAR(50),
+Element_of_Set7 NVARCHAR(50),
+Element_of_Set8 NVARCHAR(50),
+Element_of_Set9 NVARCHAR(50),
+Element_of_Set10 NVARCHAR(50),
+Element_of_Set11 NVARCHAR(50),
+Element_of_Set12 NVARCHAR(50),
+Element_of_Set13 NVARCHAR(50),
+Element_of_Set14 NVARCHAR(50),
+Element_of_Set15 NVARCHAR(50),
+Element_of_Set16 NVARCHAR(50),
+Element_of_Set17 NVARCHAR(50),
+Element_of_Set18 NVARCHAR(50),
+Element_of_Set19 NVARCHAR(50),
+Element_of_Set20 NVARCHAR(50),
+
+)
+
+
+USE CoinShell
+Create TABLE Personal_Forum_Information (
+Id reference Members(Id),
+Total_Posted_Artical int /*應該要和Article_Of_Members做結合，依照帳號抓出上傳的文章數量*/,
+)
+
+USE CoinShell
+CREATE TABLE Article_Of_Members(
+Id int identity(1,1) NOT NULL,
+Title NVARCHAR(100) NOT NULL,
+E_Mail_Of_Uploader NVARCHAR(50) NOT NULL ,
+Content_Of_Article NVARCHAR(max)
+Isvisible int ,
+Upload_Date DATE)
+
+
+USE CoinShell
+CREATE TABLE HomePage_News(
+Id int identity(1,1) NOT NULL,
+Title NVARCHAR(100),
+Content_Of_News NVARCHAR(MAX),
+Image_Of_News NVARCHAR(MAX)
+)
+
+
