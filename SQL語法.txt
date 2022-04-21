@@ -1,3 +1,4 @@
+IF NOT EXISTS (SELECT * FROM  sysdatabases where name='CoinShell')
 CREATE DATABASE CoinShell
 
 USE CoinShell
@@ -139,26 +140,26 @@ Use CoinShell
 CREATE TABLE Sets_of_Investmen(
 Id int references Members(Id),
 Order_of_Sets int not null unique ,
-Element_of_Set1 nvarchr(50),
-Element_of_Set2 nvarchr(50),
-Element_of_Set3 nvarchr(50),
-Element_of_Set4 nvarchr(50),
-Element_of_Set5 nvarchr(50),
-Element_of_Set6 nvarchr(50),
-Element_of_Set7 nvarchr(50),
-Element_of_Set8 nvarchr(50),
-Element_of_Set9 nvarchr(50),
-Element_of_Set10 nvarchr(50),
-Element_of_Set11 nvarchr(50),
-Element_of_Set12 nvarchr(50),
-Element_of_Set13 nvarchr(50),
-Element_of_Set14 nvarchr(50),
-Element_of_Set15 nvarchr(50),
-Element_of_Set16 nvarchr(50),
-Element_of_Set17 nvarchr(50),
-Element_of_Set18 nvarchr(50),
-Element_of_Set19 nvarchr(50),
-Element_of_Set20 nvarchr(50),
+Element_of_Set1 nvarchar(50),
+Element_of_Set2 nvarchar(50),
+Element_of_Set3 nvarchar(50),
+Element_of_Set4 nvarchar(50),
+Element_of_Set5 nvarchar(50),
+Element_of_Set6 nvarchar(50),
+Element_of_Set7 nvarchar(50),
+Element_of_Set8 nvarchar(50),
+Element_of_Set9 nvarchar(50),
+Element_of_Set10 nvarchar(50),
+Element_of_Set11 nvarchar(50),
+Element_of_Set12 nvarchar(50),
+Element_of_Set13 nvarchar(50),
+Element_of_Set14 nvarchar(50),
+Element_of_Set15 nvarchar(50),
+Element_of_Set16 nvarchar(50),
+Element_of_Set17 nvarchar(50),
+Element_of_Set18 nvarchar(50),
+Element_of_Set19 nvarchar(50),
+Element_of_Set20 nvarchar(50),
 
 )
 
