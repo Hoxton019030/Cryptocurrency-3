@@ -1,177 +1,198 @@
-USE CoinShell
-CREATE TABLE Fiat_Currency(
-Id int identity(1,1) not null,
-CurrencyName Nvarchar(3) not null);
+/*第一步 先執行這段，建立DATABASE */
+IF NOT EXISTS (SELECT * FROM  sysdatabases where name='CoinShell')
+CREATE DATABASE CoinShell
 
+
+/*第二步 執行下面這段，建立Table*/
 USE CoinShell
 CREATE TABLE Fiat_Currency(
-Id int identity(1,1) not null,
-CurrencyName Nvarchar(3) not null);
+Id INT IDENTITY(1,1) NOT NULL,
+CurrencyName NVARCHAR(3) NOT NULL);
+
+CREATE TABLE List_Of_Cryptocurrency(
+Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+Crypocurrency NVARCHAR(50) NOT NULL
+)
 
 USE CoinShell
 CREATE TABLE Members(
-Id int identity(1,1) PRIMARY KEY not null,
-CustomizedUserName nvarchar(50) not null,
-CustomizedUserAvatar nvarchar(max) not null,
-E_Mail nvarchar(50) not null UNIQUE,
-Password nvarchar(50) not null,
-MyShell money ,
-IsPremium nvarchar(2) not null,
-JoinTime Date not null,
+Id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+CustomizedUserName NVARCHAR(50) NOT NULL,
+CustomizedUserAvatar NVARCHAR(max) NOT NULL,
+E_Mail NVARCHAR(50) NOT NULL UNIQUE,
+Password NVARCHAR(50) NOT NULL,
+MyShell MONEY ,
+IsPremium NVARCHAR(2) NOT NULL,
+JoINTime Date NOT NULL,
 
-Recommender  nvarchar(50)  /*這個地方應該要參照Members的欄位，不能讓使用者填一個不存在的E_mail*/
+Recommender  NVARCHAR(50)  /*這個地方應該要參照Members的欄位，不能讓使用者填一個不存在的E_mail*/
 )
 
 
 
 /*CREATE TABLE Recommender(
-Id int UNIQUE not null ,
+Id INT UNIQUE NOT NULL ,
 )*/
 
 Use CoinShell
 CREATE TABLE CNY_Cryptocurrency(
-
-Date date not null  Primary KEY,
-Name_of_Cryptocurrency nvarchar(10),
-Symbol_of_Cryptocurrency nvarchar(10),
-Slug_of_Cryptocurrency nvarchar(30),
-Max_Supply int,
-Circulating_Supply int,
-Price_of_Cryptocurrency money,
-Percent_Change_1h decimal(12,8),
-Percent_Change_24h decimal(12,8),
-Percent_Change_7d decimal(12,8),
-Percent_Change_30d decimal(12,8),
-Percent_Change_60d decimal(12,8),
-Percent_Change_90d decimal(12,8),
-Market_Cap money ,
-Fully_Diluted_Market_Cap money ,
+Fiat_Currency INT REFERENCES List_Of_Cryptocurrency(Id), 
+Date date NOT NULL  Primary KEY,
+Name_of_Cryptocurrency NVARCHAR(10),
+Symbol_of_Cryptocurrency NVARCHAR(10),
+Slug_of_Cryptocurrency NVARCHAR(30),
+Max_Supply INT,
+Circulating_Supply INT,
+Price_of_Cryptocurrency MONEY,
+Percent_Change_1h DECIMAL(12,8),
+Percent_Change_24h DECIMAL(12,8),
+Percent_Change_7d DECIMAL(12,8),
+Percent_Change_30d DECIMAL(12,8),
+Percent_Change_60d DECIMAL(12,8),
+Percent_Change_90d DECIMAL(12,8),
+Market_Cap MONEY ,
+Fully_Diluted_Market_Cap MONEY ,
 
 )
 
 Use CoinShell
 
 CREATE TABLE EUR_Cryptocurrency(
-Date date not null Primary KEY,
-Name_of_Cryptocurrency nvarchar(10),
-Symbol_of_Cryptocurrency nvarchar(10),
-Slug_of_Cryptocurrency nvarchar(30),
-Max_Supply int,
-Circulating_Supply int,
-Price_of_Cryptocurrency money,
-Percent_Change_1h decimal(12,8),
-Percent_Change_24h decimal(12,8),
-Percent_Change_7d decimal(12,8),
-Percent_Change_30d decimal(12,8),
-Percent_Change_60d decimal(12,8),
-Percent_Change_90d decimal(12,8),
-Market_Cap money ,
-Fully_Diluted_Market_Cap money ,
+Fiat_Currency INT REFERENCES List_Of_Cryptocurrency(Id), 
+Date date NOT NULL Primary KEY,
+Name_of_Cryptocurrency NVARCHAR(10),
+Symbol_of_Cryptocurrency NVARCHAR(10),
+Slug_of_Cryptocurrency NVARCHAR(30),
+Max_Supply INT,
+Circulating_Supply INT,
+Price_of_Cryptocurrency MONEY,
+Percent_Change_1h DECIMAL(12,8),
+Percent_Change_24h DECIMAL(12,8),
+Percent_Change_7d DECIMAL(12,8),
+Percent_Change_30d DECIMAL(12,8),
+Percent_Change_60d DECIMAL(12,8),
+Percent_Change_90d DECIMAL(12,8),
+Market_Cap MONEY ,
+Fully_Diluted_Market_Cap MONEY ,
 )
 
 
 Use CoinShell
 
 CREATE TABLE JPY_Cryptocurrency(
-Date date not null Primary KEY,
-Name_of_Cryptocurrency nvarchar(10),
-Symbol_of_Cryptocurrency nvarchar(10),
-Slug_of_Cryptocurrency nvarchar(30),
-Max_Supply int,
-Circulating_Supply int,
-Price_of_Cryptocurrency money,
-Percent_Change_1h decimal(12,8),
-Percent_Change_24h decimal(12,8),
-Percent_Change_7d decimal(12,8),
-Percent_Change_30d decimal(12,8),
-Percent_Change_60d decimal(12,8),
-Percent_Change_90d decimal(12,8),
-Market_Cap money ,
-Fully_Diluted_Market_Cap money ,
+Fiat_Currency INT REFERENCES List_Of_Cryptocurrency(Id), 
+Date date NOT NULL Primary KEY,
+Name_of_Cryptocurrency NVARCHAR(10),
+Symbol_of_Cryptocurrency NVARCHAR(10),
+Slug_of_Cryptocurrency NVARCHAR(30),
+Max_Supply INT,
+Circulating_Supply INT,
+Price_of_Cryptocurrency MONEY,
+Percent_Change_1h DECIMAL(12,8),
+Percent_Change_24h DECIMAL(12,8),
+Percent_Change_7d DECIMAL(12,8),
+Percent_Change_30d DECIMAL(12,8),
+Percent_Change_60d DECIMAL(12,8),
+Percent_Change_90d DECIMAL(12,8),
+Market_Cap MONEY ,
+Fully_Diluted_Market_Cap MONEY ,
 )
 
 Use CoinShell
 
 CREATE TABLE TWD_Cryptocurrency(
-Date date not null Primary KEY,
-Name_of_Cryptocurrency nvarchar(10),
-Symbol_of_Cryptocurrency nvarchar(10),
-Slug_of_Cryptocurrency nvarchar(30),
-Max_Supply int,
-Circulating_Supply int,
-Price_of_Cryptocurrency money,
-Percent_Change_1h decimal(12,8),
-Percent_Change_24h decimal(12,8),
-Percent_Change_7d decimal(12,8),
-Percent_Change_30d decimal(12,8),
-Percent_Change_60d decimal(12,8),
-Percent_Change_90d decimal(12,8),
-Market_Cap money ,
-Fully_Diluted_Market_Cap money ,
+Fiat_Currency INT REFERENCES List_Of_Cryptocurrency(Id), 
+Date date NOT NULL Primary KEY,
+Name_of_Cryptocurrency NVARCHAR(10),
+Symbol_of_Cryptocurrency NVARCHAR(10),
+Slug_of_Cryptocurrency NVARCHAR(30),
+Max_Supply INT,
+Circulating_Supply INT,
+Price_of_Cryptocurrency MONEY,
+Percent_Change_1h DECIMAL(12,8),
+Percent_Change_24h DECIMAL(12,8),
+Percent_Change_7d DECIMAL(12,8),
+Percent_Change_30d DECIMAL(12,8),
+Percent_Change_60d DECIMAL(12,8),
+Percent_Change_90d DECIMAL(12,8),
+Market_Cap MONEY ,
+Fully_Diluted_Market_Cap MONEY ,
 )
 
 
 Use CoinShell
 
 CREATE TABLE USD_Cryptocurrency(
-Date date not null Primary KEY,
-Name_of_Cryptocurrency nvarchar(10),
-Symbol_of_Cryptocurrency nvarchar(10),
-Slug_of_Cryptocurrency nvarchar(30),
-Max_Supply int,
-Circulating_Supply int,
-Price_of_Cryptocurrency money,
-Percent_Change_1h decimal(12,8),
-Percent_Change_24h decimal(12,8),
-Percent_Change_7d decimal(12,8),
-Percent_Change_30d decimal(12,8),
-Percent_Change_60d decimal(12,8),
-Percent_Change_90d decimal(12,8),
-Market_Cap money ,
-Fully_Diluted_Market_Cap money ,
+Fiat_Currency INT REFERENCES List_Of_Cryptocurrency(Id), 
+Date date NOT NULL Primary KEY,
+Name_of_Cryptocurrency NVARCHAR(10),
+Symbol_of_Cryptocurrency NVARCHAR(10),
+Slug_of_Cryptocurrency NVARCHAR(30),
+Max_Supply INT,
+Circulating_Supply INT,
+Price_of_Cryptocurrency MONEY,
+Percent_Change_1h DECIMAL(12,8),
+Percent_Change_24h DECIMAL(12,8),
+Percent_Change_7d DECIMAL(12,8),
+Percent_Change_30d DECIMAL(12,8),
+Percent_Change_60d DECIMAL(12,8),
+Percent_Change_90d DECIMAL(12,8),
+Market_Cap MONEY ,
+Fully_Diluted_Market_Cap MONEY ,
 )
 
 
 Use CoinShell
 
 CREATE TABLE Sets_of_Investmen(
-Id REFERENCE Members(Id),
-Order_of_Sets int not null unique ,
-Element_of_Set1 nvarchr(50),
-Element_of_Set2 nvarchr(50),
-Element_of_Set3 nvarchr(50),
-Element_of_Set4 nvarchr(50),
-Element_of_Set5 nvarchr(50),
-Element_of_Set6 nvarchr(50),
-Element_of_Set7 nvarchr(50),
-Element_of_Set8 nvarchr(50),
-Element_of_Set9 nvarchr(50),
-Element_of_Set10 nvarchr(50),
-Element_of_Set11 nvarchr(50),
-Element_of_Set12 nvarchr(50),
-Element_of_Set13 nvarchr(50),
-Element_of_Set14 nvarchr(50),
-Element_of_Set15 nvarchr(50),
-Element_of_Set16 nvarchr(50),
-Element_of_Set17 nvarchr(50),
-Element_of_Set18 nvarchr(50),
-Element_of_Set19 nvarchr(50),
-Element_of_Set20 nvarchr(50),
+Id INT REFERENCES Members(Id),
+Order_of_Sets INT NOT NULL unique ,
+Element_of_Set1 NVARCHAR(50),
+Element_of_Set2 NVARCHAR(50),
+Element_of_Set3 NVARCHAR(50),
+Element_of_Set4 NVARCHAR(50),
+Element_of_Set5 NVARCHAR(50),
+Element_of_Set6 NVARCHAR(50),
+Element_of_Set7 NVARCHAR(50),
+Element_of_Set8 NVARCHAR(50),
+Element_of_Set9 NVARCHAR(50),
+Element_of_Set10 NVARCHAR(50),
+Element_of_Set11 NVARCHAR(50),
+Element_of_Set12 NVARCHAR(50),
+Element_of_Set13 NVARCHAR(50),
+Element_of_Set14 NVARCHAR(50),
+Element_of_Set15 NVARCHAR(50),
+Element_of_Set16 NVARCHAR(50),
+Element_of_Set17 NVARCHAR(50),
+Element_of_Set18 NVARCHAR(50),
+Element_of_Set19 NVARCHAR(50),
+Element_of_Set20 NVARCHAR(50),
 
 )
 
+
 USE CoinShell
-
-CREATE TABLE List_Of_Cryptocurrency(
-Id int identity(1,1) not null PRIMARY KEY,
-Crypocurrency nvarchar(50)
-
+Create TABLE Personal_Forum_Information (
+Id INT REFERENCES Members(Id),
+Total_Posted_Artical INT /*應該要和Article_Of_Members做結合，依照帳號抓出上傳的文章數量*/,
 )
 
-/* 待完成
 USE CoinShell
-Create TABLE Forum (
-Id reference Members(Id),
+CREATE TABLE Article_Of_Members(
+Id INT IDENTITY(1,1) NOT NULL,
+Title NVARCHAR(100) NOT NULL,
+E_Mail_Of_Uploader NVARCHAR(50) NOT NULL ,
+Content_Of_Article NVARCHAR(max),
+Isvisible INT ,
+Upload_Date DATE)
 
-)*/
+
+USE CoinShell
+CREATE TABLE HomePage_News(
+Id INT IDENTITY(1,1) NOT NULL,
+Title NVARCHAR(100),
+Content_Of_News NVARCHAR(MAX),
+Image_Of_News NVARCHAR(MAX)
+)
+
 
