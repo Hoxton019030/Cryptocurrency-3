@@ -1,0 +1,69 @@
+package Group1.MyShell.grabJsonToSqlDatabase;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
+import org.json.JSONArray;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import Group1.MyShell.MVC.model.CryptocurrencyBean;
+
+public class grabJsonToSqlDatabase {
+	public static void main(String[] args) throws IOException {
+		String day = "17";
+		String TWD_filePath = "C:\\Json\\TWD\\2022-04-"+day+".txt";
+		String USD_filePath = "C:\\Json\\TWD\\2022-04-"+day+".txt";
+		String CYN_filePath = "C:\\Json\\TWD\\2022-04-"+day+".txt";
+		String JPY_filePath = "C:\\Json\\TWD\\2022-04-"+day+".txt";
+		String EUR_filePath = "C:\\Json\\TWD\\2022-04-"+day+".txt";
+		
+		String fileContent;
+		
+		FileReader TWDfile = new FileReader(TWD_filePath);
+		FileReader USDfile = new FileReader(USD_filePath);
+		FileReader CYNfile = new FileReader(CYN_filePath);
+		FileReader JPYfile = new FileReader(JPY_filePath);
+		FileReader EURfile = new FileReader(EUR_filePath);
+		
+		BufferedReader TWDbr = new BufferedReader(TWDfile);
+		BufferedReader USDbr = new BufferedReader(USDfile);
+		BufferedReader CYNbr = new BufferedReader(CYNfile);
+		BufferedReader JPYbr = new BufferedReader(JPYfile);
+		BufferedReader EURbr = new BufferedReader(EURfile);
+		
+		StringBuffer TWDsr = new StringBuffer();
+
+		while ((fileContent = TWDbr.readLine()) != null) {
+			TWDsr.append(fileContent);
+		}
+
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode node = mapper.readTree(TWDsr.toString());
+		String data = node.get("data").toString();
+
+		JSONArray jArray = new JSONArray(data);
+		for (int i = 0; i < jArray.length(); i++) {
+			CryptocurrencyBean crypto = new CryptocurrencyBean();
+			String date = node.get("status").get("timestamp").asText().substring(0, 10);
+			String nameOfCryptocurrency = node.get("data").get(i).get("name").asText();
+			String symbolOfCryptocurrency = node.get("data").get(i).get("symbol").asText();
+			String slugOfCryptocurrency = node.get("data").get(i).get("slug").asText();
+			int maxSupply = node.get("data").get(i).get("max_supply").asInt();
+			int circulatingSupply = node.get("data").get(i).get("circulating_supply").asInt();
+			double percentChange1h = node.get("data").get(i).get("quote").get("TWD").get("percent_change_1h").asDouble();
+			double percentChange24h = node.get("data").get(i).get("quote").get("TWD").get("percent_change_24h").asDouble();
+			double percentChange7d = node.get("data").get(i).get("quote").get("TWD").get("percent_change_7d").asDouble();
+			double percentChange30d = node.get("data").get(i).get("quote").get("TWD").get("percent_change_30d").asDouble();
+			double percentChange60d = node.get("data").get(i).get("quote").get("TWD").get("percent_change_60d").asDouble();
+			double percentChange90d = node.get("data").get(i).get("quote").get("TWD").get("percent_change_90d").asDouble();
+			crypto.setDate(date);
+			crypto.setNameOfCryptocurrency(nameOfCryptocurrency);
+			System.out.println(crypto);
+		}
+	}
+
+}

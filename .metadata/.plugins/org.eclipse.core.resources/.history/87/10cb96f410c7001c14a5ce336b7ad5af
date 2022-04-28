@@ -1,0 +1,15 @@
+package Group1.MyShell.grabJsonToSqlDatabase;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+
+public class grabJsonToSqlDatabase {
+	public static void main(String[] args) throws FileNotFoundException {
+		FileReader file;
+		String filePath = "C:\\Json\\TWD\\2022-04-18.txt";
+		String fileContent;
+		file=new FileReader(filePath);
+		
+	}
+
+}

@@ -1,0 +1,8 @@
+package Group1.MyShell.grabJsonToSqlDatabase;
+
+public class grabJsonToSqlDatabase {
+	public static void main(String[] args) {
+		
+	}
+
+}
