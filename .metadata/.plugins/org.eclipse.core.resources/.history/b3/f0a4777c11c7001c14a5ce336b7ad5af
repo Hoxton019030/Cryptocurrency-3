@@ -1,0 +1,26 @@
+package Group1.MyShell.grabJsonToSqlDatabase;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+public class grabJsonToSqlDatabase {
+	public static void main(String[] args) throws IOException {
+		String filePath = "C:\\Json\\TWD\\2022-04-18.txt";
+		String fileContent;
+		FileReader file = new FileReader(filePath);
+
+		BufferedReader br = new BufferedReader(file);
+		StringBuffer sr = new StringBuffer();
+
+		while ((fileContent = br.readLine()) != null) {
+			sr.append(fileContent);
+		}
+		
+		ObjectMapper mapper = new ObjectMapper();
+	}
+
+}

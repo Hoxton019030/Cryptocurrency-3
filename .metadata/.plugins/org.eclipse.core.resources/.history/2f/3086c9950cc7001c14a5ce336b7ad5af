@@ -1,0 +1,40 @@
+package Group1.MyShell.MVC.model;
+
+import java.sql.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table()
+public class CryptocurrencyBean {
+	
+	private Date date;
+	private String nameOfCryptocurrency;
+	private String symbolOfCryptocurrency;
+	private String slugOfCryptocurrency;
+	private Integer maxSupply;
+	private Integer circulatingSupply;
+	private double percentChange1h;
+	private double percentChange24h;
+	private double percentChange7d;
+	private double percentChange30d;
+	private double percentChange60d;
+	private double percentChange90d;
+	private double CNYpriceOfCryptocurrency;
+	private double CNYmarketCap;
+	private double CNYfullyDilutedMarketCap;
+	private double EURpriceOfCryptocurrency;
+	private double EURmarketCap;
+	private double EURfullyDilutedMarketCap;
+	private double TWDpriceOfCryptocurrency;
+	private double TWDmarketCap;
+	private double TWDfullyDilutedMarketCap;
+	private double USDpriceOfCryptocurrency;
+	private double USDNYmarketCap;
+	private double USDfullyDilutedMarketCap;
+	private double JPYpriceOfCryptocurrency;
+	private double JPYmarketCap;
+	private double JPYfullyDilutedMarketCap;
+
+}

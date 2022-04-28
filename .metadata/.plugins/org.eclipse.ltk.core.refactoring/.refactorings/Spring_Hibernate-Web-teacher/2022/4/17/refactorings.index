@@ -1,0 +1,7 @@
+1650442887262	Extract local variable 'config'
+1650459228207	Extract local variable 'ds'
+1650464434350	Extract local variable 'properties'
+1650470688722	Extract local variable 'sessionFactory'
+1650473135793	Extract local variable 'txManger'
+1650474460009	Extract local variable 'context'
+1650474566038	Extract local variable 'mService'
