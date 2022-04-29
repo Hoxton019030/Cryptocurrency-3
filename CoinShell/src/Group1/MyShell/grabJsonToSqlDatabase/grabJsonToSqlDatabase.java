@@ -4,17 +4,23 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.json.JSONArray;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import Group1.MyShell.MVC.model.CryptocurrencyBean;
+import Group1.MyShell.util.HibernateUtils;
 
 public class grabJsonToSqlDatabase {
 	public static void main(String[] args) throws IOException {
+		SessionFactory factory = HibernateUtils.getSessionFactory();
+		Session session = factory.openSession();
 
 		for (int day = 17; day < 29; day++) {
+			
 
 			String TWD_filePath = "C:\\Json\\TWD\\2022-04-" + day + ".txt";
 			String USD_filePath = "C:\\Json\\USD\\2022-04-" + day + ".txt";
@@ -151,8 +157,11 @@ public class grabJsonToSqlDatabase {
 				crypto.setEURpriceOfCryptocurrency(EURpriceOfCryptocurrency);
 				crypto.setEURmarketCap(EURmarketCap);
 				crypto.setEURfullyDilutedMarketCap(EURfullyDilutedMarketCap);
-
+				session.beginTransaction();
+				session.save(crypto);
 				System.out.println(crypto);
+				session.getTransaction().commit();
+				
 			}
 		}
 	}

@@ -25,3 +25,7 @@
 1651170009520	Rename local variable 'CYNsr'
 1651170015049	Rename local variable 'CYNnode'
 1651170390131	Rename field 'USDNYmarketCap'
+1651199168892	Extract local variable 'serviceRegistry'
+1651199281427	Extract local variable 'factory'
+1651199456684	Extract local variable 'factory'
+1651199466418	Extract local variable 'session'
