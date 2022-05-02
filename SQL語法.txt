@@ -4,11 +4,7 @@ CREATE DATABASE CoinShell
 
 
 /*第二步 執行下面這段，建立Table*/
-USE CoinShell
-CREATE TABLE List_Of_Cryptocurrency(
-Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-Crypocurrency NVARCHAR(50) NOT NULL
-)
+
 
 USE CoinShell
 CREATE TABLE Members(
@@ -45,21 +41,12 @@ Percent_Change_7d DECIMAL(12,8),
 Percent_Change_30d DECIMAL(12,8),
 Percent_Change_60d DECIMAL(12,8),
 Percent_Change_90d DECIMAL(12,8),
-CNY_Price_of_Cryptocurrency MONEY,
-CNY_Market_Cap MONEY ,
-CNY_Fully_Diluted_Market_Cap MONEY ,
-EUR_Price_of_Cryptocurrency MONEY,
-EUR_Market_Cap MONEY ,
-EUR_Fully_Diluted_Market_Cap MONEY ,
 TWD_Price_of_Cryptocurrency MONEY,
 TWD_Market_Cap MONEY ,
 TWD_Fully_Diluted_Market_Cap MONEY ,
 USD_Price_of_Cryptocurrency MONEY,
 USD_Market_Cap MONEY ,
 USD_Fully_Diluted_Market_Cap MONEY ,
-JPY_Price_of_Cryptocurrency MONEY,
-JPY_Market_Cap MONEY ,
-JPY_Fully_Diluted_Market_Cap MONEY ,
 )
 
 
@@ -115,4 +102,26 @@ Title NVARCHAR(100),
 Content_Of_News NVARCHAR(MAX),
 Image_Of_News NVARCHAR(MAX)
 )
+
+USE CoinShell
+CREATE TABLE Forum(
+Id INT IDENTITY(1,1) NOT NULL,
+Members_Id INT REFERENCES Members(Id),
+Date TIMESTAMP,
+Title  NVARCHAR(30),
+Content_Of_Article NVARCHAR(MAX),
+Flair NVARCHAR(30)
+);
+
+
+USE CoinShell
+CREATE TABLE Chat(
+Id INT IDENTITY(1,1) NOT NULL,
+Members_Id INT REFERENCES Members(Id),
+Date TIMESTAMP,
+Messege NVARCHAR(100),
+)
+
+
+
 

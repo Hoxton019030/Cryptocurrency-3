@@ -6,106 +6,117 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "Cryptocurrency")
 public class CryptocurrencyBean {
+
+	public CryptocurrencyBean() {
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
+	@Column(name = "id", columnDefinition = "INT")
 	private Integer id;
 
-	@Column(name = "Date")
+	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "Date", columnDefinition = "datetime")
 	private String date;
 
-	@Column(name = "Name_of_Cryptocurrency")
+	@Column(name = "Name_of_Cryptocurrency", columnDefinition = "NVARCHAR(50)")
 	private String nameOfCryptocurrency;
 
-	@Column(name = "Symbol_of_Cryptocurrency")
+	@Column(name = "Symbol_of_Cryptocurrency", columnDefinition = "NVARCHAR(50)")
 	private String symbolOfCryptocurrency;
 
-	@Column(name = "Slug_of_Cryptocurrency")
+	@Column(name = "Slug_of_Cryptocurrency", columnDefinition = "NVARCHAR(50)")
 	private String slugOfCryptocurrency;
 
-	@Column(name = "Max_Supply")
+	@Column(name = "Max_Supply", columnDefinition = "INT")
 	private Integer maxSupply;
 
-	@Column(name = "Circulating_Supply")
+	@Column(name = "Circulating_Supply", columnDefinition = "INT")
 	private Integer circulatingSupply;
 
-	@Column(name = "Percent_Change_1h")
+	@Column(name = "Percent_Change_1h", columnDefinition = "DECIMAL(12,8)")
 	private double percentChange1h;
 
-	@Column(name = "Percent_Change_24h")
+	@Column(name = "Percent_Change_24h", columnDefinition = "DECIMAL(12,8)")
 	private double percentChange24h;
 
-	@Column(name = "Percent_Change_7d")
+	@Column(name = "Percent_Change_7d", columnDefinition = "DECIMAL(12,8)")
 	private double percentChange7d;
 
-	@Column(name = "Percent_Change_30d")
+	@Column(name = "Percent_Change_30d", columnDefinition = "DECIMAL(12,8)")
 	private double percentChange30d;
 
-	@Column(name = "Percent_Change_60d")
+	@Column(name = "Percent_Change_60d", columnDefinition = "DECIMAL(12,8)")
 	private double percentChange60d;
 
-	@Column(name = "Percent_Change_90d")
+	@Column(name = "Percent_Change_90d", columnDefinition = "DECIMAL(12,8)")
 	private double percentChange90d;
 
-	@Column(name = "TWD_Price_of_Cryptocurrency")
-	private double TWDpriceOfCryptocurrency;
+	@Column(name = "TWD_Price_of_Cryptocurrency", columnDefinition = "DECIMAL(12,8)")
+	private double twdPriceOfCryptocurrency;
 
-	@Column(name = "TWD_Market_Cap")
-	private double TWDmarketCap;
+	@Column(name = "TWD_Market_Cap", columnDefinition = "DECIMAL(12,8)")
+	private double twdMarketCap;
 
-	@Column(name = "TWD_Fully_Diluted_Market_Cap")
-	private double TWDfullyDilutedMarketCap;
+	@Column(name = "TWD_Fully_Diluted_Market_Cap", columnDefinition = "DECIMAL(12,8)")
+	private double twdFullyDilutedMarketCap;
 
-	@Column(name = "USD_Price_of_Cryptocurrency")
-	private double USDpriceOfCryptocurrency;
+	@Column(name = "USD_Price_of_Cryptocurrency", columnDefinition = "DECIMAL(12,8)")
+	private double usdPriceOfCryptocurrency;
 
-	@Column(name = "USD_Market_Cap")
-	private double USDmarketCap;
+	@Column(name = "USD_Market_Cap", columnDefinition = "DECIMAL(12,8)")
+	private double usdMarketCap;
 
-	@Column(name = "USD_Fully_Diluted_Market_Cap")
-	private double USDfullyDilutedMarketCap;
+	@Column(name = "USD_Fully_Diluted_Market_Cap", columnDefinition = "DECIMAL(12,8)")
+	private double usdFullyDilutedMarketCap;
 
-	@Column(name = "CNY_Price_of_Cryptocurrency")
-	private double CNYpriceOfCryptocurrency;
+	@Column(name = "CNY_Price_of_Cryptocurrency", columnDefinition = "DECIMAL(12,8)")
+	private double cnyPriceOfCryptocurrency;
 
-	@Column(name = "CNY_Market_Cap")
-	private double CNYmarketCap;
+	@Column(name = "CNY_Market_Cap", columnDefinition = "DECIMAL(12,8)")
+	private double cnyMarketCap;
 
-	@Column(name = "CNY_Fully_Diluted_Market_Cap")
-	private double CNYfullyDilutedMarketCap;
+	@Column(name = "CNY_Fully_Diluted_Market_Cap", columnDefinition = "DECIMAL(12,8)")
+	private double cnyFullyDilutedMarketCap;
 
-	@Column(name = "JPY_Price_of_Cryptocurrency")
-	private double JPYpriceOfCryptocurrency;
+	@Column(name = "JPY_Price_of_Cryptocurrency", columnDefinition = "DECIMAL(12,8)")
+	private double jpyPriceOfCryptocurrency;
 
-	@Column(name = "JPY_Market_Cap")
-	private double JPYmarketCap;
+	@Column(name = "JPY_Market_Cap", columnDefinition = "DECIMAL(12,8)")
+	private double jpyMarketCap;
 
-	@Column(name = "JPY_Fully_Diluted_Market_Cap")
-	private double JPYfullyDilutedMarketCap;
+	@Column(name = "JPY_Fully_Diluted_Market_Cap", columnDefinition = "DECIMAL(12,8)")
+	private double jpyFullyDilutedMarketCap;
 
-	@Column(name = "EUR_Price_of_Cryptocurrency")
-	private double EURpriceOfCryptocurrency;
+	@Column(name = "EUR_Price_of_Cryptocurrency", columnDefinition = "DECIMAL(12,8)")
+	private double eurPriceOfCryptocurrency;
 
-	@Column(name = "EUR_Market_Cap")
-	private double EURmarketCap;
+	@Column(name = "EUR_Market_Cap", columnDefinition = "DECIMAL(12,8)")
+	private double eurMarketCap;
 
-	@Column(name = "EUR_Fully_Diluted_Market_Cap")
-	private double EURfullyDilutedMarketCap;
+	@Column(name = "EUR_Fully_Diluted_Market_Cap", columnDefinition = "DECIMAL(12,8)")
+	private double eurFullyDilutedMarketCap;
 
-	public CryptocurrencyBean(String date, String nameOfCryptocurrency, String symbolOfCryptocurrency,
+	public CryptocurrencyBean(Integer id, String date, String nameOfCryptocurrency, String symbolOfCryptocurrency,
 			String slugOfCryptocurrency, Integer maxSupply, Integer circulatingSupply, double percentChange1h,
 			double percentChange24h, double percentChange7d, double percentChange30d, double percentChange60d,
-			double percentChange90d, double cNYpriceOfCryptocurrency, double cNYmarketCap,
-			double cNYfullyDilutedMarketCap, double eURpriceOfCryptocurrency, double eURmarketCap,
-			double eURfullyDilutedMarketCap, double tWDpriceOfCryptocurrency, double tWDmarketCap,
-			double tWDfullyDilutedMarketCap, double uSDpriceOfCryptocurrency, double uSDNYmarketCap,
-			double uSDfullyDilutedMarketCap, double jPYpriceOfCryptocurrency, double jPYmarketCap,
-			double jPYfullyDilutedMarketCap) {
+			double percentChange90d, double twdPriceOfCryptocurrency, double twdMarketCap,
+			double twdFullyDilutedMarketCap, double usdPriceOfCryptocurrency, double usdMarketCap,
+			double usdFullyDilutedMarketCap, double cnyPriceOfCryptocurrency, double cnyMarketCap,
+			double cnyFullyDilutedMarketCap, double jpyPriceOfCryptocurrency, double jpyMarketCap,
+			double jpyFullyDilutedMarketCap, double eurPriceOfCryptocurrency, double eurMarketCap,
+			double eurFullyDilutedMarketCap) {
 		super();
+		this.id = id;
 		this.date = date;
 		this.nameOfCryptocurrency = nameOfCryptocurrency;
 		this.symbolOfCryptocurrency = symbolOfCryptocurrency;
@@ -118,85 +129,48 @@ public class CryptocurrencyBean {
 		this.percentChange30d = percentChange30d;
 		this.percentChange60d = percentChange60d;
 		this.percentChange90d = percentChange90d;
-		CNYpriceOfCryptocurrency = cNYpriceOfCryptocurrency;
-		CNYmarketCap = cNYmarketCap;
-		CNYfullyDilutedMarketCap = cNYfullyDilutedMarketCap;
-		EURpriceOfCryptocurrency = eURpriceOfCryptocurrency;
-		EURmarketCap = eURmarketCap;
-		EURfullyDilutedMarketCap = eURfullyDilutedMarketCap;
-		TWDpriceOfCryptocurrency = tWDpriceOfCryptocurrency;
-		TWDmarketCap = tWDmarketCap;
-		TWDfullyDilutedMarketCap = tWDfullyDilutedMarketCap;
-		USDpriceOfCryptocurrency = uSDpriceOfCryptocurrency;
-		USDmarketCap = uSDNYmarketCap;
-		USDfullyDilutedMarketCap = uSDfullyDilutedMarketCap;
-		JPYpriceOfCryptocurrency = jPYpriceOfCryptocurrency;
-		JPYmarketCap = jPYmarketCap;
-		JPYfullyDilutedMarketCap = jPYfullyDilutedMarketCap;
-	}
-
-	public CryptocurrencyBean() {
+		this.twdPriceOfCryptocurrency = twdPriceOfCryptocurrency;
+		this.twdMarketCap = twdMarketCap;
+		this.twdFullyDilutedMarketCap = twdFullyDilutedMarketCap;
+		this.usdPriceOfCryptocurrency = usdPriceOfCryptocurrency;
+		this.usdMarketCap = usdMarketCap;
+		this.usdFullyDilutedMarketCap = usdFullyDilutedMarketCap;
+		this.cnyPriceOfCryptocurrency = cnyPriceOfCryptocurrency;
+		this.cnyMarketCap = cnyMarketCap;
+		this.cnyFullyDilutedMarketCap = cnyFullyDilutedMarketCap;
+		this.jpyPriceOfCryptocurrency = jpyPriceOfCryptocurrency;
+		this.jpyMarketCap = jpyMarketCap;
+		this.jpyFullyDilutedMarketCap = jpyFullyDilutedMarketCap;
+		this.eurPriceOfCryptocurrency = eurPriceOfCryptocurrency;
+		this.eurMarketCap = eurMarketCap;
+		this.eurFullyDilutedMarketCap = eurFullyDilutedMarketCap;
 	}
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("CryptocurrencyBean [date=");
-		builder.append(date);
-		builder.append(", nameOfCryptocurrency=");
-		builder.append(nameOfCryptocurrency);
-		builder.append(", symbolOfCryptocurrency=");
-		builder.append(symbolOfCryptocurrency);
-		builder.append(", slugOfCryptocurrency=");
-		builder.append(slugOfCryptocurrency);
-		builder.append(", maxSupply=");
-		builder.append(maxSupply);
-		builder.append(", circulatingSupply=");
-		builder.append(circulatingSupply);
-		builder.append(", percentChange1h=");
-		builder.append(percentChange1h);
-		builder.append(", percentChange24h=");
-		builder.append(percentChange24h);
-		builder.append(", percentChange7d=");
-		builder.append(percentChange7d);
-		builder.append(", percentChange30d=");
-		builder.append(percentChange30d);
-		builder.append(", percentChange60d=");
-		builder.append(percentChange60d);
-		builder.append(", percentChange90d=");
-		builder.append(percentChange90d);
-		builder.append(", CNYpriceOfCryptocurrency=");
-		builder.append(CNYpriceOfCryptocurrency);
-		builder.append(", CNYmarketCap=");
-		builder.append(CNYmarketCap);
-		builder.append(", CNYfullyDilutedMarketCap=");
-		builder.append(CNYfullyDilutedMarketCap);
-		builder.append(", EURpriceOfCryptocurrency=");
-		builder.append(EURpriceOfCryptocurrency);
-		builder.append(", EURmarketCap=");
-		builder.append(EURmarketCap);
-		builder.append(", EURfullyDilutedMarketCap=");
-		builder.append(EURfullyDilutedMarketCap);
-		builder.append(", TWDpriceOfCryptocurrency=");
-		builder.append(TWDpriceOfCryptocurrency);
-		builder.append(", TWDmarketCap=");
-		builder.append(TWDmarketCap);
-		builder.append(", TWDfullyDilutedMarketCap=");
-		builder.append(TWDfullyDilutedMarketCap);
-		builder.append(", USDpriceOfCryptocurrency=");
-		builder.append(USDpriceOfCryptocurrency);
-		builder.append(", USDNYmarketCap=");
-		builder.append(USDmarketCap);
-		builder.append(", USDfullyDilutedMarketCap=");
-		builder.append(USDfullyDilutedMarketCap);
-		builder.append(", JPYpriceOfCryptocurrency=");
-		builder.append(JPYpriceOfCryptocurrency);
-		builder.append(", JPYmarketCap=");
-		builder.append(JPYmarketCap);
-		builder.append(", JPYfullyDilutedMarketCap=");
-		builder.append(JPYfullyDilutedMarketCap);
-		builder.append("]");
-		return builder.toString();
+		return "CryptocurrencyBean [id=" + id + ", date=" + date + ", nameOfCryptocurrency=" + nameOfCryptocurrency
+				+ ", symbolOfCryptocurrency=" + symbolOfCryptocurrency + ", slugOfCryptocurrency="
+				+ slugOfCryptocurrency + ", maxSupply=" + maxSupply + ", circulatingSupply=" + circulatingSupply
+				+ ", percentChange1h=" + percentChange1h + ", percentChange24h=" + percentChange24h
+				+ ", percentChange7d=" + percentChange7d + ", percentChange30d=" + percentChange30d
+				+ ", percentChange60d=" + percentChange60d + ", percentChange90d=" + percentChange90d
+				+ ", twdPriceOfCryptocurrency=" + twdPriceOfCryptocurrency + ", twdMarketCap=" + twdMarketCap
+				+ ", twdFullyDilutedMarketCap=" + twdFullyDilutedMarketCap + ", usdPriceOfCryptocurrency="
+				+ usdPriceOfCryptocurrency + ", usdMarketCap=" + usdMarketCap + ", usdFullyDilutedMarketCap="
+				+ usdFullyDilutedMarketCap + ", cnyPriceOfCryptocurrency=" + cnyPriceOfCryptocurrency
+				+ ", cnyMarketCap=" + cnyMarketCap + ", cnyFullyDilutedMarketCap=" + cnyFullyDilutedMarketCap
+				+ ", jpyPriceOfCryptocurrency=" + jpyPriceOfCryptocurrency + ", jpyMarketCap=" + jpyMarketCap
+				+ ", jpyFullyDilutedMarketCap=" + jpyFullyDilutedMarketCap + ", eurPriceOfCryptocurrency="
+				+ eurPriceOfCryptocurrency + ", eurMarketCap=" + eurMarketCap + ", eurFullyDilutedMarketCap="
+				+ eurFullyDilutedMarketCap + "]";
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getDate() {
@@ -295,124 +269,124 @@ public class CryptocurrencyBean {
 		this.percentChange90d = percentChange90d;
 	}
 
-	public double getCNYpriceOfCryptocurrency() {
-		return CNYpriceOfCryptocurrency;
+	public double getTwdPriceOfCryptocurrency() {
+		return twdPriceOfCryptocurrency;
 	}
 
-	public void setCNYpriceOfCryptocurrency(double cNYpriceOfCryptocurrency) {
-		CNYpriceOfCryptocurrency = cNYpriceOfCryptocurrency;
+	public void setTwdPriceOfCryptocurrency(double twdPriceOfCryptocurrency) {
+		this.twdPriceOfCryptocurrency = twdPriceOfCryptocurrency;
 	}
 
-	public double getCNYmarketCap() {
-		return CNYmarketCap;
+	public double getTwdMarketCap() {
+		return twdMarketCap;
 	}
 
-	public void setCNYmarketCap(double cNYmarketCap) {
-		CNYmarketCap = cNYmarketCap;
+	public void setTwdMarketCap(double twdMarketCap) {
+		this.twdMarketCap = twdMarketCap;
 	}
 
-	public double getCNYfullyDilutedMarketCap() {
-		return CNYfullyDilutedMarketCap;
+	public double getTwdFullyDilutedMarketCap() {
+		return twdFullyDilutedMarketCap;
 	}
 
-	public void setCNYfullyDilutedMarketCap(double cNYfullyDilutedMarketCap) {
-		CNYfullyDilutedMarketCap = cNYfullyDilutedMarketCap;
+	public void setTwdFullyDilutedMarketCap(double twdFullyDilutedMarketCap) {
+		this.twdFullyDilutedMarketCap = twdFullyDilutedMarketCap;
 	}
 
-	public double getEURpriceOfCryptocurrency() {
-		return EURpriceOfCryptocurrency;
+	public double getUsdPriceOfCryptocurrency() {
+		return usdPriceOfCryptocurrency;
 	}
 
-	public void setEURpriceOfCryptocurrency(double eURpriceOfCryptocurrency) {
-		EURpriceOfCryptocurrency = eURpriceOfCryptocurrency;
+	public void setUsdPriceOfCryptocurrency(double usdPriceOfCryptocurrency) {
+		this.usdPriceOfCryptocurrency = usdPriceOfCryptocurrency;
 	}
 
-	public double getEURmarketCap() {
-		return EURmarketCap;
+	public double getUsdMarketCap() {
+		return usdMarketCap;
 	}
 
-	public void setEURmarketCap(double eURmarketCap) {
-		EURmarketCap = eURmarketCap;
+	public void setUsdMarketCap(double usdMarketCap) {
+		this.usdMarketCap = usdMarketCap;
 	}
 
-	public double getEURfullyDilutedMarketCap() {
-		return EURfullyDilutedMarketCap;
+	public double getUsdFullyDilutedMarketCap() {
+		return usdFullyDilutedMarketCap;
 	}
 
-	public void setEURfullyDilutedMarketCap(double eURfullyDilutedMarketCap) {
-		EURfullyDilutedMarketCap = eURfullyDilutedMarketCap;
+	public void setUsdFullyDilutedMarketCap(double usdFullyDilutedMarketCap) {
+		this.usdFullyDilutedMarketCap = usdFullyDilutedMarketCap;
 	}
 
-	public double getTWDpriceOfCryptocurrency() {
-		return TWDpriceOfCryptocurrency;
+	public double getCnyPriceOfCryptocurrency() {
+		return cnyPriceOfCryptocurrency;
 	}
 
-	public void setTWDpriceOfCryptocurrency(double tWDpriceOfCryptocurrency) {
-		TWDpriceOfCryptocurrency = tWDpriceOfCryptocurrency;
+	public void setCnyPriceOfCryptocurrency(double cnyPriceOfCryptocurrency) {
+		this.cnyPriceOfCryptocurrency = cnyPriceOfCryptocurrency;
 	}
 
-	public double getTWDmarketCap() {
-		return TWDmarketCap;
+	public double getCnyMarketCap() {
+		return cnyMarketCap;
 	}
 
-	public void setTWDmarketCap(double tWDmarketCap) {
-		TWDmarketCap = tWDmarketCap;
+	public void setCnyMarketCap(double cnyMarketCap) {
+		this.cnyMarketCap = cnyMarketCap;
 	}
 
-	public double getTWDfullyDilutedMarketCap() {
-		return TWDfullyDilutedMarketCap;
+	public double getCnyFullyDilutedMarketCap() {
+		return cnyFullyDilutedMarketCap;
 	}
 
-	public void setTWDfullyDilutedMarketCap(double tWDfullyDilutedMarketCap) {
-		TWDfullyDilutedMarketCap = tWDfullyDilutedMarketCap;
+	public void setCnyFullyDilutedMarketCap(double cnyFullyDilutedMarketCap) {
+		this.cnyFullyDilutedMarketCap = cnyFullyDilutedMarketCap;
 	}
 
-	public double getUSDpriceOfCryptocurrency() {
-		return USDpriceOfCryptocurrency;
+	public double getJpyPriceOfCryptocurrency() {
+		return jpyPriceOfCryptocurrency;
 	}
 
-	public void setUSDpriceOfCryptocurrency(double uSDpriceOfCryptocurrency) {
-		USDpriceOfCryptocurrency = uSDpriceOfCryptocurrency;
+	public void setJpyPriceOfCryptocurrency(double jpyPriceOfCryptocurrency) {
+		this.jpyPriceOfCryptocurrency = jpyPriceOfCryptocurrency;
 	}
 
-	public double getUSDmarketCap() {
-		return USDmarketCap;
+	public double getJpyMarketCap() {
+		return jpyMarketCap;
 	}
 
-	public void setUSDmarketCap(double uSDNYmarketCap) {
-		USDmarketCap = uSDNYmarketCap;
+	public void setJpyMarketCap(double jpyMarketCap) {
+		this.jpyMarketCap = jpyMarketCap;
 	}
 
-	public double getUSDfullyDilutedMarketCap() {
-		return USDfullyDilutedMarketCap;
+	public double getJpyFullyDilutedMarketCap() {
+		return jpyFullyDilutedMarketCap;
 	}
 
-	public void setUSDfullyDilutedMarketCap(double uSDfullyDilutedMarketCap) {
-		USDfullyDilutedMarketCap = uSDfullyDilutedMarketCap;
+	public void setJpyFullyDilutedMarketCap(double jpyFullyDilutedMarketCap) {
+		this.jpyFullyDilutedMarketCap = jpyFullyDilutedMarketCap;
 	}
 
-	public double getJPYpriceOfCryptocurrency() {
-		return JPYpriceOfCryptocurrency;
+	public double getEurPriceOfCryptocurrency() {
+		return eurPriceOfCryptocurrency;
 	}
 
-	public void setJPYpriceOfCryptocurrency(double jPYpriceOfCryptocurrency) {
-		JPYpriceOfCryptocurrency = jPYpriceOfCryptocurrency;
+	public void setEurPriceOfCryptocurrency(double eurPriceOfCryptocurrency) {
+		this.eurPriceOfCryptocurrency = eurPriceOfCryptocurrency;
 	}
 
-	public double getJPYmarketCap() {
-		return JPYmarketCap;
+	public double getEurMarketCap() {
+		return eurMarketCap;
 	}
 
-	public void setJPYmarketCap(double jPYmarketCap) {
-		JPYmarketCap = jPYmarketCap;
+	public void setEurMarketCap(double eurMarketCap) {
+		this.eurMarketCap = eurMarketCap;
 	}
 
-	public double getJPYfullyDilutedMarketCap() {
-		return JPYfullyDilutedMarketCap;
+	public double getEurFullyDilutedMarketCap() {
+		return eurFullyDilutedMarketCap;
 	}
 
-	public void setJPYfullyDilutedMarketCap(double jPYfullyDilutedMarketCap) {
-		JPYfullyDilutedMarketCap = jPYfullyDilutedMarketCap;
+	public void setEurFullyDilutedMarketCap(double eurFullyDilutedMarketCap) {
+		this.eurFullyDilutedMarketCap = eurFullyDilutedMarketCap;
 	}
 
 }
