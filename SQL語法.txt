@@ -4,7 +4,7 @@ CREATE DATABASE CoinShell
 
 
 /*第二步 執行下面這段，建立Table*/
-
+USE CoinShell
 CREATE TABLE List_Of_Cryptocurrency(
 Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
 Crypocurrency NVARCHAR(50) NOT NULL
@@ -32,9 +32,10 @@ Id INT UNIQUE NOT NULL ,
 
 Use CoinShell
 CREATE TABLE Cryptocurrency(
-Date date NOT NULL  Primary KEY,
-Name_of_Cryptocurrency NVARCHAR(10),
-Symbol_of_Cryptocurrency NVARCHAR(10),
+id INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+Date date NOT NULL,
+Name_of_Cryptocurrency NVARCHAR(30),
+Symbol_of_Cryptocurrency NVARCHAR(30),
 Slug_of_Cryptocurrency NVARCHAR(30),
 Max_Supply INT,
 Circulating_Supply INT,
@@ -114,4 +115,3 @@ Title NVARCHAR(100),
 Content_Of_News NVARCHAR(MAX),
 Image_Of_News NVARCHAR(MAX)
 )
-
