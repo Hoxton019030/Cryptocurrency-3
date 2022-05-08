@@ -6674,3 +6674,9 @@ java.lang.Error: SWT Resource was not properly disposed
 
 !ENTRY org.eclipse.jst.jsp.core 4 4 2022-05-08 14:14:07.098
 !MESSAGE A workspace crash was detected. The previous session did not exit normally. Not using saved taglib indexes.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2022-05-08 14:36:26.485
+!MESSAGE Using platform encoding (MS950 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2022-05-08 14:36:26.486
+!MESSAGE Using platform encoding (MS950 actually) to copy filtered resources, i.e. build is platform dependent!
