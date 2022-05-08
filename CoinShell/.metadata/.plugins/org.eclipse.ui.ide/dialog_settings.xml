@@ -6,6 +6,7 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+<<<<<<< HEAD
 			<item value="C:\Users\za546\OneDrive\文件\CoinShell\CoinShell"/>
 		</list>
 	</section>
@@ -20,6 +21,9 @@
 		</list>
 		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
 			<item value=""/>
+=======
+			<item value="C:\Users\za546\OneDrive\文件\Cryptocurrency\CoinShell"/>
+>>>>>>> 1fb9520efe635e0bb1b90f6993d3a12f3e8fe1a8
 		</list>
 	</section>
 </section>
