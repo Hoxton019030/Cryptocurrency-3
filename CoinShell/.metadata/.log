@@ -212,6 +212,7 @@ java.lang.Error: SWT Resource was not properly disposed
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1461)
 =======
 >>>>>>> 1fb9520efe635e0bb1b90f6993d3a12f3e8fe1a8
+<<<<<<< HEAD
 !SESSION 2022-05-08 13:59:10.284 -----------------------------------------------
 eclipse.buildId=4.21.0.I20210906-0500
 java.version=17.0.2
@@ -609,3 +610,5 @@ This warning can be switched off on the Team > Git > Confirmations and Warnings 
 
 !ENTRY org.springsource.ide.eclipse.commons.core 4 0 2022-05-08 14:02:18.426
 !MESSAGE May have failed to replace token 		//The dummy helps preview/test the page in an external browser.
+=======
+>>>>>>> 50043d5d1a639a226eb2a553855df839b4dcf0ca
