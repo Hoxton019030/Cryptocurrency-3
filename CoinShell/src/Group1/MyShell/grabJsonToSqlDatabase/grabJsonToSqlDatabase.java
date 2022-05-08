@@ -1,9 +1,14 @@
 package Group1.MyShell.grabJsonToSqlDatabase;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.json.JSONArray;
@@ -15,155 +20,172 @@ import Group1.MyShell.MVC.model.CryptocurrencyBean;
 import Group1.MyShell.util.HibernateUtils;
 
 public class grabJsonToSqlDatabase {
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, ParseException {
 		SessionFactory factory = HibernateUtils.getSessionFactory();
 		Session session = factory.openSession();
+		String RootLocation = "./Json/";
+		File file = new File(RootLocation);
+		String[] currencyFolderNameList = file.list();
+		File twdFile = new File(RootLocation + "TWD");
+		String[] NumberOfTxtFile = twdFile.list();
 
-		for (int day = 17; day < 29; day++) {
-			
-
-			String TWD_filePath = "C:\\Json\\TWD\\2022-04-" + day + ".txt";
-			String USD_filePath = "C:\\Json\\USD\\2022-04-" + day + ".txt";
-			String CNY_filePath = "C:\\Json\\CNY\\2022-04-" + day + ".txt";
-			String JPY_filePath = "C:\\Json\\JPY\\2022-04-" + day + ".txt";
-			String EUR_filePath = "C:\\Json\\EUR\\2022-04-" + day + ".txt";
-
-			String fileContent;
-
-			FileReader TWDfile = new FileReader(TWD_filePath);
-			FileReader USDfile = new FileReader(USD_filePath);
-			FileReader CNYfile = new FileReader(CNY_filePath);
-			FileReader JPYfile = new FileReader(JPY_filePath);
-			FileReader EURfile = new FileReader(EUR_filePath);
-
-			BufferedReader TWDbr = new BufferedReader(TWDfile);
-			BufferedReader USDbr = new BufferedReader(USDfile);
-			BufferedReader CNYbr = new BufferedReader(CNYfile);
-			BufferedReader JPYbr = new BufferedReader(JPYfile);
-			BufferedReader EURbr = new BufferedReader(EURfile);
-
-			StringBuffer TWDsr = new StringBuffer();
-			StringBuffer USDsr = new StringBuffer();
-			StringBuffer CNYsr = new StringBuffer();
-			StringBuffer JPYsr = new StringBuffer();
-			StringBuffer EURsr = new StringBuffer();
-
-			while ((fileContent = TWDbr.readLine()) != null) {
-				TWDsr.append(fileContent);
-			}
-			while ((fileContent = USDbr.readLine()) != null) {
-				USDsr.append(fileContent);
-			}
-			while ((fileContent = CNYbr.readLine()) != null) {
-				CNYsr.append(fileContent);
-			}
-			while ((fileContent = JPYbr.readLine()) != null) {
-				JPYsr.append(fileContent);
-			}
-			while ((fileContent = EURbr.readLine()) != null) {
-				EURsr.append(fileContent);
-			}
-
+		for (int count = 0; count < NumberOfTxtFile.length; count++) {
 			ObjectMapper mapper = new ObjectMapper();
-			JsonNode TWDnode = mapper.readTree(TWDsr.toString());
-			JsonNode USDnode = mapper.readTree(USDsr.toString());
-			JsonNode CNYnode = mapper.readTree(CNYsr.toString());
-			JsonNode JPYnode = mapper.readTree(JPYsr.toString());
-			JsonNode EURnode = mapper.readTree(EURsr.toString());
+			String JsonWordTwd;
+			String JsonWordUsd;
+			File jsonTwdTxtFile = new File(RootLocation + "/TWD/" + NumberOfTxtFile[count]);
+			File jsonUsdTxtFile = new File(RootLocation + "/USD/" + NumberOfTxtFile[count]);
 
-			String data = TWDnode.get("data").toString();
+			FileReader fileReaderTwdTxt = new FileReader(jsonTwdTxtFile);
+			FileReader fileReaderUsdTxt = new FileReader(jsonUsdTxtFile);
 
-			JSONArray jArray = new JSONArray(data);
-			for (int i = 0; i < jArray.length(); i++) {
+			BufferedReader brTwd = new BufferedReader(fileReaderTwdTxt);
+			BufferedReader brUsd = new BufferedReader(fileReaderUsdTxt);
+
+			StringBuffer srTwd = new StringBuffer();
+			StringBuffer srUsd = new StringBuffer();
+
+			while ((JsonWordTwd = brTwd.readLine()) != null) {
+				srTwd.append(JsonWordTwd);
+			}
+			while ((JsonWordUsd = brUsd.readLine()) != null) {
+				srUsd.append(JsonWordUsd);
+			}
+			JsonNode nodeTwd = mapper.readTree(srTwd.toString());
+			JsonNode nodeUsd = mapper.readTree(srUsd.toString());
+
+			String dataNodeTwd = nodeTwd.get("data").get("cryptoCurrencyList").toString();
+			String dataNodeUsd = nodeUsd.get("data").get("cryptoCurrencyList").toString();
+
+			JSONArray jsonArrayTwd = new JSONArray(dataNodeTwd);
+			JSONArray jsonArrayUsd = new JSONArray(dataNodeUsd);
+
+			for (int i = 0; i < jsonArrayTwd.length(); i++) {
 				CryptocurrencyBean crypto = new CryptocurrencyBean();
-				String date = TWDnode.get("status").get("timestamp").asText().substring(0, 10);
-				String nameOfCryptocurrency = TWDnode.get("data").get(i).get("name").asText();
-				String symbolOfCryptocurrency = TWDnode.get("data").get(i).get("symbol").asText();
-				String slugOfCryptocurrency = TWDnode.get("data").get(i).get("slug").asText();
-				int maxSupply = TWDnode.get("data").get(i).get("max_supply").asInt();
-				int circulatingSupply = TWDnode.get("data").get(i).get("circulating_supply").asInt();
-				double percentChange1h = TWDnode.get("data").get(i).get("quote").get("TWD").get("percent_change_1h")
-						.asDouble();
-				double percentChange24h = TWDnode.get("data").get(i).get("quote").get("TWD").get("percent_change_24h")
-						.asDouble();
-				double percentChange7d = TWDnode.get("data").get(i).get("quote").get("TWD").get("percent_change_7d")
-						.asDouble();
-				double percentChange30d = TWDnode.get("data").get(i).get("quote").get("TWD").get("percent_change_30d")
-						.asDouble();
-				double percentChange60d = TWDnode.get("data").get(i).get("quote").get("TWD").get("percent_change_60d")
-						.asDouble();
-				double percentChange90d = TWDnode.get("data").get(i).get("quote").get("TWD").get("percent_change_90d")
-						.asDouble();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
+				Date date = sdf.parse(NumberOfTxtFile[count].substring(0, 19)); 
+				System.out.println(date);
+				String name = nodeTwd.get("data").get("cryptoCurrencyList").get(i).get("name").asText();
+				String symbol = nodeTwd.get("data").get("cryptoCurrencyList").get(i).get("symbol").asText();
+				String slug = nodeTwd.get("data").get("cryptoCurrencyList").get(i).get("slug").asText();
+				Double circulatingSupply = nodeTwd.get("data").get("cryptoCurrencyList").get(i)
+						.get("circulatingSupply").asDouble();
+				Double totalSupply = nodeTwd.get("data").get("cryptoCurrencyList").get(i).get("totalSupply").asDouble();
+				Double maxSupply = null;
 
-				double TWDpriceOfCryptocurrency = TWDnode.get("data").get(i).get("quote").get("TWD").get("price")
-						.asDouble();
-				double TWDmarketCap = TWDnode.get("data").get(i).get("quote").get("TWD").get("market_cap").asDouble();
-				double TWDfullyDilutedMarketCap = TWDnode.get("data").get(i).get("quote").get("TWD")
-						.get("fully_diluted_market_cap").asDouble();
+				try {
+					maxSupply = nodeTwd.get("data").get("cryptoCurrencyList").get(i).get("maxSupply").asDouble();
+				} catch (Exception e) {
+					maxSupply = 0.0;
+				} finally {
+					crypto.setMaxSupply(maxSupply);
+				}
 
-				double USDpriceOfCryptocurrency = USDnode.get("data").get(i).get("quote").get("USD").get("price")
-						.asDouble();
-				double USDmarketCap = USDnode.get("data").get(i).get("quote").get("USD").get("market_cap").asDouble();
-				double USDfullyDilutedMarketCap = USDnode.get("data").get(i).get("quote").get("USD")
-						.get("fully_diluted_market_cap").asDouble();
-
-				double CNYpriceOfCryptocurrency = CNYnode.get("data").get(i).get("quote").get("CNY").get("price")
-						.asDouble();
-				double CNYmarketCap = CNYnode.get("data").get(i).get("quote").get("CNY").get("market_cap").asDouble();
-				double CNYfullyDilutedMarketCap = CNYnode.get("data").get(i).get("quote").get("CNY")
-						.get("fully_diluted_market_cap").asDouble();
-
-				double JPYpriceOfCryptocurrency = JPYnode.get("data").get(i).get("quote").get("JPY").get("price")
-						.asDouble();
-				double JPYmarketCap = JPYnode.get("data").get(i).get("quote").get("JPY").get("market_cap").asDouble();
-				double JPYfullyDilutedMarketCap = JPYnode.get("data").get(i).get("quote").get("JPY")
-						.get("fully_diluted_market_cap").asDouble();
-
-				double EURpriceOfCryptocurrency = EURnode.get("data").get(i).get("quote").get("EUR").get("price")
-						.asDouble();
-				double EURmarketCap = EURnode.get("data").get(i).get("quote").get("EUR").get("market_cap").asDouble();
-				double EURfullyDilutedMarketCap = EURnode.get("data").get(i).get("quote").get("EUR")
-						.get("fully_diluted_market_cap").asDouble();
+				
+				Double twdPriceOfCryptocurrency = nodeTwd.get("data").get("cryptoCurrencyList").get(i).get("quotes")
+						.get(0).get("price").asDouble();
+				Double twdMarketCap = nodeTwd.get("data").get("cryptoCurrencyList").get(i).get("quotes").get(0)
+						.get("marketCap").asDouble();
+				Double usdPriceOfCryptocurrency = nodeUsd.get("data").get("cryptoCurrencyList").get(i).get("quotes")
+						.get(0).get("price").asDouble();
+				Double usdMarketCap = nodeUsd.get("data").get("cryptoCurrencyList").get(i).get("quotes").get(0)
+						.get("marketCap").asDouble();
+				Double volume24h = nodeTwd.get("data").get("cryptoCurrencyList").get(i).get("quotes").get(0)
+						.get("volume24h").asDouble();
+				Double percentChange1h = nodeTwd.get("data").get("cryptoCurrencyList").get(i).get("quotes").get(0)
+						.get("percentChange1h").asDouble();
+				Double percentChange24h = nodeTwd.get("data").get("cryptoCurrencyList").get(i).get("quotes").get(0)
+						.get("percentChange24h").asDouble();
+				Double percentChange7d = nodeTwd.get("data").get("cryptoCurrencyList").get(i).get("quotes").get(0)
+						.get("percentChange7d").asDouble();
+				Double percentChange30d = nodeTwd.get("data").get("cryptoCurrencyList").get(i).get("quotes").get(0)
+						.get("percentChange30d").asDouble();
+				Double percentChange60d = nodeTwd.get("data").get("cryptoCurrencyList").get(i).get("quotes").get(0)
+						.get("percentChange60d").asDouble();
+				Double percentChange90d = nodeTwd.get("data").get("cryptoCurrencyList").get(i).get("quotes").get(0)
+						.get("percentChange90d").asDouble();
+				Double fullyDilluttedMarketCapTwd = nodeTwd.get("data").get("cryptoCurrencyList").get(i).get("quotes")
+						.get(0).get("fullyDilluttedMarketCap").asDouble();
+				Double fullyDilluttedMarketCapUsd = nodeUsd.get("data").get("cryptoCurrencyList").get(i).get("quotes")
+						.get(0).get("fullyDilluttedMarketCap").asDouble();
+				Double ytdPriceChangePercentageTwd = nodeTwd.get("data").get("cryptoCurrencyList").get(i).get("quotes")
+						.get(0).get("ytdPriceChangePercentage").asDouble();
+				Double ytdPriceChangePercentageUsd = nodeUsd.get("data").get("cryptoCurrencyList").get(i).get("quotes")
+						.get(0).get("ytdPriceChangePercentage").asDouble();
 
 				crypto.setDate(date);
-				crypto.setNameOfCryptocurrency(nameOfCryptocurrency);
-				crypto.setSymbolOfCryptocurrency(symbolOfCryptocurrency);
-				crypto.setSlugOfCryptocurrency(slugOfCryptocurrency);
-				crypto.setMaxSupply(maxSupply);
+				crypto.setNameOfCryptocurrency(name);
+				crypto.setSymbolOfCryptocurrency(symbol);
+				crypto.setSlugOfCryptocurrency(slug);
+				crypto.setTotalSupply(totalSupply);
 				crypto.setCirculatingSupply(circulatingSupply);
+				crypto.setTwdPriceOfCryptocurrency(twdPriceOfCryptocurrency);
+				crypto.setUsdPriceOfCryptocurrency(usdPriceOfCryptocurrency);
+				crypto.setVolume24h(volume24h);
 				crypto.setPercentChange1h(percentChange1h);
 				crypto.setPercentChange24h(percentChange24h);
 				crypto.setPercentChange7d(percentChange7d);
 				crypto.setPercentChange30d(percentChange30d);
 				crypto.setPercentChange60d(percentChange60d);
 				crypto.setPercentChange90d(percentChange90d);
+				crypto.setTwdFullyDilutedMarketCap(fullyDilluttedMarketCapTwd);
+				crypto.setUsdFullyDilutedMarketCap(fullyDilluttedMarketCapUsd);
+				crypto.setYtdPriceChangePercentageTwd(ytdPriceChangePercentageTwd);
+				crypto.setYtdPriceChangePercentageUsd(ytdPriceChangePercentageUsd);
+				crypto.setUsdMarketCap(usdMarketCap);
+				crypto.setTwdMarketCap(twdMarketCap);
+				
 
-				crypto.setTWDpriceOfCryptocurrency(TWDpriceOfCryptocurrency);
-				crypto.setTWDmarketCap(TWDmarketCap);
-				crypto.setTWDfullyDilutedMarketCap(TWDfullyDilutedMarketCap);
-
-				crypto.setUSDpriceOfCryptocurrency(USDpriceOfCryptocurrency);
-				crypto.setUSDmarketCap(USDmarketCap);
-				crypto.setUSDfullyDilutedMarketCap(USDfullyDilutedMarketCap);
-
-				crypto.setCNYpriceOfCryptocurrency(CNYpriceOfCryptocurrency);
-				crypto.setCNYmarketCap(CNYmarketCap);
-				crypto.setCNYfullyDilutedMarketCap(CNYfullyDilutedMarketCap);
-
-				crypto.setJPYpriceOfCryptocurrency(JPYpriceOfCryptocurrency);
-				crypto.setJPYmarketCap(JPYmarketCap);
-				crypto.setJPYfullyDilutedMarketCap(JPYfullyDilutedMarketCap);
-
-				crypto.setEURpriceOfCryptocurrency(EURpriceOfCryptocurrency);
-				crypto.setEURmarketCap(EURmarketCap);
-				crypto.setEURfullyDilutedMarketCap(EURfullyDilutedMarketCap);
+//				CryptocurrencyBean cryptocurrencyBean = new CryptocurrencyBean(date, name, symbol, slug, maxSupply,
+//						circulatingSupply, totalSupply, percentChange1h, ytdPriceChangePercentageTwd,
+//						ytdPriceChangePercentageUsd, percentChange24h, percentChange7d, percentChange30d,
+//						percentChange60d, percentChange90d, twdPriceOfCryptocurrency, twdMarketCap,
+//						fullyDilluttedMarketCapTwd, usdPriceOfCryptocurrency, usdMarketCap, fullyDilluttedMarketCapUsd, volume24h);
 				session.beginTransaction();
 				session.save(crypto);
-				System.out.println(crypto);
 				session.getTransaction().commit();
-				
+				System.out.println("done");
+
 			}
+
 		}
+
+		/*
+		 * 取得所有幣別的資料夾(USD,TWD)
+		 */
+//		for (int i = 0; i < currencyFolderNameList.length; i++) {
+//			String currencyFileLocation = RootLocation + currencyFolderNameList[i];
+//			File currencyFile = new File(currencyFileLocation);
+//			String[] jsonTxtFileList = currencyFile.list();
+//
+		/*
+		 * 取得資料夾內的檔案
+		 */
+//			for (int j = 0; j < jsonTxtFileList.length; j++) {
+//				String JsonWord;
+//				ObjectMapper mapper = new ObjectMapper();
+//				File jsonTxtFile = new File(currencyFileLocation + "/" + jsonTxtFileList[j]);
+//				FileReader fileReader = new FileReader(jsonTxtFile);
+//				BufferedReader br = new BufferedReader(fileReader);
+//				StringBuffer sr = new StringBuffer();
+//				while ((JsonWord = br.readLine()) != null) {
+//					sr.append(JsonWord);
+//				}
+//				JsonNode node = mapper.readTree(sr.toString());
+//				String dataNode = node.get("data").get("cryptoCurrencyList").toString();
+//				JSONArray jArray = new JSONArray(dataNode);
+//
+		/*
+		 * 將資料夾內的json.txt 遍歷
+		 */
+//				for (int k = 0; k < jArray.length(); k++) {
+//					String name = node.get("data").get("cryptoCurrencyList").get(k).get("name").asText();
+//					System.out.println(name);
+//				}
+//			}
+//
+//		}
+
 	}
 
 }
