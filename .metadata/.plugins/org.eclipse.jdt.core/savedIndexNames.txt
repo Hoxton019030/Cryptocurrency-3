@@ -1,14 +1,8 @@
 INDEX VERSION 1.131+C:\Users\za546\OneDrive\¤å¥ó\Cryptocurrency\.metadata\.plugins\org.eclipse.jdt.core
-802236854.index
-2540380547.index
+2078054370.index
+2949985911.index
+996284912.index
+936796704.index
 1384613197.index
-950006595.index
-3432188919.index
-3234640488.index
-1770850995.index
-506445347.index
-3235352221.index
-2706529911.index
-2995676504.index
-2972291446.index
-2987115545.index
+3392188984.index
+2750401715.index
