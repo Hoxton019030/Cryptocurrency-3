@@ -2,8 +2,7 @@ package Group1.MyShell.grabJsonToSqlDatabase.Group1.MyShell.grabJsonToSqlDatabas
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
-import java.text.ParseException;
+import java.io.IOException;import java.math.BigDecimal;import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -73,8 +72,7 @@ public class grabJsonToSqlDatabase {
 				Double maxSupply = null;
 
 				try {
-					maxSupply = nodeTwd.get("data").get("cryptoCurrencyList").get(i).get("maxSupply").asDouble();
-				} catch (Exception e) {
+					double bigDecimal = nodeTwd.get("data").get("cryptoCurrencyList").get(i).get("maxSupply").asDouble();					maxSupply= new BigDecimal(bigDecimal).doubleValue();				} catch (Exception e) {
 					maxSupply = 0.0;
 				} finally {
 					crypto.setMaxSupply(maxSupply);

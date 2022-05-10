@@ -17,10 +17,9 @@
                     <div class="col-sm-4">
                         <div class="text-nowrap">
                             <div class="icon d-inline-block">
-                                <img src="https://fakeimg.pl/32x32/200">
-
+                                <img src="./images/${currencyInformation.symbolOfCryptocurrency}.png" alt="找不到圖片" width="32px" height="32px">
                             </div>
-                            <div class="text-nowrap d-inline-block">(縮寫)</div>
+                            <div class="text-nowrap d-inline-block">${currencyInformation.symbolOfCryptocurrency}</div>
 
                             <button type="button" class="btn btn-info d-inline-block">★</button>
                         </div>
@@ -33,10 +32,10 @@
                     <div class="col-sm-4">
                         <div class="text-nowrap ">
                             <div class="d-inline-block">
-                                (虛擬貨幣當前價位s)
+                                當前價位:${currencyInformation.twdPriceOfCryptocurrency}
                             </div>
                             <div class="d-inline-block badge badge-pill badge-danger">
-                                (漲跌幅)
+                                漲跌幅:${currencyInformation.percentChange24h}
                             </div>
                             <div class="lower_highest_price">
                                 <div class="lower_Price d-inline-block ">
@@ -75,7 +74,7 @@
                             <div class="row row-cols-4">
                                 <div class="col marketcap">
                                     <span class="badge badge-primary">MaxSupply</span>
-                                    <div class="market_cap_price">$(45,002,502)</div>
+                                    <div class="market_cap_price">${currencyInformation.maxSupply}</div>
                                     <div class="market_cap_fluctuation "><span class="badge badge-pill badge-danger">(漲跌幅)</span></div>
                                 </div>
                                 <div class="col fullydilutedmarketcap">
@@ -87,20 +86,20 @@
 
                                 <div class="col volume">
                                     <span class="badge badge-primary">Volume</span>
-                                    <div class="Volume">$(45,002,502)</div>
+                                    <div class="Volume">${currencyInformation.volume24h}</div>
                                     <div class=Volume_fluctuation "><span class="badge badge-pill badge-danger ">(漲跌幅)</span>
                                     </div>
                                 </div>
                                 <div class="col circulatingsupply ">
                                     <span class="badge badge-primary ">Circulating Supply</span>
-                                    <div class="Circulating_Supply_price ">$(45,002,502)</div>
+                                    <div class="Circulating_Supply_price ">${currencyInformation.circulatingSupply}</div>
                                     <div class="Circulating_MaxSupply_Title "> 
                                         <div class="title d-inline-block small text-left "> MaxSupply</div>
-                                        <div class="maxsupply d-inline-block small "> $(45,002,502)</div>
+                                        <div class="maxsupply d-inline-block small ">${currencyInformation.maxSupply}</div>
                                     </div>
                                     <div class="Circulating_TotalSupply_Title "> 
                                         <div class="title d-inline-block small text-left "> TotalSupply</div>
-                                        <div class="maxsupply d-inline-block small "> $(45,002,502)</div>
+                                        <div class="maxsupply d-inline-block small "> ${currencyInformation.totalSupply}</div>
                                     </div>
                                 </div>
                                 </div>
@@ -111,6 +110,11 @@
 
                 </div>
             </div>
+
+            <hr>
+
+
+            
 
             <script src="${contextRoot}/js/jquery-3.6.0.min.js " type="text/javascript "></script>
             <script src="${contextRoot}/js/bootstrap.bundle.min.js " type="text/javascript "></script>

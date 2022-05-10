@@ -1,8 +1,5 @@
 package com.Group1.CoinShell.model;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -18,6 +15,6 @@ public interface CryptocurryencyDao extends JpaRepository<Cryptocurrency,Integer
 //	public List<Cryptocurrency> findLastestCurrencyInformation(@Param("currecnyName1") String currencyName);
 	
 	@Query(value="SELECT TOP 1 * FROM cryptocurrency WHERE Symbol_of_Cryptocurrency = :currencyName1 ORDER BY Date DESC",nativeQuery = true)
-	public List<Cryptocurrency> findLastestCurrencyInformation(@Param("currencyName1") String currecnyName);
+	public Cryptocurrency findLastestCurrencyInformation(@Param("currencyName1") String currecnyName);
 
 }

@@ -17,8 +17,8 @@ public class CryptocurrencyInformationService {
 	private CryptocurryencyDao dao;
 
 
-//	public List<Cryptocurrency> findLastestCurrencyInformation(String currencyName) {
-//		return dao.findLastestCurrencyInformation(currencyName);
-//	}
+	public Cryptocurrency findLastestCurrencyInformation(String currencyName) {
+		return dao.findLastestCurrencyInformation(currencyName);
+	}
 
 }
