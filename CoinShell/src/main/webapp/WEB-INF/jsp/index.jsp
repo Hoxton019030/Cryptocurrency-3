@@ -13,10 +13,12 @@
             </head>
 
             <body>
-            <form:form action="individualCryptocurrencyInformation" method="get" modelAttribute="currencyName">
-            請輸入貨幣名稱(縮寫):<form:input path="name" type="text" value="BTN"/>
-            </form:form>
-                
+
+                <form action="individualCryptocurrencyInformation" method="get">
+                    <input type="text" name="currencyName" value="BTC">
+                    <input type="submit">
+                </form>
+
 
 
 

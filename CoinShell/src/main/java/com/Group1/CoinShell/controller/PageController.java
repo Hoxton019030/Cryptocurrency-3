@@ -1,6 +1,5 @@
 package com.Group1.CoinShell.controller;
 
-import org.springframework.context.annotation.Conditional;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +19,8 @@ public class PageController {
 	}
 	
 	@GetMapping("/individualCryptocurrencyInformation")
-	public String getCryptocurrency() {
+	public String getCryptocurrency(@RequestParam("currencyName") String name,Model model) {
+		
 		return "individualCryptocurrencyInformation";
 	}
 	
