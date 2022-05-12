@@ -89,8 +89,11 @@ public class Cryptocurrency {
 	@Column(name = "USD_Fully_Diluted_Market_Cap")
 	private double usdFullyDilutedMarketCap;
 
-	@Column(name = "volume24h")
-	private double volume24h;
+	@Column(name = "volume24hUsd")
+	private double volume24hUsd;
+	
+	@Column(name = "volume24hTwd")
+	private double volume24hTwd;
 
 	public Integer getId() {
 		return id;
@@ -268,12 +271,22 @@ public class Cryptocurrency {
 		this.usdFullyDilutedMarketCap = usdFullyDilutedMarketCap;
 	}
 
-	public double getVolume24h() {
-		return volume24h;
+
+
+	public double getVolume24hUsd() {
+		return volume24hUsd;
 	}
 
-	public void setVolume24h(double volume24h) {
-		this.volume24h = volume24h;
+	public void setVolume24hUsd(double volume24hUsd) {
+		this.volume24hUsd = volume24hUsd;
+	}
+
+	public double getVolume24hTwd() {
+		return volume24hTwd;
+	}
+
+	public void setVolume24hTwd(double volume24hTwd) {
+		this.volume24hTwd = volume24hTwd;
 	}
 
 	public Cryptocurrency(Integer id, Date date, String nameOfCryptocurrency, String symbolOfCryptocurrency,
@@ -282,7 +295,7 @@ public class Cryptocurrency {
 			double percentChange24h, double percentChange7d, double percentChange30d, double percentChange60d,
 			double percentChange90d, double twdPriceOfCryptocurrency, double twdMarketCap,
 			double twdFullyDilutedMarketCap, double usdPriceOfCryptocurrency, double usdMarketCap,
-			double usdFullyDilutedMarketCap, double volume24h) {
+			double usdFullyDilutedMarketCap, double volume24hUsd,double volume24hTwd) {
 		super();
 		this.id = id;
 		this.date = date;
@@ -306,7 +319,8 @@ public class Cryptocurrency {
 		this.usdPriceOfCryptocurrency = usdPriceOfCryptocurrency;
 		this.usdMarketCap = usdMarketCap;
 		this.usdFullyDilutedMarketCap = usdFullyDilutedMarketCap;
-		this.volume24h = volume24h;
+		this.volume24hUsd = volume24hUsd;
+		this.volume24hTwd = volume24hTwd;
 	}
 
 	@Override
@@ -321,7 +335,7 @@ public class Cryptocurrency {
 				+ ", percentChange90d=" + percentChange90d + ", twdPriceOfCryptocurrency=" + twdPriceOfCryptocurrency
 				+ ", twdMarketCap=" + twdMarketCap + ", twdFullyDilutedMarketCap=" + twdFullyDilutedMarketCap
 				+ ", usdPriceOfCryptocurrency=" + usdPriceOfCryptocurrency + ", usdMarketCap=" + usdMarketCap
-				+ ", usdFullyDilutedMarketCap=" + usdFullyDilutedMarketCap + ", volume24h=" + volume24h + "]";
+				+ ", usdFullyDilutedMarketCap=" + usdFullyDilutedMarketCap + ", volume24hUsd=" + volume24hUsd+"]";
 	}
 
 	

@@ -9,115 +9,145 @@
             <title>貨幣資訊頁面</title>
             <c:set var="contextRoot" value="${pageContext.request.contextPath}"></c:set>
             <link href="${contextRoot}/css/bootstrap.min.css" rel="stylesheet">
+            <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+            <link rel="stylesheet" href="/resources/demos/style.css">
+            <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+            <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+            <script>
+                $(function() {
+                    $("#tabs").tabs();
+                });
+            </script>
         </head>
 
         <body>
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="text-nowrap">
-                            <div class="icon d-inline-block">
-                                <img src="./images/${currencyInformation.symbolOfCryptocurrency}.png" alt="找不到圖片" width="32px" height="32px">
-                            </div>
-                            <div class="text-nowrap d-inline-block">${currencyInformation.symbolOfCryptocurrency}</div>
+            <div id="tabs">
 
-                            <button type="button" class="btn btn-info d-inline-block">★</button>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="text-nowrap">
+                                <div class="icon d-inline-block">
+                                    <img src="./images/${currencyInformation.symbolOfCryptocurrency}.png" alt="找不到圖片" width="32px" height="32px">
+                                </div>
+                                <div class="text-nowrap d-inline-block">${currencyInformation.symbolOfCryptocurrency}</div>
+
+                                <button type="button" class="btn btn-info d-inline-block">★</button>
+                            </div>
+                            <div>
+                                <a href="#" class="badge badge-secondary">Rank#(?)</a>
+                            </div>
+
+
                         </div>
-                        <div>
-                            <a href="#" class="badge badge-secondary">Rank#(?)</a>
-                        </div>
-
-
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="text-nowrap ">
-                            <div class="d-inline-block">
-                                當前價位:${currencyInformation.twdPriceOfCryptocurrency}
-                            </div>
-                            <div class="d-inline-block badge badge-pill badge-danger">
-                                漲跌幅:${currencyInformation.percentChange24h}
-                            </div>
-                            <div class="lower_highest_price">
-                                <div class="lower_Price d-inline-block ">
-                                    <span> Low:</span>
-                                    <span>(最低價格)</span>
-                                    <span> High:</span>
-                                    <span>(最高價格)</span>
-                                    <div class="dropdown d-inline-block">
-                                        <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="col-sm-4">
+                            <div class="text-nowrap ">
+                                <div class="d-inline-block">
+                                    當前價位:${currencyInformation.twdPriceOfCryptocurrency}
+                                </div>
+                                <div class="d-inline-block badge badge-pill badge-danger">
+                                    漲跌幅:${currencyInformation.percentChange24h}
+                                </div>
+                                <div class="lower_highest_price">
+                                    <div class="lower_Price d-inline-block ">
+                                        <span> Low:</span>
+                                        <span>(最低價格)</span>
+                                        <span> High:</span>
+                                        <span>(最高價格)</span>
+                                        <div class="dropdown d-inline-block">
+                                            <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                           24h
                                         </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#">24h</a>
-                                            <a class="dropdown-item" href="#">7d</a>
-                                            <a class="dropdown-item" href="#">30d</a>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="#">24h</a>
+                                                <a class="dropdown-item" href="#">7d</a>
+                                                <a class="dropdown-item" href="#">30d</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            1/3佔位
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="container">
+                                <div class="row row-cols-4">
+                                    <div class="col marketcap">
+                                        <span class="badge badge-primary">MaxSupply</span>
+                                        <div class="market_cap_price">${currencyInformation.maxSupply}</div>
+                                        <div class="market_cap_fluctuation "><span class="badge badge-pill badge-danger">(漲跌幅)</span></div>
+                                    </div>
+                                    <div class="col fullydilutedmarketcap">
+                                        <span class="badge badge-primary">Fully Diluted Market Cap</span>
+                                        <div class="Fully_DilutedMarket Cap_price">$(45,002,502)</div>
+                                        <div class="market_cap_fluctuation "><span class="badge badge-pill badge-danger">(漲跌幅)</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col volume">
+                                        <span class="badge badge-primary">Volume</span>
+                                        <div class="Volume">${currencyInformation.volume24hUsd}</div>
+                                        <div class=Volume_fluctuation><span class="badge badge-pill badge-danger ">(漲跌幅)</span>
+                                        </div>
+                                    </div>
+                                    <div class="col circulatingsupply ">
+                                        <span class="badge badge-primary ">Circulating Supply</span>
+                                        <div class="Circulating_Supply_price ">${currencyInformation.circulatingSupply}</div>
+                                        <div class="Circulating_MaxSupply_Title ">
+                                            <div class="title d-inline-block small text-left "> MaxSupply</div>
+                                            <div class="maxsupply d-inline-block small ">${currencyInformation.maxSupply}</div>
+                                        </div>
+                                        <div class="Circulating_TotalSupply_Title ">
+                                            <div class="title d-inline-block small text-left "> TotalSupply</div>
+                                            <div class="maxsupply d-inline-block small "> ${currencyInformation.totalSupply}</div>
                                         </div>
                                     </div>
                                 </div>
 
                             </div>
-
-
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-4">
-                        1/3佔位
-                    </div>
-                    <div class="col-sm-8">
-                        <div class="container">
-                            <div class="row row-cols-4">
-                                <div class="col marketcap">
-                                    <span class="badge badge-primary">MaxSupply</span>
-                                    <div class="market_cap_price">${currencyInformation.maxSupply}</div>
-                                    <div class="market_cap_fluctuation "><span class="badge badge-pill badge-danger">(漲跌幅)</span></div>
-                                </div>
-                                <div class="col fullydilutedmarketcap">
-                                    <span class="badge badge-primary">Fully Diluted Market Cap</span>
-                                    <div class="Fully_DilutedMarket Cap_price">$(45,002,502)</div>
-                                    <div class="market_cap_fluctuation "><span class="badge badge-pill badge-danger">(漲跌幅)</span>
-                                    </div>
-                                </div>
-
-                                <div class="col volume">
-                                    <span class="badge badge-primary">Volume</span>
-                                    <div class="Volume">${currencyInformation.volume24h}</div>
-                                    <div class=Volume_fluctuation "><span class="badge badge-pill badge-danger ">(漲跌幅)</span>
-                                    </div>
-                                </div>
-                                <div class="col circulatingsupply ">
-                                    <span class="badge badge-primary ">Circulating Supply</span>
-                                    <div class="Circulating_Supply_price ">${currencyInformation.circulatingSupply}</div>
-                                    <div class="Circulating_MaxSupply_Title "> 
-                                        <div class="title d-inline-block small text-left "> MaxSupply</div>
-                                        <div class="maxsupply d-inline-block small ">${currencyInformation.maxSupply}</div>
-                                    </div>
-                                    <div class="Circulating_TotalSupply_Title "> 
-                                        <div class="title d-inline-block small text-left "> TotalSupply</div>
-                                        <div class="maxsupply d-inline-block small "> ${currencyInformation.totalSupply}</div>
-                                    </div>
-                                </div>
-                                </div>
-
-                            </div>
                         </div>
                     </div>
 
                 </div>
-            </div>
+                <hr>
+                <div id="tabs">
+                    <ul>
+                        <li>
+                            <a href="#overview">總覽</a> </li>
+                        <li>
+                            <a href="#historical">歷史資訊</a> </li>
+                        <li>
+                            <a href="#news">新聞</a> </li>
 
-            <hr>
+                    </ul>
+
+                    <div id="overview">
+                        <p>這裡放總覽</p>
+                    </div>
+                    <div id="historical">
+                        <p>歷史資料</p>
+                    </div>
+                    <div id="news">
+                        這裡放新聞
+                    </div>
 
 
-            
 
-            <script src="${contextRoot}/js/jquery-3.6.0.min.js " type="text/javascript "></script>
-            <script src="${contextRoot}/js/bootstrap.bundle.min.js " type="text/javascript "></script>
+
+                </div>
+
+
         </body>
 
         </html>

@@ -27,7 +27,7 @@
 		<!-- setting auto generate table: update/validate -->
 		<!-- <property name="hbm2ddl.auto">update</property> -->
 		<!-- source mapping in xml file -->
-		<mapping class="Group1.MyShell.MVC.model.CryptocurrencyBean"/>
+		<mapping class="group1.CryptocurrencyBean"/>
 		<!-- class mapping -->
 <!-- 		<mapping class="tw.hibernatedemo.model.Department" /> -->
 		<!-- <mapping class="tw.hibernatedemo.model.InstructorDetail" /> -->
