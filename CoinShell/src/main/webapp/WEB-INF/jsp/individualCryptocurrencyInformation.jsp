@@ -11,6 +11,8 @@
             <link href="${contextRoot}/css/bootstrap.min.css" rel="stylesheet">
             <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
             <link rel="stylesheet" href="/resources/demos/style.css">
+            <link href="stylesheets/jquery-ui/base/jquery-ui.min.css" rel="stylesheet" />
+            <link href="stylesheets/myStyleSheet.css" rel="stylesheet" />
             <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
             <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
             <script>
@@ -35,7 +37,7 @@
                                 <button type="button" class="btn btn-info d-inline-block">★</button>
                             </div>
                             <div>
-                                <a href="#" class="badge badge-secondary">Rank#(?)</a>
+                                <a href="#" class="badge badge-secondary">Rank#${currencyInformation.id%100}</a>
                             </div>
 
 
@@ -124,11 +126,11 @@
                 <div id="tabs">
                     <ul>
                         <li>
-                            <a href="#overview">總覽</a> </li>
+                            <a href="#overview" id="page-overview">總覽</a> </li>
                         <li>
-                            <a href="#historical">歷史資訊</a> </li>
+                            <a href="#historical" id="page-historical">歷史資訊</a> </li>
                         <li>
-                            <a href="#news">新聞</a> </li>
+                            <a href="#news" id="page-news">新聞</a> </li>
 
                     </ul>
 
@@ -137,13 +139,75 @@
                     </div>
                     <div id="historical">
                         <p>歷史資料</p>
+                        <!-- 這邊抓一個月的資料 -->
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">日期</th>
+                                    <th scope="col">開盤</th>
+                                    <th scope="col">最高點</th>
+                                    <th scope="col">最低點</th>
+                                    <th scope="col">收盤價</th>
+                                    <th scope="col">24小時交易量</th>
+                                    <th scope="col">整體市值</th>
+                                </tr>
+                                <tbody>
+                                    <tr>
+                                        <th scope="col"> 2022/5/13</th>
+                                        <th scope="col">100</th>
+                                        <th scope="col">150</th>
+                                        <th scope="col">90</th>
+                                        <th scope="col">103</th>
+                                        <th scope="col">122</th>
+                                        <th scope="col">12332</th>
+                                    </tr>
+                                </tbody>
+
+                            </thead>
+
+
+                        </table>
                     </div>
                     <div id="news">
-                        這裡放新聞
+
                     </div>
 
+                    <script>
+                        $("#page-news").click(function() {
+                            $("#news").empty();
+                            fetch("http://localhost:8080/myapp/news/get?currencyName=BTC", {
+                                method: "GET"
+                            }).then(function(response) {
+                                return response.json();
+                            }).then(function(array) {
+                                $.each(array, function(index, value) {
+                                    $("#news").append(`<div class="card mb-3" style="width: 150;">
+                            <div class="row no-gutters">
+                                <div class="col-md-4">
+                                    <img width="300" height="200" src="` + value.imageOfNews + `">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="new-card-body">
+                                        <h5 class="card-title">` + value.title + `</h5>
+                                        <p class="card-text">` + value.contentOfNews + `</p>
+                                        <p class="card-text"><small class="text-muted">上傳日期:` + value.date + `</small></p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>`)
+                                })
+                            })
+                            return false;
+                        })
 
 
+                        // fetch("http://localhost:8080/myapp/news/get?currencyName=BTC").then(function(response) {
+                        //     return response.json();
+                        // }).then(function(myJson) {
+                        //     console.log(myJson);
+                        // })
+                    </script>
 
                 </div>
 

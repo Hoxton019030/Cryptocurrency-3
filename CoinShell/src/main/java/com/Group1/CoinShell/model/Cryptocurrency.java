@@ -26,7 +26,7 @@ public class Cryptocurrency {
 
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "Date")
+	@Column(name = "InformationDate")
 	private Date date;
 
 	@Column(name = "Name_of_Cryptocurrency")

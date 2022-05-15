@@ -14,12 +14,16 @@
 
             <body>
 
-                <form action="individualCryptocurrencyInformation" method="get">
+                <form action="individualCryptocurrencyInformation" method="get" id="">
                     <input type="text" name="currencyName" value="BTC">
+                    <div id="day"></div>
                     <input type="submit">
                 </form>
 
-
+                <script>
+                    let day = new Date()
+                    document.getElementById("day").innerHTML = (`<input type="text" id="currentlyDay" name="currentlyDay" value="` + day.getFullYear() + "-" + (day.getMonth() + 1) + "-" + day.getDate() + `">`);
+                </script>
 
 
             </body>

@@ -30,8 +30,9 @@ public class PageController {
 	}
 	
 	@GetMapping("/individualCryptocurrencyInformation")
-	public String getCryptocurrency(@RequestParam("currencyName") String name,Model model) {
+	public String getCryptocurrency(@RequestParam("currencyName") String name,@RequestParam("currentlyDay") String day, Model model) {
 		Cryptocurrency lastestCurrencyInformation = service.findLastestCurrencyInformation(name);
+		service.findHistoricalCurrencyInformation(name, day);
 		model.addAttribute("currencyInformation", lastestCurrencyInformation);
 		System.out.println(lastestCurrencyInformation);
 		return "individualCryptocurrencyInformation";

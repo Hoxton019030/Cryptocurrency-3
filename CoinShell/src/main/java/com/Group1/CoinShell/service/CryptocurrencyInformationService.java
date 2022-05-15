@@ -20,5 +20,9 @@ public class CryptocurrencyInformationService {
 	public Cryptocurrency findLastestCurrencyInformation(String currencyName) {
 		return dao.findLastestCurrencyInformation(currencyName);
 	}
+	
+	public Cryptocurrency findHistoricalCurrencyInformation(String currencyName,String date) {
+		return dao.findHistoricalCurrencyInformation(currencyName, date);
+	}
 
 }
