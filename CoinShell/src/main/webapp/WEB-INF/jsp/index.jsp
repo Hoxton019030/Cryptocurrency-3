@@ -192,7 +192,7 @@
                     }
                     window.setInterval(function() {
                         upCoin()
-                    }, 1000000);
+                    }, 10000);
 
                     // window.onbeforeunload = function() {
                     //     var scrollPos;
