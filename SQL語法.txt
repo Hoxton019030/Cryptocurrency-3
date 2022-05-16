@@ -33,25 +33,27 @@ Date DateTime NOT NULL,
 Name_of_Cryptocurrency NVARCHAR(30),
 Symbol_of_Cryptocurrency NVARCHAR(30),
 Slug_of_Cryptocurrency NVARCHAR(30),
-Total_Supply DECIMAL(38,8),
-Max_Supply DECIMAL(38,8),
-Circulating_Supply DECIMAL(38,8),
-Percent_Change_1h DECIMAL(12,8),
-Percent_Change_24h DECIMAL(12,8),
-Percent_Change_7d DECIMAL(12,8),
-Percent_Change_30d DECIMAL(12,8),
-Percent_Change_60d DECIMAL(12,8),
-Percent_Change_90d DECIMAL(12,8),
-ytdPriceChangePercentageTwd DECIMAL(12,8),
-ytdPriceChangePercentageUsd DECIMAL(12,8),
+Total_Supply DECIMAL(38,4),
+Max_Supply DECIMAL(38,4),
+Circulating_Supply DECIMAL(38,4),
+Percent_Change_1h DECIMAL(12,4),
+Percent_Change_24h DECIMAL(12,4),
+Percent_Change_7d DECIMAL(12,4),
+Percent_Change_30d DECIMAL(12,4),
+Percent_Change_60d DECIMAL(12,4),
+Percent_Change_90d DECIMAL(12,4),
+ytdPriceChangePercentageTwd DECIMAL(12,4),
+ytdPriceChangePercentageUsd DECIMAL(12,4),
 TWD_Price_of_Cryptocurrency MONEY,
 TWD_Market_Cap MONEY ,
 TWD_Fully_Diluted_Market_Cap MONEY ,
 USD_Price_of_Cryptocurrency MONEY,
 USD_Market_Cap MONEY ,
 USD_Fully_Diluted_Market_Cap MONEY ,
-volume24h DECIMAL(38,8),
+volume24hUsd DECIMAL(38,4),
+volume24hTwd DECIMAL(38,4),
 )
+
 
 Use CoinShell
 
@@ -99,7 +101,7 @@ Upload_Date DATE)
 
 
 USE CoinShell
-CREATE TABLE HomePage_News(
+CREATE TABLE News(
 Id INT IDENTITY(1,1) NOT NULL,
 Upload_Time Date NOT NULL,
 Title NVARCHAR(100),
