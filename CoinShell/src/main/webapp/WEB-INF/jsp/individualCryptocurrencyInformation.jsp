@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+          <jsp:include page="NavBar/CoinShellNavBar.jsp" />
         <!DOCTYPE html>
         <html>
 
@@ -30,7 +31,7 @@
                         <div class="col-sm-4">
                             <div class="text-nowrap">
                                 <div class="icon d-inline-block">
-                                    <img src="./images/${currencyInformation.symbolOfCryptocurrency}.png" alt="找不到圖片" width="32px" height="32px">
+                                    <img src="./images/currencyIcon/${currencyInformation.symbolOfCryptocurrency}.png" alt="找不到圖片" width="32px" height="32px">
                                 </div>
                                 <div class="text-nowrap d-inline-block">${currencyInformation.symbolOfCryptocurrency}</div>
 

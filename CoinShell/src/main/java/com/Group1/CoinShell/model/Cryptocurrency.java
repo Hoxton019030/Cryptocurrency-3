@@ -24,7 +24,7 @@ public class Cryptocurrency {
 	@Column(name = "id")
 	private Integer id;
 
-	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
+	@DateTimeFormat(pattern = "yyyy/MM/dd hh:mm:ss")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "InformationDate")
 	private Date date;
