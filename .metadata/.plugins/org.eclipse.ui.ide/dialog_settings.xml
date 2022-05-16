@@ -6,6 +6,12 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="C:\Users\za546\OneDrive\文件\Cryptocurrency\ShellCoin-master.zip_expanded\ShellCoin-master"/>
+			<item value="C:\Users\za546\OneDrive\文件\Cryptocurrency\CoinShellSpringBoot\CoinShellSpringBoot"/>
+			<item value="Z:\Download\ShellCoin-master.zip"/>
+			<item value="C:\_java\SpringBootWorkspace\PERFECT_SpringBootNoteBook"/>
+			<item value="Z:\Download\.SpringBootProject\CoinShellSpringBoot"/>
+			<item value="C:\Users\za546\OneDrive\文件\Cryptocurrency\CoinShell"/>
 			<item value="C:\_Java\SpringPerfectSave\SpringMVCDemo"/>
 			<item value="C:\_Java\SpringHomework"/>
 		</list>
