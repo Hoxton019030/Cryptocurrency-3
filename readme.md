@@ -5,6 +5,7 @@
    > C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\Backup
     ▲僅供參考
 3. 每個人上傳檔案都是先推到自己的分支，要合併的時候才由負責人合併
+4. # 網址是`http://localhost:8080/coinshell/`  !!!
 
 
 # 待辦事項
