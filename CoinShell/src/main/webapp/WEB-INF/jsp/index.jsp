@@ -56,9 +56,12 @@
                     
                     .news-image {
                         width: 100%;
-                        height: 200px;
+                        height: auto;
                         border: 3px rgb(30, 16, 187) dashed;
-                        flex-direction: row-reverse
+                    }
+                    .news-image img{
+                   
+                        margin: 0 20px 0 20px ;
                     }
                     
                     .main {
@@ -150,10 +153,9 @@
                             </div>
                         </div>
                     </div>
-
-
-
                 </div>
+                
+                
                 <script>
                     $(function() {
                         upCoin();
@@ -193,25 +195,6 @@
                     window.setInterval(function() {
                         upCoin()
                     }, 10000);
-
-                    // window.onbeforeunload = function() {
-                    //     var scrollPos;
-                    //     if (typeof window.pageYOffset != 'undefined') {
-                    //         scrollPos = window.pageYOffset;
-                    //     } else if (typeof document.compatMode != 'undefined' && document.compatMode != 'BackCompat') {
-                    //         scrollPos = document.documentElement.scrollTop;
-                    //     } else if (typeof document.body != 'undefined') {
-                    //         scrollPos = document.body.scrollTop;
-                    //     }
-                    //     document.cookie = "scrollTop=" + scrollPos; //存儲滾動條位置到cookies中
-                    // }
-                    // window.onload = function() {
-                    //     if (document.cookie.match(/scrollTop=([^;]+)(;|$)/) != null) {
-                    //         var arr = document.cookie.match(/scrollTop=([^;]+)(;|$)/); //cookies中不為空，則讀取滾動條位置  
-                    //         document.documentElement.scrollTop = parseInt(arr[1]);
-                    //         document.body.scrollTop = parseInt(arr[1]);
-                    //     }
-                    // }
                 </script>
 
 
