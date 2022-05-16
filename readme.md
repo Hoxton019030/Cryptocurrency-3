@@ -9,27 +9,25 @@
 
 # 待辦事項
 + Crystal00300
-  1. 
-  2. 
-  3. 
+
+  1. (Pending)
+ 
 
 + Feeder
-  1. 
-  2. 
-  3. 
+  1. (Pending)
+ 
 
 + yicelwen
-  1. 
-  2. 
-  3. 
+  1. (Pending)
+
 
 + habufly
-  1. 
-  2. 
-  3. 
+  1. (Pending)
+
 
 + Hoxton
-  1. 
+  1. 要記得加入Follow List的功能
+     ![image](https://user-images.githubusercontent.com/98711945/168682177-6ac5b00b-63b4-469e-8c61-afd6e50a4261.png)
   2. 
   3. 
 
