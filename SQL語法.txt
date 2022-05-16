@@ -29,7 +29,7 @@ Id INT UNIQUE NOT NULL ,
 Use CoinShell
 CREATE TABLE Cryptocurrency(
 id INT NOT NULL PRIMARY KEY IDENTITY(1,1),
-Date DateTime NOT NULL,
+informationDate DateTime NOT NULL,
 Name_of_Cryptocurrency NVARCHAR(30),
 Symbol_of_Cryptocurrency NVARCHAR(30),
 Slug_of_Cryptocurrency NVARCHAR(30),
