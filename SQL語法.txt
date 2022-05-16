@@ -101,6 +101,7 @@ Upload_Date DATE)
 USE CoinShell
 CREATE TABLE HomePage_News(
 Id INT IDENTITY(1,1) NOT NULL,
+Upload_Time Date NOT NULL,
 Title NVARCHAR(100),
 Content_Of_News NVARCHAR(MAX),
 Image_Of_News NVARCHAR(MAX)
