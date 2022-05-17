@@ -185,8 +185,8 @@
                                     $(".cointable").append(`
                                             <tr>
                                             <th scope="row">` + value.id + `</th>
-                                            <td> <a href="http://localhost:8080/coinshell/individualCryptocurrencyInformation?currencyName=` + value.symbol + `&currentlyDay=` + value.lastUpdated.substr(0, 10) + `">` + value.name + `</a></td>
-                                            <td>` +`<img class=currencyIcon src="${contextRoot}/images/currencyIcon/`+value.symbol+`.png" alt="">`+ value.symbol + `</td>
+                                            <td>`+`<img class=currencyIcon src="${contextRoot}/images/currencyIcon/`+value.symbol+`.png" alt="">`+`<a href="http://localhost:8080/coinshell/individualCryptocurrencyInformation?currencyName=` + value.symbol + `&currentlyDay=` + value.lastUpdated.substr(0, 10) + `">` + value.name + `</a></td>
+                                            <td>` + value.symbol + `</td>
                                             <td>$` + value.price.toFixed(2) + `</td>
                                             <td>` + value.percentChange1h.toFixed(2) + `%</td>
                                             <td>` + value.percentChange24h.toFixed(2) + `%</td>
@@ -201,28 +201,13 @@
 
                         })
                     }
+                    //設定間隔時間
                     window.setInterval(function() {
                         upCoin()
-                    }, 10000);
+                    }, 5000);
+                    
 
-                    // window.onbeforeunload = function() {
-                    //     var scrollPos;
-                    //     if (typeof window.pageYOffset != 'undefined') {
-                    //         scrollPos = window.pageYOffset;
-                    //     } else if (typeof document.compatMode != 'undefined' && document.compatMode != 'BackCompat') {
-                    //         scrollPos = document.documentElement.scrollTop;
-                    //     } else if (typeof document.body != 'undefined') {
-                    //         scrollPos = document.body.scrollTop;
-                    //     }
-                    //     document.cookie = "scrollTop=" + scrollPos; //存儲滾動條位置到cookies中
-                    // }
-                    // window.onload = function() {
-                    //     if (document.cookie.match(/scrollTop=([^;]+)(;|$)/) != null) {
-                    //         var arr = document.cookie.match(/scrollTop=([^;]+)(;|$)/); //cookies中不為空，則讀取滾動條位置  
-                    //         document.documentElement.scrollTop = parseInt(arr[1]);
-                    //         document.body.scrollTop = parseInt(arr[1]);
-                    //     }
-                    // }
+ 
                 </script>
 
 
