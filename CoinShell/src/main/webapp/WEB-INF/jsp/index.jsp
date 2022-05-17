@@ -60,6 +60,11 @@
                         border: 3px rgb(30, 16, 187) dashed;
                         flex-direction: row-reverse
                     }
+
+                    .news-image img{
+                        margin: 0 20px 0 20px;
+                        border: 3px rgb(76, 187, 16) dashed;
+                    }
                     
                     .main {
                         background-color: white;
@@ -68,6 +73,10 @@
                     .top-coin {
                         border: 3px rgb(255, 251, 0) dashed;
                         height: 50em;
+                    }
+                    .currencyIcon{
+                        width: 32px;
+                        height: 32px;
                     }
                 </style>
                 <script>
@@ -149,6 +158,8 @@
                                 </thead>
                             </div>
                         </div>
+                     
+                   
                     </div>
 
 
@@ -175,7 +186,7 @@
                                             <tr>
                                             <th scope="row">` + value.id + `</th>
                                             <td> <a href="http://localhost:8080/coinshell/individualCryptocurrencyInformation?currencyName=` + value.symbol + `&currentlyDay=` + value.lastUpdated.substr(0, 10) + `">` + value.name + `</a></td>
-                                            <td>` + value.symbol + `</td>
+                                            <td>` +`<img class=currencyIcon src="${contextRoot}/images/currencyIcon/`+value.symbol+`.png" alt="">`+ value.symbol + `</td>
                                             <td>$` + value.price.toFixed(2) + `</td>
                                             <td>` + value.percentChange1h.toFixed(2) + `%</td>
                                             <td>` + value.percentChange24h.toFixed(2) + `%</td>
