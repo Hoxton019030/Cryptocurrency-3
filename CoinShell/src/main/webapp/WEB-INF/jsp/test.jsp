@@ -1,25 +1,134 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-        <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-            <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-            <!DOCTYPE html>
-            <html>
+<!DOCTYPE html>
+<html lang="en">
 
-            <head>
-                <meta charset="UTF-8">
-                <title>首頁</title>
-                <link rel="Shortcut Icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/1490/1490853.png" />
-                <link href="${contextRoot}/css/bootstrap.min.css" rel="stylesheet">
-                <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-                <link rel="stylesheet" href="/resources/demos/style.css">
-                <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-                <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-            </head>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
 
-            <body>
-                <img src="${contextRoot}/images/currencyIcon/BTC.png" alt="">
+</head>
 
-            </body>
+<body>
+    <div id="my_dataviz"></div>
 
-            </html>
+    <script>
+        // set the dimensions and margins of the graph
+        var margin = {
+                top: 10,
+                right: 30,
+                bottom: 30,
+                left: 60
+            },
+            width = 460 - margin.left - margin.right,
+            height = 400 - margin.top - margin.bottom;
+
+        // append the svg object to the body of the page
+        var svg = d3.select("#my_dataviz")
+            .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + margin.left + "," + margin.top + ")");
+
+        //Read the data
+        d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_IC.csv", function(data) {
+
+            // Add X axis --> it is a date format
+            var x = d3.scaleLinear()
+                .domain([1, 100])
+                .range([0, width]);
+            svg.append("g")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x));
+
+            // Add Y axis
+            var y = d3.scaleLinear()
+                .domain([0, 13])
+                .range([height, 0]);
+            svg.append("g")
+                .call(d3.axisLeft(y));
+
+            // This allows to find the closest X index of the mouse:
+            var bisect = d3.bisector(function(d) {
+                return d.x;
+            }).left;
+
+            // Create the circle that travels along the curve of chart
+            var focus = svg
+                .append('g')
+                .append('circle')
+                .style("fill", "none")
+                .attr("stroke", "black")
+                .attr('r', 8.5)
+                .style("opacity", 0)
+
+            // Create the text that travels along the curve of chart
+            var focusText = svg
+                .append('g')
+                .append('text')
+                .style("opacity", 0)
+                .attr("text-anchor", "left")
+                .attr("alignment-baseline", "middle")
+
+            // Add the line
+            svg
+                .append("path")
+                .datum(data)
+                .attr("fill", "none")
+                .attr("stroke", "steelblue")
+                .attr("stroke-width", 1.5)
+                .attr("d", d3.line()
+                    .x(function(d) {
+                        return x(d.x)
+                    })
+                    .y(function(d) {
+                        return y(d.y)
+                    })
+                )
+
+            // Create a rect on top of the svg area: this rectangle recovers mouse position
+            svg
+                .append('rect')
+                .style("fill", "none")
+                .style("pointer-events", "all")
+                .attr('width', width)
+                .attr('height', height)
+                .on('mouseover', mouseover)
+                .on('mousemove', mousemove)
+                .on('mouseout', mouseout);
+
+
+            // What happens when the mouse move -> show the annotations at the right positions.
+            function mouseover() {
+                focus.style("opacity", 1)
+                focusText.style("opacity", 1)
+            }
+
+            function mousemove() {
+                // recover coordinate we need
+                var x0 = x.invert(d3.mouse(this)[0]);
+                var i = bisect(data, x0, 1);
+                selectedData = data[i]
+                focus
+                    .attr("cx", x(selectedData.x))
+                    .attr("cy", y(selectedData.y))
+                focusText
+                    .html("x:" + selectedData.x + "  -  " + "y:" + selectedData.y)
+                    .attr("x", x(selectedData.x) + 15)
+                    .attr("y", y(selectedData.y))
+            }
+
+            function mouseout() {
+                focus.style("opacity", 0)
+                focusText.style("opacity", 0)
+            }
+
+        })
+    </script>
+
+</body>
+
+</html>

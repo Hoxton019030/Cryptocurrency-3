@@ -1,5 +1,8 @@
 package com.Group1.CoinShell.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,19 +21,11 @@ public class CryptocurrencyController {
 	
 	@GetMapping("historical/get")
 	@ResponseBody
-	public Cryptocurrency findHistoricalCurrencyInformation(@RequestParam String currencyName ,@RequestParam String day) {
-		Cryptocurrency historicalCryptocurrencyData = dao.findHistoricalCurrencyInformation(currencyName, day);
-		return historicalCryptocurrencyData;
+	public List<Map<String,Object>> findHistoricalCurrencyInformation(@RequestParam String currencyName ,@RequestParam String day) {
+		List<Map<String,Object>> findHistoricalCurrencyInformation = dao.findHistoricalCurrencyInformation(currencyName, day);
+		return findHistoricalCurrencyInformation;
 	}
 	
-	@GetMapping("historical/get2")
-	@ResponseBody
-	public Cryptocurrency findHistoricalCurrencyInformation2() {
-		Cryptocurrency historicalCryptocurrencyData2 = dao.findHistoricalCurrencyInformation2();
-		System.out.println("測試");
-		System.out.println(historicalCryptocurrencyData2);
-		return historicalCryptocurrencyData2;
-	}
 	
 	@GetMapping("/individualCryptocurrencyInformation")
 	public String getCryptocurrency(@RequestParam("currencyName") String name,@RequestParam("currentlyDay") String day, Model model) {

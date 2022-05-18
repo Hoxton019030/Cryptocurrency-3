@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-          <jsp:include page="NavBar/CoinShellNavBar.jsp" />
+        <jsp:include page="NavBar/CoinShellNavBar.jsp" />
         <!DOCTYPE html>
         <html>
 
@@ -152,7 +152,7 @@
                                     <th scope="col">24小時交易量</th>
                                     <th scope="col">整體市值</th>
                                 </tr>
-                                <tbody>
+                                <tbody id="historical-row">
                                     <tr>
                                         <th scope="col"> 2022/5/13</th>
                                         <th scope="col">100</th>
@@ -172,13 +172,19 @@
                     <div id="news">
 
                     </div>
+                    <div id="test"></div>
+
 
                     <script>
+                        var getUrlString = location.href;
+                        var url = new URL(getUrlString);
+                        var currencyName = url.searchParams.get('currencyName');
+                        var day = url.searchParams.get('currentlyDay');
+
+
                         $("#page-news").click(function() {
                             $("#news").empty();
-                            fetch("http://localhost:8080/myapp/news/get?currencyName=BTC", {
-                                method: "GET"
-                            }).then(function(response) {
+                            fetch("http://localhost:8080/coinshell/news/get?currencyName=" + currencyName).then(function(response) {
                                 return response.json();
                             }).then(function(array) {
                                 $.each(array, function(index, value) {
@@ -199,15 +205,27 @@
                         </div>`)
                                 })
                             })
-                            return false;
                         })
 
 
-                        // fetch("http://localhost:8080/myapp/news/get?currencyName=BTC").then(function(response) {
-                        //     return response.json();
-                        // }).then(function(myJson) {
-                        //     console.log(myJson);
-                        // })
+                        $("#page-historical").click(function() {
+                            $("#historical-row").empty()
+                            fetch("http://localhost:8080/coinshell/historical/get?currencyName=" + currencyName + "&day=" + day).then(function(response) {
+                                return response.json();
+                            }).then(function(array) {
+                                $.each(array, function(index, value) {
+                                    $("#historical-row").append(`<tr>
+                                        <th scope="col"> ` + day + `</th>
+                                        <th scope="col">` + value.TheFristUsdDate + `</th>
+                                        <th scope="col">` + value.TheHighestUsdPricePerUnit + `</th>
+                                        <th scope="col">` + value.TheLowerUsdPricePerUnit + `</th>
+                                        <th scope="col">` + value.TheLastUsdDate + `</th>
+                                        <th scope="col">` + value.Usd24hVolume + `</th>
+                                        <th scope="col">` + value.UsdMarkCap + `</th>
+                                    </tr>3`);
+                                })
+                            })
+                        })
                     </script>
 
                 </div>

@@ -60,8 +60,8 @@
                         border: 3px rgb(30, 16, 187) dashed;
                         flex-direction: row-reverse
                     }
-
-                    .news-image img{
+                    
+                    .news-image img {
                         margin: 0 20px 0 20px;
                         border: 3px rgb(76, 187, 16) dashed;
                     }
@@ -74,7 +74,8 @@
                         border: 3px rgb(255, 251, 0) dashed;
                         height: 50em;
                     }
-                    .currencyIcon{
+                    
+                    .currencyIcon {
                         width: 32px;
                         height: 32px;
                     }
@@ -158,8 +159,8 @@
                                 </thead>
                             </div>
                         </div>
-                     
-                   
+
+
                     </div>
 
 
@@ -174,6 +175,12 @@
                     });
 
 
+
+                    var day = new Date();
+                    let month = day.getMonth() + 1
+                    month = (month < 10 ? '0' : '') + month
+                    var today = day.getFullYear() + "-" + month + "-" + day.getDate();
+
                     function upCoin() {
                         $(function() {
                             $(".cointable").empty();
@@ -185,7 +192,7 @@
                                     $(".cointable").append(`
                                             <tr>
                                             <th scope="row">` + value.id + `</th>
-                                            <td>`+`<img class=currencyIcon src="${contextRoot}/images/currencyIcon/`+value.symbol+`.png" alt="">`+`<a href="http://localhost:8080/coinshell/individualCryptocurrencyInformation?currencyName=` + value.symbol + `&currentlyDay=` + value.lastUpdated.substr(0, 10) + `">` + value.name + `</a></td>
+                                            <td>` + `<img class=currencyIcon src="${contextRoot}/images/currencyIcon/` + value.symbol + `.png" alt="">` + `<a href="http://localhost:8080/coinshell/individualCryptocurrencyInformation?currencyName=` + value.symbol + `&currentlyDay=` + today + `">` + value.name + `</a></td>
                                             <td>` + value.symbol + `</td>
                                             <td>$` + value.price.toFixed(2) + `</td>
                                             <td>` + value.percentChange1h.toFixed(2) + `%</td>
@@ -205,9 +212,6 @@
                     window.setInterval(function() {
                         upCoin()
                     }, 5000);
-                    
-
- 
                 </script>
 
 
