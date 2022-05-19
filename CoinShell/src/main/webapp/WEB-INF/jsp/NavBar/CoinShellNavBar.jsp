@@ -22,7 +22,7 @@
             <script src="https://kit.fontawesome.com/0ef2a35b44.js" crossorigin="anonymous"></script>
 
             <!--Only for this login modal's CSS 連結-->
-            <link rel="stylesheet" href="loginStyle.css">
+            <link rel="stylesheet" href="${contextRoot}/css/loginStyle.css">
             <style>
                 body {
                     background-image: url("tempbackground.png");
