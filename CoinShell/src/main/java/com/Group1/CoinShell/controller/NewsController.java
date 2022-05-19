@@ -44,6 +44,7 @@ public class NewsController {
 		List<News> newsList = dao.findAllNewsByCurrencyName(currencyName);
 		return newsList;
 	}
+//http://localhost:8080/coinshell/news/get?currencyName=BTC
 	
 	
 }

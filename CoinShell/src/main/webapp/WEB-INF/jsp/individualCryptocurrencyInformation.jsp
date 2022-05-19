@@ -138,39 +138,11 @@
                     <div id="overview">
                         <p>
                             <div>
-                                <canvas id="myChart"></canvas>
-                                <script>
-                                    const labels = [
-                                        'January',
-                                        'February',
-                                        'March',
-                                        'April',
-                                        'May',
-                                        'June',
-                                    ];
+                                <canvas id="canvas" width="500" height="100">
 
-                                    const data = {
-                                        labels: labels,
-                                        datasets: [{
-                                            label: 'My First dataset',
-                                            backgroundColor: 'rgb(255, 99, 132)',
-                                            borderColor: 'rgb(255, 99, 132)',
-                                            data: [0, 10, 5, 2, 20, 30, 45],
-                                        }]
-                                    };
+                                </canvas>
 
-                                    const config = {
-                                        type: 'line',
-                                        data: data,
-                                        options: {}
-                                    };
-                                </script>
-                                <script>
-                                    const myChart = new Chart(
-                                        document.getElementById('myChart'),
-                                        config
-                                    );
-                                </script>
+
                             </div>
                         </p>
                     </div>
@@ -208,7 +180,7 @@
                     <div id="news">
 
                     </div>
-                    <div id="test"></div>
+
 
 
                     <script>
@@ -262,15 +234,76 @@
                                 })
                             })
                         })
+                        var xmlHttp = new XMLHttpRequest();
+                        var url = "http://localhost:8080/coinshell/historical/get30days?currencyName=" + currencyName
+                        xmlHttp.open("GET", url, true);
+                        xmlHttp.send()
+                        xmlHttp.onreadystatechange = function() {
+                            if (this.readyState == 4 && this.status == 200) {
+                                var data = JSON.parse(this.responseText);
+                                var days = data.map(function(elem) {
+                                    return elem.informationDate
+                                        .substr(0, 14).replace('T', '').replace('-', '').replace('-', '').replace(':', '')
+                                });
+                                var price = data.map(function(elem) {
+                                    return elem.USD_Price_of_Cryptocurrency;
+                                })
+                                console.log(days)
+                                console.log(price)
+                                    // document.write(days)
+                                    // document.write(price)
+                                const ctx = document.getElementById('canvas').getContext('2d');
+                                const myChart = new Chart(ctx, {
+                                    type: 'line',
+                                    data: {
+                                        labels: days,
+                                        datasets: [{
+                                            label: 'US',
+                                            data: price,
+                                            backgroundColor: [
+                                                'transparent'
+                                            ],
+                                            borderColor: 'black',
+                                            borderWidth: 4,
+                                            lineTension: 0
+
+                                        }]
+                                    },
+                                    options: {
+                                        element: {
+                                            line: {
+                                                lineTension: 0
+                                            }
+                                        },
+                                        scales: {
+                                            xAxes: [{
+                                                type: 'time',
+                                                time: {
+                                                    unit: 'hour'
+                                                }
+                                            }],
+                                            y: {
+                                                beginAtZero: true
+                                            }
+
+
+                                        }
+                                    }
+                                });
+                            }
+                        }
                     </script>
-                    <script>
+                    <!-- <script>
                         function updateCoinData() {
                             $(function() {
                                 $(".currentlyPrice").empty()
                                 fetch("")
                             })
                         }
-                    </script>
+                    </script> -->
+
+                </div>
+                <div id="test">
 
                 </div>
 

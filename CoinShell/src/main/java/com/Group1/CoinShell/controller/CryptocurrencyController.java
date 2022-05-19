@@ -40,8 +40,8 @@ public class CryptocurrencyController {
 
 	@ResponseBody
 	@GetMapping("/historical/get30days")
-	public List<Cryptocurrency> find30DaysCurrencyInformation(@RequestParam("currencyName") String currencyName) {
-		List<Cryptocurrency> find30DaysCurrencyInformation = dao.find30DaysCurrencyInformation(currencyName);
+	public List<Map<String,Object>> find30DaysCurrencyInformation(@RequestParam("currencyName") String currencyName) {
+		List<Map<String,Object>> find30DaysCurrencyInformation = dao.find30DaysCurrencyInformation(currencyName);
 		return find30DaysCurrencyInformation;
 	}
 	// http://localhost:8080/coinshell/historical/get30days?currencyName=btc
