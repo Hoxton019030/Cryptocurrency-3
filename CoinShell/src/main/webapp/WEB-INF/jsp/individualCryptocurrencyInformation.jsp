@@ -246,10 +246,10 @@
                                         .substr(0, 14).replace('T', '').replace('-', '').replace('-', '').replace(':', '')
                                 });
                                 var price = data.map(function(elem) {
-                                    return elem.USD_Price_of_Cryptocurrency;
-                                })
-                                console.log(days)
-                                console.log(price)
+                                        return elem.USD_Price_of_Cryptocurrency;
+                                    })
+                                    // console.log(days)
+                                    // console.log(price)
                                     // document.write(days)
                                     // document.write(price)
                                 const ctx = document.getElementById('canvas').getContext('2d');
