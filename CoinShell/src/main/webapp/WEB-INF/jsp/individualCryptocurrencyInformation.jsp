@@ -16,6 +16,7 @@
             <link href="stylesheets/myStyleSheet.css" rel="stylesheet" />
             <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
             <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
             <script>
                 $(function() {
                     $("#tabs").tabs();
@@ -25,7 +26,6 @@
 
         <body>
             <div id="tabs">
-
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-4">
@@ -45,7 +45,7 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="text-nowrap ">
-                                <div class="d-inline-block">
+                                <div class="d-inline-block currentlyPrice">
                                     當前價位:${currencyInformation.twdPriceOfCryptocurrency}
                                 </div>
                                 <div class="d-inline-block badge badge-pill badge-danger">
@@ -136,7 +136,43 @@
                     </ul>
 
                     <div id="overview">
-                        <p>這裡放總覽</p>
+                        <p>
+                            <div>
+                                <canvas id="myChart"></canvas>
+                                <script>
+                                    const labels = [
+                                        'January',
+                                        'February',
+                                        'March',
+                                        'April',
+                                        'May',
+                                        'June',
+                                    ];
+
+                                    const data = {
+                                        labels: labels,
+                                        datasets: [{
+                                            label: 'My First dataset',
+                                            backgroundColor: 'rgb(255, 99, 132)',
+                                            borderColor: 'rgb(255, 99, 132)',
+                                            data: [0, 10, 5, 2, 20, 30, 45],
+                                        }]
+                                    };
+
+                                    const config = {
+                                        type: 'line',
+                                        data: data,
+                                        options: {}
+                                    };
+                                </script>
+                                <script>
+                                    const myChart = new Chart(
+                                        document.getElementById('myChart'),
+                                        config
+                                    );
+                                </script>
+                            </div>
+                        </p>
                     </div>
                     <div id="historical">
                         <p>歷史資料</p>
@@ -226,6 +262,14 @@
                                 })
                             })
                         })
+                    </script>
+                    <script>
+                        function updateCoinData() {
+                            $(function() {
+                                $(".currentlyPrice").empty()
+                                fetch("")
+                            })
+                        }
                     </script>
 
                 </div>

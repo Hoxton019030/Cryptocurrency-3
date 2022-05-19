@@ -31,11 +31,7 @@ public class PageController {
 	
 
 	
-//	@GetMapping("/individualCryptocurrencyInformation")
-//	public List<Cryptocurrency> getCryptocurrency(@RequestParam("currencyName") String name) {
-//		List<Cryptocurrency> lastestCurrencyInformation = service.findLastestCurrencyInformation(name);
-//		return lastestCurrencyInformation;
-//	}
+
 	
 
 }

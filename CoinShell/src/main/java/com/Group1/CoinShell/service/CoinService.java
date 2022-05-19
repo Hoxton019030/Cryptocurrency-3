@@ -44,5 +44,10 @@ public class CoinService {
 			return "error open url: " + strUrl;
 		}
 	}
+	
+public Coin  findLastestCurrencyInformation(String currencyName) {
+	Coin findLastestCurrencyInformation = coindao.findLastestCurrencyInformation(currencyName);
+	return findLastestCurrencyInformation;
+}
 
 }
