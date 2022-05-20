@@ -17,10 +17,8 @@
             <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
             <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-            <script>
-                $(function() {
-                    $("#tabs").tabs();
-                });
+            <link rel="stylesheet" type="text/css" href="${contextRoot}/css/individualCryptocurrencyInformationCss.css">
+            <script src="${contextRoot}/javascripts/individualCryptocurrencyInformationJs.js">
             </script>
             <style>
 
@@ -28,6 +26,7 @@
         </head>
 
         <body>
+
             <div id="tabs">
                 <div class="container">
                     <div class="row">
@@ -140,7 +139,7 @@
 
                     <div id="overview">
                         <p>
-                            <div>
+                            <div class="chart-container">
                                 <canvas id="canvas" width="500" height="100">
 
                                 </canvas>
@@ -164,15 +163,7 @@
                                     <th scope="col">整體市值</th>
                                 </tr>
                                 <tbody id="historical-row">
-                                    <tr>
-                                        <th scope="col"> 2022/5/13</th>
-                                        <th scope="col">100</th>
-                                        <th scope="col">150</th>
-                                        <th scope="col">90</th>
-                                        <th scope="col">103</th>
-                                        <th scope="col">122</th>
-                                        <th scope="col">12332</th>
-                                    </tr>
+
                                 </tbody>
 
                             </thead>
@@ -183,130 +174,6 @@
                     <div id="news">
 
                     </div>
-
-
-
-                    <script>
-                        var getUrlString = location.href;
-                        var url = new URL(getUrlString);
-                        var currencyName = url.searchParams.get('currencyName');
-                        var day = url.searchParams.get('currentlyDay');
-
-
-                        $("#page-news").click(function() {
-                            $("#news").empty();
-                            fetch("http://localhost:8080/coinshell/news/get?currencyName=" + currencyName).then(function(response) {
-                                return response.json();
-                            }).then(function(array) {
-                                $.each(array, function(index, value) {
-                                    $("#news").append(`<div class="card mb-3" style="width: 150;">
-                            <div class="row no-gutters">
-                                <div class="col-md-4">
-                                    <img width="300" height="200" src="` + value.imageOfNews + `">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="new-card-body">
-                                        <h5 class="card-title">` + value.title + `</h5>
-                                        <p class="card-text">` + value.contentOfNews + `</p>
-                                        <p class="card-text"><small class="text-muted">上傳日期:` + value.date + `</small></p>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>`)
-                                })
-                            })
-                        })
-
-
-                        $("#page-historical").click(function() {
-                            $("#historical-row").empty()
-                            fetch("http://localhost:8080/coinshell/historical/get?currencyName=" + currencyName + "&day=" + day).then(function(response) {
-                                return response.json();
-                            }).then(function(array) {
-                                $.each(array, function(index, value) {
-                                    $("#historical-row").append(`<tr>
-                                        <th scope="col"> ` + day + `</th>
-                                        <th scope="col">` + value.TheFristUsdDate + `</th>
-                                        <th scope="col">` + value.TheHighestUsdPricePerUnit + `</th>
-                                        <th scope="col">` + value.TheLowerUsdPricePerUnit + `</th>
-                                        <th scope="col">` + value.TheLastUsdDate + `</th>
-                                        <th scope="col">` + value.Usd24hVolume + `</th>
-                                        <th scope="col">` + value.UsdMarkCap + `</th>
-                                    </tr>3`);
-                                })
-                            })
-                        })
-                        var xmlHttp = new XMLHttpRequest();
-                        var url = "http://localhost:8080/coinshell/historical/get30days?currencyName=" + currencyName
-                        xmlHttp.open("GET", url, true);
-                        xmlHttp.send()
-                        xmlHttp.onreadystatechange = function() {
-                            if (this.readyState == 4 && this.status == 200) {
-                                var data = JSON.parse(this.responseText);
-                                var days = data.map(function(elem) {
-                                    return elem.informationDate
-                                        .substr(0, 14).replace('T', '').replace('-', '').replace('-', '').replace(':', '')
-                                });
-                                var price = data.map(function(elem) {
-                                        return elem.USD_Price_of_Cryptocurrency;
-                                    })
-                                    // console.log(days)
-                                    // console.log(price)
-                                    // document.write(days)
-                                    // document.write(price)
-                                const ctx = document.getElementById('canvas').getContext('2d');
-                                const myChart = new Chart(ctx, {
-                                    type: 'line',
-                                    data: {
-                                        labels: days,
-                                        datasets: [{
-                                            label: 'US',
-                                            data: price,
-                                            backgroundColor: [
-                                                'transparent'
-                                            ],
-                                            borderColor: 'black',
-                                            borderWidth: 4,
-                                            lineTension: 0
-
-                                        }]
-                                    },
-                                    options: {
-                                        element: {
-                                            line: {
-                                                lineTension: 0
-                                            }
-                                        },
-                                        scales: {
-                                            xAxes: [{
-                                                type: 'time',
-                                                time: {
-                                                    unit: 'hour'
-                                                }
-                                            }],
-                                            y: {
-                                                beginAtZero: true
-                                            }
-
-
-                                        }
-                                    }
-                                });
-                            }
-                        }
-                    </script>
-                    <!-- <script>
-                        function updateCoinData() {
-                            $(function() {
-                                $(".currentlyPrice").empty()
-                                fetch("")
-                            })
-                        }
-                    </script> -->
-
-                </div>
-                <div id="test">
 
                 </div>
 
