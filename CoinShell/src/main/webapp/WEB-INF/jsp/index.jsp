@@ -16,80 +16,11 @@
                 <link rel="stylesheet" href="/resources/demos/style.css">
                 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
                 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-                <style>
-                    body {
-                        margin: 0px 50px 0px 50px;
-                        background-attachment: fixed;
-                        background-repeat: repeat;
-                        background-color: rgba(128, 128, 128, 0.22)
-                        /*背景色彩*/
-                    }
-                    
-                    .container-fluid {
-                        background-color: rgb(255, 255, 255);
-                        text-align: left;
-                        width: 100%;
-                        height: 60px;
-                    }
-                    
-                    .top-web-space {
-                        width: 100%;
-                        height: 100px;
-                        border: 3px black dashed;
-                    }
-                    
-                    .news {
-                        border: 3px red dashed;
-                    }
-                    
-                    .banner {
-                        width: 100%;
-                        /* border: 3px green dashed; */
-                        background-color: rgb(0, 132, 206);
-                        border-radius: 5px;
-                        font-family: 'Times New Roman', Times, serif;
-                        font-size: 30px;
-                        text-shadow: 2px 2px 4px #000000;
-                        color: white;
-                        box-shadow: -2px 1px 10px #000000;
-                    }
-                    
-                    .news-image {
-                        width: 100%;
-                        height: 200px;
-                        border: 3px rgb(30, 16, 187) dashed;
-                        flex-direction: row-reverse
-                    }
-                    
-                    .news-image img {
-                        margin: 0 20px 0 20px;
-                        border: 3px rgb(76, 187, 16) dashed;
-                    }
-                    
-                    .main {
-                        background-color: white;
-                    }
-                    
-                    .top-coin {
-                        border: 3px rgb(255, 251, 0) dashed;
-                        height: 50em;
-                    }
-                    
-                    .currencyIcon {
-                        width: 32px;
-                        height: 32px;
-                    }
-                </style>
-                <script>
-                    $(function() {
-                        $("#tabs").tabs();
-                    });
-                </script>
+                <script src="${contextRoot}/javascripts/indexJs.js"></script>
+                <link rel="stylesheet" type="text/css" href="${contextRoot}/css/indexCss.css">
             </head>
 
             <body>
-
-
                 <div class="main">
                     <div class="top-web-space">
                     </div>
@@ -166,53 +97,7 @@
 
 
                 </div>
-                <script>
-                    $(function() {
-                        upCoin();
-                    })
-                    $(window).on('beforeunload', function() {
-                        $(window).scrollTop(150);
-                    });
 
-
-
-                    var day = new Date();
-                    let month = day.getMonth() + 1
-                    month = (month < 10 ? '0' : '') + month
-                    var today = day.getFullYear() + "-" + month + "-" + day.getDate();
-
-                    function upCoin() {
-                        $(function() {
-                            $(".cointable").empty();
-                            fetch("http://localhost:8080/coinshell/coin/getAll").then(function(response) {
-                                return response.json();
-                                console.log(response.json())
-                            }).then(function(array) {
-                                $.each(array, function(index, value) {
-                                    $(".cointable").append(`
-                                            <tr>
-                                            <th scope="row">` + value.id + `</th>
-                                            <td>` + `<img class=currencyIcon src="${contextRoot}/images/currencyIcon/` + value.symbol + `.png" alt="">` + `<a href="http://localhost:8080/coinshell/individualCryptocurrencyInformation?currencyName=` + value.symbol + `&currentlyDay=` + today + `">` + value.name + `</a></td>
-                                            <td>` + value.symbol + `</td>
-                                            <td>$` + value.price.toFixed(2) + `</td>
-                                            <td>` + value.percentChange1h.toFixed(2) + `%</td>
-                                            <td>` + value.percentChange24h.toFixed(2) + `%</td>
-                                            <td>` + value.percentChange7d.toFixed(2) + `%</td>
-                                            <td>` + value.percentChange30d.toFixed(2) + `%</td>
-                                            <td>$` + value.volume24h.toFixed(2) + `</td>
-                                            <td>$` + value.marketCap.toFixed(2) + `</td>
-                                        </tr>
-                                            `)
-                                })
-                            })
-
-                        })
-                    }
-                    //設定間隔時間
-                    window.setInterval(function() {
-                        upCoin()
-                    }, 5000);
-                </script>
 
 
 
