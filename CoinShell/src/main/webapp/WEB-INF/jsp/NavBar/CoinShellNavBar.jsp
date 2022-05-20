@@ -114,7 +114,7 @@ body {
 				<div class="line"></div>
 				<!--Body-->
 				<div class="modal-body">
-					<!--tab01 對應的 Log In 頁籤-->
+<!--tab01 對應的 Log In 頁籤-->
 					<fieldset class="show" id="tab011">
 						<!--登入表單-->
 						<form:form method="post" modelAttribute="logInMember">
@@ -213,7 +213,7 @@ body {
 							<button type="button" class="btn btn-info">
 								<i class="fa-solid fa-anchor"></i> Create an account
 							</button>
-							</form:form>
+						</form:form>
 					</fieldset>
 				</div>
 				<div class="line"></div>
@@ -232,8 +232,14 @@ body {
 
 
 	<!-- jQuery + Bootstrap Bundle with Popper | Bootstrap 導入程式 JS -->
-	<script src="${contextRoot}/js/jquery-3.6.0.min.js"></script>
-	<script src="${contextRoot}/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+		crossorigin="anonymous"></script>
 
 	<script>
 	//Password 顯示密碼
