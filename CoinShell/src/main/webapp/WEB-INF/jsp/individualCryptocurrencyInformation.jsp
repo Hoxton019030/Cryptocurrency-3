@@ -22,6 +22,9 @@
                     $("#tabs").tabs();
                 });
             </script>
+            <style>
+
+            </style>
         </head>
 
         <body>
