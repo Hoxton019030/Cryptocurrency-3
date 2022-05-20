@@ -160,6 +160,7 @@
                                     <th scope="col">整體市值</th>
                                 </tr>
                                 <tbody id="historical-row">
+
                                 </tbody>
 
                             </thead>
