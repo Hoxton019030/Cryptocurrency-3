@@ -8,16 +8,17 @@ CREATE DATABASE CoinShell
 
 USE CoinShell
 CREATE TABLE Members(
-Id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+Id INT IDENTITY(1000,5) PRIMARY KEY NOT NULL, /*0517YW 用戶ID 等同於提供給新用戶的推薦碼*/
 CustomizedUserName NVARCHAR(50) NOT NULL,
-CustomizedUserAvatar NVARCHAR(max) NOT NULL,
-E_Mail NVARCHAR(50) NOT NULL UNIQUE,
+CustomizedUserAvatar varbinary(MAX) NOT NULL, /*0517YW 預設僅提供四個頭像給用戶選擇*/
+E_Mail NVARCHAR(100) NOT NULL UNIQUE,
 Password NVARCHAR(50) NOT NULL,
 MyShell MONEY ,
-IsPremium NVARCHAR(2) NOT NULL,
-JoINTime Date NOT NULL,
-
-Recommender  NVARCHAR(50)  /*這個地方應該要參照Members的欄位，不能讓使用者填一個不存在的E_mail*/
+IsPremium BIT NOT NULL, /*0517YW NVARCHAR(2)更改為BIT資料型態*/
+JoinTime Date NOT NULL,
+Member01 INT,   /*0517YW 增加三個空白欄位*/
+Member02 INT,
+Member03 INT
 )
 
 
@@ -29,29 +30,31 @@ Id INT UNIQUE NOT NULL ,
 Use CoinShell
 CREATE TABLE Cryptocurrency(
 id INT NOT NULL PRIMARY KEY IDENTITY(1,1),
-Date DateTime NOT NULL,
+informationDate DateTime NOT NULL,
 Name_of_Cryptocurrency NVARCHAR(30),
 Symbol_of_Cryptocurrency NVARCHAR(30),
 Slug_of_Cryptocurrency NVARCHAR(30),
-Total_Supply DECIMAL(38,8),
-Max_Supply DECIMAL(38,8),
-Circulating_Supply DECIMAL(38,8),
-Percent_Change_1h DECIMAL(12,8),
-Percent_Change_24h DECIMAL(12,8),
-Percent_Change_7d DECIMAL(12,8),
-Percent_Change_30d DECIMAL(12,8),
-Percent_Change_60d DECIMAL(12,8),
-Percent_Change_90d DECIMAL(12,8),
-ytdPriceChangePercentageTwd DECIMAL(12,8),
-ytdPriceChangePercentageUsd DECIMAL(12,8),
+Total_Supply DECIMAL(38,4),
+Max_Supply DECIMAL(38,4),
+Circulating_Supply DECIMAL(38,4),
+Percent_Change_1h DECIMAL(12,4),
+Percent_Change_24h DECIMAL(12,4),
+Percent_Change_7d DECIMAL(12,4),
+Percent_Change_30d DECIMAL(12,4),
+Percent_Change_60d DECIMAL(12,4),
+Percent_Change_90d DECIMAL(12,4),
+ytdPriceChangePercentageTwd DECIMAL(12,4),
+ytdPriceChangePercentageUsd DECIMAL(12,4),
 TWD_Price_of_Cryptocurrency MONEY,
 TWD_Market_Cap MONEY ,
 TWD_Fully_Diluted_Market_Cap MONEY ,
 USD_Price_of_Cryptocurrency MONEY,
 USD_Market_Cap MONEY ,
 USD_Fully_Diluted_Market_Cap MONEY ,
-volume24h DECIMAL(38,8),
+volume24hUsd DECIMAL(38,4),
+volume24hTwd DECIMAL(38,4),
 )
+
 
 Use CoinShell
 
@@ -99,8 +102,9 @@ Upload_Date DATE)
 
 
 USE CoinShell
-CREATE TABLE HomePage_News(
+CREATE TABLE News(
 Id INT IDENTITY(1,1) NOT NULL,
+Upload_Time Date NOT NULL,
 Title NVARCHAR(100),
 Content_Of_News NVARCHAR(MAX),
 Image_Of_News NVARCHAR(MAX)
