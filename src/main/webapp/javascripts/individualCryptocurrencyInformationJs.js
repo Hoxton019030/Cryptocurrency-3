@@ -7,6 +7,43 @@ var url = new URL(getUrlString);
 var currencyName = url.searchParams.get('currencyName');
 var day = url.searchParams.get('currentlyDay');
 
+window.setInterval(function() {
+    upCoin()
+}, 10000);
+$(function() {
+    upCoin();
+})
+
+
+function upCoin() {
+    $(function() {
+        $("#rank").empty();
+        $("#currentlyPrice").empty();
+        $("#highLowRatio").empty();
+        $("#marketCapByTotalSupply").empty();
+        $("#maxSupply2").empty();
+        $("#Fully-DilutedMarket-Cap_price").empty();
+        $("#volume24h").empty();
+        $("#circulatingSupply").empty()
+        $("#totalSupply").empty()
+        fetch("http://localhost:8080/coinshell/coin/getlastest?currencyName=" + currencyName).then(function(response) {
+            return response.json();
+        }).then(function(jsonObject) {
+            $("#rank").append(`Rank#` + jsonObject.id);
+            $("#currentlyPrice").append(`當前價位:$` + jsonObject.price.toFixed(2).toString().replace(/(\d)(?=(\d{3})+\.)/g, "$1,"));
+            $("#highLowRatio").append(`24h漲跌幅:` + jsonObject.percentChange24h.toFixed(2) + `%`);
+            $("#marketCapByTotalSupply").append(`$` + jsonObject.marketCapByTotalSupply.toFixed(0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, "$1,"));
+            $("#Fully-DilutedMarket-Cap_price").append(`$` + jsonObject.fullyDilluttedMarketCap.toFixed(2).toString().replace(/(\d)(?=(\d{3})+\.)/g, "$1,"));
+            $("#volume24h").append(`$` + jsonObject.volume24h.toFixed(2).toString().replace(/(\d)(?=(\d{3})+\.)/g, "$1,"));
+            $("#circulatingSupply").append(`$` + jsonObject.circulatingSupply.toFixed(2).toString().replace(/(\d)(?=(\d{3})+\.)/g, "$1,"));
+            $("#maxSupply2").append(jsonObject.maxSupply.toFixed(0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, "$1,"));
+            $("#totalSupply").append(jsonObject.totalSupply.toFixed(0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, "$1,"));
+
+        })
+
+
+    })
+}
 
 $("#page-news").click(function() {
     $("#news").empty();
