@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<modules>
-  <module moduleId="org.eclipse.jst.jee.server:Spring_Hibernate-Web-teacher" serverId="Tomcat v9.0 Server at localhost"/>
-  <module moduleId="org.eclipse.jst.jee.server:4-26_SpringMvc_PRACTICE_CRUD_Byself" serverId="Tomcat v9.0 Server at localhost"/>
-  <module moduleId="org.eclipse.jst.jee.server:Hibernate-Web-teacher" serverId="Tomcat v9.0 Server at localhost"/>
-  <module moduleId="org.eclipse.jst.jee.server:SpringMVCDemo" serverId="Tomcat v9.0 Server at localhost"/>
-</modules>
