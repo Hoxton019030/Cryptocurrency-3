@@ -1,5 +1,0 @@
-package com.jerrymvc.springdemo.controller;
-
-public class EmployeeController {
-
-}
