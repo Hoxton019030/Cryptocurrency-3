@@ -2,3 +2,10 @@
 	height: 100%;
 	width: 100%;
 }
+body {
+    margin: 0px 50px 0px 50px;
+    background-attachment: fixed;
+    background-repeat: repeat;
+    background-color: rgba(128, 128, 128, 0.22)
+    /*背景色彩*/
+}

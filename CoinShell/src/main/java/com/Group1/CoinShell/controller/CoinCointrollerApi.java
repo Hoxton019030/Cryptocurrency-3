@@ -25,7 +25,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 @Component // 在 SpringbootdemoApplication 注入@EnableScheduling 搭配下面@Scheduled 以啟動定時器排程
 @RestController
-public class CoinCointroller {
+public class CoinCointrollerApi {
 
 	@Autowired
 	private CoinService coinService;
@@ -146,6 +146,7 @@ public class CoinCointroller {
 		List<Coin> allCoinList = coinDao.findAll();
 		return allCoinList;
 	}
+	//http://localhost:8080/coinshell/coin/getAll
 	
 	//已經在JSP AJAX設定輪詢 這邊就不用在訂時跟資料庫要資料了
 	@GetMapping("coin/page/{pageNumber}")
@@ -158,12 +159,12 @@ public class CoinCointroller {
 
 		return list;
 	}
-	
+	//http://localhost:8080/coinshell/coin/page/1
 	@GetMapping("coin/getlastest")
 	public Coin findLastestCurrencyInformation(@RequestParam("currencyName") String currencyName) {
 		Coin lastestCoin=coinService.findLastestCurrencyInformation(currencyName);
 		return lastestCoin;
-		// ur:http://localhost:8080/coinshell/coin/getlastest?currencyName=btc
+		//http://localhost:8080/coinshell/coin/getlastest?currencyName=btc
 		
 	}
 	
