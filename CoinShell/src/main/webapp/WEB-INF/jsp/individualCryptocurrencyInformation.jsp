@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-          <jsp:include page="NavBar/CoinShellNavBar.jsp" />
+        <jsp:include page="NavBar/CoinShellNavBar.jsp" />
         <!DOCTYPE html>
         <html>
 
@@ -16,16 +16,18 @@
             <link href="stylesheets/myStyleSheet.css" rel="stylesheet" />
             <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
             <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-            <script>
-                $(function() {
-                    $("#tabs").tabs();
-                });
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <link rel="stylesheet" type="text/css" href="${contextRoot}/css/individualCryptocurrencyInformationCss.css">
+            <script src="${contextRoot}/javascripts/individualCryptocurrencyInformationJs.js">
             </script>
+            <style>
+
+            </style>
         </head>
 
         <body>
-            <div id="tabs">
 
+            <div id="tabs">
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-4">
@@ -45,7 +47,7 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="text-nowrap ">
-                                <div class="d-inline-block">
+                                <div class="d-inline-block currentlyPrice">
                                     當前價位:${currencyInformation.twdPriceOfCryptocurrency}
                                 </div>
                                 <div class="d-inline-block badge badge-pill badge-danger">
@@ -136,7 +138,15 @@
                     </ul>
 
                     <div id="overview">
-                        <p>這裡放總覽</p>
+                        <p>
+                            <div class="chart-container">
+                                <canvas id="canvas" width="500" height="100">
+
+                                </canvas>
+
+
+                            </div>
+                        </p>
                     </div>
                     <div id="historical">
                         <p>歷史資料</p>
@@ -152,16 +162,8 @@
                                     <th scope="col">24小時交易量</th>
                                     <th scope="col">整體市值</th>
                                 </tr>
-                                <tbody>
-                                    <tr>
-                                        <th scope="col"> 2022/5/13</th>
-                                        <th scope="col">100</th>
-                                        <th scope="col">150</th>
-                                        <th scope="col">90</th>
-                                        <th scope="col">103</th>
-                                        <th scope="col">122</th>
-                                        <th scope="col">12332</th>
-                                    </tr>
+                                <tbody id="historical-row">
+
                                 </tbody>
 
                             </thead>
@@ -172,43 +174,6 @@
                     <div id="news">
 
                     </div>
-
-                    <script>
-                        $("#page-news").click(function() {
-                            $("#news").empty();
-                            fetch("http://localhost:8080/myapp/news/get?currencyName=BTC", {
-                                method: "GET"
-                            }).then(function(response) {
-                                return response.json();
-                            }).then(function(array) {
-                                $.each(array, function(index, value) {
-                                    $("#news").append(`<div class="card mb-3" style="width: 150;">
-                            <div class="row no-gutters">
-                                <div class="col-md-4">
-                                    <img width="300" height="200" src="` + value.imageOfNews + `">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="new-card-body">
-                                        <h5 class="card-title">` + value.title + `</h5>
-                                        <p class="card-text">` + value.contentOfNews + `</p>
-                                        <p class="card-text"><small class="text-muted">上傳日期:` + value.date + `</small></p>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>`)
-                                })
-                            })
-                            return false;
-                        })
-
-
-                        // fetch("http://localhost:8080/myapp/news/get?currencyName=BTC").then(function(response) {
-                        //     return response.json();
-                        // }).then(function(myJson) {
-                        //     console.log(myJson);
-                        // })
-                    </script>
 
                 </div>
 

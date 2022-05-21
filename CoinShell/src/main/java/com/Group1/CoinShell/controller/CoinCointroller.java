@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Group1.CoinShell.model.Coin;
@@ -156,6 +157,14 @@ public class CoinCointroller {
 		List<Coin> list = page.getContent();
 
 		return list;
+	}
+	
+	@GetMapping("coin/getlastest")
+	public Coin findLastestCurrencyInformation(@RequestParam("currencyName") String currencyName) {
+		Coin lastestCoin=coinService.findLastestCurrencyInformation(currencyName);
+		return lastestCoin;
+		// ur:http://localhost:8080/coinshell/coin/getlastest?currencyName=btc
+		
 	}
 	
 }

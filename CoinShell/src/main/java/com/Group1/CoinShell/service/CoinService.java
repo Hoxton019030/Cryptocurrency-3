@@ -45,4 +45,9 @@ public class CoinService {
 		}
 	}
 
+	public Coin findLastestCurrencyInformation(String currencyName) {
+		Coin findLastestCurrencyInformation = coindao.findLastestCurrencyInformation(currencyName);
+		return findLastestCurrencyInformation;
+	}
+
 }
