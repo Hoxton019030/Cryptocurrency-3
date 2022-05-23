@@ -15,11 +15,12 @@ import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity 
-@Table(name="Members")
+@Table(name="Members",uniqueConstraints = {@UniqueConstraint(columnNames = {"E_Mail"})})
 public class Members {
 
 	@Id

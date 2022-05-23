@@ -33,6 +33,7 @@ public class MembersController {
 	public String postSignUp(@ModelAttribute("memberBean") Members members) {
 		SimpleDateFormat sdf = new SimpleDateFormat();
 		Date date = new Date();
+		// TODO: 之後要寫煤填 email /pwd 註冊失敗的條件式
 		sdf.applyPattern("yyyy-MM-dd HH:mm:ss");
 		members.setCustomizedUserName("defaultUser");
 		members.setCustomizedUserAvatar("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUIAAADmCAIAAAAvNRuHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAADuSURBVHhe7cExAQAAAMKg9U/tawggAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4NWT3AAHCzkfXAAAAAElFTkSuQmCC");
@@ -42,7 +43,26 @@ public class MembersController {
 //		memService.insert(resMem);
 		memService.save(members);
 		return "signupOK";
+	}
+	
+	@GetMapping("/login")
+	public String loginPage(Model model) {
+		model.addAttribute("memberBean", new Members());
+		return "login";
+	}
+	
+	@PostMapping("/login")
+	public String postLogin(@ModelAttribute("memberBean") Members members) {
+		System.out.println("mail:"+members.geteMail());
+		System.out.println("password"+members.getPassword());
 		
+//		Members resMem = memService.findMemberByEMail(members.geteMail());
+//		if(resMem.getPassword().equals(members.getPassword())){
+//			System.out.println("登入成功");
+//		}else {
+//			System.out.println("登入失敗");
+//		}
+ 		return "index";
 	}
 	
 //	public String postSignUp(@ModelAttribute("memberBean") Members members) {

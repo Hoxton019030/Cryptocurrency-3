@@ -65,7 +65,7 @@ body {
 				<li class="nav-item"><a class="nav-link" href="#">Learn</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">Shell Shop</a></li>
 				<li class="nav-item"><a class="nav-link" href="/coinshell/signup">Sign Up</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Log In</a></li>
+				<li class="nav-item"><a class="nav-link" href="/coinshell/login">Log In</a></li>
 			</ul>
 		</div>
 		<!-- Button trigger modal -->

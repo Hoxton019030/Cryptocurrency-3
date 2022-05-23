@@ -20,6 +20,11 @@ public class MembersService {
 	public void save(Members members) {
 		membersDao.save(members);
 	}
+	
+	public Members findMemberByEMail(String eMail) {
+		Members resMem = membersDao.findMemberByEMail(eMail);
+		return resMem;
+	}
 }
 //	
 //	public Members checkLogin(String eMail, String password) {
