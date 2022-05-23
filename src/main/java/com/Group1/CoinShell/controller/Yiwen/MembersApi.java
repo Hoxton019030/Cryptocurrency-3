@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.Group1.CoinShell.model.Yiwen.Members;
-import com.Group1.CoinShell.model.Yiwen.MembersDao;
+
 //
 //@RestController     //命名為 RestController(XXXApi.java) 的類別回傳的都是JSON
 //public class MembersApi {
