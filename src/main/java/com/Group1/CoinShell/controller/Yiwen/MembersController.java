@@ -3,12 +3,16 @@ package com.Group1.CoinShell.controller.Yiwen;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.Group1.CoinShell.model.Yiwen.Members;
 import com.Group1.CoinShell.model.Yiwen.MembersDao;
@@ -52,9 +56,16 @@ public class MembersController {
 	}
 	
 	@PostMapping("/login")
-	public String postLogin(@ModelAttribute("memberBean") Members members) {
-		System.out.println("mail:"+members.geteMail());
-		System.out.println("password"+members.getPassword());
+	public String postLogin(@RequestParam("eMail") String eMail, 
+			HttpSession httpSession, RedirectAttributes redirectAttributes) {
+		Members memRes = dao.findMemberByEMail(eMail);
+		
+		if(memRes == null) {
+			redirectAttributes.addFlashAttribute("loginError", "帳號密碼錯誤，請重新輸入");
+			return "redirect:login";
+		}
+		httpSession.setAttribute("login", memRes);
+		return "loginOK";
 		
 //		Members resMem = memService.findMemberByEMail(members.geteMail());
 //		if(resMem.getPassword().equals(members.getPassword())){
@@ -62,7 +73,7 @@ public class MembersController {
 //		}else {
 //			System.out.println("登入失敗");
 //		}
- 		return "index";
+
 	}
 	
 //	public String postSignUp(@ModelAttribute("memberBean") Members members) {

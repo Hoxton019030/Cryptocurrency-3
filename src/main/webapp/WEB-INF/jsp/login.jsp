@@ -18,7 +18,7 @@
 <br/>
 <input type="hidden"/>
 <br/>
-<button type="submit">登入會員</button>
+<button type="submit">登入會員</button> <p>${loginError}</p>
 </form>
 
 </body>

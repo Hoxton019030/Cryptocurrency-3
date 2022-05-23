@@ -11,28 +11,28 @@ import org.springframework.web.bind.annotation.RestController;
 import com.Group1.CoinShell.model.Yiwen.Members;
 import com.Group1.CoinShell.model.Yiwen.MembersDao;
 
-@RestController     //命名為 RestController(XXXApi.java) 的類別回傳的都是JSON
-public class MembersApi {
-
-	@Autowired
-	private MembersDao dao;
-	
-	/**
-	 * SignUp 註冊功能 CREATE an account
-	 * @param mem Members 的 instance
-	 * @return
-	 */
-	@PostMapping(value = "/members/signUp")
-	public Members insertMembers(@RequestBody Members mem) {
-		SimpleDateFormat sdf = new SimpleDateFormat();
-		Date date = new Date();
-		sdf.applyPattern("yyyy-MM-dd HH:mm:ss");
-		mem.setCustomizedUserName("defaultUser");
-		mem.setMyShell(0);
-		mem.setJoinTime(date);
-		Members resMem = dao.save(mem);
-		return resMem;
-	}
+//@RestController     //命名為 RestController(XXXApi.java) 的類別回傳的都是JSON
+//public class MembersApi {
+//
+//	@Autowired
+//	private MembersDao dao;
+//	
+//	/**
+//	 * SignUp 註冊功能 CREATE an account
+//	 * @param mem Members 的 instance
+//	 * @return
+//	 */
+//	@PostMapping(value = "/members/signUp")
+//	public Members insertMembers(@RequestBody Members mem) {
+//		SimpleDateFormat sdf = new SimpleDateFormat();
+//		Date date = new Date();
+//		sdf.applyPattern("yyyy-MM-dd HH:mm:ss");
+//		mem.setCustomizedUserName("defaultUser");
+//		mem.setMyShell(0);
+//		mem.setJoinTime(date);
+//		Members resMem = dao.save(mem);
+//		return resMem;
+//	}
 //	
 //	/**
 //	 * LogIn/SignIn 登入功能
