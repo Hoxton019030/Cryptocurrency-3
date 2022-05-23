@@ -5,10 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<meta http-equiv="refresh" content="2;url=http://localhost:8080/coinshell/" />
 </head>
 <body>
 
-註冊成功，點我回到首頁...
+註冊成功，2秒後重新跳轉... 
 
 
 </body>

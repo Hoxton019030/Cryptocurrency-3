@@ -33,19 +33,34 @@ public class MembersController {
 		return "signup";
 	}
 	
+//	@PostMapping("/signup")
+//	public String postSignUp(@ModelAttribute("memberBean") Members members) {
+//		SimpleDateFormat sdf = new SimpleDateFormat();
+//		Date date = new Date();
+//		// TODO: 之後要寫煤填 email /pwd 註冊失敗的條件式
+//		sdf.applyPattern("yyyy-MM-dd HH:mm:ss");
+//		members.setCustomizedUserName("defaultUser");
+//		members.setCustomizedUserAvatar("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUIAAADmCAIAAAAvNRuHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAADuSURBVHhe7cExAQAAAMKg9U/tawggAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4NWT3AAHCzkfXAAAAAElFTkSuQmCC");
+//		members.setMyShell(0);
+//		members.setJoinTime(date);
+////		Members resMem = dao.save(members);
+////		memService.insert(resMem);
+//		memService.save(members);
+//		return "signupOK";
+//	}
+	
 	@PostMapping("/signup")
-	public String postSignUp(@ModelAttribute("memberBean") Members members) {
+	public String signUp(@RequestParam("e-mail")String eMail ,@RequestParam("password") String password) {
 		SimpleDateFormat sdf = new SimpleDateFormat();
 		Date date = new Date();
-		// TODO: 之後要寫煤填 email /pwd 註冊失敗的條件式
-		sdf.applyPattern("yyyy-MM-dd HH:mm:ss");
-		members.setCustomizedUserName("defaultUser");
-		members.setCustomizedUserAvatar("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUIAAADmCAIAAAAvNRuHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAADuSURBVHhe7cExAQAAAMKg9U/tawggAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4NWT3AAHCzkfXAAAAAElFTkSuQmCC");
-		members.setMyShell(0);
-		members.setJoinTime(date);
-//		Members resMem = dao.save(members);
-//		memService.insert(resMem);
-		memService.save(members);
+		Members member = new Members();
+		member.setCustomizedUserAvatar("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUIAAADmCAIAAAAvNRuHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAADuSURBVHhe7cExAQAAAMKg9U/tawggAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4NWT3AAHCzkfXAAAAAElFTkSuQmCC");
+		member.setMyShell(0);
+		member.seteMail(eMail);
+		member.setJoinTime(date);
+		member.setPassword(password);
+		member.setCustomizedUserName("defaultUser");
+		memService.save(member);
 		return "signupOK";
 	}
 	

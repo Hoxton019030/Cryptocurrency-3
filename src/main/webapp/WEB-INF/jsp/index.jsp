@@ -23,6 +23,7 @@
             <body>
                 <div class="main">
                     <div class="top-web-space">
+                    <p>${login.memId}</p>>
                     </div>
 
                     <div class=" news">
