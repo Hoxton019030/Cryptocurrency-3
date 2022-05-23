@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%> <!-- 時間的格式化 -->
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
@@ -116,104 +116,92 @@ body {
 				<div class="modal-body">
 <!--tab01 對應的 Log In 頁籤-->
 					<fieldset class="show" id="tab011">
-						<!--登入表單-->
-						<form:form method="post" modelAttribute="logInMember">
-							<!--E-Mail-->
-							<div class="form-group input-group">
-								<div class="input-group-prepend">
-									<div class="input-group-text">
-										<i class="fas fa-user-circle"></i>
-									</div>
-								</div>
-								<input type="email" class="account form-control"
-									placeholder="E-mail">
+					<!--登入表單-->
+					<form action="#" method="post"> <!-- form:form action="${contextRoot}/members/login"-->
+					<!--E-Mail-->
+					<div class="form-group input-group">
+						<div class="input-group-prepend">
+							<div class="input-group-text">
+								<i class="fas fa-user-circle"></i>
 							</div>
-
-							<!--Password-->
-							<div class="form-floating form-group input-group">
-								<div class="input-group-prepend">
-									<div class="input-group-text">
-										<i class="fas fa-unlock-alt"></i>
-									</div>
-								</div>
-								<input type="password" class="password form-control"
-									placeholder="Password" id="floatingPassword1">
-								<div class="input-group-append">
-									<span class="input-group-text"> <i id="eye1"
-										class="fas fa-eye"></i>
-									</span>
-								</div>
+						</div>
+					    <input type="email" class="account form-control" placeholder="E-mail"/>  
+					    <!-- form:input ... + path="eMail" Q:form:form到form:input中間的標籤沒有 form: 標籤OK? -->
+					</div>
+					<!--Password-->
+					<div class="form-floating form-group input-group">
+						<div class="input-group-prepend">
+							<div class="input-group-text">
+								<i class="fas fa-unlock-alt"></i>
 							</div>
-							<a href="#" style="display: block; text-align: right;">Forgot
-								password?</a>
-							<!--Checkbox-->
-							<div class="form-group">
-								<input type="checkbox" class="remember-me">Remember me
-							</div>
-							<!--Submit btn-->
-							<button type="button" class="btn btn-info">
-								<i class="fa-solid fa-anchor"></i> Log In
-							</button>
-						</form:form>
+						</div>
+					<input type="password" class="password form-control" 
+					placeholder="Password" id="floatingPassword1"/>
+					<!--標籤改成 form:input ... + 屬性 path="password" -->
+					<div class="input-group-append">
+						<span class="input-group-text"> <i id="eye1" class="fas fa-eye"></i>
+						</span>
+					</div>
+					</div>
+					<a href="#" style="display: block; text-align: right;">Forgot password?</a>
+					<!--Checkbox-->
+					<div class="form-group">
+					<input type="checkbox" class="remember-me">Remember me
+					</div>
+					<!--Submit btn-->
+					<button type="button" class="btn btn-info">
+					<i class="fa-solid fa-anchor"></i> Log In
+					</button>  <!--印出 c:out value="${loginError}" /c:out-->
+					</form>	<!--改成/form:form-->
 					</fieldset>
 					<!--tab02 對應的 Sign Up 頁籤-->
 					<fieldset id="tab021">
 						<p>Gain access to additional features such as Watchlist and
 							Portfolio tracking.</p>
-						<!--註冊表單-->
-						<form:form method="post" modelAttribute="SignUpMember">
-							<!--E-Mail-->
-							<div class="form-group input-group">
-								<div class="input-group-prepend">
-									<div class="input-group-text">
-										<i class="fas fa-user-circle"></i>
-									</div>
+					<!--註冊表單-->
+					<form method="post" action="#"> <!-- 標籤改成form:form ... action="${contextRoot}/members/signUp" -->
+					<!--E-Mail-->
+					<div class="form-group input-group">
+						<div class="input-group-prepend">
+							<div class="input-group-text">
+								<i class="fas fa-user-circle"></i>
+							</div>
+						</div>
+					<input type="email" class="account form-control" placeholder="E-mail"/>
+					<!-- 標籤改成 form:input ... + path="password" -->
+					</div>
+					<!--Password-->
+					<div class="form-group form-floating">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<div class="input-group-text">
+									<i class="fas fa-unlock-alt"></i>
 								</div>
-								<input type="email" class="account form-control"
-									placeholder="E-mail">
 							</div>
-							<!--Password-->
-							<div class="form-group form-floating">
-								<div class="input-group">
-									<div class="input-group-prepend">
-										<div class="input-group-text">
-											<i class="fas fa-unlock-alt"></i>
-										</div>
-									</div>
-									<input type="password" class="password form-control"
-										placeholder="Password" id="floatingPassword2">
-									<div class="input-group-append">
-										<span class="input-group-text"> <i id="eye2"
-											class="fas fa-eye"></i>
-										</span>
-									</div>
-								</div>
-								<p>Password should contain both letter and number, with
-									minimum length of 8 characters.</p>
+						<input type="password" class="password form-control"
+										placeholder="Password" id="floatingPassword2"/>
+						<!-- 標籤改成 form:input ... +屬性值 path="password" -->
+						<div class="input-group-append">
+							<span class="input-group-text"> <i id="eye2" class="fas fa-eye"></i>
+							</span>
 							</div>
-							<!--推薦人 Referral ID-->
-							<div class="form-group input-group">
-								<div class="input-group-prepend">
-									<div class="input-group-text">
-										<i class="fas fa-users"></i>
-									</div>
-								</div>
-								<input type="text" class="referral form-control"
-									placeholder="Referral / your friend's email">
-							</div>
-							<!--Checkbox-->
-							<div class="form-group">
-								<input type="checkbox" class="dailyshell">Get a daily
-								post of CoinShell, right to your inbox!
-							</div>
-							<!--reCAPTCHA v2-->
-							<div class="g-recaptcha"
-								data-sitekey="6LfDfO8fAAAAAALEtexVflMvH0HDwc5HCLGPjrj5xxxxxxx"></div>
-							<!--Submit btn-->
-							<button type="button" class="btn btn-info">
-								<i class="fa-solid fa-anchor"></i> Create an account
-							</button>
-						</form:form>
+						</div>
+						<p>Password should contain both letter and number, withminimum length of 8 characters.</p>
+						</div>
+						<!--Checkbox-->
+						<div class="form-group">
+						<input type="checkbox" class="dailyshell">Get a daily
+							post of CoinShell, right to your inbox!
+						</div>
+						<!--reCAPTCHA v2-->
+						<div class="g-recaptcha"
+							data-sitekey="6LfDfO8fAAAAAALEtexVflMvH0HDwc5HCLGPjrj5xxxxxxx"></div>
+						<!--Submit btn-->
+						<button type="button" class="btn btn-info">
+							<i class="fa-solid fa-anchor"></i> Create an account
+						</button>
+						</form>
+						<!-- closing label 改成 /form:form  -->
 					</fieldset>
 				</div>
 				<div class="line"></div>
