@@ -43,7 +43,7 @@ public class Members {
     private Integer myShell;
     
 //	@Column(name = "IsPremium", columnDefinition ="bit", nullable=false)
-//  private Boolean isPremium;
+//  private Boolean isPremium
     
 	@DateTimeFormat(pattern="yyyy/MM/dd")
 	@Temporal(TemporalType.TIMESTAMP)
