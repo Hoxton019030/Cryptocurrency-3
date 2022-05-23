@@ -48,8 +48,6 @@ public interface MembersDao extends JpaRepository<Members, Integer> {
 //	@Query(value="update Members set Password = ?1, where Id = memId", nativeQuery = true)
 //	public Members updatePasswordById(Integer memId, Members Members);
 //	
-//	
-//	
 /////////////////////以下無關/////////////////////
 //	
 //	@Query("from Members where CustomizedUserName = :CustomizedUserName")
