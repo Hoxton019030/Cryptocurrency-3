@@ -49,10 +49,11 @@
                                 </li>
                             </ul>
                             <div id="overview">
-                                <table class="table table-hover">
+                                <table class="table table-hover" id="top">
                                     <thead>
                                         <tr>
                                             <th scope="col">Top</th>
+                                            <th scope="col">Watch</th>
                                             <th scope="col">Name</th>
                                             <th scope="col">Currency</th>
                                             <th scope="col">Price</th>
@@ -69,11 +70,11 @@
                                 </table>
                             </div>
                             <div id="focus">
-                                <thead>
-                                    <table class="table table-hover">
+                                    <table class="table table-hover" id="watch">
                                         <thead>
                                             <tr>
                                                 <th scope="col">Top</th>
+                                                <th scope="col">Watch</th>
                                                 <th scope="col">Name</th>
                                                 <th scope="col">Currency</th>
                                                 <th scope="col">Price</th>
@@ -85,9 +86,7 @@
                                                 <th scope="col">Market Cap</th>
                                             </tr>
                                         </thead>
-
                                     </table>
-                                </thead>
                             </div>
                         </div>
 
@@ -97,8 +96,7 @@
 
 
                 </div>
-
-
+                
 
 
             </body>
