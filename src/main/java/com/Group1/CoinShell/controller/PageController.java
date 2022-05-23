@@ -29,9 +29,10 @@ public class PageController {
 		return "/test";
 	}
 	
+	@GetMapping("/viewAllAjax")
+	public String forum() {
+		return "forum/viewAllAjax";
+	}
 
 	
-
-	
-
 }
