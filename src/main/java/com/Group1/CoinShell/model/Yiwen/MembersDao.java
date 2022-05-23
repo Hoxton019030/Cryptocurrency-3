@@ -5,19 +5,20 @@ import javax.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MembersDao extends JpaRepository<Members, Integer> {
 	
-//	/**
-//	 * 會員登入
-//	 * @param eMail
-//	 * @param password
-//	 * @return
-//	 */
-//	@Query(value="select m from Members m where m.eMail = ?1 and m.password = ?2")
-//	public Members findByEMailAndPassword(String eMail, String password);
+	/**
+	 * 會員登入
+	 * @param eMail
+	 * @param password
+	 * @return
+	 */
+	@Query(value="SELECT * FROM Members WHERE E_Mail = :eMail2", nativeQuery = true)
+	public Members findMemberByEMail(@Param("eMail2") String eMail);
 //	
 //	@Query(value="select m from Members m where m.Id =?1")
 //	public Members findById(String memId);
@@ -47,8 +48,6 @@ public interface MembersDao extends JpaRepository<Members, Integer> {
 //	@Modifying
 //	@Query(value="update Members set Password = ?1, where Id = memId", nativeQuery = true)
 //	public Members updatePasswordById(Integer memId, Members Members);
-//	
-//	
 //	
 /////////////////////以下無關/////////////////////
 //	

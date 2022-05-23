@@ -15,13 +15,14 @@ import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity 
-@Table(name="Members")
+@Table(name="Members",uniqueConstraints = {@UniqueConstraint(columnNames = {"E_Mail"})})
 public class Members {
-// aiueo
+
 	@Id
 	@Column(name = "Id", columnDefinition ="int")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,7 +44,7 @@ public class Members {
     private Integer myShell;
     
 //	@Column(name = "IsPremium", columnDefinition ="bit", nullable=false)
-//  private Boolean isPremium;
+//  private Boolean isPremium
     
 	@DateTimeFormat(pattern="yyyy/MM/dd")
 	@Temporal(TemporalType.TIMESTAMP)
