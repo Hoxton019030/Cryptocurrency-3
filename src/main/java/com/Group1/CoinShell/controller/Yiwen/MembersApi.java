@@ -1,35 +1,38 @@
 package com.Group1.CoinShell.controller.Yiwen;
 
-import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.Group1.CoinShell.model.Yiwen.Members;
 import com.Group1.CoinShell.model.Yiwen.MembersDao;
-//
-//@RestController     //命名為 RestController(XXXApi.java) 的類別回傳的都是JSON
-//public class MembersApi {
-//
-//	@Autowired
-//	private MembersDao dao;
-//	
-//	/**
-//	 * SignUp 註冊功能 CREATE an account
-//	 * @param mem
-//	 * @return
-//	 */
-//	@PostMapping(value = "/members/signUp")
-//	public Members insertMembers(@RequestBody Members mem) {
-//		Members resMem = dao.save(mem);
-//		return resMem;
-//	}
+
+@RestController     //命名為 RestController(XXXApi.java) 的類別回傳的都是JSON
+public class MembersApi {
+
+	@Autowired
+	private MembersDao dao;
+	
+	/**
+	 * SignUp 註冊功能 CREATE an account
+	 * @param mem Members 的 instance
+	 * @return
+	 */
+	@PostMapping(value = "/members/signUp")
+	public Members insertMembers(@RequestBody Members mem) {
+		SimpleDateFormat sdf = new SimpleDateFormat();
+		Date date = new Date();
+		sdf.applyPattern("yyyy-MM-dd HH:mm:ss");
+		mem.setCustomizedUserName("defaultUser");
+		mem.setMyShell(0);
+		mem.setJoinTime(date);
+		Members resMem = dao.save(mem);
+		return resMem;
+	}
 //	
 //	/**
 //	 * LogIn/SignIn 登入功能
@@ -72,7 +75,7 @@ import com.Group1.CoinShell.model.Yiwen.MembersDao;
 //		Members resMem = dao.updatePasswordById(memId, members);
 //		return resMem;
 //	}
-//}
+}
 //	
 //	
 ///////////////////////以下無關/////////////////////////////

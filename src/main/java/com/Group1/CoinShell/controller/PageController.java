@@ -29,7 +29,10 @@ public class PageController {
 		return "/test";
 	}
 	
-
+	@GetMapping("/signup")
+	public String sign() {
+		return "/signup";
+	}
 	
 
 	

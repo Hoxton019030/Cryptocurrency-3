@@ -159,7 +159,7 @@ body {
 						<p>Gain access to additional features such as Watchlist and
 							Portfolio tracking.</p>
 					<!--註冊表單-->
-					<form method="post" action="#"> <!-- 標籤改成form:form ... action="${contextRoot}/members/signUp" -->
+					<form:form method="post" action="/members/signUp"> <!-- 標籤改成form:form ... action="" -->
 					<!--E-Mail-->
 					<div class="form-group input-group">
 						<div class="input-group-prepend">
@@ -167,7 +167,7 @@ body {
 								<i class="fas fa-user-circle"></i>
 							</div>
 						</div>
-					<input type="email" class="account form-control" placeholder="E-mail"/>
+					<form:input type="email" class="account form-control" placeholder="E-mail"/>
 					<!-- 標籤改成 form:input ... + path="password" -->
 					</div>
 					<!--Password-->
@@ -178,7 +178,7 @@ body {
 									<i class="fas fa-unlock-alt"></i>
 								</div>
 							</div>
-						<input type="password" class="password form-control"
+						<form:input type="password" class="password form-control"
 										placeholder="Password" id="floatingPassword2"/>
 						<!-- 標籤改成 form:input ... +屬性值 path="password" -->
 						<div class="input-group-append">
@@ -194,13 +194,13 @@ body {
 							post of CoinShell, right to your inbox!
 						</div>
 						<!--reCAPTCHA v2-->
-						<div class="g-recaptcha"
-							data-sitekey="6LfDfO8fAAAAAALEtexVflMvH0HDwc5HCLGPjrj5xxxxxxx"></div>
+					<!-- <div class="g-recaptcha"
+							data-sitekey="6LfDfO8fAAAAAALEtexVflMvH0HDwc5HCLGPjrj5xxxxxxx"></div>  -->	
 						<!--Submit btn-->
-						<button type="button" class="btn btn-info">
+						<button type="submit" class="btn btn-info">
 							<i class="fa-solid fa-anchor"></i> Create an account
 						</button>
-						</form>
+						</form:form>
 						<!-- closing label 改成 /form:form  -->
 					</fieldset>
 				</div>
