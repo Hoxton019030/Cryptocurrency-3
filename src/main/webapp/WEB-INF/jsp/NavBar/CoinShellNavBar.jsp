@@ -63,8 +63,9 @@ body {
 				<li class="nav-item"><a class="nav-link" href="#">Portfolio</a>
 				</li>
 				<li class="nav-item"><a class="nav-link" href="#">Learn</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Shell
-						Shop</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Shell Shop</a></li>
+				<li class="nav-item"><a class="nav-link" href="/coinshell/signup">Sign Up</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Log In</a></li>
 			</ul>
 		</div>
 		<!-- Button trigger modal -->
@@ -159,7 +160,7 @@ body {
 						<p>Gain access to additional features such as Watchlist and
 							Portfolio tracking.</p>
 					<!--註冊表單-->
-					<form:form method="post" action="/members/signUp"> <!-- 標籤改成form:form ... action="" -->
+					<form method="post" action="/members/signUp"> <!-- 標籤改成form:form ... action="" -->
 					<!--E-Mail-->
 					<div class="form-group input-group">
 						<div class="input-group-prepend">
@@ -167,7 +168,7 @@ body {
 								<i class="fas fa-user-circle"></i>
 							</div>
 						</div>
-					<form:input type="email" class="account form-control" placeholder="E-mail"/>
+					<input type="email" class="account form-control" placeholder="E-mail"/>
 					<!-- 標籤改成 form:input ... + path="password" -->
 					</div>
 					<!--Password-->
@@ -178,7 +179,7 @@ body {
 									<i class="fas fa-unlock-alt"></i>
 								</div>
 							</div>
-						<form:input type="password" class="password form-control"
+						<input type="password" class="password form-control"
 										placeholder="Password" id="floatingPassword2"/>
 						<!-- 標籤改成 form:input ... +屬性值 path="password" -->
 						<div class="input-group-append">
@@ -200,7 +201,7 @@ body {
 						<button type="submit" class="btn btn-info">
 							<i class="fa-solid fa-anchor"></i> Create an account
 						</button>
-						</form:form>
+						</form>
 						<!-- closing label 改成 /form:form  -->
 					</fieldset>
 				</div>
