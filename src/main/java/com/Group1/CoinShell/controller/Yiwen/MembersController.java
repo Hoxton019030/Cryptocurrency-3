@@ -12,15 +12,15 @@ import com.Group1.CoinShell.model.Yiwen.Members;
 @Controller
 public class MembersController {
 
-//	@GetMapping("/signup")
-//	public String signupPage(Model model) {
-//		model.addAttribute("memberBean", new Members());
-//		return "coinshell/signup";
-//	}
 	@GetMapping("/signup")
-	public String signupPage() {
-		return "signup";
+	public String signupPage(Model model) {
+		model.addAttribute("memberBean", new Members());
+		return "coinshell/signup";
 	}
+//	@GetMapping("/signup")
+//	public String signupPage() {
+//		return "signup";
+//	}
 	
 //	@PostMapping("/signup")
 //	public String postForm(@ModelAttribute("memberBean") Members members) {
