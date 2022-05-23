@@ -3,8 +3,9 @@
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
         <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
             <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-            <!DOCTYPE html>
             <jsp:include page="NavBar/CoinShellNavBar.jsp" />
+            <!DOCTYPE html>
+            
             <html>
 
             <head>
@@ -23,7 +24,8 @@
             <body>
                 <div class="main">
                     <div class="top-web-space">
-                    <p>${login.memId}</p>>
+                    <p>${loginError}</p>
+                    <p>歡迎你${login.eMail}</p>
                     </div>
 
                     <div class=" news">

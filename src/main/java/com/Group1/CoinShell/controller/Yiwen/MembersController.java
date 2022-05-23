@@ -59,7 +59,7 @@ public class MembersController {
 		member.seteMail(eMail);
 		member.setJoinTime(date);
 		member.setPassword(password);
-		member.setCustomizedUserName("defaultUser");
+		member.setCustomizedUserName("使用者01");
 		memService.save(member);
 		return "signupOK";
 	}
@@ -77,10 +77,10 @@ public class MembersController {
 		
 		if(memRes == null) {
 			redirectAttributes.addFlashAttribute("loginError", "帳號密碼錯誤，請重新輸入");
-			return "redirect:login";
+			return "redirect:/";
 		}
 		httpSession.setAttribute("login", memRes);
-		return "loginOK";
+		return "index";
 		
 //		Members resMem = memService.findMemberByEMail(members.geteMail());
 //		if(resMem.getPassword().equals(members.getPassword())){

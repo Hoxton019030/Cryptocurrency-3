@@ -64,8 +64,6 @@ body {
 				</li>
 				<li class="nav-item"><a class="nav-link" href="#">Learn</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">Shell Shop</a></li>
-				<li class="nav-item"><a class="nav-link" href="/coinshell/signup">Sign Up</a></li>
-				<li class="nav-item"><a class="nav-link" href="/coinshell/login">Log In</a></li>
 			</ul>
 		</div>
 		<!-- Button trigger modal -->
@@ -118,7 +116,8 @@ body {
 <!--tab01 對應的 Log In 頁籤-->
 					<fieldset class="show" id="tab011">
 					<!--登入表單-->
-					<form action="#" method="post"> <!-- form:form action="${contextRoot}/members/login"-->
+
+					<form action="/coinshell/login" method="post"> <!-- form:form action="${contextRoot}/members/login"-->
 					<!--E-Mail-->
 					<div class="form-group input-group">
 						<div class="input-group-prepend">
@@ -126,7 +125,7 @@ body {
 								<i class="fas fa-user-circle"></i>
 							</div>
 						</div>
-					    <input type="email" class="account form-control" placeholder="E-mail"/>  
+					    <input type="email" name="eMail" class="account form-control" placeholder="E-mail"/>  
 					    <!-- form:input ... + path="eMail" Q:form:form到form:input中間的標籤沒有 form: 標籤OK? -->
 					</div>
 					<!--Password-->
@@ -136,7 +135,7 @@ body {
 								<i class="fas fa-unlock-alt"></i>
 							</div>
 						</div>
-					<input type="password" class="password form-control" 
+					<input type="password" name="password" class="password form-control" 
 					placeholder="Password" id="floatingPassword1"/>
 					<!--標籤改成 form:input ... + 屬性 path="password" -->
 					<div class="input-group-append">
@@ -149,11 +148,14 @@ body {
 					<div class="form-group">
 					<input type="checkbox" class="remember-me">Remember me
 					</div>
+					<p>${loginError}</p>
 					<!--Submit btn-->
-					<button type="button" class="btn btn-info">
+					<button type="submit" class="btn btn-info">
 					<i class="fa-solid fa-anchor"></i> Log In
 					</button>  <!--印出 c:out value="${loginError}" /c:out-->
 					</form>	<!--改成/form:form-->
+
+					
 					</fieldset>
 					<!--tab02 對應的 Sign Up 頁籤-->
 					<fieldset id="tab021">
