@@ -84,6 +84,8 @@ function upCoin(){
                 	coinList += '</tr>'      
                 })
                 $('#top').append(coinList);
+                
+                setUpCoin();
                 upjquery();
             },
             error: function(err){
@@ -92,8 +94,15 @@ function upCoin(){
          })
 }
 
+var myInterval
+
+function setUpCoin(){
+myInterval  = window.setInterval(function(){upCoin()},30000);
+}
+
+
 //每30秒更新一次
-window.setInterval(function(){upCoin()},30000);
+//window.setInterval(function(){upCoin()},30000);
 
 
 function watch(id){
@@ -131,7 +140,47 @@ function watch(id){
 }
 
 
+                function loadCoinByName(){
+                	var coinName = document.getElementById("coinName").value;
+                		 $.ajax({
+                	            url:'http://localhost:8080/coinshell/coin/select?name=' + coinName,
+                	            contentType:'application/json; charset=UTF-8',  //送過去的
+                	            dataType:'json', //傳回來的
+                	            method:'get',
+                	            success: function(result){
+                	            	$('#top tr td').remove();
+                	                console.log(result)
+                	                coinList = '';
+                	                $.each(result,function(index, value){
+                	                	coinList += '<tr>'
+                	                	coinList += '<td>' + value.id + '</td>'
+                	                	coinList += '<td><input type="checkbox" style="height:30px width:30px" id="watch' + value.id + '" value="' + value.name + '" onClick="watch(' + value.id + ')"></td>'
+                	                	coinList += '<td><img class=currencyIcon src="' + contextRoot + '/images/currencyIcon/' + value.symbol + '.png" alt=""><a href="http://localhost:8080/coinshell/individualCryptocurrencyInformation?currencyName=' + value.symbol + '&currentlyDay=' + value.lastUpdated.substr(0, 10) + '">' + value.name + '</a></td>'
+                	                	coinList += '<td>' + value.symbol + '</td>' 
+                	                	coinList += '<td class="price">'  + value.price + '</td>'
+                	                	coinList += '<td class="1h">'     + value.percentChange1h  + '</td>' 
+                	                	coinList += '<td class="24h">'    + value.percentChange24h + '</td>' 
+                	                	coinList += '<td class="7d">'     + value.percentChange7d  + '</td>' 
+                	                	coinList += '<td class="30d">'    + value.percentChange30d + '</td>' 
+                	                	coinList += '<td class="vol24h">' + value.volume24h + '</td>' 
+                	                	coinList += '<td class="market">' + value.marketCap + '</td>' 
+                	                	coinList += '</tr>'      
+                	                })
+                	                $('#top').append(coinList);
+                	                
+                	                console.log("myInterval=",myInterval);
+                	                window.clearInterval(myInterval);
+                	                
+                	                //查詢後持續即時更新
+//                	                window.setInterval(function(){loadCoinByName()},10000);
 
+                	                upjquery();
+                	            },
+                	            error: function(err){
+                	                console.log(err)
+                	            } 
+                	         })
+                	}
 
 
 
