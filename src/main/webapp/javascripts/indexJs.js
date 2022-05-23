@@ -21,41 +21,102 @@ let month = day.getMonth() + 1
 month = (month < 10 ? '0' : '') + month
 var today = day.getFullYear() + "-" + month + "-" + day.getDate();
 //這邊定義今天的日期，格式為yyyy-MM-dd (2022-05-20)
-//
-//function upCoin() {
-//    $(function() {
-//        $(".cointable").empty();
-//        fetch("http://localhost:8080/coinshell/coin/getAll").then(function(response) {
-//            return response.json();
-//            console.log(response.json())
-//        }).then(function(array) {
-//            $.each(array, function(index, value) {
-//                $(".cointable").append(`
-//                        <tr>
-//                        <th scope="row">` + value.id + `</th>
-//                        <td>` + `<img class=currencyIcon src="` + contextRoot + `/images/currencyIcon/` + value.symbol + `.png" alt="">` + `<a href="http://localhost:8080/coinshell/individualCryptocurrencyInformation?currencyName=` + value.symbol + `&currentlyDay=` + today + `">` + value.name + `</a></td>
-//                        <td>` + value.symbol + `</td>
-//                        <td>$` + value.price.toFixed(2) + `</td>
-//                        <td>` + value.percentChange1h.toFixed(2) + `%</td>
-//                        <td>` + value.percentChange24h.toFixed(2) + `%</td>
-//                        <td>` + value.percentChange7d.toFixed(2) + `%</td>
-//                        <td>` + value.percentChange30d.toFixed(2) + `%</td>
-//                        <td>$` + value.volume24h.toFixed(2) + `</td>
-//                        <td>$` + value.marketCap.toFixed(2) + `</td>
-//                    </tr>
-//                        `)
-//            })
-//        })
-//    })
+
+
+//function upCoin(){
+//	 $.ajax({
+//            url:'http://localhost:8080/coinshell/coin/getAll',
+//            contentType:'application/json; charset=UTF-8',  //送過去的
+//            dataType:'json', //傳回來的
+//            method:'get',
+//            success: function(result){
+//            	$('#top tr td').remove();
+//                console.log(result)
+//                coinList = '';
+//                $.each(result,function(index, value){
+//                	coinList += '<tr>'
+//                	coinList += '<td>' + value.id + '</td>'
+//                	
+//                	coinList += '<td><input type="checkbox" style="height:30px width:30px" id="watch' + value.id + '" value="' + value.name + '" onClick="watch(' + value.id + ')"></td>'
+////                	coinList += '<td><button id="watch' + value.id + '" value="' + value.name + '" onClick="watch(' + value.id + ')">watch</button></td>'
+//                	
+//                	coinList += '<td><img class=currencyIcon src="' + contextRoot + '/images/currencyIcon/' + value.symbol + '.png" alt=""><a href="http://localhost:8080/coinshell/individualCryptocurrencyInformation?currencyName=' + value.symbol + '&currentlyDay=' + value.lastUpdated.substr(0, 10) + '">' + value.name + '</a></td>'
+//                	coinList += '<td>' + value.symbol + '</td>' 
+//                	coinList += '<td class="price">'  + value.price + '</td>'
+//                	coinList += '<td class="1h">'     + value.percentChange1h  + '</td>' 
+//                	coinList += '<td class="24h">'    + value.percentChange24h + '</td>' 
+//                	coinList += '<td class="7d">'     + value.percentChange7d  + '</td>' 
+//                	coinList += '<td class="30d">'    + value.percentChange30d + '</td>' 
+//                	coinList += '<td class="vol24h">' + value.volume24h + '</td>' 
+//                	coinList += '<td class="market">' + value.marketCap + '</td>' 
+//                	coinList += '</tr>'      
+//                })
+//                $('#top').append(coinList);
+//                
+//                setUpCoin();
+//                upjquery();
+//            },
+//            error: function(err){
+//                console.log(err)
+//            } 
+//         })
 //}
-////設定間隔時間
-//window.setInterval(function() {
-//    upCoin()
-//}, 10000);
+//
+//var myInterval
+//
+//function setUpCoin(){
+//myInterval  = window.setInterval(function(){upCoin()},30000);
+//}
+
+
+//每30秒更新一次
+//window.setInterval(function(){upCoin()},30000);
+
+
+//function watch(id){
+//  var name = document.getElementById("watch" + id).value;
+//	 $.ajax({
+//            url:'http://localhost:8080/coinshell/watch?name=' + name,
+//            contentType:'application/json; charset=UTF-8',  //送過去的
+//            dataType:'json', //傳回來的
+//            method:'get',
+//            success: function(result){
+//                console.log(result)
+//                coinList = '';
+//                $.each(result,function(index, value){
+//                	coinList += '<tr>'
+//                	coinList += '<td>' + value.id + '</td>'
+//                	
+//                	coinList += '<td><input type="checkbox" style="height:30px width:30px" id="watch' + value.id + '" value="' + value.name + '" onClick="watch(' + value.id + ')"></td>'
+//                	
+//                	coinList += '<td><img class=currencyIcon src="' + contextRoot + '/images/currencyIcon/' + value.symbol + '.png" alt=""><a href="http://localhost:8080/coinshell/individualCryptocurrencyInformation?currencyName=' + value.symbol + '&currentlyDay=' + value.lastUpdated.substr(0, 10) + '">' + value.name + '</a></td>'
+//                	coinList += '<td>' + value.symbol + '</td>' 
+//                	coinList += '<td class="price">'  + value.price + '</td>'
+//                	coinList += '<td class="1h">'     + value.percentChange1h  + '</td>' 
+//                	coinList += '<td class="24h">'    + value.percentChange24h + '</td>' 
+//                	coinList += '<td class="7d">'     + value.percentChange7d  + '</td>' 
+//                	coinList += '<td class="30d">'    + value.percentChange30d + '</td>' 
+//                	coinList += '<td class="vol24h">' + value.volume24h + '</td>' 
+//                	coinList += '<td class="market">' + value.marketCap + '</td>' 
+//                	coinList += '</tr>'      
+//                })
+//                $('#watch').append(coinList);
+//                upjquery();
+//            },
+//            error: function(err){
+//                console.log(err)
+//            } 
+//         })
+//}
 
 
 
 function upCoin(){
+    var tableObj = document.getElementById("watch");
+    for (var i = 1; i < tableObj.rows.length; i++ ){
+        tableObj.deleteRow(i)
+    }
+//     $("#watch").html("");
 	 $.ajax({
             url:'http://localhost:8080/coinshell/coin/getAll',
             contentType:'application/json; charset=UTF-8',  //送過去的
@@ -67,9 +128,12 @@ function upCoin(){
                 coinList = '';
                 $.each(result,function(index, value){
                 	coinList += '<tr>'
+
                 	coinList += '<td>' + value.id + '</td>'
-                	
-                	coinList += '<td><input type="checkbox" style="height:30px width:30px" id="watch' + value.id + '" value="' + value.name + '" onClick="watch(' + value.id + ')"></td>'
+                    
+                	var div_color= value.id+"div";
+                	coinList += '<td><div  id="'+div_color+'"+" style="background-color:#FFBB73;text-align: center;"><input type="checkbox" style="height:30px width:10px" name="yes" id="watch' + value.id + '" value="' + value.name + '" onClick="watch(' + value.id + ',this.name)"></div></td>'
+
 //                	coinList += '<td><button id="watch' + value.id + '" value="' + value.name + '" onClick="watch(' + value.id + ')">watch</button></td>'
                 	
                 	coinList += '<td><img class=currencyIcon src="' + contextRoot + '/images/currencyIcon/' + value.symbol + '.png" alt=""><a href="http://localhost:8080/coinshell/individualCryptocurrencyInformation?currencyName=' + value.symbol + '&currentlyDay=' + value.lastUpdated.substr(0, 10) + '">' + value.name + '</a></td>'
@@ -84,8 +148,6 @@ function upCoin(){
                 	coinList += '</tr>'      
                 })
                 $('#top').append(coinList);
-                
-                setUpCoin();
                 upjquery();
             },
             error: function(err){
@@ -94,50 +156,70 @@ function upCoin(){
          })
 }
 
-var myInterval
-
-function setUpCoin(){
-myInterval  = window.setInterval(function(){upCoin()},30000);
-}
-
-
 //每30秒更新一次
-//window.setInterval(function(){upCoin()},30000);
+window.setInterval(function(){upCoin()},30000);
 
 
-function watch(id){
-  var name = document.getElementById("watch" + id).value;
-	 $.ajax({
-            url:'http://localhost:8080/coinshell/watch?name=' + name,
-            contentType:'application/json; charset=UTF-8',  //送過去的
-            dataType:'json', //傳回來的
-            method:'get',
-            success: function(result){
+function watch(id,name) {
+    if(name =='yes') {
+        document.getElementById(id+'div').setAttribute("style","background-color:#FF2D2D;text-align: center;");
+        var name = document.getElementById("watch" + id).value;
+        $.ajax({
+            url: 'http://localhost:8080/coinshell/watch?name=' + name,
+            contentType: 'application/json; charset=UTF-8',  //送過去的
+            dataType: 'json', //傳回來的
+            method: 'get',
+            success: function (result) {
                 console.log(result)
                 coinList = '';
-                $.each(result,function(index, value){
-                	coinList += '<tr>'
-                	coinList += '<td>' + value.id + '</td>'
-                	coinList += '<td><a href="' + contextRoot + '/watch/' + value.name + '"><button>watch</button></a></td>'
-                	coinList += '<td><img class=currencyIcon src="' + contextRoot + '/images/currencyIcon/' + value.symbol + '.png" alt=""><a href="http://localhost:8080/coinshell/individualCryptocurrencyInformation?currencyName=' + value.symbol + '&currentlyDay=' + value.lastUpdated.substr(0, 10) + '">' + value.name + '</a></td>'
-                	coinList += '<td>' + value.symbol + '</td>' 
-                	coinList += '<td class="price">'  + value.price + '</td>'
-                	coinList += '<td class="1h">'     + value.percentChange1h  + '</td>' 
-                	coinList += '<td class="24h">'    + value.percentChange24h + '</td>' 
-                	coinList += '<td class="7d">'     + value.percentChange7d  + '</td>' 
-                	coinList += '<td class="30d">'    + value.percentChange30d + '</td>' 
-                	coinList += '<td class="vol24h">' + value.volume24h + '</td>' 
-                	coinList += '<td class="market">' + value.marketCap + '</td>' 
-                	coinList += '</tr>'      
+                $.each(result, function (index, value) {
+                    coinList += '<tr>'
+                    coinList += '<td>' + value.id + '</td>'
+
+                    var div_color= value.id+"div";
+                	coinList += '<td><div  id="'+div_color+'"+" style="background-color:#FFBB73;text-align: center;"><input type="checkbox" style="height:30px width:10px" name="yes" id="watch' + value.id + '" value="' + value.name + '" onClick="watch(' + value.id + ',this.name)"></div></td>'
+
+//                  coinList += '<td><input type="checkbox" style="height:30px width:30px" id="watch' + value.id + '" value="' + value.name + '" onClick="watch(' + value.id + ')"></td>'
+
+
+                    coinList += '<td><img class=currencyIcon src="' + contextRoot + '/images/currencyIcon/' + value.symbol + '.png" alt=""><a href="http://localhost:8080/coinshell/individualCryptocurrencyInformation?currencyName=' + value.symbol + '&currentlyDay=' + value.lastUpdated.substr(0, 10) + '">' + value.name + '</a></td>'
+                    coinList += '<td>' + value.symbol + '</td>'
+                    coinList += '<td class="price">' + value.price + '</td>'
+                    coinList += '<td class="1h">' + value.percentChange1h + '</td>'
+                    coinList += '<td class="24h">' + value.percentChange24h + '</td>'
+                    coinList += '<td class="7d">' + value.percentChange7d + '</td>'
+                    coinList += '<td class="30d">' + value.percentChange30d + '</td>'
+                    coinList += '<td class="vol24h">' + value.volume24h + '</td>'
+                    coinList += '<td class="market">' + value.marketCap + '</td>'
+                    coinList += '</tr>'
                 })
                 $('#watch').append(coinList);
                 upjquery();
             },
-            error: function(err){
+            error: function (err) {
                 console.log(err)
-            } 
-         })
+            }
+        })
+        document.getElementById('watch'+id).setAttribute("name","no");
+    }else
+    {
+        document.getElementById(id+'div').setAttribute("style","background-color:#FFBB73;text-align: center;")
+        document.getElementById('watch'+id).setAttribute("name","yes");
+        var tableObj = document.getElementById("watch");
+        for (var i = 0; i < tableObj.rows.length; i++ ){
+            if(id==tableObj.rows[i].cells[0].innerText)
+            {
+                tableObj.deleteRow(i)
+                break;
+            }
+        }
+    }
+
 }
+
+
+
+
 
 
                 function loadCoinByName(){
@@ -154,7 +236,12 @@ function watch(id){
                 	                $.each(result,function(index, value){
                 	                	coinList += '<tr>'
                 	                	coinList += '<td>' + value.id + '</td>'
-                	                	coinList += '<td><input type="checkbox" style="height:30px width:30px" id="watch' + value.id + '" value="' + value.name + '" onClick="watch(' + value.id + ')"></td>'
+
+                                        var div_color= value.id+"div";
+                	                    coinList += '<td><div  id="'+div_color+'"+" style="background-color:#FFBB73;text-align: center;"><input type="checkbox" style="height:30px width:10px" name="yes" id="watch' + value.id + '" value="' + value.name + '" onClick="watch(' + value.id + ',this.name)"></div></td>'
+//                	                	coinList += '<td><input type="checkbox" style="height:30px width:30px" id="watch' + value.id + '" value="' + value.name + '" onClick="watch(' + value.id + ')"></td>'
+
+
                 	                	coinList += '<td><img class=currencyIcon src="' + contextRoot + '/images/currencyIcon/' + value.symbol + '.png" alt=""><a href="http://localhost:8080/coinshell/individualCryptocurrencyInformation?currencyName=' + value.symbol + '&currentlyDay=' + value.lastUpdated.substr(0, 10) + '">' + value.name + '</a></td>'
                 	                	coinList += '<td>' + value.symbol + '</td>' 
                 	                	coinList += '<td class="price">'  + value.price + '</td>'
