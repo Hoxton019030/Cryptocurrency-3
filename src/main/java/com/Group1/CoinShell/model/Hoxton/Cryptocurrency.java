@@ -13,7 +13,7 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name = "cryptocurrency")
+@Table(name = "Cryptocurrency")
 public class Cryptocurrency {
 
 	public Cryptocurrency() {
