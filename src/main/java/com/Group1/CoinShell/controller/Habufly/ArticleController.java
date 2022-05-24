@@ -1,11 +1,8 @@
 package com.Group1.CoinShell.controller.Habufly;
 
-import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -89,7 +86,7 @@ public class ArticleController {
 	public String editArticle(Model model, @PathVariable("id")Integer id) {
 		Article atc = aService.findById(id);
 		model.addAttribute("article", atc);	
-		return "forum/editArticle";
+		return "editArticle";
 	}
 	
 	@PostMapping("/postEditArticle")
@@ -98,7 +95,7 @@ public class ArticleController {
 		Integer id = atc.getId();
 		System.out.println(id);
 		model.addAttribute("id", id);
-		return "redirect:/forum/viewArticle/"+id+"/";
+		return "redirect:/viewArticle/"+id+"/";
 	}
 	
 	@GetMapping("/deleteArticle/{id}")
@@ -106,7 +103,7 @@ public class ArticleController {
 		Article atc = aService.findById(id);
 		atc.setDeleted("y");
 		aService.save(atc);
-		return "redirect:/forum/viewAllAjax";
+		return "redirect:/viewAllAjax";
 	}
 	
 	@ModelAttribute("tagList")
@@ -123,14 +120,13 @@ public class ArticleController {
 		return tagList;
 	}
 	
-	@GetMapping("/viewArticle/{id}")
-	public String viewArticle(HttpSession session, Model model, @PathVariable("id") Integer id) throws IOException{
-		Article atc = aService.findById(id);
-		model.addAttribute("Article", atc);	
-		//增加文章瀏覽數
-		aService.increasePageView(session, id);
-		return "forum/viewArticle";
-	}
+//	@GetMapping("/viewArticle/{id}")
+//  public String viewArticle(HttpSession session, Model model, @PathVariable("id") Integer id) throws IOException{
+//		Article atc = aService.findById(id);
+//		model.addAttribute("Article", atc);	
+//		aService.increasePageView(session, id);
+//      return "viewArticle";
+//  }
 	
 //	@PostMapping("/viewArticle/{id}")
 //	public void viewArticle2(HttpSession session, Model model, @PathVariable("id") Integer id,  @RequestParam(name="p", defaultValue ="1") Integer pageNumber) throws IOException{

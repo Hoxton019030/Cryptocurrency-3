@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Group1.CoinShell.model.Feeder.Coin;
@@ -181,6 +182,17 @@ public class CoinCointrollerApi {
 		return coin;
 	}
 	
-
+	//透過name跟symbol模糊查詢
+    @ResponseBody
+    @GetMapping("/coin/select")
+    public List<Coin> selectCoinByName(@RequestParam String name) {
+    	List<Coin> SelectCoin;
+        
+    	SelectCoin = coinService.findByName2(name);
+        
+        System.out.println(SelectCoin);
+        
+        return SelectCoin;
+    }
 	
 }

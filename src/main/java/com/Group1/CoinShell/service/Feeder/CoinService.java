@@ -20,6 +20,7 @@ public class CoinService {
 	@Autowired
 	private CoinDao coindao;
 
+	//從coinmarketAPI抓資料存進coin用
 	public void save(Coin coin) {
 		coindao.save(coin);
 	}
@@ -28,29 +29,23 @@ public class CoinService {
 		coindao.saveAll(coin);
 	}
 	
+	//從資料庫抓全部coin的資料出來
 	public List<Coin> findAll(Coin coin) {
 		return coindao.findAll();
 	}
-
+	
+	//給watch用name抓幣用
 	public List<Coin> findByName(String name) {
 		return coindao.findByName(name);
 	}
+	
+	//透過name跟symbol模糊查詢幣
+	public List<Coin> findByName2(String name) {
+	    List<Coin> list = coindao.findByName2(name);
+	    return list;
+	    }
 
 	
-	public Coin findById(Integer id) {
-		Optional<Coin> option = coindao.findById(id);
-
-		if (option.isPresent()) {
-			return option.get();
-		}
-		return null;
-	}
-	
-	public Coin getCoinById(Integer id) {
-		return coindao.findById(id).get();
-	}
-
-
 	public String getContent(String strUrl) {
 		// 一個public方法,返回字串,錯誤則返回"error open url"
 		try {

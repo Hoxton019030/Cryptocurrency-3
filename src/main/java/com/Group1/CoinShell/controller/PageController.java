@@ -34,5 +34,7 @@ public class PageController {
 		return "forum/viewAllAjax";
 	}
 
-	
+
 }
+	
+

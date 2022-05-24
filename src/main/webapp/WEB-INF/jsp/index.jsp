@@ -3,8 +3,9 @@
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
         <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
             <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-            <!DOCTYPE html>
             <jsp:include page="NavBar/CoinShellNavBar.jsp" />
+            <!DOCTYPE html>
+            
             <html>
 
             <head>
@@ -23,6 +24,8 @@
             <body>
                 <div class="main">
                     <div class="top-web-space">
+                    <p>${loginError}</p>
+                    <p>歡迎你${login.eMail}</p>
                     </div>
 
                     <div class=" news">
@@ -49,6 +52,10 @@
                                 </li>
                             </ul>
                             <div id="overview">
+                            
+                            <input id="coinName" type="text" placeholder="Serch"/>
+							<input type="button" name="submit" value="查詢" id="search"/>
+                            
                                 <table class="table table-hover" id="top">
                                     <thead>
                                         <tr>
@@ -98,7 +105,12 @@
                 </div>
                 
 
+                <script>
+                
+                $("#search").click(function(){loadCoinByName();})
 
+                </script>
+                
             </body>
 
             </html>
