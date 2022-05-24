@@ -62,10 +62,10 @@ var today = day.getFullYear() + "-" + month + "-" + day.getDate();
 //         })
 //}
 //
-//var myInterval
+//var timeoutID;
 //
 //function setUpCoin(){
-//myInterval  = window.setInterval(function(){upCoin()},30000);
+//timeoutID  = window.setTimeout(function(){upCoin()},20000); //改2000僅為快速測試而已
 //}
 
 
@@ -148,6 +148,7 @@ function upCoin(){
                 	coinList += '</tr>'      
                 })
                 $('#top').append(coinList);
+                setUpCoin();
                 upjquery();
             },
             error: function(err){
@@ -156,8 +157,11 @@ function upCoin(){
          })
 }
 
-//每30秒更新一次
-window.setInterval(function(){upCoin()},30000);
+var timeoutID;
+
+function setUpCoin(){
+timeoutID  = window.setTimeout(function(){upCoin()},20000); //改2000僅為快速測試而已
+}
 
 
 function watch(id,name) {
@@ -255,11 +259,10 @@ function watch(id,name) {
                 	                })
                 	                $('#top').append(coinList);
                 	                
-                	                console.log("myInterval=",myInterval);
-                	                window.clearInterval(myInterval);
+                	                window.clearTimeout(timeoutID);
                 	                
                 	                //查詢後持續即時更新
-//                	                window.setInterval(function(){loadCoinByName()},10000);
+                	                window.setTimeout(function(){loadCoinByName()},20000); //改2000僅為快速測試而已
 
                 	                upjquery();
                 	            },
