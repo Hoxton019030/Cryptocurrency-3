@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%> <!-- 時間的格式化 -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+<c:set var="contextRoot" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -58,7 +58,7 @@ body {
 				<li class="nav-item active"><a class="nav-link" href="#">About
 						us<span class="sr-only">(current)</span>
 				</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">BeachTown</a>
+				<li class="nav-item"><a class="nav-link" href="${contextRoot}/viewAllAjax">BeachTown</a>
 				</li>
 				<li class="nav-item"><a class="nav-link" href="#">Portfolio</a>
 				</li>
@@ -155,7 +155,7 @@ body {
 					</button>  <!--印出 c:out value="${loginError}" /c:out-->
 					</form>	<!--改成/form:form-->
 
-					
+
 					</fieldset>
 					<!--tab02 對應的 Sign Up 頁籤-->
 					<fieldset id="tab021">
@@ -180,7 +180,10 @@ body {
 							<div class="input-group-prepend">
 								<div class="input-group-text">
 									<i class="fas fa-unlock-alt"></i>
+
 								</div>
+								<input type="email" class="account form-control"
+									placeholder="E-mail">
 							</div>
 						<input type="password" name="password" class="password form-control"
 										placeholder="Password" id="floatingPassword2"/>

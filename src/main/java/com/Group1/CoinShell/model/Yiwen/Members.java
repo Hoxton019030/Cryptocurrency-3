@@ -1,5 +1,4 @@
 package com.Group1.CoinShell.model.Yiwen;
-
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -123,3 +122,4 @@ public class Members {
 	}
 
 }
+

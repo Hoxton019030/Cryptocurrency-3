@@ -28,26 +28,13 @@ public class MembersService {
 }
 //	
 //	public Members checkLogin(String eMail, String password) {
-//		Members tempMember = membersDao.findByEMailAndPassword(eMail, password);
-//				
+//		Members tempMember = dao.findByNameAndPassword(eMail, password);
+//		
 //		if(tempMember != null) {
 //			return tempMember;
 //		}
 //		return null;
-//	}
-//	
-//	public Members findById(Integer memId) {
-//		Optional<Members> option = membersDao.findById(memId);
 //		
-//		if(option.isPresent()) {
-//			return option.get();
-//		}
-//		return null;
 //	}
-//	
-//	public void deleteById(Integer memId) {
-//		membersDao.deleteById(memId);
-//	}
+//
 //}
-
-// findAllMembers, findByPage, getLatest 不會用到，略
