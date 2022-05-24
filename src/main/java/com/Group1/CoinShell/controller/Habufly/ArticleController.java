@@ -1,8 +1,11 @@
 package com.Group1.CoinShell.controller.Habufly;
 
+import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,93 +24,93 @@ import com.Group1.CoinShell.service.Habufly.CommentService;
 
 @Controller
 public class ArticleController {
-	
+
 	@Autowired
 	private ArticleService aService;
 	@Autowired
 	private CommentService cService;
-	
-	@GetMapping("/article/add")  //	 ModelAndView 參數一定要放在第一個
+
+	@GetMapping("/article/add") // ModelAndView 參數一定要放在第一個
 	public ModelAndView goAddArticle(ModelAndView mav) {
 		Article atc = new Article();
-		
-		//model.addAttribute("名字", 物件)
+
+		// model.addAttribute("名字", 物件)
 		mav.getModel().put("article", atc);
-		
+
 		mav.setViewName("/forum/addArticle");
-		
+
 		Article lastestArticle = aService.getFirstNewArticle();
 		mav.getModel().put("lastestArticle", lastestArticle);
-		
+
 		return mav;
 	}
-	
+
 	@PostMapping("/article/add")
-	public ModelAndView postMessage(ModelAndView mav, @ModelAttribute(name="article") Article atc) {
+	public ModelAndView postMessage(ModelAndView mav, @ModelAttribute(name = "article") Article atc) {
 		aService.save(atc);
-		
-		//save完之後，再帶入一個新的進去，否則格子內還是舊的
+
+		// save完之後，再帶入一個新的進去，否則格子內還是舊的
 		Article newAtc = new Article();
 		mav.getModel().put("article", newAtc);
-		
-		//回傳後顯示最新的那一筆留言
+
+		// 回傳後顯示最新的那一筆留言
 		Article lastestArticle = aService.getFirstNewArticle();
 		mav.getModel().put("lastestArticle", lastestArticle);
 		mav.setViewName("forum/addArticle");
 		return mav;
 	}
-	
-	@ResponseBody//由於是寫在一般Controller底下，要將java物件序列化轉成Json格式，需寫
+
+	@ResponseBody // 由於是寫在一般Controller底下，要將java物件序列化轉成Json格式，需寫
 	@GetMapping("/article/viewAllAjax")
 	public List<Article> viewArticlePage(@RequestParam String tag) {
 		List<Article> allAtc;
-		
-		if("All".equals(tag)) {
+
+		if ("All".equals(tag)) {
 			allAtc = aService.findAll();
-		}else {
+		} else {
 			allAtc = aService.findByTag(tag);
 		}
 		return allAtc;
 	}
-	//http://localhost:8080/myapp/article/viewAllAjax?tag=btc
-	
+	// http://localhost:8080/myapp/article/viewAllAjax?tag=btc
+
 	@ResponseBody
 	@GetMapping("/article/viewAllAjaxByTitle")
 	public List<Article> viewArticleByTitle(@RequestParam String titlePart) {
 		List<Article> allAtc;
-		
+
 		allAtc = aService.findByTitle(titlePart);
 		System.out.println(allAtc);
 		return allAtc;
 	}
-	//http://localhost:8080/myapp/article/viewAllAjax?tag=btc
-	
+	// http://localhost:8080/myapp/article/viewAllAjax?tag=btc
+
 	@GetMapping("/editArticle/{id}")
-	public String editArticle(Model model, @PathVariable("id")Integer id) {
+	public String editArticle(Model model, @PathVariable("id") Integer id) {
 		Article atc = aService.findById(id);
-		model.addAttribute("article", atc);	
-		return "editArticle";
+		model.addAttribute("article", atc);
+		return "forum/editArticle";
 	}
-	
+
 	@PostMapping("/postEditArticle")
-	public String postEditArticle(Model model, @ModelAttribute("article")Article atc) {
-		aService.save(atc);//save方法，有此id的話就會做update
+	public String postEditArticle(Model model, @ModelAttribute("article") Article atc) {
+		aService.save(atc);// save方法，有此id的話就會做update
 		Integer id = atc.getId();
 		System.out.println(id);
 		model.addAttribute("id", id);
-		return "redirect:/viewArticle/"+id+"/";
+		return "redirect:/forum/viewArticle/" + id + "/";
 	}
-	
+
 	@GetMapping("/deleteArticle/{id}")
-	public String deleteArticle(@PathVariable("id")Integer id) {
+	public String deleteArticle(@PathVariable("id") Integer id) {
 		Article atc = aService.findById(id);
 		atc.setDeleted("y");
 		aService.save(atc);
-		return "redirect:/viewAllAjax";
+		return "redirect:/forum/viewAllAjax";
 	}
-	
+
 	@ModelAttribute("tagList")
-	public Map<String, String> getTags(){
+	public Map<String, String> getTags() {
 		Map<String, String> tagList = new LinkedHashMap<String, String>();
 		tagList.put("BTC", "比特幣");
 		tagList.put("BCH", "比特幣現金");
@@ -119,47 +122,46 @@ public class ArticleController {
 		tagList.put("ADA", "艾達幣");
 		return tagList;
 	}
-	
-//	@GetMapping("/viewArticle/{id}")
-//  public String viewArticle(HttpSession session, Model model, @PathVariable("id") Integer id) throws IOException{
-//		Article atc = aService.findById(id);
-//		model.addAttribute("Article", atc);	
-//		aService.increasePageView(session, id);
-//      return "viewArticle";
-//  }
-	
+
+	@GetMapping("/viewArticle/{id}")
+	public String viewArticle(HttpSession session, Model model, @PathVariable("id") Integer id) throws IOException {
+		Article atc = aService.findById(id);
+		model.addAttribute("Article", atc);
+		aService.increasePageView(session, id);
+		return "forum/viewArticle";
+	}
+
 //	@PostMapping("/viewArticle/{id}")
 //	public void viewArticle2(HttpSession session, Model model, @PathVariable("id") Integer id,  @RequestParam(name="p", defaultValue ="1") Integer pageNumber) throws IOException{
 //		//增加文章瀏覽數
 //		aService.increasePageView(session, id);
 //	}
-	
 
 //	@GetMapping("/viewArticle/{id}")
 //    public String viewArticle(HttpSession session, Model model, @PathVariable("id") Integer id) throws IOException{
 //		Page<Comment> page = cService.findByPage(pageNumber);
 //		model.addAttribute("page",page);
-		
+
 //        List<Comment> commentsList;
 //        List<Comment> replyList;
-        
+
 //		Article atc = aService.findById(id);
 //		model.addAttribute("Article", atc);	
-		
+
 //		Comment comm = new Comment();
 //		model.addAttribute("comment", comm);
 //		
 //		Comment reply = new Comment();
 //		model.addAttribute("reply", reply);
-		
-        //增加文章瀏覽數
+
+	// 增加文章瀏覽數
 //		long lastAccessedTime = session.getLastAccessedTime();
 //		long creationTime = session.getCreationTime();
 //		System.out.println("lastAccessedTime:"+lastAccessedTime);
 //		System.out.println("creationTime:"+creationTime);
 //		System.out.println(lastAccessedTime-creationTime);
 //		aService.increasePageView(session, id);
-		
+
 //        synchronized (ArticleController.class) {
 //            commentsList = cService.selectComm(id);  //查詢所有評論
 //            replyList = cService.selectReply(id);  //查詢所有對評論的回復
@@ -169,7 +171,7 @@ public class ArticleController {
 
 //        return "viewArticle";
 //    }
-	
+
 //	@GetMapping("/article/viewArticleByTag")
 //	public String viewArticlePageByTag(Model model, @RequestParam("tag")String rTag ,@RequestParam(name="p", defaultValue ="1") Integer pageNumber) {
 //		
@@ -179,7 +181,7 @@ public class ArticleController {
 //		
 //		return "viewAll";
 //	}
-	
+
 //	@GetMapping("/article/viewArticle")
 //	public String viewArticlePage(Model model, Article atc, @ModelAttribute("tag")String tag ,@RequestParam(name="p", defaultValue ="1") Integer pageNumber) {
 //		
@@ -190,7 +192,7 @@ public class ArticleController {
 //		
 //		return "viewAll";
 //	}
-	
+
 //	@ResponseBody
 //	@GetMapping("/commentList")
 //	public List<Comment> commentList(@RequestParam Integer aid) {
@@ -200,7 +202,7 @@ public class ArticleController {
 //		System.out.println(allComm);
 //		return allComm;
 //	}
-	
+
 //	@ResponseBody
 //	@GetMapping("/replyList")
 //	public List<Comment> replyList(@RequestParam Integer aid) {
@@ -210,5 +212,5 @@ public class ArticleController {
 //		System.out.println(allComm);
 //		return allComm;
 //	}
-	
+
 }

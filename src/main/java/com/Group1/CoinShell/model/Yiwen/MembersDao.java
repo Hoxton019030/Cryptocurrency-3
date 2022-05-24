@@ -20,6 +20,7 @@ public interface MembersDao extends JpaRepository<Members, Integer> {
 	 */
 	@Query(value="SELECT * FROM Members WHERE E_Mail = :eMail2", nativeQuery = true)
 	public Members findMemberByEMail(@Param("eMail2") String eMail);
+}
 //	
 //	@Query(value="select m from Members m where m.Id =?1")
 //	public Members findById(String memId);
