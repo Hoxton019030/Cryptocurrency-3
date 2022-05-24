@@ -1,5 +1,6 @@
 package com.Group1.CoinShell.model.Yiwen;
 
+
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,6 +20,7 @@ public interface MembersDao extends JpaRepository<Members, Integer> {
 	 */
 	@Query(value="SELECT * FROM Members WHERE E_Mail = :eMail2", nativeQuery = true)
 	public Members findMemberByEMail(@Param("eMail2") String eMail);
+}
 //	
 //	@Query(value="select m from Members m where m.Id =?1")
 //	public Members findById(String memId);
@@ -54,13 +56,35 @@ public interface MembersDao extends JpaRepository<Members, Integer> {
 //	@Query("from Members where CustomizedUserName = :CustomizedUserName")
 //	public List<Members> findByName(@Param(value = "customizedUserName") String customizedUserName);
 //
-//	@Query(value="select * from Members where customizedUserName = :customizedUserName",nativeQuery = true)
-//	public List<Members> findByName2(@Param(value = "customizedUserName") String customizedUserName);
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.stereotype.Repository;
+//
+//@Repository
+//public class MembersDao {
 //	
-//	@Transactional
-//	@Modifying
-//	@Query(value = "delete from members where Id =?1", nativeQuery = true)
-//	public void delByMemId(Integer MemId);
-//	
-//  public List<Members> findByisPremiumTrue(Boolean isPremium);
-}
+//	@Autowired
+//	private SessionFactory factory;
+//
+//	public Members findByNameAndPassword(String eMail, String password) {
+//		Session session = factory.getCurrentSession();
+//		
+//		String hql = "from Member m where m.memberName = :name and m.memberPwd = :pwd";
+//		
+//		try {
+//			Members result = session.createQuery(hql, Members.class)
+//					.setParameter("name", eMail)
+//					.setParameter("pwd", password)
+//					.getSingleResult();
+//			if(result != null) {
+//				return result;
+//			}
+//			
+//		}catch(Exception e) {
+//			e.printStackTrace();
+//			return null;
+//		}
+//		
+//		return null;
+//	}
+//
+//}

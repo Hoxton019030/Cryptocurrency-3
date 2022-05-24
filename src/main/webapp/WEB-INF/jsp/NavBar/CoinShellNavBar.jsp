@@ -2,9 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<!-- 時間的格式化 -->
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+<c:set var="contextRoot" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -58,7 +57,7 @@ body {
 				<li class="nav-item active"><a class="nav-link" href="#">About
 						us<span class="sr-only">(current)</span>
 				</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">BeachTown</a>
+				<li class="nav-item"><a class="nav-link" href="${contextRoot}/viewAllAjax">BeachTown</a>
 				</li>
 				<li class="nav-item"><a class="nav-link" href="#">Portfolio</a>
 				</li>
@@ -154,6 +153,7 @@ body {
 									</span>
 								</div>
 							</div>
+
 							<a href="#" style="display: block; text-align: right;">Forgot
 								password?</a>
 							<!--Checkbox-->
@@ -165,9 +165,27 @@ body {
 							<button type="submit" class="btn btn-info">
 								<i class="fa-solid fa-anchor"></i> Log In
 							</button>
-							<!--印出 c:out value="${loginError}" /c:out-->
 						</form>
-						<!--改成/form:form-->
+						</div>
+					<input type="password" name="password" class="password form-control" 
+					placeholder="Password" id="floatingPassword1"/>
+					<!--標籤改成 form:input ... + 屬性 path="password" -->
+					<div class="input-group-append">
+						<span class="input-group-text"> <i id="eye1" class="fas fa-eye"></i>
+						</span>
+					</div>
+					</div>
+					<a href="#" style="display: block; text-align: right;">Forgot password?</a>
+					<!--Checkbox-->
+					<div class="form-group">
+					<input type="checkbox" class="remember-me">Remember me
+					</div>
+					<p>${loginError}</p>
+					<!--Submit btn-->
+					<button type="submit" class="btn btn-info">
+					<i class="fa-solid fa-anchor"></i> Log In
+					</button>  
+					</form>	
 
 
 					</fieldset>
@@ -178,7 +196,6 @@ body {
 						<!--註冊表單-->
 
 						<form method="post" action="/coinshell/signup">
-							<!-- 標籤改成form:form ... action="" -->
 							<!--E-Mail-->
 							<div class="form-group input-group">
 								<div class="input-group-prepend">
@@ -188,7 +205,6 @@ body {
 								</div>
 								<input type="email" name="e-mail" class="account form-control"
 									placeholder="E-mail" />
-								<!-- 標籤改成 form:input ... + path="password" -->
 							</div>
 							<!--Password-->
 							<div class="form-group form-floating">
@@ -201,7 +217,6 @@ body {
 									<input type="password" name="password"
 										class="password form-control" placeholder="Password"
 										id="floatingPassword2" />
-									<!-- 標籤改成 form:input ... +屬性值 path="password" -->
 									<div class="input-group-append">
 										<span class="input-group-text"> <i id="eye2"
 											class="fas fa-eye"></i>
@@ -210,6 +225,7 @@ body {
 								</div>
 								<p>Password should contain both letter and number,
 									with minimum length of 8 characters.</p>
+                
 							</div>
 							<!--Checkbox-->
 							<div class="form-group">
