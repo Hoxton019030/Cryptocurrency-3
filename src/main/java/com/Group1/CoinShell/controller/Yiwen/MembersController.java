@@ -63,8 +63,8 @@ public class MembersController {
 		// if (DAO.findMemberByEMail()){
 		// return "/index";
 		// }else{
-//		memService.save(member);
-//		return "signupOK";
+		memService.save(member);
+		return "signupOK";
 	    //}
 		// 
 		// 
