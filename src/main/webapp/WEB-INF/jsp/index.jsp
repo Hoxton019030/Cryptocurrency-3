@@ -30,7 +30,11 @@
 			<p>${loginError}</p>
 			<c:choose>
 				<c:when test="${login == null }">
-					<div>Hi there, please log in to continue!</div>
+					<div>
+					<a href="#" type="button" class="btn btn-primary mr-2"
+						data-toggle="modal" data-target="#loginModal"> <i class="fa-solid fa-anchor"></i> Log In
+					</a>
+				</div>
 				</c:when>
 				<c:otherwise>
 					<p>Welcome back! ${login.eMail}</p>

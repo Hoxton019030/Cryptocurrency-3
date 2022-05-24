@@ -209,7 +209,7 @@ body {
 									</div>
 								</div>
 								<p>Password should contain both letter and number,
-									withminimum length of 8 characters.</p>
+									with minimum length of 8 characters.</p>
 							</div>
 							<!--Checkbox-->
 							<div class="form-group">

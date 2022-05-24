@@ -2,8 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%-- <c:set var="contextRoot" value="${pageContext.request.contextPath}" /> --%>
-<%-- <jsp:include page="${contextRoot}/jsp/NavBar/CoinShellNavBar.jsp" /> --%>
+<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+<jsp:include page="../NavBar/CoinShellNavBar.jsp" />
 
 <head>
 <title>Account Setting | CoinShell</title>
