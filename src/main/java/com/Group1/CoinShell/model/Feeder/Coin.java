@@ -1,13 +1,22 @@
 package com.Group1.CoinShell.model.Feeder;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "coin")
@@ -120,9 +129,17 @@ public class Coin {
 
 	@Column(name = "reportUrl")
 	private String reportUrl;
+	
+	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, orphanRemoval = true,mappedBy = "coin")
+    private Set<Watch> watch = new HashSet<>();
+	
+//	@ManyToMany(mappedBy = "coin")
+//	private Set<Watch> watch = new HashSet<Watch>();
 
 	public Coin() {
 	}
+
+
 
 	@Override
 	public String toString() {
@@ -138,8 +155,10 @@ public class Coin {
 				+ ", fullyDilluttedMarketCap=" + fullyDilluttedMarketCap + ", marketCapByTotalSupply="
 				+ marketCapByTotalSupply + ", dominance=" + dominance + ", turnover=" + turnover
 				+ ", ytdPriceChangePercentage=" + ytdPriceChangePercentage + ", isAudited=" + isAudited + ", auditor="
-				+ auditor + ", auditStatus=" + auditStatus + ", reportUrl=" + reportUrl + "]";
+				+ auditor + ", auditStatus=" + auditStatus + ", reportUrl=" + reportUrl + ", watch=" + watch + "]";
 	}
+
+
 
 	public Integer getId() {
 		return id;
@@ -415,4 +434,19 @@ public class Coin {
 		this.reportUrl = reportUrl;
 	}
 
+
+
+	public Set<Watch> getWatch() {
+		return watch;
+	}
+
+
+
+	public void setWatch(Set<Watch> watch) {
+		this.watch = watch;
+	}
+
+
+
+	
 }
