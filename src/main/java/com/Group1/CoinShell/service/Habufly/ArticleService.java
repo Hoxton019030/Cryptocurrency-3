@@ -31,8 +31,14 @@ public class ArticleService {
 		return dao.findFirstByOrderByAddedDesc();
 	}
 	
-	public List<Article> findAll(){
-		return dao.findAllOrderByAddedDesc();
+//	public List<Article> findAll(){
+//		return dao.findAllOrderByAddedDesc();
+//	}
+	
+	public Page<Article> findAll(Integer pageNumber){
+		Pageable pgb = PageRequest.of(pageNumber-1, 10, Sort.Direction.DESC, "added");
+		Page<Article> page = dao.findAllOrderByAddedDesc(pgb);
+		return page;
 	}
 	
 	public Page<Article> findByPage(Integer pageNumber){
@@ -71,6 +77,11 @@ public class ArticleService {
 		return page;
 	}
 
+//	public List<Article> findByTag(String tag) {
+//		List<Article> list = dao.findByTag(tag);
+//		return list;
+//	}
+	
 	public List<Article> findByTag(String tag) {
 		List<Article> list = dao.findByTag(tag);
 		return list;

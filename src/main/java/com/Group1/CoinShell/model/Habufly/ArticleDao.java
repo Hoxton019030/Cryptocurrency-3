@@ -14,7 +14,7 @@ public interface ArticleDao extends JpaRepository<Article, Integer> {
 	
 	public Article findFirstByOrderByAddedDesc();
 
-	@Query(value = "select * from article where tag = :tag and deleted = 'n' ORDER BY added desc", countQuery = "select count (*) from article where tag = :tag", nativeQuery = true)
+	@Query(value = "select * from article where tag = :tag and deleted = 'n'", countQuery = "select count (*) from article where tag = :tag", nativeQuery = true)
 	public Page<Article> findByTag(Pageable page, @Param("tag") String tag);
 //	 實際查詢過程中，需使用註釋來避免sql文報錯，增加以下「countQuery = "select count (*) from article where tag = :tag",」
 
@@ -25,7 +25,10 @@ public interface ArticleDao extends JpaRepository<Article, Integer> {
 	@Query(value = "select * from article where title like %?1% or text like %?1% and deleted = 'n' ORDER BY added desc", countQuery = "select count (*) from article where title like %?1% or text like %?1%", nativeQuery = true)
 	public List<Article> findByTitle(String titlePart);
 
-	@Query(value = "select * from article where deleted = 'n' ORDER BY added desc", countQuery = "select count (*) from article", nativeQuery = true)
-	public List<Article> findAllOrderByAddedDesc();
+//	@Query(value = "select * from article where deleted = 'n' ORDER BY added desc", countQuery = "select count (*) from article", nativeQuery = true)
+//	public List<Article> findAllOrderByAddedDesc();
+	
+	@Query(value = "select * from article where deleted = 'n'", countQuery = "select count (*) from article", nativeQuery = true)
+	public Page<Article> findAllOrderByAddedDesc(Pageable page);
 	
 }

@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -60,16 +61,31 @@ public class ArticleController {
 		return mav;
 	}
 
+//	@ResponseBody // 由於是寫在一般Controller底下，要將java物件序列化轉成Json格式，需寫
+//	@GetMapping("/article/viewAllAjax")
+//	public List<Article> viewArticlePage(@RequestParam String tag) {
+//		List<Article> allAtc;
+//
+//		if ("All".equals(tag)) {
+//			allAtc = aService.findAll();
+//		} else {
+//			allAtc = aService.findByTag(tag);
+//		}
+//		return allAtc;
+//	}
+//	// http://localhost:8080/myapp/article/viewAllAjax?tag=btc
+	
 	@ResponseBody // 由於是寫在一般Controller底下，要將java物件序列化轉成Json格式，需寫
 	@GetMapping("/article/viewAllAjax")
-	public List<Article> viewArticlePage(@RequestParam String tag) {
-		List<Article> allAtc;
-
+	public Page<Article> viewArticlePage(@RequestParam String tag, @RequestParam Integer page) {
+		Page<Article> allAtc = aService.findAll(page);
+		
 		if ("All".equals(tag)) {
-			allAtc = aService.findAll();
+			allAtc = aService.findAll(page);
 		} else {
-			allAtc = aService.findByTag(tag);
+			allAtc = aService.findByPageAndTag(page, tag);
 		}
+		System.out.println(allAtc);
 		return allAtc;
 	}
 	// http://localhost:8080/myapp/article/viewAllAjax?tag=btc
