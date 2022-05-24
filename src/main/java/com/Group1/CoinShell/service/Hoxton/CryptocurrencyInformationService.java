@@ -22,8 +22,8 @@ public class CryptocurrencyInformationService {
 		return dao.findLastestCurrencyInformation(currencyName);
 	}
 	
-	public List<Map<String,Object>> findHistoricalCurrencyInformation(String currencyName,String date) {
-		return dao.findHistoricalCurrencyInformation(currencyName, date);
+	public List<Map<String,Object>> findHistoricalCurrencyInformation(String currencyName) {
+		return dao.findHistoricalCurrencyInformation(currencyName);
 	}
 	
 	public List<Map<String,Object>> find30DaysCurrencyInformation(String currencyName) {

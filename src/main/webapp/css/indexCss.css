@@ -60,3 +60,8 @@ body {
     width: 32px;
     height: 32px;
 }
+
+td {
+    width: 100px;
+    height: 100px;
+}

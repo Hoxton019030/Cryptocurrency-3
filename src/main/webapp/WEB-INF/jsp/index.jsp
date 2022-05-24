@@ -5,7 +5,7 @@
             <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
             <jsp:include page="NavBar/CoinShellNavBar.jsp" />
             <!DOCTYPE html>
-            
+
             <html>
 
             <head>
@@ -17,6 +17,7 @@
                 <link rel="stylesheet" href="/resources/demos/style.css">
                 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
                 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                 <script src="${contextRoot}/javascripts/indexJs.js"></script>
                 <link rel="stylesheet" type="text/css" href="${contextRoot}/css/indexCss.css">
             </head>
@@ -24,8 +25,8 @@
             <body>
                 <div class="main">
                     <div class="top-web-space">
-                    <p>${loginError}</p>
-                    <p>歡迎你${login.eMail}</p>
+                        <p>${loginError}</p>
+                        <p>歡迎你${login.eMail}</p>
                     </div>
 
                     <div class=" news">
@@ -52,6 +53,7 @@
                                 </li>
                             </ul>
                             <div id="overview">
+
                             
                             <input id="coinName" type="text" placeholder="Search"/>
 							<input type="button" name="submit" value="查詢" id="search"/>
@@ -70,6 +72,7 @@
                                             <th scope="col">30d%</th>
                                             <th scope="col">Volume24h</th>
                                             <th scope="col">Market Cap</th>
+                                            <th scope="col">Line Chart</th>
                                         </tr>
                                     </thead>
                                     <tbody class="cointable">
@@ -77,23 +80,23 @@
                                 </table>
                             </div>
                             <div id="focus">
-                                    <table class="table table-hover" id="watch">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Top</th>
-                                                <th scope="col">Watch</th>
-                                                <th scope="col">Name</th>
-                                                <th scope="col">Currency</th>
-                                                <th scope="col">Price</th>
-                                                <th scope="col">1h%</th>
-                                                <th scope="col">24h%</th>
-                                                <th scope="col">7d%</th>
-                                                <th scope="col">30d%</th>
-                                                <th scope="col">Volume24h</th>
-                                                <th scope="col">Market Cap</th>
-                                            </tr>
-                                        </thead>
-                                    </table>
+                                <table class="table table-hover" id="watch">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Top</th>
+                                            <th scope="col">Watch</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Currency</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">1h%</th>
+                                            <th scope="col">24h%</th>
+                                            <th scope="col">7d%</th>
+                                            <th scope="col">30d%</th>
+                                            <th scope="col">Volume24h</th>
+                                            <th scope="col">Market Cap</th>
+                                        </tr>
+                                    </thead>
+                                </table>
                             </div>
                         </div>
 
@@ -103,14 +106,14 @@
 
 
                 </div>
-                
+
 
                 <script>
-                
-                $("#search").click(function(){loadCoinByName();})
-
+                    $("#search").click(function() {
+                        loadCoinByName();
+                    })
                 </script>
-                
+
             </body>
 
             </html>
