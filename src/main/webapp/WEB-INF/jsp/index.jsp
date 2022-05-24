@@ -26,6 +26,7 @@
                     <div class="top-web-space">
                     <p>${loginError}</p>
                     <p>歡迎你${login.eMail}</p>
+                    <a>Account Settings</a>
                     </div>
 
                     <div class=" news">

@@ -60,8 +60,15 @@ public class MembersController {
 		member.setJoinTime(date);
 		member.setPassword(password);
 		member.setCustomizedUserName("使用者01");
-		memService.save(member);
-		return "signupOK";
+		// if (DAO.findMemberByEMail()){
+		// return "/index";
+		// }else{
+//		memService.save(member);
+//		return "signupOK";
+	    //}
+		// 
+		// 
+		
 	}
 	
 	@GetMapping("/login")
