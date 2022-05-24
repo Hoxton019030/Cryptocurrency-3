@@ -37,6 +37,7 @@ public class CryptocurrencyController {
 		System.out.println(lastestCurrencyInformation);
 		return "individualCryptocurrencyInformation";
 	}
+	//http://localhost:8080/coinshell/individualCryptocurrencyInformation?currencyName=btc&currentlyDay=2022-05-17
 
 	@ResponseBody
 	@GetMapping("/historical/get30days")
