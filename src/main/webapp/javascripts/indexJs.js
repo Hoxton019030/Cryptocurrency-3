@@ -145,7 +145,7 @@ function upCoin() {
                 coinList += '<td class="30d">' + value.percentChange30d + '</td>'
                 coinList += '<td class="vol24h">' + value.volume24h + '</td>'
                 coinList += '<td class="market">' + value.marketCap + '</td>'
-                coinList += '<td><canvas id="myChart' + value.id + '"></canvas></td>'
+                coinList += '<td style="width:10px;height:10px"><canvas id="myChart' + value.id + '"></canvas></td>'
                 coinList += '</tr>';
 
                 //注入折線圖至id=canvas
@@ -192,9 +192,12 @@ function upCoin() {
                                         intersect: false
                                     }
                                 },
-                                element: {
+                                elements: {
                                     line: {
                                         lineTension: 0
+                                    },
+                                    point: {
+                                        radius: 0
                                     }
                                 },
                                 scales: {
@@ -202,13 +205,17 @@ function upCoin() {
                                         type: 'time',
                                         time: {
                                             unit: 'hour',
-                                        }
+                                        },
 
                                     }],
                                     yAxes: {
                                         beginAtZero: false
                                     }
+                                },
+                                animation: {
+                                    duration: 0
                                 }
+
                             }
                         });
                     }
