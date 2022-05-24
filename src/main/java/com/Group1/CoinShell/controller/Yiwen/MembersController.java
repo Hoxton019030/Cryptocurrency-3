@@ -65,10 +65,12 @@ public class MembersController {
 		// }else{
 		memService.save(member);
 		return "signupOK";
-	    //}
-		// 
-		// 
-		
+	}
+	
+	@GetMapping("/account/set")
+	public String GetAccountSet(Model model) {
+		model.addAttribute("memberBean", new Members());
+		return "account/set";
 	}
 	
 	@GetMapping("/login")
