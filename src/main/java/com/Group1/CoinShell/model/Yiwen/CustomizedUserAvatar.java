@@ -15,9 +15,32 @@ public class CustomizedUserAvatar {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer AvatarId;
 	
+	@Column(name="UserAvatar", columnDefinition="nvarchar(MAX)")
 	private String customizedUserAvatar;
 	
 	public CustomizedUserAvatar() {
+	}
+
+	public CustomizedUserAvatar(Integer avatarId, String customizedUserAvatar) {
+		super();
+		AvatarId = avatarId;
+		this.customizedUserAvatar = customizedUserAvatar;
+	}
+
+	public Integer getAvatarId() {
+		return AvatarId;
+	}
+
+	public void setAvatarId(Integer avatarId) {
+		AvatarId = avatarId;
+	}
+
+	public String getCustomizedUserAvatar() {
+		return customizedUserAvatar;
+	}
+
+	public void setCustomizedUserAvatar(String customizedUserAvatar) {
+		this.customizedUserAvatar = customizedUserAvatar;
 	}
 
 }
