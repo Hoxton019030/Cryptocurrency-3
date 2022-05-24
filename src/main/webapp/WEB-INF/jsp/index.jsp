@@ -54,9 +54,10 @@
                             </ul>
                             <div id="overview">
 
-                                <input id="coinName" type="text" placeholder="Serch" />
-                                <input type="button" name="submit" value="查詢" id="search" />
-
+                            
+                            <input id="coinName" type="text" placeholder="Search"/>
+							<input type="button" name="submit" value="查詢" id="search"/>
+                            
                                 <table class="table table-hover" id="top">
                                     <thead>
                                         <tr>

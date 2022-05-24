@@ -182,8 +182,6 @@ body {
 									<i class="fas fa-unlock-alt"></i>
 
 								</div>
-								<input type="email" class="account form-control"
-									placeholder="E-mail">
 							</div>
 						<input type="password" name="password" class="password form-control"
 										placeholder="Password" id="floatingPassword2"/>

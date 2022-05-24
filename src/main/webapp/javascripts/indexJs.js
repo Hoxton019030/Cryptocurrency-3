@@ -62,10 +62,10 @@ var today = day.getFullYear() + "-" + month + "-" + day.getDate();
 //         })
 //}
 //
-//var myInterval
+//var timeoutID;
 //
 //function setUpCoin(){
-//myInterval  = window.setInterval(function(){upCoin()},30000);
+//timeoutID  = window.setTimeout(function(){upCoin()},20000); //改2000僅為快速測試而已
 //}
 
 
@@ -116,6 +116,7 @@ function upCoin() {
     for (var i = 1; i < tableObj.rows.length; i++) {
         tableObj.deleteRow(i)
     }
+
     //     $("#watch").html("");
     $.ajax({
         url: 'http://localhost:8080/coinshell/coin/getAll',
@@ -231,8 +232,11 @@ function upCoin() {
     })
 }
 
-//每30秒更新一次
-window.setInterval(function() { upCoin() }, 30000);
+var timeoutID;
+
+function setUpCoin(){
+timeoutID  = window.setTimeout(function(){upCoin()},20000); //改2000僅為快速測試而已
+}
 
 
 function watch(id, name) {
@@ -315,18 +319,24 @@ function loadCoinByName() {
                     //                	                	coinList += '<td><input type="checkbox" style="height:30px width:30px" id="watch' + value.id + '" value="' + value.name + '" onClick="watch(' + value.id + ')"></td>'
 
 
-                coinList += '<td><img class=currencyIcon src="' + contextRoot + '/images/currencyIcon/' + value.symbol + '.png" alt=""><a href="http://localhost:8080/coinshell/individualCryptocurrencyInformation?currencyName=' + value.symbol + '&currentlyDay=' + value.lastUpdated.substr(0, 10) + '">' + value.name + '</a></td>'
-                coinList += '<td>' + value.symbol + '</td>'
-                coinList += '<td class="price">' + value.price + '</td>'
-                coinList += '<td class="1h">' + value.percentChange1h + '</td>'
-                coinList += '<td class="24h">' + value.percentChange24h + '</td>'
-                coinList += '<td class="7d">' + value.percentChange7d + '</td>'
-                coinList += '<td class="30d">' + value.percentChange30d + '</td>'
-                coinList += '<td class="vol24h">' + value.volume24h + '</td>'
-                coinList += '<td class="market">' + value.marketCap + '</td>'
-                coinList += '</tr>'
-            })
-            $('#top').append(coinList);
+
+                	                	coinList += '<td><img class=currencyIcon src="' + contextRoot + '/images/currencyIcon/' + value.symbol + '.png" alt=""><a href="http://localhost:8080/coinshell/individualCryptocurrencyInformation?currencyName=' + value.symbol + '&currentlyDay=' + value.lastUpdated.substr(0, 10) + '">' + value.name + '</a></td>'
+                	                	coinList += '<td>' + value.symbol + '</td>' 
+                	                	coinList += '<td class="price">'  + value.price + '</td>'
+                	                	coinList += '<td class="1h">'     + value.percentChange1h  + '</td>' 
+                	                	coinList += '<td class="24h">'    + value.percentChange24h + '</td>' 
+                	                	coinList += '<td class="7d">'     + value.percentChange7d  + '</td>' 
+                	                	coinList += '<td class="30d">'    + value.percentChange30d + '</td>' 
+                	                	coinList += '<td class="vol24h">' + value.volume24h + '</td>' 
+                	                	coinList += '<td class="market">' + value.marketCap + '</td>' 
+                	                	coinList += '</tr>'      
+                	                })
+                	                $('#top').append(coinList);
+                	                
+                	                window.clearTimeout(timeoutID);
+                	                
+                	                //查詢後持續即時更新
+                	                window.setTimeout(function(){loadCoinByName()},20000); //改2000僅為快速測試而已
 
             console.log("myInterval=", myInterval);
             window.clearInterval(myInterval);
