@@ -7,6 +7,11 @@
 
 <head>
 <title>Account Setting | CoinShell</title>
+<style type="text/css">
+body {
+	padding-top: 82px;
+}
+</style>
 </head>
 
 <body>
@@ -14,7 +19,7 @@
 		<div class="header">
 			<h4>Account Settings</h4>
 		</div>
-		<form action="/coinshell/account/set" method="post">
+		<form action="/account/set" method="post">
 			<div>
 				<div class="label">Avatar</div>
 				<div class="setting-avatar-wrapper">
@@ -59,6 +64,7 @@
 			<a type="button" data-toggle="modal" data-target="#changePwd">Change password</a>
 		</div>
 	</div>
+		</div>
 
 <!-- 選擇 avatar 的modal -->
 	<div class="modal fade text-left" id="chooseAvatar" tabindex="-1"
