@@ -82,7 +82,7 @@ body {
 								<button class="dropdown-item" type="button">Watchlist</button>
 								<button class="dropdown-item" type="button">Portfolio</button>
 								<button class="dropdown-item" type="button">Referral Program</button>
-								<button class="dropdown-item" type="button"><a href="./account/test">Account Settings</a></button>
+								<button class="dropdown-item" type="button"><a href="/coinshell/account/set">Account Settings</a></button>
 								<button class="dropdown-item" type="button"><a href="${contextRoot}/logout">Log Out</a></button> <!-- MemController line 110 -->
 							</div>
 					</div>
