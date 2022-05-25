@@ -65,3 +65,14 @@ td {
     width: 100px;
     height: 100px;
 }
+
+.star{
+     color: rgb(206, 202, 202);
+        }
+.check{
+     display: none;
+    }
+
+.check:checked + span{
+     color: rgb(255, 0, 106);     
+        }
