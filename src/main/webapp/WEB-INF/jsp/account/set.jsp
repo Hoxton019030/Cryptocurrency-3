@@ -64,6 +64,7 @@ body {
 			<a type="button" data-toggle="modal" data-target="#changePwd">Change password</a>
 		</div>
 	</div>
+		</div>
 
 <!-- 選擇 avatar 的modal -->
 	<div class="modal fade text-left" id="chooseAvatar" tabindex="-1"

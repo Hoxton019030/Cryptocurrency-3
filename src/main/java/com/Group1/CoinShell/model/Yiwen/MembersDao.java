@@ -1,6 +1,9 @@
 package com.Group1.CoinShell.model.Yiwen;
 
 
+import java.util.List;
+import java.util.Map;
+
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -20,6 +23,15 @@ public interface MembersDao extends JpaRepository<Members, Integer> {
 	 */
 	@Query(value="SELECT * FROM Members WHERE E_Mail = :eMail2", nativeQuery = true)
 	public Members findMemberByEMail(@Param("eMail2") String eMail);
+	
+	/**
+	 * 參考課本第9-11
+	 * @return
+	 */
+
+	@Query(value="SELECT MEMBERS.Id, MEMBERS.CustomizedUserAvatar, CustomizedUserAvatar.UserAvatar FROM MEMBERS LEFT JOIN CustomizedUserAvatar ON MEMBERS.Id = CustomizedUserAvatar.Id WHERE MEMBER.Id = ?1"
+			, nativeQuery = true)
+	public List<Map<String, Object>> updateMemberAvatar(@Param("MemId") Integer memId);
 }
 //	
 //	@Query(value="select m from Members m where m.Id =?1")

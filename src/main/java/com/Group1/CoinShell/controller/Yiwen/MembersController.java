@@ -96,6 +96,7 @@ public class MembersController {
 		model.addAttribute("memberBean", new Members());
 		return "login";
 	}
+
 	
 	@PostMapping("/login")
 	public String postLogin(@RequestParam("eMail") String eMail, 
@@ -109,6 +110,12 @@ public class MembersController {
 		httpSession.setAttribute("login", memRes);
 		return "index";
 	}
+	
+	
+//	public String updateAvatar() {
+//		
+//		return null;
+//	}
 	
 	@GetMapping("/logout")
 	public String LogOut(HttpSession httpSession, HttpServletRequest request, HttpServletResponse response,

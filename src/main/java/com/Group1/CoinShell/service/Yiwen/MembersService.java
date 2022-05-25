@@ -1,5 +1,7 @@
 package com.Group1.CoinShell.service.Yiwen;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -25,6 +27,12 @@ public class MembersService {
 		Members resMem = membersDao.findMemberByEMail(eMail);
 		return resMem;
 	}
+	
+	// 缺少 MembersController (line 115 ~ 118)
+//	public List<Map<String, Object>> updateMemberAvatar(Integer memId){
+//		List<Map<String, Object>> resMem = membersDao.updateMemberAvatar(memId);
+//		return resMem;
+//	}
 }
 //	
 //	public Members checkLogin(String eMail, String password) {

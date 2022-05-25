@@ -6,8 +6,11 @@
     ( modify controller Post/SignUp method )
 
 3. log In表單，希望可以實現
-     CoinshellNavBar.jsp 檔案內的 
-     c:choose / when (login==null)`button` / otherwise`drop-down` 抓不到 JesssionID
+
+4. SignUp password set Pattern
+    +  Password regex pattern="各種政則表達是"
+    +  How TO - Password Validation 
+       https://www.w3schools.com/howto/howto_js_password_validation.asp
 
 4. Account Settings 功能 `!Important`
 

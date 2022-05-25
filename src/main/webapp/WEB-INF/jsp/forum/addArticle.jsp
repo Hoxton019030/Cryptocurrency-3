@@ -4,11 +4,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page isELIgnored="false" %>
-<!DOCTYPE html>
+
 <head>
 <meta charset="UTF-8">
 <c:set var="contextRoot" value="${pageContext.request.contextPath}"/>
 <title>新增留言</title>
+<style type="text/css">
+body{
+padding-top: 82px;
+}
+</style>
 </head>
 <body>
 <jsp:include page="../NavBar/CoinShellNavBar.jsp" />

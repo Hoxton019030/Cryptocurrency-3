@@ -5,13 +5,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <jsp:include page="NavBar/CoinShellNavBar.jsp" />
-<!DOCTYPE html>
-
-<html>
 
 <head>
 <meta charset="UTF-8">
-<title>首頁</title>
+<title>CoinShell</title>
 <link rel="Shortcut Icon" type="image/x-icon"
 	href="https://cdn-icons-png.flaticon.com/512/1490/1490853.png" />
 <link href="${contextRoot}/css/bootstrap.min.css" rel="stylesheet">
@@ -23,6 +20,11 @@
 <script src="${contextRoot}/javascripts/indexJs.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="${contextRoot}/css/indexCss.css">
+<style type="text/css">
+body{
+padding-top: 82px;
+}
+</style>
 </head>
 
 <body>
