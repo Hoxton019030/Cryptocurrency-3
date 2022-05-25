@@ -19,7 +19,7 @@ body {
 		<div class="header">
 			<h4>Account Settings</h4>
 		</div>
-		<form action="/coinshell/account/set" method="post">
+		<form action="/account/set" method="post">
 			<div>
 				<div class="label">Avatar</div>
 				<div class="setting-avatar-wrapper">

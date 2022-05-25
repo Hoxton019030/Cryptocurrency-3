@@ -55,11 +55,8 @@ body {
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav">
-				<li class="nav-item active"><a class="nav-link" href="${contextRoot}/aboutUs/intro">About
-						us<span class="sr-only">(current)</span>
-				</a></li>
-				<li class="nav-item"><a class="nav-link"
-					href="${contextRoot}/viewAllAjax">BeachTown</a></li>
+				<li class="nav-item active"><a class="nav-link" href="${contextRoot}/aboutUs/intro">About us<span class="sr-only">(current)</span></a></li>
+				<li class="nav-item active"><a class="nav-link" href="${contextRoot}/viewAllAjax">BeachTown<span class="sr-only">(current)</span></a></li>
 				<li class="nav-item"><a class="nav-link" href="#">Portfolio</a>
 				</li>
 				<li class="nav-item"><a class="nav-link" href="#">Learn</a></li>
@@ -85,7 +82,7 @@ body {
 								<button class="dropdown-item" type="button">Watchlist</button>
 								<button class="dropdown-item" type="button">Portfolio</button>
 								<button class="dropdown-item" type="button">Referral Program</button>
-								<button class="dropdown-item" type="button"><a href="coinshell/account/set">Account Settings</a></button>
+								<button class="dropdown-item" type="button"><a href="./account/test">Account Settings</a></button>
 								<button class="dropdown-item" type="button"><a href="${contextRoot}/logout">Log Out</a></button> <!-- MemController line 110 -->
 							</div>
 					</div>

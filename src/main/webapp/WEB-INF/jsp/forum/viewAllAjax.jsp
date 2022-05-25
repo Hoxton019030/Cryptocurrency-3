@@ -6,12 +6,17 @@
 <!DOCTYPE html>
 <html>
 <head>
+<body>
+<jsp:include page="../NavBar/CoinShellNavBar.jsp" />
 <meta charset="UTF-8">
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <title>討論區</title>
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="${contextRoot}/css/bootstrap.min.css">
+
 </head>
-<body>
-<jsp:include page="../NavBar/CoinShellNavBar.jsp" />
+
 <div class="row justify-content-center">
 <div class="col-9">
     <form id="searchByTag">
@@ -192,4 +197,15 @@ function loadAtc() {
 
 
 </script>
+
+	<!-- jQuery + Bootstrap Bundle with Popper | Bootstrap 導入程式 JS -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+		crossorigin="anonymous"></script>
+
 </html>

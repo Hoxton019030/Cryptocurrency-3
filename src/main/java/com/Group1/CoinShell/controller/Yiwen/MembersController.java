@@ -72,7 +72,7 @@ public class MembersController {
 	@GetMapping("/account/set")
 	public String GetAccountSet(Model model) {
 		model.addAttribute("memberBean", new Members());
-		return "account/set";
+		return "test";
 	}
 	
 	@GetMapping("/aboutUs/intro")
