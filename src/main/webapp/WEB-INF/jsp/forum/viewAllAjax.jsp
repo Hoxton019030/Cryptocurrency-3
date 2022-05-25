@@ -5,8 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
-<link href="../../../css/pagination.css" rel="external nofollow" rel="stylesheet">
-<script src="../../../javascripts/pagination.js" type="text/javascript"></script>
+<link href="http://localhost:8080/coinshell/css/pagination.css" rel="external nofollow" rel="stylesheet">
 <head>
 <meta charset="UTF-8">
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
@@ -35,44 +34,66 @@
 		<tbody class="sel" id="atcTable">
 		
 		</tbody>
-        <div class="pagination" id="pageDiv"></div>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination" id="pageid">
+            </ul>
+        </nav>
 	</table>
 </div>
 </div>
 </body>
-<script type="text/javascript">
+<script src="http://localhost:8080/coinshell/javascripts/jquery.min.js" type="text/javascript"></script>
+<script>
 var contextRoot = "http://localhost:8080/coinshell";
 //下拉選單相關
 var tag;
+var page = 1;
+let dataNow = {};
 tagList();
 loadAtc();
-// loadPage();
 $("#tag-list").change(function(){loadAtc();})
-// $("#tag-list").change(function(){selectTag();loadAtc();})
 $("#search").click(function(){loadAtcByTitle();})
 
-// function selectTag(){	
-//     var tag = document.getElementById("tag-list").value;
-// 	console.log(tag);
-// }
+function loadAtc(){
+    $(function() {
+        var tag = document.getElementById("tag-list").value;
+        console.log(tag);
+        fetch("http://localhost:8080/coinshell/article/viewAllAjax?tag="+tag).then(function(response) {
+            return response.json();
+            // console.log(response.json())
+        }).then(function(data) {
+            console.log(data);
+            dataNow = data;
+            pagination(data, 1)
+        })
+    })
+}
 
-// $("#pageDiv").pagination(${p.totalPage}, { 
-// num_edge_entries: 1, //兩側顯示的首尾分頁的條目數 
-// num_display_entries: 4, //連續分頁主體部分顯示的分頁條目數 
-// callback: function(){//回撥函式， 
-// //setLinkTo();//自定義函式：某種行為 
-// }, 
-// link_to: "#",//分頁的連結 
-// current_page: ${p.pageNo},//當前頁 
-// prev_text : "< 上一頁",//自定義“上一頁”標籤 
-// next_text : "下一頁 >",//自定義“下一頁”標籤 
-// first_text: "<i class='begin_page'>首頁</i>", //是否顯示首頁按鈕，預設為true； 
-// last_text: "<i class='last_page'>末頁</i>", //是否顯示尾頁按鈕，預設為true； 
-// items_per_page: ${p.pageSize}, //每頁顯示的條目數(pageSize) 
-// toPage: false //是否顯示跳轉到第幾頁，預設是true； 
-// }); 
+function loadAtcByTitle(){
+    $(function() {
+        var titlePart = document.getElementById("titlePart").value;
+        console.log(tag);
+        fetch("http://localhost:8080/coinshell/article/viewAllAjaxByTitle?titlePart="+titlePart).then(function(response) {
+            return response.json();
+            // console.log(response.json())
+        }).then(function(data) {
+            console.log(data);
+            dataNow = data;
+            pagination(data, 1)
+        })
+    })
+}
 
-function tagList(index){
+pageid.addEventListener('click',switchPage);
+
+function switchPage(e){
+e.preventDefault();
+if(e.target.nodeName !== 'A') return;
+const page = e.target.dataset.page;
+pagination(dataNow, page);
+}
+
+function tagList(){
     var inner = "";
     var tags = ['All','BTC', 'ETH', 'USDT', 'USDC', 'BNB', 'XRP', 'ADA', 'BUSD', 'SOL', 'DOGE', 'DOT', 'AVAX', 'WBTC', 'TRX', 'SHIB', 'DAI', 'MATIC', 'CRO', 'LEO', 'LTC', 'NEAR', 'FTT', 'BCH', 'UNI', 'LINK', 'XLM', 'ATOM', 'ALGO', 'XMR', 'FLOW', 'ETC', 'APE', 'MANA', 'HBAR', 'EGLD', 'VET', 'ICP', 'FIL', 'SAND', 'XTZ', 'MKR', 'ZEC', 'KCS', 'THETA', 'CAKE', 'EOS', 'AXS', 'TUSD', 'GRT', 'AAVE', 'UST', 'KLAY', 'HT', 'RUNE', 'HNT', 'BTT', 'BSV', 'MIOTA', 'USDP', 'XEC', 'FTM', 'GMT', 'QNT', 'USDN', 'NEXO', 'STX', 'OKB', 'NEO', 'WAVES', 'CHZ', 'CVX', 'KSM', 'ZIL', 'ENJ', 'DASH', 'CELO', 'LRC', 'CRV', 'GALA', 'PAXG', 'BAT', 'AMP', 'GNO', 'ONE', 'XDC', 'AR', 'MINA', 'XEM', 'DCR', 'KDA', 'COMP', 'HOT', 'KAVA', 'LDO', 'GT', 'FEI', 'QTUM', 'BNT', '1INCH', 'XYM']
     for(var i=0;i<tags.length;i++){
@@ -82,31 +103,108 @@ function tagList(index){
     $("#tag-list").html(inner)
 }
 
-// function loadAtcByTitle(){     
+function pagination(array, nowPage){
+                console.log(nowPage);
+                const dataTotal = array.length;
+                const perpage = 5;
+                const pageTotal = Math.ceil(dataTotal / perpage);
+                console.log(`全部資料:`+dataTotal+` 每一頁顯示:`+perpage+`筆`);
+                let currentPage = nowPage;
+                if (currentPage > pageTotal) {currentPage = pageTotal;}
+                const minData = (currentPage * perpage) - perpage + 1 ;
+                const maxData = (currentPage * perpage) ;
+                const data = [];
+                array.forEach((item, index) => {
+                    const num = index + 1;
+                    if ( num >= minData && num <= maxData) {
+                        data.push(item);
+                    }
+                })
+                console.log(data);
+                displayData(data)
+                const page = {
+                    pageTotal,
+                    currentPage,
+                    hasPage: currentPage > 1,
+                    hasNext: currentPage < pageTotal,
+                } 
+                console.log(page);
+                pageBtn (page)
+            }
+
+function displayData(data){
+    $("#atcTable").empty();
+    $.each(data, function(index, value) {
+                const added = new Date(Date.parse(value.added));
+                const MM = added.getMonth();
+                const dd = added.getDate();
+                const HH = added.getHours();
+                const mm = added.getMinutes();
+                const weekIndex = added.getDay();
+                const weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+                const weekDayPrint = weekDay[weekIndex];  
+                const peek = value.text.substr(0,100);
+                // console.log(peek);
+                // console.log(array);
+                     $("#atcTable").append(`
+                        <tr class="table-info">
+                        <td>` + value.tag + `</td>
+                        <td><a href="`+contextRoot+`/viewArticle/` + value.id + `" style="display: block;"><div class="b-list"><div><h3>` + value.title + `</h3></div></a><p>` + peek + `....</p></div></td>
+                        <td align="center">` + value.readNum + ` / ` + value.commentNum + `</td>
+                        <td>`+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</td>
+                        </tr>
+                    `)
+                }
+              
+            )}
+
+function pageBtn (page){
+    let str = '';
+    const total = page.pageTotal;
+    if(page.hasPage) {
+        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)-1)+`">Previous</a></li>`;
+    } else {
+        str += `<li class="page-item disabled"><span class="page-link">Previous</span></li>`;
+    }
+    
+    for(let i = 1; i <= total; i++){
+        if(Number(page.currentPage) === i) {
+            str +=`<li class="page-item active"><a class="page-link" href="#" data-page="`+i+`">`+i+`</a></li>`;
+        } else {
+            str +=`<li class="page-item"><a class="page-link" href="#" data-page="`+i+`">`+i+`</a></li>`;
+        }
+    };
+
+    if(page.hasNext) {
+        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)-1)+`">Next</a></li>`;
+    } else {
+        str += `<li class="page-item disabled"><span class="page-link">Next</span></li>`;
+    }
+    pageid.innerHTML = str;
+}
+
+// function loadAtcByTitle(){
+//     $(function() {
 //         var titlePart = document.getElementById("titlePart").value;
 //         console.log(titlePart);
-        
-//         $.ajax({
-//             url:"http://localhost:8080/coinshell/article/viewAllAjaxByTitle?titlePart="+titlePart,
-//             // contentType:'application/json; charset=UTF-8',
-//             dataType:'json',
-//             method:'get',
-//             success:function(array){
-//                 $("#atcTable").empty(); 
-//                 console.log(array);
-//                 $.each(array,function(index, value){
-//                     var added = new Date(Date.parse(value.added));
-//                     var MM = added.getMonth();
-//                     var dd = added.getDate();
-//                     var HH = added.getHours();
-//                     var mm = added.getMinutes();
-//                     var weekIndex = added.getDay();
-//                     var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
-//                     var weekDayPrint = weekDay[weekIndex];  
-//                     var peek = value.text.substr(0,100);
-//                     // console.log(peek);
-//                     // console.log(array);
-//                     $("#atcTable").append(`
+//         $("#atcTable").empty();    
+//         fetch("http://localhost:8080/coinshell/article/viewAllAjaxByTitle?titlePart="+titlePart).then(function(response) {
+//             return response.json();
+//             // console.log(response.json())
+//         }).then(function(array) {
+//             $.each(array, function(index, value) {
+//                 var added = new Date(Date.parse(value.added));
+//                 var MM = added.getMonth();
+//                 var dd = added.getDate();
+//                 var HH = added.getHours();
+//                 var mm = added.getMinutes();
+//                 var weekIndex = added.getDay();
+//                 var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+//                 var weekDayPrint = weekDay[weekIndex];  
+//                 var peek = value.text.substr(0,100);
+//                 // console.log(peek);
+//                 // console.log(array);
+//                 $("#atcTable").append(`
 //                         <tr class="table-info">
 //                         <td>` + value.tag + `</td>
 //                         <td><a href="`+contextRoot+`/viewArticle/` + value.id + `" style="display: block;"><div class="b-list"><div><h3>` + value.title + `</h3></div></a><p>` + peek + `....</p></div></td>
@@ -114,97 +212,10 @@ function tagList(index){
 //                         <td>`+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</td>
 //                     	</tr>
 //                         `)
-//                 })
-//             },
-//             error:function(err){console.log(err)}
+//             })
 //         })
-//     }
-
-
-function loadAtcByTitle(){
-    $(function() {
-        var titlePart = document.getElementById("titlePart").value;
-        console.log(titlePart);
-        $("#atcTable").empty();    
-        fetch("http://localhost:8080/coinshell/article/viewAllAjaxByTitle?titlePart="+titlePart).then(function(response) {
-            return response.json();
-            // console.log(response.json())
-        }).then(function(array) {
-            $.each(array, function(index, value) {
-                var added = new Date(Date.parse(value.added));
-                var MM = added.getMonth();
-                var dd = added.getDate();
-                var HH = added.getHours();
-                var mm = added.getMinutes();
-                var weekIndex = added.getDay();
-                var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
-                var weekDayPrint = weekDay[weekIndex];  
-                var peek = value.text.substr(0,100);
-                // console.log(peek);
-                // console.log(array);
-                $("#atcTable").append(`
-                        <tr class="table-info">
-                        <td>` + value.tag + `</td>
-                        <td><a href="`+contextRoot+`/viewArticle/` + value.id + `" style="display: block;"><div class="b-list"><div><h3>` + value.title + `</h3></div></a><p>` + peek + `....</p></div></td>
-                        <td align="center">` + value.readNum + ` / ` + value.commentNum + `</td>
-                        <td>`+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</td>
-                    	</tr>
-                        `)
-            })
-        })
-    })
-}
-
-
-function loadAtc() {
-    $(function() {
-        var tag = document.getElementById("tag-list").value;
-        $("#atcTable").empty();
-        fetch("http://localhost:8080/coinshell/article/viewAllAjax?page=1&tag="+tag).then(function(response) {
-            return response.json();
-            console.log(response.json())
-        }).then(function(array) {
-            var j = array.content.length;
-            console.log(j);
-            $.each(array.content, function(index, value) {
-                var added = new Date(Date.parse(value.added));
-                var MM = added.getMonth();
-                var dd = added.getDate();
-                var HH = added.getHours();
-                var mm = added.getMinutes();
-                var weekIndex = added.getDay();
-                var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
-                var weekDayPrint = weekDay[weekIndex];  
-                var peek = value.text;
-                console.log(peek);
-                console.log(array);
-                $("#atcTable").append(`
-                        <tr class="table-info">
-                        <td>` + value.tag + `</td>
-                        <td><a href="`+contextRoot+`/viewArticle/` + value.id + `" style="display: block;"><div class="b-list"><div><h3>` + value.title + `</h3></div></a><p>` + peek + `....</p></div></td>
-                        <td align="center">` + value.readNum + ` / ` + value.commentNum + `</td>
-                        <td>`+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</td>
-                    	</tr>
-                        `)
-            })
-            $('.pagination').pagination({
-                totalData:,
-                showData:,
-                coping: true,
-                jump: true,
-                keepShowPN: true,
-                homePage: '首頁',
-				endPage: '末頁',
-				prevContent: '上頁',
-				nextContent: '下頁',
-                callback:function (api) {}
-            },function(api){
-                
-            })
-        })
-
-    })
-}
+//     })
+// }
 
 // function loadAtcByTag() {
 //     $(function() {
