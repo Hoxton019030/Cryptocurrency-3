@@ -1,5 +1,6 @@
 $(function() {
     $("#tabs").tabs();
+    loadHistoricalData();
 });
 
 var getUrlString = location.href;
@@ -41,17 +42,18 @@ function upCoin() {
 
         })
 
-
     })
 }
 
+
+//控制新聞
 $("#page-news").click(function() {
     $("#news").empty();
     fetch("http://localhost:8080/coinshell/news/get?currencyName=" + currencyName).then(function(response) {
         return response.json();
     }).then(function(array) {
         $.each(array, function(index, value) {
-            $("#news").append(`<div class="card mb-3" style="width: 150;">
+            $("#news").append(123123 `<div class="card mb-3" style="width: 150;">
     <div class="row no-gutters">
         <div class="col-md-4">
             <img width="300" height="200" src="` + value.imageOfNews + `">
@@ -70,29 +72,63 @@ $("#page-news").click(function() {
     })
 })
 
+//控制歷史數據
+$("#pagehistorical").click(function() {
+    alert(123);
+})
 
-$("#page-historical").click(function() {
-    $("#historical-row").empty()
-    fetch("http://localhost:8080/coinshell/historical/get?currencyName=" + currencyName + "&day=" + day).then(function(response) {
+function loadHistoricalData() {
+    $("#historicalrow").empty();
+    fetch("http://localhost:8080/coinshell/historical/get?currencyName=" + currencyName).then(function(response) {
         return response.json();
     }).then(function(array) {
         $.each(array, function(index, value) {
-            $("#historical-row").append(`<tr>
-                <th scope="col"> ` + day + `</th>
-                <th scope="col">` + value.TheFristUsdDate + `</th>
-                <th scope="col">` + value.TheHighestUsdPricePerUnit + `</th>
-                <th scope="col">` + value.TheLowerUsdPricePerUnit + `</th>
-                <th scope="col">` + value.TheLastUsdDate + `</th>
-                <th scope="col">` + value.Usd24hVolume + `</th>
-                <th scope="col">` + value.UsdMarkCap + `</th>
-            </tr>3`);
+            $("#historicalrow").append(`<tr>
+                    <th scope="col"> ` + value.day + `</th>
+                    <th scope="col">$` + value.Frist_USD_Price_of_Cryptocurrency.toFixed(2).toString().replace(/(\d)(?=(\d{3})+\.)/g, "$1,") + `</th>
+
+                    <th scope="col">$` + value.MAX_USD_Price_of_Cryptocurrency.toFixed(2).toString().replace(/(\d)(?=(\d{3})+\.)/g, "$1,") + `</th>
+                    <th scope="col">$` + value.MIN_USD_Price_of_Cryptocurrency.toFixed(2).toString().replace(/(\d)(?=(\d{3})+\.)/g, "$1,") + `</th>
+                    <th scope="col">$` + value.Latest_USD_Price_of_Cryptocurrency.toFixed(2).toString().replace(/(\d)(?=(\d{3})+\.)/g, "$1,") + `</th>
+                    <th scope="col">$` + value.Volume24hUsd.toFixed(2).toString().replace(/(\d)(?=(\d{3})+\.)/g, "$1,") + `</th>
+                    <th scope="col">$` + value.USD_Market_Cap.toFixed(2).toString().replace(/(\d)(?=(\d{3})+\.)/g, "$1,") + `</th>
+                </tr>3`);
         })
     })
-})
+}
+
+$("#page-historical").click(function()
+
+    {
+        alert(123);
+        $("#historical-row").empty()
+        fetch("http://localhost:8080/coinshell/historical/get?currencyName=" + currencyName).then(function(response) {
+            return response.json();
+        }).then(function(array) {
+            $.each(array, function(index, value) {
+                alert(123);
+                $("#historical-row").append(`<tr>
+                    <th scope="col"> ` + value.day + `</th>
+                    <th scope="col">` + value.TOP1_USD_Price_of_Cryptocurrency + `</th>
+
+                    <th scope="col">` + value.max_USD_Price_of_Cryptocurrency + `</th>
+                    <th scope="col">` + value._USD_Price_of_Cryptocurrency + `</th>
+                    <th scope="col">` + value.Latest_USD_Price_of_Cryptocurrency + `</th>
+                    <th scope="col">` + value.Usd24hVolume + `</th>
+                    <th scope="col">` + value.UsdMarkCap + `</th>
+                </tr>3`);
+            })
+        })
+    }
+
+)
+
+
 var xmlHttp = new XMLHttpRequest();
 var url = "http://localhost:8080/coinshell/historical/get30days?currencyName=" + currencyName
 xmlHttp.open("GET", url, true);
-xmlHttp.send()
+xmlHttp.send();
+
 xmlHttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
         var data = JSON.parse(this.responseText);
@@ -131,9 +167,12 @@ xmlHttp.onreadystatechange = function() {
                         intersect: false
                     }
                 },
-                element: {
+                elements: {
                     line: {
                         lineTension: 0
+                    },
+                    point: {
+                        radius: 0
                     }
                 },
                 scales: {

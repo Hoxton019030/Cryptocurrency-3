@@ -152,7 +152,6 @@
                         </p>
                     </div>
                     <div id="historical">
-                        <p>歷史資料</p>
                         <!-- 這邊抓一個月的資料 -->
                         <table class="table">
                             <thead>
@@ -165,7 +164,7 @@
                                     <th scope="col">24小時交易量</th>
                                     <th scope="col">整體市值</th>
                                 </tr>
-                                <tbody id="historical-row">
+                                <tbody id="historicalrow">
 
                                 </tbody>
 
