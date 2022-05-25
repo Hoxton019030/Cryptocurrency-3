@@ -3,12 +3,16 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>	
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<!DOCTYPE html>
-<html>
+<jsp:include page="../NavBar/CoinShellNavBar.jsp" />
 <head>
 <meta charset="UTF-8">
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <title>${Article.title}</title>
+<style type="text/css">
+body{
+padding-top: 82px;
+}
+</style>
 </head>
 <body>
 <jsp:include page="../NavBar/CoinShellNavBar.jsp" />
