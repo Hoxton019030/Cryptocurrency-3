@@ -7,13 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Controller
 @RequestMapping("/administrator")
-public class StoreController {
+public class backendPageController {
 
-//	@GetMapping("/changePage-insertCommodity")
-//	public String changePageInsertCommodity() {
-//		return "/backend/store";
-//	}
-	
+	//這個class都是用來控制後臺頁面跳轉的地方
 	@GetMapping("/store")
 	public String changePageInsertCommodity() {
 		return "backend/store/administrator-store";
