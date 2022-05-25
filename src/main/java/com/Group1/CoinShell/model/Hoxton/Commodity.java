@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="commodity")
-public class commodity {
+public class Commodity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -79,7 +79,7 @@ public class commodity {
 		this.discribe = discribe;
 	}
 
-	public commodity(String commodityName, Integer price, Integer volume, String photo, String discribe) {
+	public Commodity(String commodityName, Integer price, Integer volume, String photo, String discribe) {
 		this.commodityName = commodityName;
 		this.price = price;
 		this.volume = volume;
