@@ -3,16 +3,18 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<!DOCTYPE html>
-<html>
-<link href="http://localhost:8080/coinshell/css/pagination.css" rel="external nofollow" rel="stylesheet">
 <head>
+<jsp:include page="../NavBar/CoinShellNavBar.jsp" />
 <meta charset="UTF-8">
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <title>討論區</title>
+<style type="text/css">
+body{
+padding-top: 82px;
+}
+</style>
 </head>
-<body>
-<jsp:include page="../NavBar/CoinShellNavBar.jsp" />
+
 <div class="row justify-content-center">
 <div class="col-9">
     <form id="searchByTag">
@@ -277,4 +279,6 @@ function pageBtn (page){
 
 
 </script>
+
+
 </html>

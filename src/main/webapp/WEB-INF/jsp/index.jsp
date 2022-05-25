@@ -5,13 +5,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <jsp:include page="NavBar/CoinShellNavBar.jsp" />
-<!DOCTYPE html>
-
-<html>
 
 <head>
 <meta charset="UTF-8">
-<title>首頁</title>
+<title>CoinShell</title>
 <link rel="Shortcut Icon" type="image/x-icon"
 	href="https://cdn-icons-png.flaticon.com/512/1490/1490853.png" />
 <link href="${contextRoot}/css/bootstrap.min.css" rel="stylesheet">
@@ -23,37 +20,17 @@
 <script src="${contextRoot}/javascripts/indexJs.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="${contextRoot}/css/indexCss.css">
+<style type="text/css">
+body{
+padding-top: 82px;
+}
+</style>
 </head>
 
 <body>
 	<div class="main">
 		<div class="top-web-space">
 			<p>${loginError}</p>
-			<c:choose>
-				<c:when test="${login == null }">
-					<div>
-					<a href="#" type="button" class="btn btn-primary mr-2"
-						data-toggle="modal" data-target="#loginModal"> <i class="fa-solid fa-anchor"></i> Log In
-					</a>
-				</div>
-				</c:when>
-				<c:otherwise>
-					<p>Welcome back! ${login.eMail}</p>
-					<div class="btn-group">
-							<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
-								aria-expanded="false">
-								${login.eMail}'s Settings
-							</button>
-							<div class="dropdown-menu dropdown-menu-right">
-								<button class="dropdown-item" type="button">Watchlist</button>
-								<button class="dropdown-item" type="button">Portfolio</button>
-								<button class="dropdown-item" type="button">Referral Program</button>
-								<button class="dropdown-item" type="button"><a href="/coinshell/account/set">Account Settings</a></button>
-								<button class="dropdown-item" type="button">Log out</button>
-							</div>
-					</div>
-				</c:otherwise>
-			</c:choose>
 		</div>
 
 

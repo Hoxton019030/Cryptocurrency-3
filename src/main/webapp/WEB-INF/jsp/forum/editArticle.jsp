@@ -5,11 +5,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
-<!DOCTYPE html>
-<html>
 <head>
+<jsp:include page="../NavBar/CoinShellNavBar.jsp" />
 <meta charset="UTF-8">
 <title>修改文章頁面</title>
+<style type="text/css">
+body{
+padding-top: 82px;
+}
+</style>
 </head>
 <body>
 <jsp:include page="../NavBar/CoinShellNavBar.jsp" />
