@@ -70,15 +70,9 @@ public class MembersController {
 	}
 	
 	@GetMapping("/account/set")
-	public String getAccountSet(Model model) {
+	public String GetAccountSet(Model model) {
 		model.addAttribute("memberBean", new Members());
 		return "/account/set";
-	}
-	
-	@GetMapping("/account/referral")
-	public String getReferral(Model model) {
-		model.addAttribute("memberBean", new Members());
-		return "/account/referral";
 	}
 	
 	@GetMapping("/aboutUs/intro")
@@ -98,7 +92,7 @@ public class MembersController {
 	
 
 	@GetMapping("/login")
-	public String getloginPage(Model model) {
+	public String loginPage(Model model) {
 		model.addAttribute("memberBean", new Members());
 		return "login";
 	}
