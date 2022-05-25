@@ -8,7 +8,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>CoinShell | Homepage</title>
+<title>CoinShell</title>
 <link rel="Shortcut Icon" type="image/x-icon"
 	href="https://cdn-icons-png.flaticon.com/512/1490/1490853.png" />
 <link href="${contextRoot}/css/bootstrap.min.css" rel="stylesheet">
