@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<c:set var="contextRoot" value="${pageContext.request.contextPath}"/>
+<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -45,7 +45,8 @@ body {
 <body>
 	<!-- Start of the nv-->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand" href="${contextRoot}"><img src="${contextRoot}/images/NavBarImg/CoinShell.png"
+		<a class="navbar-brand" href="${contextRoot}"><img
+			src="${contextRoot}/images/NavBarImg/CoinShell.png"
 			style="width: 150px;" alt="logo"></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarNav" aria-controls="navbarNav"
@@ -57,8 +58,8 @@ body {
 				<li class="nav-item active"><a class="nav-link" href="#">About
 						us<span class="sr-only">(current)</span>
 				</a></li>
-				<li class="nav-item"><a class="nav-link" href="${contextRoot}/viewAllAjax">BeachTown</a>
-				</li>
+				<li class="nav-item"><a class="nav-link"
+					href="${contextRoot}/viewAllAjax">BeachTown</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">Portfolio</a>
 				</li>
 				<li class="nav-item"><a class="nav-link" href="#">Learn</a></li>
@@ -71,7 +72,8 @@ body {
 			<c:when test="${ SessionScope.login==null }">
 				<div>
 					<a href="#" type="button" class="btn btn-primary mr-2"
-						data-toggle="modal" data-target="#loginModal"> <i class="fa-solid fa-anchor"></i> Log In
+						data-toggle="modal" data-target="#loginModal"> <i
+						class="fa-solid fa-anchor"></i> Log In
 					</a>
 				</div>
 			</c:when>
@@ -122,9 +124,7 @@ body {
 					<!--tab01 對應的 Log In 頁籤-->
 					<fieldset class="show" id="tab011">
 						<!--登入表單-->
-
 						<form action="/coinshell/login" method="post">
-							<!-- form:form action="${contextRoot}/members/login"-->
 							<!--E-Mail-->
 							<div class="form-group input-group">
 								<div class="input-group-prepend">
@@ -134,7 +134,6 @@ body {
 								</div>
 								<input type="email" name="eMail" class="account form-control"
 									placeholder="E-mail" />
-								<!-- form:input ... + path="eMail" Q:form:form到form:input中間的標籤沒有 form: 標籤OK? -->
 							</div>
 							<!--Password-->
 							<div class="form-floating form-group input-group">
@@ -146,7 +145,6 @@ body {
 								<input type="password" name="password"
 									class="password form-control" placeholder="Password"
 									id="floatingPassword1" />
-								<!--標籤改成 form:input ... + 屬性 path="password" -->
 								<div class="input-group-append">
 									<span class="input-group-text"> <i id="eye1"
 										class="fas fa-eye"></i>
@@ -166,95 +164,70 @@ body {
 								<i class="fa-solid fa-anchor"></i> Log In
 							</button>
 						</form>
+			</fieldset>
+			<!--tab02 對應的 Sign Up 頁籤-->
+			<fieldset id="tab021">
+				<p>Gain access to additional features such as Watchlist and
+					Portfolio tracking.</p>
+				<!--註冊表單-->
+
+				<form method="post" action="/coinshell/signup">
+					<!--E-Mail-->
+					<div class="form-group input-group">
+						<div class="input-group-prepend">
+							<div class="input-group-text">
+								<i class="fas fa-user-circle"></i>
+							</div>
 						</div>
-					<input type="password" name="password" class="password form-control" 
-					placeholder="Password" id="floatingPassword1"/>
-					<!--標籤改成 form:input ... + 屬性 path="password" -->
-					<div class="input-group-append">
-						<span class="input-group-text"> <i id="eye1" class="fas fa-eye"></i>
-						</span>
+						<input type="email" name="e-mail" class="account form-control"
+							placeholder="E-mail" />
 					</div>
+					<!--Password-->
+					<div class="form-group form-floating">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<div class="input-group-text">
+									<i class="fas fa-unlock-alt"></i>
+								</div>
+							</div>
+							<input type="password" name="password"
+								class="password form-control" placeholder="Password"
+								id="floatingPassword2" />
+							<div class="input-group-append">
+								<span class="input-group-text"> <i id="eye2"
+									class="fas fa-eye"></i>
+								</span>
+							</div>
+						</div>
+						<p>Password should contain both letter and number, with
+							minimum length of 8 characters.</p>
 					</div>
-					<a href="#" style="display: block; text-align: right;">Forgot password?</a>
 					<!--Checkbox-->
 					<div class="form-group">
-					<input type="checkbox" class="remember-me">Remember me
+						<input type="checkbox" class="dailyshell">Get a daily post
+						of CoinShell, right to your inbox!
 					</div>
-					<p>${loginError}</p>
+					<!--reCAPTCHA v2-->
+					<!-- <div class="g-recaptcha"
+							data-sitekey="6LfDfO8fAAAAAALEtexVflMvH0HDwc5HCLGPjrj5xxxxxxx"></div>  -->
 					<!--Submit btn-->
 					<button type="submit" class="btn btn-info">
-					<i class="fa-solid fa-anchor"></i> Log In
-					</button>  
-					</form>	
-
-
-					</fieldset>
-					<!--tab02 對應的 Sign Up 頁籤-->
-					<fieldset id="tab021">
-						<p>Gain access to additional features such as Watchlist and
-							Portfolio tracking.</p>
-						<!--註冊表單-->
-
-						<form method="post" action="/coinshell/signup">
-							<!--E-Mail-->
-							<div class="form-group input-group">
-								<div class="input-group-prepend">
-									<div class="input-group-text">
-										<i class="fas fa-user-circle"></i>
-									</div>
-								</div>
-								<input type="email" name="e-mail" class="account form-control"
-									placeholder="E-mail" />
-							</div>
-							<!--Password-->
-							<div class="form-group form-floating">
-								<div class="input-group">
-									<div class="input-group-prepend">
-										<div class="input-group-text">
-											<i class="fas fa-unlock-alt"></i>
-										</div>
-									</div>
-									<input type="password" name="password"
-										class="password form-control" placeholder="Password"
-										id="floatingPassword2" />
-									<div class="input-group-append">
-										<span class="input-group-text"> <i id="eye2"
-											class="fas fa-eye"></i>
-										</span>
-									</div>
-								</div>
-								<p>Password should contain both letter and number,
-									with minimum length of 8 characters.</p>
-							</div>
-							<!--Checkbox-->
-							<div class="form-group">
-								<input type="checkbox" class="dailyshell">Get a daily
-								post of CoinShell, right to your inbox!
-							</div>
-							<!--reCAPTCHA v2-->
-							<!-- <div class="g-recaptcha"
-							data-sitekey="6LfDfO8fAAAAAALEtexVflMvH0HDwc5HCLGPjrj5xxxxxxx"></div>  -->
-							<!--Submit btn-->
-							<button type="submit" class="btn btn-info">
-								<i class="fa-solid fa-anchor"></i> Create an account
-							</button>
-						</form>
-
-
-						<!-- closing label 改成 /form:form  -->
-					</fieldset>
-				</div>
-				<div class="line"></div>
-				<!--Footer-->
-				<div class="modal-footer">
-					<div class="tnc-div">
-						By creating this account, you agree to our <a
-							href="#privacy-policy頁面">privacy policy</a> and <a
-							href="#cookies-policy頁面">cookie policy</a>.
-					</div>
-				</div>
+						<i class="fa-solid fa-anchor"></i> Create an account
+					</button>
+				</form>
+			</fieldset>
+		</div>
+		<div class="line"></div>
+		<!--Footer-->
+		<div class="modal-footer">
+			<div class="tnc-div">
+				By creating this account, you agree to our <a
+					href="${contextRoot}/account/privacy">privacy policy</a> and <a
+					href="${contextRoot}/account/cookie">cookie policy</a>.
 			</div>
 		</div>
+	</div>
+	</div>
 	</div>
 	</div>
 
