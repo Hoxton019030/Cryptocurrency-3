@@ -59,8 +59,17 @@ public class MembersController {
 		member.setJoinTime(date);
 		member.setPassword(password);
 		member.setCustomizedUserName("使用者01");
+		// if (DAO.findMemberByEMail()){
+		// return "/index";
+		// }else{
 		memService.save(member);
 		return "signupOK";
+	}
+	
+	@GetMapping("/account/set")
+	public String GetAccountSet(Model model) {
+		model.addAttribute("memberBean", new Members());
+		return "account/set";
 	}
 	
 	@GetMapping("/login")
