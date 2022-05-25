@@ -29,31 +29,6 @@
 	<div class="main">
 		<div class="top-web-space">
 			<p>${loginError}</p>
-			<c:choose>
-				<c:when test="${login == null }">
-					<div>
-					<a href="#" type="button" class="btn btn-primary mr-2"
-						data-toggle="modal" data-target="#loginModal"> <i class="fa-solid fa-anchor"></i> Log In
-					</a>
-				</div>
-				</c:when>
-				<c:otherwise>
-					<p>Welcome back! ${login.eMail}</p>
-					<div class="btn-group">
-							<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
-								aria-expanded="false">
-								${login.eMail}'s Settings
-							</button>
-							<div class="dropdown-menu dropdown-menu-right">
-								<button class="dropdown-item" type="button">Watchlist</button>
-								<button class="dropdown-item" type="button">Portfolio</button>
-								<button class="dropdown-item" type="button">Referral Program</button>
-								<button class="dropdown-item" type="button"><a href="/coinshell/account/set">Account Settings</a></button>
-								<button class="dropdown-item" type="button">Log out</button>
-							</div>
-					</div>
-				</c:otherwise>
-			</c:choose>
 		</div>
 
 

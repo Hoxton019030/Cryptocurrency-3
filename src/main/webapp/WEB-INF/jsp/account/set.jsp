@@ -7,6 +7,11 @@
 
 <head>
 <title>Account Setting | CoinShell</title>
+<style type="text/css">
+body {
+	padding-top: 82px;
+}
+</style>
 </head>
 
 <body>

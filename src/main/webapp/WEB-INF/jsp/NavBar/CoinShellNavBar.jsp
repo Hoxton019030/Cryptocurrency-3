@@ -44,7 +44,7 @@ body {
 
 <body>
 	<!-- Start of the nv-->
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
 		<a class="navbar-brand" href="${contextRoot}"><img
 			src="${contextRoot}/images/NavBarImg/CoinShell.png"
 			style="width: 150px;" alt="logo"></a>
@@ -55,7 +55,7 @@ body {
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav">
-				<li class="nav-item active"><a class="nav-link" href="#">About
+				<li class="nav-item active"><a class="nav-link" href="${contextRoot}/aboutUs/intro">About
 						us<span class="sr-only">(current)</span>
 				</a></li>
 				<li class="nav-item"><a class="nav-link"
@@ -63,24 +63,34 @@ body {
 				<li class="nav-item"><a class="nav-link" href="#">Portfolio</a>
 				</li>
 				<li class="nav-item"><a class="nav-link" href="#">Learn</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Shell
-						Shop</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Shell Shop</a></li>
 			</ul>
 		</div>
-		<!-- Button trigger modal c:choose沒寫在 index的話，接不到 JSessionID -->
-		<c:choose>
-			<c:when test="${ SessionScope.login==null }">
-				<div>
+		<!-- Button trigger modal  -->
+			<c:choose>
+				<c:when test="${login == null }">
+					<div>
 					<a href="#" type="button" class="btn btn-primary mr-2"
-						data-toggle="modal" data-target="#loginModal"> <i
-						class="fa-solid fa-anchor"></i> Log In
+						data-toggle="modal" data-target="#loginModal"> <i class="fa-solid fa-anchor"></i> Log In
 					</a>
 				</div>
-			</c:when>
-			<c:otherwise>
-				<div>Welcome</div>
-			</c:otherwise>
-		</c:choose>
+				</c:when>
+				<c:otherwise>
+					<div class="btn-group">
+							<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+								aria-expanded="false">
+								${login.eMail}'s Settings
+							</button>
+							<div class="dropdown-menu dropdown-menu-right">
+								<button class="dropdown-item" type="button">Watchlist</button>
+								<button class="dropdown-item" type="button">Portfolio</button>
+								<button class="dropdown-item" type="button">Referral Program</button>
+								<button class="dropdown-item" type="button"><a href="coinshell/account/set">Account Settings</a></button>
+								<button class="dropdown-item" type="button"><a href="${contextRoot}/logout">Log Out</a></button> <!-- MemController line 110 -->
+							</div>
+					</div>
+				</c:otherwise>
+			</c:choose>
 
 		<!--Search navbar-->
 		<form class="form-inline my-1 my-lg-0">
