@@ -10,7 +10,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="CustomizedUserAvatar")
 public class CustomizedUserAvatar {
-
+//test
 	@Id
 	@Column(name="Id", columnDefinition="int")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
