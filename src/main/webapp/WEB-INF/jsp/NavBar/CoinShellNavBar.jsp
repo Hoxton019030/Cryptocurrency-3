@@ -196,7 +196,8 @@
 													<p><i class="fa-solid fa-triangle-exclamation"></i> Password should
 														contain
 														both letter and number, with
-														minimum length of 8 characters.</p>
+														minimum length of 8 characters.</p> 
+<!-- 														123 -->
 													<p id="letter" class="invalid">  A letter</p>
 													<p id="number" class="invalid">  A number</p>
 													<p id="length" class="invalid">  Minimum 8 characters</p>
