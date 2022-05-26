@@ -82,6 +82,7 @@ function loadHistoricalData() {
     fetch("http://localhost:8080/coinshell/historical/get?currencyName=" + currencyName).then(function(response) {
         return response.json();
     }).then(function(array) {
+        array = array.reverse();
         $.each(array, function(index, value) {
             $("#historicalrow").append(`<tr>
                     <th scope="col"> ` + value.day + `</th>
