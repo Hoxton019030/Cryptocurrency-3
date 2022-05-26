@@ -10,11 +10,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name="CustomizedUserAvatar")
 public class CustomizedUserAvatar {
-//test
+
 	@Id
 	@Column(name="Id", columnDefinition="int")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer AvatarId;
+	private Integer avatarId;
 	
 	@Column(name="UserAvatar", columnDefinition="nvarchar(MAX)")
 	private String customizedUserAvatar;
@@ -24,16 +24,16 @@ public class CustomizedUserAvatar {
 
 	public CustomizedUserAvatar(Integer avatarId, String customizedUserAvatar) {
 		super();
-		AvatarId = avatarId;
+		this.avatarId = avatarId;
 		this.customizedUserAvatar = customizedUserAvatar;
 	}
 
 	public Integer getAvatarId() {
-		return AvatarId;
+		return avatarId;
 	}
 
 	public void setAvatarId(Integer avatarId) {
-		AvatarId = avatarId;
+		this.avatarId = avatarId;
 	}
 
 	public String getCustomizedUserAvatar() {
@@ -43,5 +43,6 @@ public class CustomizedUserAvatar {
 	public void setCustomizedUserAvatar(String customizedUserAvatar) {
 		this.customizedUserAvatar = customizedUserAvatar;
 	}
+
 
 }
