@@ -21,6 +21,5 @@
     +  Update userAvatar, update customized UserName
     +  Modal * 2
 4. 登入後的下拉選單按鈕改成頭像
-5. Log Out 功能 `!Important`
-6. Referral program, about coinshell team 頁面
+5. Referral program, about coinshell team 頁面
 
