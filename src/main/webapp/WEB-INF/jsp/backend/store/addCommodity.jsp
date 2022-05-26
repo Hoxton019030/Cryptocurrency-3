@@ -15,7 +15,7 @@
         </head>
 
         <body>
-            <form action="" method="post">
+            <!-- <form action="/commodityUpload" method="post" enctype="multipart/form-data">
                 <br> Commodity Name: <input type="text" name="name">
                 <br> Discribe:<textarea name="discribe"></textarea>
                 <br> Volume: <input type="number" name="volume" min="0" max="2147483647">
@@ -26,13 +26,19 @@
                 <label for="Shell" onclick="showMyshell()">Shell</label>
                 <input type="radio" id="Coin" name="shellOrCoin" value="Coin">
                 <label for="Coin" onclick="showMyCoin()">Coin</label>
-                <!-- <input type="radio" name="shellOrCoin" value="Coin"> Coin -->
-                <div style="display: none;" id="myShell"> MyShell:<input type="number" name="volume" min="0" max="2147483647"></div>
-                <div style="display: none;" id="myCoin"> Coin:<input type="number" name="volume" min="0" max="2147483647"></div>
+                <div style="display: none;" id="myShell"> MyShell:<input type="number" name="myShell" min="0" max="2147483647"></div>
+                <div style="display: none;" id="myCoin"> Coin:<input type="number" name="coin" min="0" max="2147483647"></div>
 
                 <br>
-
                 <input type="submit" value="送出">
+            </form> -->
+            <form action="fileUpload" method="post" enctype="multipart/form-data" accept="image/*">
+                name: <input id="photoName" name="photoName" />
+                <br /> file: <input type="file" name="file">
+
+                <br />
+                <input type="submit" value="送出">
+
             </form>
 
 
