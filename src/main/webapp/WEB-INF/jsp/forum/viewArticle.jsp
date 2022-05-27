@@ -22,42 +22,36 @@
         <div class="row">
             <div class="col-md-12">
                 <h1>${Article.title}</h1>
-                <input id="aid" type="hidden" value="${Article.id}"/>                
+                <input id="aid" type="hidden" value="${Article.id}"/>
+                <input id="authorid" type="hidden" value="${Article.authorId}"/>
                 <a href="${contextRoot}/editArticle/${Article.id}">Edit</a>
                 <a href="${contextRoot}/deleteArticle/${Article.id}" onclick="return confirm('確認刪除嗎?')">Delete</a>
                 <br>
                 <div>${Article.text}</div><br/>
                 <hr/>
-                <div class="row section_title">
-                    <div class="col-md-12" id="comment-list">
-
-                    </div>
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination" id="pageidC">
-                        </ul>
-                    </nav>
-                </div>
+                <button id="doComment">Leave comment here...</button>
+                <button id="closeComment" style="display: none;">Umm...let me think about it...</button>
                 <div id="respond">
-                    <!-- <form id="commentform"> -->
-                        <ul class="comment-l">
+                    <!-- <form id="commentform"> -->                        
+                        <ul class="comment-l" style="display: none;">
                             <li style="height:28px;line-height: 28px;overflow: hidden">
                                 <label for="text">Comment:(necessery)</label>
                             </li>
                             <li>
-                                <textarea id="text-c" tabindex="1"></textarea>
+                                <textarea id="text-c" tabindex="1" placeholder="我其實也不是一定要評論" style="resize:none;width:600px;height:90px;">我其實也不是一定要評論</textarea>
                             </li>
                             <li class="comment-btn">
                                 <button href="#" id="submit-c" tabindex="5">OK!Let's do this!</button>
-                                <p>( Ctrl+Enter Quick Submit )&nbsp;&nbsp;&nbsp;&nbsp;</p>                                    
-                            </li>
+                                <!-- <p>( Ctrl+Enter Quick Submit )&nbsp;&nbsp;&nbsp;&nbsp;</p>                                     -->
+                            </li>                   
                         </ul>
 
-                        <ul class="comment-r">
+                        <ul class="comment-r" style="display: none;">
                             <li>
                                 <label for="userName">Name:(necessery)</label>
                             </li>
                             <li>
-                                <input type="text" id="userName-c" size="25" tabindex="2" aria-required='true'/>
+                                <input type="text" id="userName-c" size="25" tabindex="2" aria-required='true' value="測試員熊掌1號"/>
                             </li>
                             <li>
                                 <label for="userEmail">E-mail:(necessery)</label>
@@ -66,10 +60,19 @@
                                 <input type="hidden" id="articleId" value="${Article.id}" />
                             </li>
                             <li>
-                                <input type="text" id="userEmail-c" size="25" tabindex="3" aria-required='true'/>
-                            </li>
+                                <input type="text" id="userEmail-c" size="25" tabindex="3" aria-required='true' value="commTest@gmail.com"/>
+                            </li>                            
                         </ul>
                     <!-- </form> -->
+                </div>
+                <div class="row section_title">
+                    <div class="col-md-12" id="comment-list">
+
+                    </div>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination" id="pageidC">
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
@@ -81,6 +84,20 @@ let commDataNow = {};
 let replyDataNow = {};
 loadComment();
 $("#submit-c").click(function(){comment()})
+doComment.addEventListener('click',verifyMembership);
+closeComment.addEventListener('click',closeCommentL);
+
+function verifyMembership(){
+    $(".comment-l").toggle();
+    $("#closeComment").toggle();
+    $("#doComment").hide();
+}
+
+function closeCommentL(){
+    $(".comment-l").hide();
+    $("#doComment").toggle();
+    $("#closeComment").hide();
+}
 
 async function comment(){
     await commentTo();
@@ -258,20 +275,20 @@ function displayComm(data){
                             <div class="col-4">                                
                                 <div class="pull-right reply">
                                     <a href="#" onclick="doReply(`+id+`)"><span><i class="fa fa-reply"></i>reply</span></a>
-                                    <div id="`+id+`" class="reply-section" style="display: none">
-                                        <ul class="comment-l">
+                                    <div id="`+id+`" class="reply-section">
+                                        <ul class="reply-l" style="display: none;">
                                             <li style="height:28px;line-height: 28px;overflow: hidden">
                                                 Comment content:(necessery)
                                             </li>
                                             <li>
                                                 <textarea id="text-r`+id+`" tabindex="1" aria-required="true"></textarea>
                                             </li>
-                                            <li class="comment-btn">
+                                            <li class="reply-btn">
                                                 <button class="submit-r" onclick="reply(`+id+`)" tabindex="5">OK!Let's do this!</button>
                                                 <p>( Ctrl+Enter Quick Submit )&nbsp;&nbsp;&nbsp;&nbsp;</p>
                                             </li>
                                         </ul>
-                                        <ul class="comment-r">
+                                        <ul class="reply-r" style="display: none;">
                                             <li>
                                                 <label for="userName">Name:(necessery)</label>
                                             </li>
