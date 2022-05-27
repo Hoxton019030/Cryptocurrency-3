@@ -102,6 +102,7 @@ async function reply(id){
 
 function closeReply(id){
     $("#reply-list"+id).empty();
+    $("#pageidR"+id).empty();
     $("#showR"+id).toggle();
     $("#closeR"+id).hide();
 }

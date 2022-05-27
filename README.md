@@ -26,3 +26,7 @@
 4. 登入後的下拉選單按鈕改成頭像
 5. Referral program, about coinshell team 頁面
 
+# Bear's pending
+1. 後台設計，Article的CRUD功能引入
+2. 使用者登入判斷
+3. Article, Comment, Reply新增使用者的相關input(姓名、圖片、ID)

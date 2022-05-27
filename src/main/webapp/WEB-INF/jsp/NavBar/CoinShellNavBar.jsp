@@ -190,7 +190,7 @@
 														<span class="input-group-text"> <i id="eye2"
 																class="fas fa-eye"></i>
 														</span>
-													</div>
+													</div> 
 												</div>
 												<div id="pmessage">
 													<p><i class="fa-solid fa-triangle-exclamation"></i> Password should
