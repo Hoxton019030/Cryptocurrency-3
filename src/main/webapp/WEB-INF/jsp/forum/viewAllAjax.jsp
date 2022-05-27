@@ -49,7 +49,7 @@ padding-top: 82px;
 var contextRoot = "http://localhost:8080/coinshell";
 //下拉選單相關
 var tag;
-var page = 1;
+// var page = 1;
 let dataNow = {};
 tagList();
 loadAtc();
@@ -178,11 +178,12 @@ function pageBtn (page){
     };
 
     if(page.hasNext) {
-        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)-1)+`">Next</a></li>`;
+        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)+1)+`">Next</a></li>`;
     } else {
         str += `<li class="page-item disabled"><span class="page-link">Next</span></li>`;
     }
-    pageid.innerHTML = str;
+    pageid.innerHTML = str;    
+    console.log(str);
 }
 
 // function loadAtcByTitle(){

@@ -138,7 +138,7 @@ function upCoin() {
             })
 //            checkStatus= true;
             $('#top').append(coinList);
-            setUpCoin();
+//            setUpCoin();
             upjquery();
         },
         error: function(err) {

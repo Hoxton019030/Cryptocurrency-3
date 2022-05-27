@@ -3,15 +3,16 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>	
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<jsp:include page="../NavBar/CoinShellNavBar.jsp" />
+<!DOCTYPE html>
+<html>
 <head>
 <meta charset="UTF-8">
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <title>${Article.title}</title>
 <style type="text/css">
-body{
-padding-top: 82px;
-}
+    body{
+    padding-top: 82px;
+    }
 </style>
 </head>
 <body>
@@ -31,6 +32,10 @@ padding-top: 82px;
                     <div class="col-md-12" id="comment-list">
 
                     </div>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination" id="pageidC">
+                        </ul>
+                    </nav>
                 </div>
                 <div id="respond">
                     <!-- <form id="commentform"> -->
@@ -71,6 +76,9 @@ padding-top: 82px;
     </div>
 </div>
 <script type="text/javascript">
+var page = 1;
+let commDataNow = {};
+let replyDataNow = {};
 loadComment();
 $("#submit-c").click(function(){comment()})
 
@@ -102,62 +110,81 @@ function doReply(id){
     $("#"+id).toggle()
 }
 
-function commentTo(){
-var userNameC = document.getElementById("userName-c").value;
-var userEmailC = document.getElementById("userEmail-c").value;
-var textC = document.getElementById("text-c").value;
-var articleIdC = document.getElementById("articleId").value; 
-var comm = {
-    "userName":userNameC,
-    "userEmail":userEmailC,
-    "text":textC,
-    "type":"a",
-    "deleted":"n",
-    "articleId":articleIdC
+pageidC.addEventListener('click',switchPageC);
+
+function switchPageC(e){
+    e.preventDefault();
+    if(e.target.nodeName !== 'A') return;
+    const page = e.target.dataset.page;
+    commPagination(commDataNow, page);
 }
-var jsonComm = JSON.stringify(comm);
-fetch('http://localhost:8080/coinshell/editComment', {
-    // credentials: 'include',
-    method:'POST',
-    headers: {
-        'Content-Type': 'application/json'    
-    },
-    body:jsonComm    
-}).then(res => {
-        return res.json();
-    }).then(result =>{
-        console.log(result);
-    });
+
+function switchPageR(e, id){
+    console.log("這裡是"+id);
+    e.preventDefault();
+    if(e.target.nodeName !== 'A') return;
+    const page = e.target.dataset.page;
+    console.log("這是第幾頁"+page);
+    replyPagination(replyDataNow, page, id);
+    console.log("現在的reply是"+replyDataNow);
+}
+
+function commentTo(){
+    var userNameC = document.getElementById("userName-c").value;
+    var userEmailC = document.getElementById("userEmail-c").value;
+    var textC = document.getElementById("text-c").value;
+    var articleIdC = document.getElementById("articleId").value; 
+    var comm = {
+        "userName":userNameC,
+        "userEmail":userEmailC,
+        "text":textC,
+        "type":"a",
+        "deleted":"n",
+        "articleId":articleIdC
+    }
+    var jsonComm = JSON.stringify(comm);
+    fetch('http://localhost:8080/coinshell/editComment', {
+        // credentials: 'include',
+        method:'POST',
+        headers: {
+            'Content-Type': 'application/json'    
+        },
+        body:jsonComm    
+    }).then(res => {
+            return res.json();
+        }).then(result =>{
+            console.log(result);
+        });
 };
 
 function replyTo(id){
-var userNameR = document.getElementById("userName-r"+id).value;
-var userEmailR = document.getElementById("userEmail-r"+id).value;
-var textR = document.getElementById("text-r"+id).value;
-var articleIdR = document.getElementById("articleId").value; 
-var commentIdR = document.getElementById("commentId"+id).value;
-var reply = {
-    "userName":userNameR,
-    "userEmail":userEmailR,
-    "text":textR,
-    "type":"b",
-    "deleted":"n",
-    "articleId":articleIdR,
-    "commentId":commentIdR
-}
-var jsonReply = JSON.stringify(reply);
-fetch('http://localhost:8080/coinshell/editReply?commentId='+commentIdR, {
-    method:'POST',
-    headers: {
-        'Content-Type': 'application/json'    
-    },
-    body:jsonReply
-}).catch(error => console.log('Error:', error))
-.then(res => {
-        return res.json();
-    }).then(result =>{
-        console.log(result);
-    });
+    var userNameR = document.getElementById("userName-r"+id).value;
+    var userEmailR = document.getElementById("userEmail-r"+id).value;
+    var textR = document.getElementById("text-r"+id).value;
+    var articleIdR = document.getElementById("articleId").value; 
+    var commentIdR = document.getElementById("commentId"+id).value;
+    var reply = {
+        "userName":userNameR,
+        "userEmail":userEmailR,
+        "text":textR,
+        "type":"b",
+        "deleted":"n",
+        "articleId":articleIdR,
+        "commentId":commentIdR
+    }
+    var jsonReply = JSON.stringify(reply);
+    fetch('http://localhost:8080/coinshell/editReply?commentId='+commentIdR, {
+        method:'POST',
+        headers: {
+            'Content-Type': 'application/json'    
+        },
+        body:jsonReply
+    }).catch(error => console.log('Error:', error))
+    .then(res => {
+            return res.json();
+        }).then(result =>{
+            console.log(result);
+        });
 }
 
 function loadComment(){
@@ -168,75 +195,141 @@ function loadComment(){
         fetch("http://localhost:8080/coinshell/viewComment?articleId="+aid).then(function(response) {
             return response.json();
             console.log(response.json())
-        }).then(function(array) {
-            $.each(array, function(index, value) {
-                var added = new Date(Date.parse(value.added));
-                var MM = added.getMonth();
-                var dd = added.getDate();
-                var HH = added.getHours();
-                var mm = added.getMinutes();
-                var weekIndex = added.getDay();
-                var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
-                var weekDayPrint = weekDay[weekIndex];
-                var id = value.id;             
-                // <img class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="https://i.imgur.com/stD0Q19.jpg" />
-                $("#comment-list").append(`
-                        <div class="media-body">
-                            <div class="row">
-                                <div class="col-8 d-flex">
-                                   <h5>`+value.userName+`</h5>
-                                   <span>-`+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</span>
-                                </div>                                
-                                <div class="col-4">                                
-                                    <div class="pull-right reply">
-                                        <a href="#" onclick="doReply(`+id+`)"><span><i class="fa fa-reply"></i>reply</span></a>
-                                        <div id="`+id+`" class="reply-section" style="display: none">
-                                            <ul class="comment-l">
-                                                <li style="height:28px;line-height: 28px;overflow: hidden">
-                                                    Comment content:(necessery)
-                                                </li>
-                                                <li>
-                                                    <textarea id="text-r`+id+`" tabindex="1" aria-required="true"></textarea>
-                                                </li>
-                                                <li class="comment-btn">
-                                                    <button class="submit-r" onclick="reply(`+id+`)" tabindex="5">OK!Let's do this!</button>
-                                                    <p>( Ctrl+Enter Quick Submit )&nbsp;&nbsp;&nbsp;&nbsp;</p>
-                                                </li>
-                                            </ul>
-                                            <ul class="comment-r">
-                                                <li>
-                                                    <label for="userName">Name:(necessery)</label>
-                                                </li>
-                                                <li>
-                                                    <input type="text" id="userName-r`+id+`" size="25" tabindex="2" aria-required='true'/>
-                                                </li>
-                                                <li>
-                                                    <label for="userEmail">E-mail:(necessery)</label>
-                                                </li>
-                                                <li>
-                                                    <input type="hidden" id="articleId" value="${Article.id}" />
-                                                </li>
-                                                <li>
-                                                    <input type="hidden" id="commentId`+id+`" value="`+id+`" />
-                                                </li>
-                                                <li>
-                                                    <input type="text" id="userEmail-r`+id+`" size="25" tabindex="3" aria-required='true'/>
-                                                </li>
-                                            </ul>
-                                        </div>
+        }).then(function(data) {
+            console.log(data);
+            commDataNow = data;
+            commPagination(data, 1)
+        })
+    })
+}
+
+function commPagination(array, nowPage){
+    console.log("Comment傳過來是第幾頁"+nowPage);
+    console.log("Comment傳過來是"+array);
+    const dataTotal = array.length;
+    const perpage = 5;
+    const pageTotal = Math.ceil(dataTotal / perpage);
+    console.log(`全部評論:`+dataTotal+` 每一頁顯示:`+perpage+`筆`);
+    let currentPage = nowPage;
+    if (currentPage > pageTotal) {currentPage = pageTotal;}
+    const minData = (currentPage * perpage) - perpage + 1 ;
+    const maxData = (currentPage * perpage) ;
+    const data = [];
+    array.forEach((item, index) => {
+        const num = index + 1;
+        if ( num >= minData && num <= maxData) {
+            data.push(item);
+        }
+    })
+    console.log(data);
+    displayComm(data)
+    const page = {
+        pageTotal,
+        currentPage,
+        hasPage: currentPage > 1,
+        hasNext: currentPage < pageTotal,
+    } 
+    console.log(page);
+    pageBtn(page)
+}
+
+function displayComm(data){
+    $("#comment-list").empty();
+    $.each(data, function(index, value) {
+            var added = new Date(Date.parse(value.added));
+            var MM = added.getMonth();
+            var dd = added.getDate();
+            var HH = added.getHours();
+            var mm = added.getMinutes();
+            var weekIndex = added.getDay();
+            var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+            var weekDayPrint = weekDay[weekIndex];
+            var id = value.id;
+            var cidForReply = value.commentId;           
+            // <img class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="https://i.imgur.com/stD0Q19.jpg" />
+            $("#comment-list").append(`
+                    <div class="media-body">
+                        <div class="row">
+                            <div class="col-8 d-flex">
+                               <h5>`+value.userName+`</h5>
+                               <span>-`+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</span>
+                            </div>                                
+                            <div class="col-4">                                
+                                <div class="pull-right reply">
+                                    <a href="#" onclick="doReply(`+id+`)"><span><i class="fa fa-reply"></i>reply</span></a>
+                                    <div id="`+id+`" class="reply-section" style="display: none">
+                                        <ul class="comment-l">
+                                            <li style="height:28px;line-height: 28px;overflow: hidden">
+                                                Comment content:(necessery)
+                                            </li>
+                                            <li>
+                                                <textarea id="text-r`+id+`" tabindex="1" aria-required="true"></textarea>
+                                            </li>
+                                            <li class="comment-btn">
+                                                <button class="submit-r" onclick="reply(`+id+`)" tabindex="5">OK!Let's do this!</button>
+                                                <p>( Ctrl+Enter Quick Submit )&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                                            </li>
+                                        </ul>
+                                        <ul class="comment-r">
+                                            <li>
+                                                <label for="userName">Name:(necessery)</label>
+                                            </li>
+                                            <li>
+                                                <input type="text" id="userName-r`+id+`" size="25" tabindex="2" aria-required='true'/>
+                                            </li>
+                                            <li>
+                                                <label for="userEmail">E-mail:(necessery)</label>
+                                            </li>
+                                            <li>
+                                                <input type="hidden" id="articleId" value="${Article.id}" />
+                                            </li>
+                                            <li>
+                                                <input type="hidden" id="commentId`+id+`" value="`+id+`" />
+                                            </li>
+                                            <li>
+                                                <input type="text" id="userEmail-r`+id+`" size="25" tabindex="3" aria-required='true'/>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
-                            `+value.text+`
-                            <span onclick="loadReply(`+id+`)" id="showR`+id+`"><i class="fa fa-reply"></i>See reply</span>
-                            <span onclick="closeReply(`+id+`)" id="closeR`+id+`" style="display: none"><i class="fa fa-reply"></i>Close reply</span>
-                            <div id="reply-list`+id+`">
-                            </div>
                         </div>
-                        `)                    
+                        `+value.text+`
+                        <span onclick="loadReply(`+id+`)" id="showR`+id+`"><i class="fa fa-reply"></i>See reply</span>
+                        <span onclick="closeReply(`+id+`)" id="closeR`+id+`" style="display: none"><i class="fa fa-reply"></i>Close reply</span>
+                        <div id="reply-list`+id+`">
+                        </div>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination pageR" id="pageidR`+id+`" onclick="switchPageR(event,`+id+`)"></ul>
+                        </nav>                       
+                    </div>
+                    `)                    
             })
-        })
-    })
+        }
+
+function pageBtn(page){
+    let str = '';
+    const total = page.pageTotal;
+    if(page.hasPage) {
+        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)-1)+`">Previous</a></li>`;
+    } else {
+        str += `<li class="page-item disabled"><span class="page-link">Previous</span></li>`;
+    }
+    
+    for(let i = 1; i <= total; i++){
+        if(Number(page.currentPage) === i) {
+            str +=`<li class="page-item active"><a class="page-link" href="#" data-page="`+i+`">`+i+`</a></li>`;
+        } else {
+            str +=`<li class="page-item"><a class="page-link" href="#" data-page="`+i+`">`+i+`</a></li>`;
+        }
+    };
+
+    if(page.hasNext) {
+        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)+1)+`">Next</a></li>`;
+    } else {
+        str += `<li class="page-item disabled"><span class="page-link">Next</span></li>`;
+    }
+    pageidC.innerHTML = str;
 }
 
 function loadReply(id){
@@ -251,8 +344,48 @@ function loadReply(id){
         fetch("http://localhost:8080/coinshell/viewReply?articleId="+aid+"&commentId="+cid).then(function(response) {
             return response.json();
             console.log(response.json())
-        }).then(function(array) {
-            $.each(array, function(index, value) {
+        }).then(function(data) {
+            console.log(data);
+            replyDataNow = data;
+            replyPagination(data, 1, id)
+        })
+    })
+}
+
+async function replyPagination(array, nowPage, id){
+    console.log("傳過來是第幾頁"+nowPage);
+    console.log("傳過來是"+array);
+    const dataTotal = array.length;
+    const perpage = 5;
+    const pageTotal = Math.ceil(dataTotal / perpage);
+    console.log(`全部回覆:`+dataTotal+` 每一頁顯示:`+perpage+`筆`);
+    let currentPage = nowPage;
+    if (currentPage > pageTotal) {currentPage = pageTotal;}
+    const minData = (currentPage * perpage) - perpage + 1 ;
+    const maxData = (currentPage * perpage) ;
+    const dataR = [];
+    array.forEach((item, index) => {
+        const num = index + 1;
+        if ( num >= minData && num <= maxData) {
+            dataR.push(item);
+        }
+    })
+    console.log(dataR);
+    await displayReply(dataR, id)
+    const page = {
+        pageTotal,
+        currentPage,
+        hasPage: currentPage > 1,
+        hasNext: currentPage < pageTotal,
+        id
+    } 
+    console.log(page);
+    pageBtnSm(page)
+}
+
+function displayReply(data, id){
+    $("#reply-list"+id).empty();
+    $.each(data, function(index, value) {
                 var added = new Date(Date.parse(value.added));
                 var MM = added.getMonth();
                 var dd = added.getDate();
@@ -276,8 +409,46 @@ function loadReply(id){
                         </div>
                         `)                    
             })
-        })
-    })
+}
+
+function pageBtnSm(page){
+    console.log("page的ID是:"+page.id);
+    let str = '';
+    const total = page.pageTotal;
+    console.log("第幾頁"+page.currentPage);
+    if(page.hasPage) {
+        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)-1)+`">Previous</a></li>`;
+    } else {
+        str += `<li class="page-item disabled"><span class="page-link">Previous</span></li>`;
+    }
+    
+    for(let i = 1; i <= total; i++){
+        if(Number(page.currentPage) === i) {
+            str +=`<li class="page-item active"><a class="page-link" href="#" data-page="`+i+`">`+i+`</a></li>`;
+        } else {
+            str +=`<li class="page-item"><a class="page-link" href="#" data-page="`+i+`">`+i+`</a></li>`;
+        }
+    };
+
+    if(page.hasNext) {
+        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)+1)+`">Next</a></li>`;
+    } else {
+        str += `<li class="page-item disabled"><span class="page-link">Next</span></li>`;
+    }
+    // pageidR.innerHTML = str;
+    
+    console.log('pageidR'+page.id);
+    $("#pageidR"+page.id).empty();
+    $("#pageidR"+page.id).append(str);
+    // var el = document.getElementById("pageidR"+page.id);
+    // console.log("這是?????"+el);
+    // el.innerHTML = str;
+    // var listener = document.querySelector("#pageidR"+page.id);
+    // console.log(listener);
+    // listener.addEventListener('click',switchPageR);
+
+    console.log("載入成功");
+    console.log(str);
 }
 
 // function deleteAtc(){
