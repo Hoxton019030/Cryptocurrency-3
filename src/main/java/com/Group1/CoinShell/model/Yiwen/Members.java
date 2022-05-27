@@ -37,7 +37,7 @@ public class Members {
     private String customizedUserName;
     
 	@Column(name = "CustomizedUserAvatar", columnDefinition ="nvarchar(MAX)")
-    private String customizedUserAvatar;
+    private Integer customizedUserAvatar;
     
 	@Column(name = "E_Mail", columnDefinition ="nvarchar(100)", nullable=false)
     private String eMail;
@@ -62,18 +62,6 @@ public class Members {
 	public Members() {
 	}
 
-	public Members(Integer memId, String customizedUserName, String customizedUserAvatar, String eMail, String password,
-			Integer myShell, Date joinTime) {
-		super();
-		this.memId = memId;
-		this.customizedUserName = customizedUserName;
-		this.customizedUserAvatar = customizedUserAvatar;
-		this.eMail = eMail;
-		this.password = password;
-		this.myShell = myShell;
-		this.joinTime = joinTime;
-	}
-
 	public Integer getMemId() {
 		return memId;
 	}
@@ -90,11 +78,11 @@ public class Members {
 		this.customizedUserName = customizedUserName;
 	}
 
-	public String getCustomizedUserAvatar() {
+	public Integer getCustomizedUserAvatar() {
 		return customizedUserAvatar;
 	}
 
-	public void setCustomizedUserAvatar(String customizedUserAvatar) {
+	public void setCustomizedUserAvatar(Integer customizedUserAvatar) {
 		this.customizedUserAvatar = customizedUserAvatar;
 	}
 
@@ -137,6 +125,20 @@ public class Members {
 	public void setWatch(Set<Watch> watch) {
 		this.watch = watch;
 	}
+
+	public Members(Integer memId, String customizedUserName, Integer customizedUserAvatar, String eMail,
+			String password, Integer myShell, Date joinTime, Set<Watch> watch) {
+		this.memId = memId;
+		this.customizedUserName = customizedUserName;
+		this.customizedUserAvatar = customizedUserAvatar;
+		this.eMail = eMail;
+		this.password = password;
+		this.myShell = myShell;
+		this.joinTime = joinTime;
+		this.watch = watch;
+	}
+	
+	
 
 	
 }

@@ -8,10 +8,34 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CommodityDao extends JpaRepository<Commodity,Integer>{
 	/**
-	 * 加入商品
+	 * 加入商品 
 	 */
-	@Query(value="INSERT INTO commodity (commodity_name,discribe,photo,price,volume) VALUES( :commodityName2,:discribe2,:photo2,:price2,:volume2)",nativeQuery = true)
-	public void insertcommodity(@Param("commodityName2")String commodityName,@Param("discribe2")String discribe,@Param("photo2")String photo,@Param("price2")Integer price,@Param("volume2")Integer volume);
+	@Query(value="INSERT INTO commodity "
+			+ "(commodity_name,"
+			+ "discribe,"
+			+ "photo,"
+			+ "coin,"
+			+ "volume,"
+			+ "myshell,"
+			+ "shell_or_coin) "
+			
+			+ "VALUES("
+			+ " :commodityName2,"
+			+ ":discribe2,"
+			+ ":photo2,"
+			+ ":coin2,"
+			+ ":volume2"
+			+ ":myshell2"
+			+ ":shellOrCoin)",nativeQuery = true)
+	public void insertcommodity(
+			@Param("commodityName2")String commodityName,
+			@Param("discribe2")String discribe,
+			@Param("photo2")String photo,
+			@Param("coin2")Integer price,
+			@Param("volume2")Integer volume,
+			@Param("myshell2")Integer myShell,
+			@Param("shellOrCoin")String shellOrCoin);
+	
 	
 	/**
 	 * 透過Id刪除商品
