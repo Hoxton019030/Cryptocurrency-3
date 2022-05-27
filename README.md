@@ -23,3 +23,6 @@
 4. 登入後的下拉選單按鈕改成頭像
 5. Referral program, about coinshell team 頁面
 
+## bug to fix
+1. 了解如何上傳檔案
+2. 了解action路徑與controller之對應關係

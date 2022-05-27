@@ -14,8 +14,8 @@ public class CommodityService {
 	@Autowired
 	private CommodityDao dao;
 
-	public void insertcommodity(String commodityName, String discribe, String photo, Integer price, Integer volume) {
-		dao.insertcommodity(commodityName, discribe, photo, price, volume);
+	public void insertcommodity(String commodityName,String discribe,String photo,Integer price,Integer volume,Integer myShell,String shellOrCoin) {
+		dao.insertcommodity(commodityName, discribe, photo, price, volume, myShell, shellOrCoin);
 	}
 
 	public void deleteCommodityById(Integer id) {
