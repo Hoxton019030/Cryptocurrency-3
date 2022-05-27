@@ -28,6 +28,10 @@ public class MembersService {
 		return resMem;
 	}
 	
+	public void updateCustomizedUserAvatarById(Integer memId, Integer avatarId) {
+		membersDao.updateCustomizedUserAvatarById(avatarId, memId);
+			}
+	
 	// 缺少 MembersController (line 115 ~ 118)
 //	public List<Map<String, Object>> updateMemberAvatar(Integer memId){
 //		List<Map<String, Object>> resMem = membersDao.updateMemberAvatar(memId);
