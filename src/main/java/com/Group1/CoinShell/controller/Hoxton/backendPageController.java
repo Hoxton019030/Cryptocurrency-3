@@ -17,7 +17,7 @@ public class backendPageController {
 	
 	@GetMapping("/store/addCommodity")
 	public String changePageAddCommodity() {
-		return "backend/store/addCommodity";
+		return "addCommodity";
 	}
 	
 	@GetMapping("/store/deleteCommodity")
