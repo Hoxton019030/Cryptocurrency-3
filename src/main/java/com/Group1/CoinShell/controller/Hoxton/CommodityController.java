@@ -24,7 +24,8 @@ public class CommodityController {
 	@Autowired
 	private CommodityDao dao;
 	
-	@PostMapping("/commodityUpload")
+	//返回首頁
+	@PostMapping("administrator/store/commodityUpload")
 	public String addNewCommodity(
 			@RequestParam("name")String name,
 			@RequestParam("discribe")String discribe,
@@ -39,8 +40,9 @@ public class CommodityController {
 		commodity.setVolume(volume);
 		try {
 			byte[] bytes = file.getBytes();
-			String encodeToString = Base64.getEncoder().encodeToString(bytes);
-			commodity.setPhoto(encodeToString);
+			String encodeToString = bytes.toString();
+//			String encodeToString = Base64.getEncoder().encodeToString(bytes);
+			commodity.setPhoto(bytes);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -50,7 +52,7 @@ public class CommodityController {
 		commodity.setCoin(coin);
 		dao.save(commodity);
 	
-	return "/index";	
+	return "backend/store/administrator-store";	
 	}
 	
 

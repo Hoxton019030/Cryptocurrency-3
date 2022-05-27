@@ -5,13 +5,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-//@RequestMapping("/administrator")
 @Controller
 public class backendPageController {
 
 	//這個class都是用來控制後臺頁面跳轉的地方
 	@GetMapping("/administrator/store")
-	public String changePageInsertCommodity() {
+	public String changePageCommodity() {
 		return "backend/store/administrator-store";
 	}
 	
@@ -33,6 +32,11 @@ public class backendPageController {
 	@GetMapping("administrator/store/updateCommodity")
 	public String changePageUpdateCommodity() {
 		return "backend/store/updateCommodity";
+	}
+	
+	@GetMapping("administrator/store/showAllCommodities")
+	public String changePageshowAllCommodities() {
+		return "backend/store/showAllCommodities";
 	}
 	
 }

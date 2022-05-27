@@ -1,5 +1,7 @@
 package com.Group1.CoinShell.service.Hoxton;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,6 +32,11 @@ public class CommodityService {
 	public Commodity updateCommodityById(String commodityName, String discribe, String photo, Integer price, Integer volume) {
 		Commodity commodity = dao.updateCommodityById(commodityName, discribe, photo, price, volume, photo);
 		return commodity;
+	}
+	
+	public List<Commodity> findAllCommodity(){
+		List<Commodity> commodityList = dao.findAllCommodity();
+		return commodityList;
 	}
 
 }

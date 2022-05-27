@@ -28,8 +28,8 @@ public class Commodity {
 	@Column(name="volume",nullable = false)
 	private Integer volume;
 	
-	@Column(name="photo",columnDefinition = "NVARCHAR(MAX)",nullable = false)
-	private String photo;
+	@Column(name="photo",columnDefinition = "VARBINARY(MAX)",nullable = false)
+	private byte[] photo;
 	
 	@Column(name="discribe",nullable = false)
 	private String discribe;
@@ -37,7 +37,7 @@ public class Commodity {
 	@Column(name="shell_or_coin",nullable = false)
 	private String shellOrCoin;
 
-	public Commodity(Integer id, String commodityName, Integer coin, Integer myShell, Integer volume, String photo,
+	public Commodity(Integer id, String commodityName, Integer coin, Integer myShell, Integer volume, byte[] photo,
 			String discribe, String shellOrCoin) {
 		super();
 		this.id = id;
@@ -90,11 +90,11 @@ public class Commodity {
 		this.volume = volume;
 	}
 
-	public String getPhoto() {
+	public byte[] getPhoto() {
 		return photo;
 	}
 
-	public void setPhoto(String photo) {
+	public void setPhoto(byte[] photo) {
 		this.photo = photo;
 	}
 
