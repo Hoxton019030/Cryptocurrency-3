@@ -50,7 +50,7 @@ public class CommodityController {
 		commodity.setCoin(coin);
 		dao.save(commodity);
 	
-	return "/";	
+	return "/index";	
 	}
 	
 

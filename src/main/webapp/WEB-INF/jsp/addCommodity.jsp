@@ -15,7 +15,7 @@
         </head>
 
         <body>
-          <form action="/commodityUpload" method="post" enctype="multipart/form-data">
+          <form action="commodityUpload" method="post" enctype="multipart/form-data">
                 <br> Commodity Name: <input type="text" name="name" value="123">
                 <br> Discribe:<textarea name="discribe" value="123"></textarea>
                 <br> Volume: <input type="number" name="volume" min="0" max="2147483647" value="123">
