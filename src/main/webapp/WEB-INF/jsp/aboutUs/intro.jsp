@@ -75,8 +75,6 @@ div.content {
 body {
 	padding-top: 82px;
 }
-
-
 </style>
 
 </head>
@@ -92,16 +90,26 @@ body {
 	</div>
 
 	<!--Page content-->
-	<div class="container" style="margin-top: 30px; background-color: #fff; border-radius: 30px;">
+	<div class="container"
+		style="margin-top: 30px; background-color: #fff; border-radius: 30px;">
 		<div class="col-9">
-		<h3>About Coinshell Team</h3>
-		<div>Content Hello how are you?</div>
-		<div>Content Hello how are you?</div>
-			
-			
-		
+			<h3>About Coinshell</h3>
+			<div>Coinshell is a price-tracking website for cryptoassets in
+				the rapidly growing cryptocurrency space. Its mission is to make
+				crypto discoverable and efficient globally by empowering retail
+				users with unbiased, high quality and accurate information for
+				drawing their own informed conclusions.</div>
+			<h5>Our team:</h5>
+				<ul>
+					<li>Chief executive officer: Pietersite Crystal</li>
+					<li>Chief technology officer: Huginn Hoxton</li>
+					<li>Chief information officer: Fenrir Feeder</li>
+					<li>Chief financial officer: Bjarki Bear</li>
+					<li>Chief security officer: Sváfnir Celine</li>
+				</ul>
+				<p>TODO: 這裡要加入 animated donut chart using chart.js</p>
 		</div>
 	</div>
-	
+
 
 </body>
