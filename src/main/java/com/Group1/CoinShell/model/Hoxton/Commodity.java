@@ -31,14 +31,14 @@ public class Commodity {
 	@Column(name="photo",columnDefinition = "VARBINARY(MAX)",nullable = false)
 	private byte[] photo;
 	
-	@Column(name="discribe",nullable = false)
-	private String discribe;
+	@Column(name="describe",nullable = false)
+	private String describe;
 	
 	@Column(name="shell_or_coin",nullable = false)
 	private String shellOrCoin;
 
 	public Commodity(Integer id, String commodityName, Integer coin, Integer myShell, Integer volume, byte[] photo,
-			String discribe, String shellOrCoin) {
+			String describe, String shellOrCoin) {
 		super();
 		this.id = id;
 		this.commodityName = commodityName;
@@ -46,7 +46,7 @@ public class Commodity {
 		this.myShell = myShell;
 		this.volume = volume;
 		this.photo = photo;
-		this.discribe = discribe;
+		this.describe = describe;
 		this.shellOrCoin = shellOrCoin;
 	}
 
@@ -99,11 +99,11 @@ public class Commodity {
 	}
 
 	public String getDiscribe() {
-		return discribe;
+		return describe;
 	}
 
 	public void setDiscribe(String discribe) {
-		this.discribe = discribe;
+		this.describe = discribe;
 	}
 
 	public String getShellOrCoin() {

@@ -19,6 +19,6 @@ public class CommodityControllerApi {
 	public  List<Commodity> findAllCommodity(){
 		List<Commodity> findAllCommodity = service.findAllCommodity();
 		return findAllCommodity;
-		
 	}
+	//http://localhost:8080/coinshell/allCommodity
 }

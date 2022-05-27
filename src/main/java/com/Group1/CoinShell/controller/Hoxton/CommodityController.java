@@ -41,10 +41,8 @@ public class CommodityController {
 		try {
 			byte[] bytes = file.getBytes();
 			String encodeToString = bytes.toString();
-//			String encodeToString = Base64.getEncoder().encodeToString(bytes);
 			commodity.setPhoto(bytes);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		commodity.setShellOrCoin(shellOrCoin);
@@ -52,7 +50,7 @@ public class CommodityController {
 		commodity.setCoin(coin);
 		dao.save(commodity);
 	
-	return "backend/store/administrator-store";	
+	return "redirect:/administrator/store";	
 	}
 	
 
