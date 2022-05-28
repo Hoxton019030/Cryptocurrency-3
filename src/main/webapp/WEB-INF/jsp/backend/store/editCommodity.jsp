@@ -1,12 +1,46 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>更改商品</title>
-</head>
-<body>
+    <!DOCTYPE html>
+    <html>
 
-</body>
-</html>
+    <head>
+        <meta charset="UTF-8">
+        <title>修改商品</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    </head>
+
+    <body>
+        <h1> 修改商品</h1>
+
+        <form action="editcommodity" method="post">
+            <br> Commodity Name: <input type="text" name="name" value="${commodity.commodityName}">
+            <br> Discribe:<input type="text" name="discribe" value="${commodity.discribe}">
+            <br> Volume: <input type="number" name="volume" min="1" max="2147483647" value="${commodity.volume}">
+            <br>
+            <br> shellOrCoin:
+
+            <input type="radio" id="Shell" name="shellOrCoin" value="Shell" require checked>
+            <label for="Shell" onclick="showMyshell()">Shell</label>
+            <input type="radio" id="Coin" name="shellOrCoin" value="Coin">
+            <label for="Coin" onclick="showMyCoin()">Coin</label>
+            <div style="display: none;" id="myShell"> MyShell:<input type="number" value="${commodity.myShell}" name="myShell" min="0" max="2147483647"></div>
+            <div style="display: none;" id="myCoin"> Coin:<input type="number" value="${commodity.coin}" name="coin" min="0" max="2147483647"></div>
+
+            <br>
+            <input type="submit" value="送出">
+        </form>
+    </body>
+    <script>
+        function showMyshell() {
+            $("#myShell").toggle()
+            $("#myCoin").hide()
+        }
+
+        function showMyCoin() {
+            $("#myCoin").toggle()
+            $("#myShell").hide()
+        }
+    </script>
+
+    </html>

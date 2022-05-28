@@ -29,6 +29,11 @@ public class CommodityService {
 		return commodity;
 	}
 	
+	public Commodity findCommodityById(Integer Id) {
+		Commodity commodity = dao.findCommodityById(Id);
+		return commodity;
+	}
+	
 	public Commodity updateCommodityById(String commodityName, String discribe, String photo, Integer price, Integer volume) {
 		Commodity commodity = dao.updateCommodityById(commodityName, discribe, photo, price, volume, photo);
 		return commodity;
