@@ -14,7 +14,7 @@ public class CustomizedUserAvatar {
 	@Id
 	@Column(name="Id", columnDefinition="int")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer avatarId;
+	private Integer id;
 	
 	@Column(name="UserAvatar", columnDefinition="nvarchar(MAX)")
 	private String customizedUserAvatar;
@@ -22,18 +22,18 @@ public class CustomizedUserAvatar {
 	public CustomizedUserAvatar() {
 	}
 
-	public CustomizedUserAvatar(Integer avatarId, String customizedUserAvatar) {
+	public CustomizedUserAvatar(Integer id, String customizedUserAvatar) {
 		super();
-		this.avatarId = avatarId;
+		this.id = id;
 		this.customizedUserAvatar = customizedUserAvatar;
 	}
 
-	public Integer getAvatarId() {
-		return avatarId;
+	public Integer getid() {
+		return id;
 	}
 
-	public void setAvatarId(Integer avatarId) {
-		this.avatarId = avatarId;
+	public void setid(Integer id) {
+		this.id = id;
 	}
 
 	public String getCustomizedUserAvatar() {

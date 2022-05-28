@@ -139,12 +139,12 @@ public class MembersController {
 	}
 	
 	@PostMapping("account/selectAvatar")
-	public String updateCustomizedUserAvatarById(@RequestParam("memId") Integer memId, @RequestParam("radio-emotion") Integer avatarId) {
-		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@memid="+memId);
+	public String updateCustomizedUserAvatarById(@RequestParam("id") Integer id, @RequestParam("radio-emotion") Integer avatarId) {
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@id="+id);
 		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@number="+avatarId);
 		
 		
-		memService.updateCustomizedUserAvatarById(memId, avatarId);
+		memService.updateCustomizedUserAvatarById(id, avatarId);
 		return "redirect:/account/set";
 		
 	}
