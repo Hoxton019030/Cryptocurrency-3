@@ -31,7 +31,7 @@ public class Members {
 	@Id
 	@Column(name = "Id", columnDefinition ="int")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer memId;
+    private Integer id;
     
 	@Column(name = "CustomizedUserName", columnDefinition ="nvarchar(60)", nullable=false)
     private String customizedUserName;
@@ -63,11 +63,11 @@ public class Members {
 	}
 
 	public Integer getMemId() {
-		return memId;
+		return id;
 	}
 
 	public void setMemId(Integer memId) {
-		this.memId = memId;
+		this.id = memId;
 	}
 
 	public String getCustomizedUserName() {
@@ -126,9 +126,9 @@ public class Members {
 		this.watch = watch;
 	}
 
-	public Members(Integer memId, String customizedUserName, Integer customizedUserAvatar, String eMail,
+	public Members(Integer id, String customizedUserName, Integer customizedUserAvatar, String eMail,
 			String password, Integer myShell, Date joinTime, Set<Watch> watch) {
-		this.memId = memId;
+		this.id = id;
 		this.customizedUserName = customizedUserName;
 		this.customizedUserAvatar = customizedUserAvatar;
 		this.eMail = eMail;

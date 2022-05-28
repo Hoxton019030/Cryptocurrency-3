@@ -2,6 +2,7 @@ package com.Group1.CoinShell.controller.Hoxton;
 
 import java.io.IOException;
 import java.util.Base64;
+import java.util.Optional;
 
 import javax.annotation.PostConstruct;
 
@@ -56,6 +57,7 @@ public class CommodityController {
 	
 	@GetMapping("administrator/store/editCommodity")
 	public ModelAndView changePageToEditCommodity(@RequestParam("id")Integer id) {
+		Optional<Commodity> commodity = dao.findById(id);
 		return new ModelAndView("backend/store/editCommodity");
 	}
 
