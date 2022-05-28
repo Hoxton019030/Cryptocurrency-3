@@ -50,25 +50,25 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 //	
 //	/**
 //	 * AccountSetting 修改使用者資料；Update my profile
-//	 * @param memId
+//	 * @param id
 //	 * @param members
 //	 * @return
 //	 */
-//	@PutMapping(value="/members/u-setting/{memId}")
-//	public Members updateMemberDetail(@PathVariable("memId") Integer memId, @RequestBody Members members) {
-//		Members ResMem = dao.updateUSettingById(memId, members);
+//	@PutMapping(value="/members/u-setting/{id}")
+//	public Members updateMemberDetail(@PathVariable("id") Integer id, @RequestBody Members members) {
+//		Members ResMem = dao.updateUSettingById(id, members);
 //		return ResMem;
 //	}
 //	
 //	/**
 //	 * 變更使用者密碼
-//	 * @param memId
+//	 * @param id
 //	 * @param members
 //	 * @return
 //	 */
-//	@PutMapping(value="/members/u-pwd/{memId}")
-//	public Members updateMemberPassword(@PathVariable("memId") Integer memId, @RequestBody Members members) {
-//		Members resMem = dao.updatePasswordById(memId, members);
+//	@PutMapping(value="/members/u-pwd/{id}")
+//	public Members updateMemberPassword(@PathVariable("id") Integer id, @RequestBody Members members) {
+//		Members resMem = dao.updatePasswordById(id, members);
 //		return resMem;
 //	}
 //}
@@ -77,12 +77,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 ///////////////////////以下無關/////////////////////////////
 /////**
 ////* AccountSetting 檢視使用者: READ my profile
-////* @param memId
+////* @param id
 ////* @return
 ////*/
 ////@GetMapping(value="members/get")
-////public Members getMembersById2(@RequestParam Integer memId) {
-////	Optional<Members> responseMem = dao.findById(memId);
+////public Members getMembersById2(@RequestParam Integer id) {
+////	Optional<Members> responseMem = dao.findById(id);
 ////	
 ////	if(responseMem.isPresent()) {
 ////		return responseMem.get();
@@ -92,12 +92,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 ////	
 ////	/**
 ////	 * AccountSetting 檢視使用者: READ my profile
-////	 * @param memId
+////	 * @param id
 ////	 * @return
 ////	 */
-////	@GetMapping(value="members/get/{memId}")
-////	public Members getMembersById(@PathVariable Integer memId) {
-////		Optional<Members> responseMem = dao.findById(memId);
+////	@GetMapping(value="members/get/{id}")
+////	public Members getMembersById(@PathVariable Integer id) {
+////		Optional<Members> responseMem = dao.findById(id);
 ////		
 ////		if(responseMem.isPresent()) {
 ////			return responseMem.get();
@@ -109,12 +109,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 ////	/**
 ////	 * (後台專用) 刪除使用者資料
 ////	 * Postman Get 方法 => localhost:8080/(context-path)/members/delete/(要刪除的id#)
-////	 * @param MemId
+////	 * @param id
 ////	 * @return
 ////	 */
-////	@GetMapping(value="members/delete/{MemId}")
-////	public boolean deleteMember(@PathVariable Integer MemId) {
-////		dao.delByMemId(MemId);
+////	@GetMapping(value="members/delete/{id}")
+////	public boolean deleteMember(@PathVariable Integer id) {
+////		dao.delByid(id);
 ////		return true;
 ////	}
 ////	
@@ -131,13 +131,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 ////	
 ////	
 ////	/**
-////	 * (後台專用) 從第一頁開始， 每頁2筆，以MemId升冪排列，根據頁面做排序
+////	 * (後台專用) 從第一頁開始， 每頁2筆，以id升冪排列，根據頁面做排序
 ////	 * @param pageNumber
 ////	 * @return
 ////	 */
 ////	@GetMapping(value="members/page/{pageNumber}")
 ////	public List<Members> findByPage(@PathVariable Integer pageNumber) {
-////		Pageable pgb = PageRequest.of(pageNumber-1, 2, Sort.Direction.ASC, "MemId");
+////		Pageable pgb = PageRequest.of(pageNumber-1, 2, Sort.Direction.ASC, "id");
 ////		Page<Members> page = dao.findAll(pgb);
 ////		List<Members> list = page.getContent();
 ////		return list;

@@ -111,8 +111,6 @@
 							<div class="modal-body">
 								<p>Select an avatar for your profile. You can redeem more avatars from the Rewards page.
 								</p>
-								<input type="text" value="${login.memId}" name="memId">
-
 								<input type="radio" name="radio-emotion" id="sad" class="input-hidden" value="1" />
 								<label for="sad">
 									<img src="${contextRoot}/images/NavBarImg/bubbleAvatar.png" alt="I'm sad" />

@@ -28,13 +28,13 @@ public class MembersService {
 		return resMem;
 	}
 	
-	public void updateCustomizedUserAvatarById(Integer memId, Integer avatarId) {
-		membersDao.updateCustomizedUserAvatarById(avatarId, memId);
+	public void updateCustomizedUserAvatarById(Integer id, Integer avatarId) {
+		membersDao.updateCustomizedUserAvatarById(avatarId, id);
 			}
 	
 	// 缺少 MembersController (line 115 ~ 118)
-//	public List<Map<String, Object>> updateMemberAvatar(Integer memId){
-//		List<Map<String, Object>> resMem = membersDao.updateMemberAvatar(memId);
+//	public List<Map<String, Object>> updateMemberAvatar(Integer id){
+//		List<Map<String, Object>> resMem = membersDao.updateMemberAvatar(id);
 //		return resMem;
 //	}
 }

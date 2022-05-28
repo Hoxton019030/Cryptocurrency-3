@@ -9,7 +9,6 @@
 
 
 # Yiwen's pending
-
 1. 後臺介面(後台人員能登入): `!Important` 登入後能夠增刪查改會員資料、新聞介面、討論區討論串
 2. 控制帳號密碼的格式限制(E-mail不能重複 `!Important` ( modify controller Post/SignUp method )
     ( modify controller Post/SignUp method )
@@ -21,7 +20,7 @@
     +  Update userAvatar, update customized UserName
     +  Modal * 2
 4. 登入後的下拉選單按鈕改成頭像
-5. Referral program, about coinshell team 頁面
+5. About coinshell team 頁面優化
 
 ## bug to fix
 1. 了解如何上傳檔案

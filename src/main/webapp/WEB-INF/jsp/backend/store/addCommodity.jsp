@@ -15,32 +15,23 @@
         </head>
 
         <body>
-          <form action="commodityUpload" method="post" enctype="multipart/form-data">
-                <br> Commodity Name: <input type="text" name="name" value="123">
-                <br> Discribe:<textarea name="discribe" value="123"></textarea>
-                <br> Volume: <input type="number" name="volume" min="0" max="2147483647" value="123">
-                <br> Photo: <input type="file" name="photo">
+            <form action="commodityUpload" method="post" enctype="multipart/form-data">
+                <br> Commodity Name: <input type="text" name="name" value="我是商品名稱">
+                <br> Discribe:<input type="text" name="discribe" value="我是商品描述耶">
+                <br> Volume: <input type="number" name="volume" min="1" max="2147483647" value="1">
+                <br> Photo: <input type="file" name="photo" required="required" accept="image/png, image/gif, image/jpeg">
                 <br> shellOrCoin:
 
-                <input type="radio" id="Shell" name="shellOrCoin" value="Shell" require>
+                <input type="radio" id="Shell" name="shellOrCoin" value="Shell" require checked>
                 <label for="Shell" onclick="showMyshell()">Shell</label>
                 <input type="radio" id="Coin" name="shellOrCoin" value="Coin">
                 <label for="Coin" onclick="showMyCoin()">Coin</label>
-                <div style="display: none;" id="myShell"> MyShell:<input type="number" value="123"name="myShell" min="0" max="2147483647"></div>
-                <div style="display: none;" id="myCoin"> Coin:<input type="number" value="123"name="coin" min="0" max="2147483647"></div>
+                <div style="display: none;" id="myShell"> MyShell:<input type="number" value="100" name="myShell" min="0" max="2147483647"></div>
+                <div style="display: none;" id="myCoin"> Coin:<input type="number" value="0" name="coin" min="0" max="2147483647"></div>
 
                 <br>
                 <input type="submit" value="送出">
-            </form> 
-<%--             <form action="fileUpload" method="post" enctype="multipart/form-data" accept="image/*"> --%>
-<!--                 name: <input id="photoName" name="photoName" /> -->
-<!--                 <br /> file: <input type="file" name="file"> -->
-
-<!--                 <br /> -->
-<!--                 <input type="submit" value="送出"> -->
-
-<%--             </form> --%>
-
+            </form>
 
         </body>
         <script>
