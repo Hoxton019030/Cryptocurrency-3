@@ -23,10 +23,10 @@
 						<h1>Earn Rewards Together.</h1>
 						<p>Invite your friends to join and you will both get 20 myShells, as soon as they accumulate 100
 							myShells. </p>
-
-						<button type="button" class="btn btn-outline-warning col-sms">Join Now</button>
+							
+						<button id="join" type="button" class="btn btn-outline-warning col-sms">Join Now</button>
 						<script>
-							$("button").click(function () {
+							$("#join").click(function () {
 								alert("Your balance requires at least 1200 myShells.");
 							});
 						</script>
