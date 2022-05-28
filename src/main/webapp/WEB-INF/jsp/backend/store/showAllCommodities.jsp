@@ -35,7 +35,6 @@
                         <th>Coin</th>
                         <th>Edit</th>
                         <th>DELETE</th>
-
                     </tr>
                 </thead>
                 <tbody>
@@ -61,14 +60,15 @@
                             <td>` + value.id + `</td>
                             <td>` + value.commodityName + `</td>
                             <td><img src="data:image/gif;base64,` + value.photo + `" width=300px hight=300px></td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>1</td>
-                            </tr>`
+                            <td>` + value.discribe + `</td>
+                            <td>` + value.volume + `</td>
+                            <td>` + value.shellOrCoin + `</td>
+                            <td>` + value.myShell + `</td>
+                            <td>` + value.coin + `</td>
+                            <td> <a href="editCommodity?id=` + value.id + `">編輯</a></td>
+                            <td > </td> 
+                                </tr>
+                                `
 
                             )
                         })

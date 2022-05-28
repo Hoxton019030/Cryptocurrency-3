@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.Group1.CoinShell.model.Hoxton.Commodity;
 import com.Group1.CoinShell.model.Hoxton.CommodityDao;
@@ -53,5 +54,9 @@ public class CommodityController {
 	return "redirect:/administrator/store";	
 	}
 	
+	@GetMapping("administrator/store/editCommodity")
+	public ModelAndView changePageToEditCommodity(@RequestParam("id")Integer id) {
+		return new ModelAndView("backend/store/editCommodity");
+	}
 
 }
