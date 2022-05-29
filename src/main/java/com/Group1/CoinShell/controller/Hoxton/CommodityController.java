@@ -72,5 +72,16 @@ public class CommodityController {
 		service.updateCommodityById(name, describe, shellOrCoin, myShell, coin, coin, id);
 		return "redirect:/administrator/store";
 	}
+	
+	@GetMapping("administrator/store/deleteCommodity")
+	public String deleteCommodity(@RequestParam("id")Integer id) {
+		service.deleteCommodityById(id);
+		return "redirect:/administrator/store";
+	}
+	
+	@GetMapping("administrator/store/search")
+	public String findCommodityByName(@RequestParam("name")String name) {
+		return "backend/store/ShowParticularCommodities";
+	}
 
 }

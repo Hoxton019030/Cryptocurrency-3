@@ -24,9 +24,9 @@ public class CommodityService {
 		dao.deleteCommodityById(id);
 	}
 
-	public Commodity findCommodityByName(String commodityName) {
-		Commodity commodity = dao.findCommodityByName(commodityName);
-		return commodity;
+	public List<Commodity> findCommodityByName(String commodityName) {
+		List<Commodity> commodityList = dao.findCommodityByName(commodityName);
+		return commodityList;
 	}
 	
 	public Commodity findCommodityById(Integer Id) {

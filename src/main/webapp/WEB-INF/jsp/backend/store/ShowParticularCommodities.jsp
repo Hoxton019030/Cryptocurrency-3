@@ -54,9 +54,12 @@
         </div>
         <script>
             $(function() {
+                var getUrlString = location.href;
+                var url = new URL(getUrlString);
+                var commodityName = url.searchParams.get('name');
                 $.ajax({
                     method: "GET", //API的訪問方式，GET或POST
-                    url: "http://localhost:8080/coinshell/allCommodity", //API的URL
+                    url: "http://localhost:8080/coinshell/Commodity?name=" + commodityName, //API的URL
                     dataType: "json", //這個API裡面的資料型態有"XML","html","script","json","text"
 
                     success: function(data) {
