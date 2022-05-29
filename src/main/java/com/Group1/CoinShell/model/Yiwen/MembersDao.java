@@ -31,44 +31,45 @@ public interface MembersDao extends JpaRepository<Members, Integer> {
 
 	@Query(value="SELECT MEMBERS.Id, MEMBERS.CustomizedUserAvatar, CustomizedUserAvatar.UserAvatar FROM MEMBERS LEFT JOIN CustomizedUserAvatar ON MEMBERS.Id = CustomizedUserAvatar.Id WHERE MEMBER.Id = ?1"
 			, nativeQuery = true)
-	public List<Map<String, Object>> updateMemberAvatar(@Param("MemId") Integer memId);
+	public List<Map<String, Object>> updateMemberAvatar(@Param("id") Integer id);
 	
-	@Query(value="SELECT * FROM Members WHERE Id = :memId2", nativeQuery = true)
-	public Members findMemberById (@Param("memId2") Integer Id);
+	@Query(value="SELECT * FROM Members WHERE Id = :id2", nativeQuery = true)
+	public Members findMemberById (@Param("id2") Integer Id);
 	
 	@Modifying
-	@Query(value="UPDATE Members SET CustomizedUserAvatar=:avatarNumber WHERE ID=:memId",nativeQuery = true)
-	public void updateCustomizedUserAvatarById(@Param("avatarNumber") Integer avatarId, @Param("memId") Integer memId);
+	@Query(value="UPDATE Members SET CustomizedUserAvatar=:avatarNumber WHERE ID=:id",nativeQuery = true)
+	public void updateCustomizedUserAvatarById(@Param("avatarNumber") Integer avatarId, @Param("id") Integer id);
+  
 }
 //	
 //	@Query(value="select m from Members m where m.Id =?1")
-//	public Members findById(String memId);
+//	public Members findById(String id);
 //	
 //	// 沒有Service層，直接用controller呼叫Dao的話，要加@Transactional
 //	// delete 跟 update 都要寫 modifying
 //
 //	/**
 //	 * 更新會員頭像、用戶自訂名稱
-//	 * @param memId
+//	 * @param id
 //	 * @param Members
 //	 * @return
 //	 */
 //	@Transactional
 //	@Modifying
 //	@Query(value="update Members set CustomizedUserAvatar = ?1, "
-//			+ "CustomizedUserName = ?2, where Id = memId", nativeQuery = true)
-//	public Members updateUSettingById(Integer memId, Members Members);
+//			+ "CustomizedUserName = ?2, where Id = id", nativeQuery = true)
+//	public Members updateUSettingById(Integer id, Members Members);
 //	
 //	/**
 //	 * 變更會員密碼
-//	 * @param memId
+//	 * @param id
 //	 * @param Members
 //	 * @return
 //	 */
 //	@Transactional
 //	@Modifying
-//	@Query(value="update Members set Password = ?1, where Id = memId", nativeQuery = true)
-//	public Members updatePasswordById(Integer memId, Members Members);
+//	@Query(value="update Members set Password = ?1, where Id = id", nativeQuery = true)
+//	public Members updatePasswordById(Integer id, Members Members);
 //	
 /////////////////////以下無關/////////////////////
 //	
