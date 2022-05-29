@@ -314,9 +314,9 @@
 						}
 
 						// When the user clicks outside of the password field, hide the message box
-						myInput.onblur = function () {
-							document.getElementById("pmessage").style.display = "none";
-						}
+// 						myInput.onblur = function () {
+// 							document.getElementById("pmessage").style.display = "none";
+// 						}
 
 						// When the user starts to type something inside the password field
 						myInput.onkeyup = function () {

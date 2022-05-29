@@ -36,6 +36,7 @@ public interface MembersDao extends JpaRepository<Members, Integer> {
 	@Query(value="SELECT * FROM Members WHERE Id = :memId2", nativeQuery = true)
 	public Members findMemberById (@Param("memId2") Integer Id);
 	
+	@Modifying
 	@Query(value="UPDATE Members SET CustomizedUserAvatar=:avatarNumber WHERE ID=:memId",nativeQuery = true)
 	public void updateCustomizedUserAvatarById(@Param("avatarNumber") Integer avatarId, @Param("memId") Integer memId);
 }
