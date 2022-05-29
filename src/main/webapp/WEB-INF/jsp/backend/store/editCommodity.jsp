@@ -13,9 +13,10 @@
     <body>
         <h1> 修改商品</h1>
 
-        <form action="editcommodity" method="post">
+        <form action="editCommodity" method="post">
+            <br> Commodity Id : <input type="text" name="id" value="${commodity.id}">
             <br> Commodity Name: <input type="text" name="name" value="${commodity.commodityName}">
-            <br> Discribe:<input type="text" name="discribe" value="${commodity.discribe}">
+            <br> Describe:<input type="text" name="describe" value="${commodity.discribe}">
             <br> Volume: <input type="number" name="volume" min="1" max="2147483647" value="${commodity.volume}">
             <br>
             <br> shellOrCoin:

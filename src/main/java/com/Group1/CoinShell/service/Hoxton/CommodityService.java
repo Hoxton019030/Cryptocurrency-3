@@ -34,9 +34,8 @@ public class CommodityService {
 		return commodity;
 	}
 	
-	public Commodity updateCommodityById(String commodityName, String discribe, String photo, Integer price, Integer volume) {
-		Commodity commodity = dao.updateCommodityById(commodityName, discribe, photo, price, volume, photo);
-		return commodity;
+	public void updateCommodityById(String commodityName, String discribe, String shell_or_coin,Integer myShell ,Integer coin, Integer volume,Integer id) {
+		dao.updateCommodityById(commodityName, discribe, shell_or_coin, myShell, coin, volume, id);
 	}
 	
 	public List<Commodity> findAllCommodity(){

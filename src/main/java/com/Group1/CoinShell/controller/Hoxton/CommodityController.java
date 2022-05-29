@@ -61,8 +61,16 @@ public class CommodityController {
 	}
 	
 	@PostMapping("administrator/store/editCommodity")
-	public String editCommodity(@RequestParam("name")String name,@RequestParam("describe")String describe,@RequestParam("volume")String volume,@RequestParam("shellOrCoin") String shellOrCoin,@RequestParam("myShell") Integer myShell,@RequestParam("coin")Integer coin) {
-		return null;
+	public String editCommodity
+	(@RequestParam("id") Integer id, 
+			@RequestParam("name")String name,
+			@RequestParam("describe")String describe,
+			@RequestParam("volume")String volume,
+			@RequestParam("shellOrCoin") String shellOrCoin,
+			@RequestParam("myShell") Integer myShell,
+			@RequestParam("coin")Integer coin) {
+		service.updateCommodityById(name, describe, shellOrCoin, myShell, coin, coin, id);
+		return "redirect:/administrator/store";
 	}
 
 }
