@@ -47,6 +47,9 @@ public class Members {
     
 	@Column(name = "MyShell", columnDefinition ="money", nullable=false)
     private Integer myShell;
+	
+	@Column(name = "Coin", columnDefinition ="money", nullable=false)
+    private Integer Coin;
     
 //	@Column(name = "IsPremium", columnDefinition ="bit", nullable=false)
 //  private Boolean isPremium
@@ -62,13 +65,21 @@ public class Members {
 	public Members() {
 	}
 
-	public Integer getMemId() {
-		return id;
+	
+	public Members(Integer id, String customizedUserName, Integer customizedUserAvatar, String eMail, String password,
+			Integer myShell, Integer Coin, Date joinTime, Set<Watch> watch) {
+		super();
+		this.id = id;
+		this.customizedUserName = customizedUserName;
+		this.customizedUserAvatar = customizedUserAvatar;
+		this.eMail = eMail;
+		this.password = password;
+		this.myShell = myShell;
+		this.Coin = Coin;
+		this.joinTime = joinTime;
+		this.watch = watch;
 	}
 
-	public void setMemId(Integer memId) {
-		this.id = memId;
-	}
 
 	public String getCustomizedUserName() {
 		return customizedUserName;
@@ -126,17 +137,23 @@ public class Members {
 		this.watch = watch;
 	}
 
-	public Members(Integer id, String customizedUserName, Integer customizedUserAvatar, String eMail,
-			String password, Integer myShell, Date joinTime, Set<Watch> watch) {
-		this.id = id;
-		this.customizedUserName = customizedUserName;
-		this.customizedUserAvatar = customizedUserAvatar;
-		this.eMail = eMail;
-		this.password = password;
-		this.myShell = myShell;
-		this.joinTime = joinTime;
-		this.watch = watch;
+	public Integer getId() {
+		return id;
 	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Integer getCoin() {
+		return Coin;
+	}
+
+	public void setCoin(Integer Coin) {
+		this.Coin = Coin;
+	}
+
+
 	
 	
 

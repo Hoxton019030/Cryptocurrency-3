@@ -57,7 +57,8 @@ public class MembersController {
 		Date date = new Date();
 		Members member = new Members();
 		member.setCustomizedUserAvatar(5);
-		member.setMyShell(0);
+		member.setMyShell(1000);
+		member.setCoin(1000);
 		member.seteMail(eMail);
 		member.setJoinTime(date);
 		member.setPassword(password);
