@@ -19,21 +19,6 @@ public class backendPageController {
 		return "backend/store/addCommodity";
 	}
 	
-	@GetMapping("administrator/store/deleteCommodity")
-	public String changePageDeleteCommodity() {
-		return "backend/store/deleteCommodity";
-	}
-	
-	@GetMapping("administrator/store/findCommodity")
-	public String changePageFindCommodity() {
-		return "backend/store/findCommodity";
-	}
-	
-	@GetMapping("administrator/store/updateCommodity")
-	public String changePageUpdateCommodity() {
-		return "backend/store/updateCommodity";
-	}
-	
 	@GetMapping("administrator/store/showAllCommodities")
 	public String changePageshowAllCommodities() {
 		return "backend/store/showAllCommodities";

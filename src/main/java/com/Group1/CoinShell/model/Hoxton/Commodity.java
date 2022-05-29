@@ -102,8 +102,8 @@ public class Commodity {
 		return describe;
 	}
 
-	public void setDiscribe(String discribe) {
-		this.describe = discribe;
+	public void setDescribe(String describe) {
+		this.describe = describe;
 	}
 
 	public String getShellOrCoin() {

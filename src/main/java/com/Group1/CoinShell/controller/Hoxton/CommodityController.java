@@ -30,7 +30,7 @@ public class CommodityController {
 	@PostMapping("administrator/store/commodityUpload")
 	public String addNewCommodity(
 			@RequestParam("name")String name,
-			@RequestParam("discribe")String discribe,
+			@RequestParam("describe")String describe,
 			@RequestParam("volume") Integer volume,
 			@RequestParam("photo")MultipartFile file,
 			@RequestParam("shellOrCoin")String shellOrCoin,
@@ -38,11 +38,10 @@ public class CommodityController {
 			@RequestParam("coin")Integer coin) {
 		Commodity commodity = new Commodity();
 		commodity.setCommodityName(name);
-		commodity.setDiscribe(discribe);
+		commodity.setDescribe(describe);
 		commodity.setVolume(volume);
 		try {
 			byte[] bytes = file.getBytes();
-			String encodeToString = bytes.toString();
 			commodity.setPhoto(bytes);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -57,8 +56,32 @@ public class CommodityController {
 	
 	@GetMapping("administrator/store/editCommodity")
 	public ModelAndView changePageToEditCommodity(@RequestParam("id")Integer id) {
-		Optional<Commodity> commodity = dao.findById(id);
-		return new ModelAndView("backend/store/editCommodity");
+		Commodity commodity = service.findCommodityById(id);
+		return new ModelAndView("backend/store/editCommodity","commodity",commodity);
+	}
+	
+	@PostMapping("administrator/store/editCommodity")
+	public String editCommodity
+	(@RequestParam("id") Integer id, 
+			@RequestParam("name")String name,
+			@RequestParam("describe")String describe,
+			@RequestParam("volume")String volume,
+			@RequestParam("shellOrCoin") String shellOrCoin,
+			@RequestParam("myShell") Integer myShell,
+			@RequestParam("coin")Integer coin) {
+		service.updateCommodityById(name, describe, shellOrCoin, myShell, coin, coin, id);
+		return "redirect:/administrator/store";
+	}
+	
+	@GetMapping("administrator/store/deleteCommodity")
+	public String deleteCommodity(@RequestParam("id")Integer id) {
+		service.deleteCommodityById(id);
+		return "redirect:/administrator/store";
+	}
+	
+	@GetMapping("administrator/store/search")
+	public String findCommodityByName(@RequestParam("name")String name) {
+		return "backend/store/ShowParticularCommodities";
 	}
 
 }

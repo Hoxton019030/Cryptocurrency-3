@@ -17,7 +17,7 @@
         <body>
             <form action="commodityUpload" method="post" enctype="multipart/form-data">
                 <br> Commodity Name: <input type="text" name="name" value="我是商品名稱">
-                <br> Discribe:<input type="text" name="discribe" value="我是商品描述耶">
+                <br> Describe:<input type="text" name="describe" value="我是商品描述耶">
                 <br> Volume: <input type="number" name="volume" min="1" max="2147483647" value="1">
                 <br> Photo: <input type="file" name="photo" required="required" accept="image/png, image/gif, image/jpeg">
                 <br> shellOrCoin:
