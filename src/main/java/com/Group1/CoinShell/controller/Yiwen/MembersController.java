@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.Group1.CoinShell.model.Yiwen.Members;
 import com.Group1.CoinShell.model.Yiwen.MembersDao;
+import com.Group1.CoinShell.service.Hoxton.EmailSenderService;
 import com.Group1.CoinShell.service.Yiwen.MembersService;
 
 @Controller
@@ -27,6 +28,9 @@ public class MembersController {
 	
 	@Autowired
 	MembersService memService;
+	
+	@Autowired
+	private EmailSenderService senderService;
 	
 	@Autowired
 	MembersDao dao;
@@ -40,6 +44,7 @@ public class MembersController {
 	@PostMapping("/signup")
 	public String signUp(@RequestParam("e-mail")String eMail ,@RequestParam("password") String password) {
 		SimpleDateFormat sdf = new SimpleDateFormat();
+		senderService.sendEmail(eMail, "恭喜你註冊CoinShell會員！", "歡迎你"+eMail+"！　\r\n 一起在虛擬貨幣的海洋中漫遊吧！");
 		Date date = new Date();
 		Members member = new Members();
 		member.setCustomizedUserAvatar(5);
@@ -50,6 +55,7 @@ public class MembersController {
 		member.setPassword(password);
 		member.setCustomizedUserName("New User");
 		memService.save(member);
+		
 		return "signupOK";
 	}
 	
