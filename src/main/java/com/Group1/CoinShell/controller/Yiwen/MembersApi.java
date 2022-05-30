@@ -31,13 +31,12 @@ public class MembersApi {
 		return service.selectMemberAvatar(id);
 	}
 
-//url : http://localhost:8080/coinshell/selectMemberAvatar?id=1
-
 	@GetMapping(value="/findAllMembers")
 	public List<Members> findAllMembers(){
 		return service.findAllMembers();
 	}
 
+//url : http://localhost:8080/coinshell/selectMemberAvatar?id=1
 
 //
 //	@Autowired
@@ -197,5 +196,4 @@ public class MembersApi {
 ////	public List<Members> findByIsPremiumTrue(@PathVariable Boolean isPremium){
 ////		return dao.findByisPremiumTrue(isPremium);
 	}
-
 
