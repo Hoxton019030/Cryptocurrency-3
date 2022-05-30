@@ -1,54 +1,33 @@
 package com.Group1.CoinShell.model.Feeder;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.Group1.CoinShell.model.Yiwen.Members;
-
-@Entity 
-@Table(name="watch")
+@Entity
+@Table(name = "watch")
 public class Watch {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "watch_id")
 	private Integer watchId;
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="fk_member_id")
-	private Members members;
-	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-	@JoinColumn(name = "fk_coin_id")
-	private Coin coin;
-	
-//	@ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-//	@JoinTable(name = "coin_watch",
-//	joinColumns = {@JoinColumn(name="fk_watch_id",referencedColumnName = "watch_id")},
-//	inverseJoinColumns = {@JoinColumn(name="fk_id",referencedColumnName = "id")}
-//			)
-//	private Set<Coin> coin = new HashSet<Coin>();
-	
+
+	@Column(name = "memberId")
+	private Integer memberId;
+
+	@Column(name = "coinId")
+	private Integer coinId;
+
 	public Watch() {
 	}
 
 	@Override
 	public String toString() {
-		return "Watch [watchId=" + watchId + ", members=" + members + ", coin=" + coin + "]";
+		return "Watch [watchId=" + watchId + ", memberId=" + memberId + ", coinId=" + coinId + "]";
 	}
 
 	public Integer getWatchId() {
@@ -59,20 +38,20 @@ public class Watch {
 		this.watchId = watchId;
 	}
 
-	public Members getMembers() {
-		return members;
+	public Integer getMemberId() {
+		return memberId;
 	}
 
-	public void setMembers(Members members) {
-		this.members = members;
+	public void setMemberId(Integer memberId) {
+		this.memberId = memberId;
 	}
 
-	public Coin getCoin() {
-		return coin;
+	public Integer getCoinId() {
+		return coinId;
 	}
 
-	public void setCoin(Coin coin) {
-		this.coin = coin;
+	public void setCoinId(Integer coinId) {
+		this.coinId = coinId;
 	}
 
 }
