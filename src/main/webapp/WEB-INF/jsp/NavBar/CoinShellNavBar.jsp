@@ -44,35 +44,33 @@
 							aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 							<span class="navbar-toggler-icon"></span>
 						</button>
-						<div class="collapse navbar-collapse" id="navbarNav">
-							<ul class="navbar-nav">
-								<li class="nav-item active"><a class="nav-link"
-										href="${contextRoot}/aboutUs/intro">About us<span
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav">
+                                <li class="nav-item active"><a class="nav-link" href="${contextRoot}/aboutUs/intro">About us<span
 											class="sr-only">(current)</span></a></li>
-								<li class="nav-item active"><a class="nav-link"
-										href="${contextRoot}/viewAllAjax">BeachTown<span
+                                <li class="nav-item active"><a class="nav-link" href="${contextRoot}/viewAllAjax">BeachTown<span
 											class="sr-only">(current)</span></a></li>
-								<li class="nav-item"><a class="nav-link" href="#">Portfolio</a>
-								</li>
-								<li class="nav-item"><a class="nav-link" href="#">Learn</a></li>
-								<li class="nav-item active"><a class="nav-link" href="${contextRoot}/shellshop">Shell Shop</a></li>
-							</ul>
-						</div>
-						<!-- Button trigger modal  -->
-						<c:choose>
-							<c:when test="${login == null }">
-								<div>
-									<a href="#" type="button" class="btn btn-primary mr-2" data-toggle="modal"
-										data-target="#loginModal"> <i class="fa-solid fa-anchor"></i> Log In
-									</a>
-								</div>
-							</c:when>
-							<c:otherwise>
-								<div class="btn-group">
-									<button type="button" class="btn btn-primary dropdown-toggle mr-2" data-toggle="dropdown"
-										aria-expanded="false">
+                                <li class="nav-item"><a class="nav-link" href="#">Portfolio</a>
+                                </li>
+                                <li class="nav-item"><a class="nav-link" href="#">Learn</a></li>
+                                <li class="nav-item active"><a class="nav-link" href="${contextRoot}/shellshop">Shell Shop</a></li>
+                                <li class="nav-item active"><a class="nav-link" href="administrator">Backend Administrator</a></li>
+                            </ul>
+                        </div>
+                        <!-- Button trigger modal  -->
+                        <c:choose>
+                            <c:when test="${login == null }">
+                                <div>
+                                    <a href="#" type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#loginModal"> <i class="fa-solid fa-anchor"></i> Log In
+                                    </a>
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-primary dropdown-toggle mr-2" data-toggle="dropdown" aria-expanded="false">
 										${login.eMail}'s Settings
 									</button>
+
 									<div class="dropdown-menu dropdown-menu-right">
 <!-- 										<button class="dropdown-item" type="button">Watchlist</button> -->
 										<button class="dropdown-item" type="button">Portfolio</button>
@@ -93,133 +91,121 @@
 									<button class="btn btn-secondary input-group-append" type="submit">
 										<i class="fa-solid fa-magnifying-glass"></i>
 									</button>
-								</div>
-							</div>
-						</form>
-					</nav>
-					<!-- End of the Navbar -->
+                                </div>
+                            </div>
+                        </form>
+                    </nav>
+                    <!-- End of the Navbar -->
 
 
-					<!-- Modal -->
-					<div class="modal fade text-left" id="loginModal" tabindex="-1" role="dialog" data-backdrop="static"
-						data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-						<div role="document" class="modal-dialog">
-							<div class="modal-content">
-								<!--Header-->
-								<div
-									class="modal-header row d-flex justify-content-between mx-1 mx-sm-6 mb-0 pb-0 border-0">
-									<div class="tabs" id="tab01">
-										<h6 class="font-weight-bold">Log In</h6>
-									</div>
-									<div class="tabs active" id="tab02">
-										<h6 class="text-muted">Sign Up</h6>
-									</div>
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <!-- Modal -->
+                    <div class="modal fade text-left" id="loginModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div role="document" class="modal-dialog">
+                            <div class="modal-content">
+                                <!--Header-->
+                                <div class="modal-header row d-flex justify-content-between mx-1 mx-sm-6 mb-0 pb-0 border-0">
+                                    <div class="tabs" id="tab01">
+                                        <h6 class="font-weight-bold">Log In</h6>
+                                    </div>
+                                    <div class="tabs active" id="tab02">
+                                        <h6 class="text-muted">Sign Up</h6>
+                                    </div>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 										<span aria-hidden="true">&times;</span>
 									</button>
-								</div>
-								<div class="line"></div>
-								<!--Body-->
-								<div class="modal-body">
-									<!--tab01 對應的 Log In 頁籤-->
-									<fieldset class="show" id="tab011">
-										<!--登入表單-->
-										<form action="/coinshell/login" method="post">
-											<!--E-Mail-->
-											<div class="form-group input-group">
-												<div class="input-group-prepend">
-													<div class="input-group-text">
-														<i class="fas fa-user-circle"></i>
-													</div>
-												</div>
-												<input type="email" name="eMail" class="account form-control"
-													placeholder="E-mail" />
-											</div>
-											<!--Password-->
-											<div class="form-floating form-group input-group">
-												<div class="input-group-prepend">
-													<div class="input-group-text">
-														<i class="fa-solid fa-lock"></i>
-													</div>
-												</div>
-												<input type="password" name="password" class="password form-control"
-													placeholder="Password" id="floatingPassword1" />
-												<div class="input-group-append">
-													<span class="input-group-text"> <i id="eye1" class="fas fa-eye"></i>
+                                </div>
+                                <div class="line"></div>
+                                <!--Body-->
+                                <div class="modal-body">
+                                    <!--tab01 對應的 Log In 頁籤-->
+                                    <fieldset class="show" id="tab011">
+                                        <!--登入表單-->
+                                        <form action="/coinshell/login" method="post">
+                                            <!--E-Mail-->
+                                            <div class="form-group input-group">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        <i class="fas fa-user-circle"></i>
+                                                    </div>
+                                                </div>
+                                                <input type="email" name="eMail" class="account form-control" placeholder="E-mail" />
+                                            </div>
+                                            <!--Password-->
+                                            <div class="form-floating form-group input-group">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        <i class="fa-solid fa-lock"></i>
+                                                    </div>
+                                                </div>
+                                                <input type="password" name="password" class="password form-control" placeholder="Password" id="floatingPassword1" />
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"> <i id="eye1" class="fas fa-eye"></i>
 													</span>
-												</div>
-											</div>
+                                                </div>
+                                            </div>
 
-											<a href="#" style="display: block; text-align: right;">Forgot
+                                            <a href="#" style="display: block; text-align: right;">Forgot
 												password?</a>
-											<!--Checkbox-->
-											<div class="form-group">
-												<input type="checkbox" class="remember-me">Remember me
-											</div>
-											<p>${loginError}</p>
-											<!--Submit btn-->
-											<button type="submit" class="btn btn-info">
+                                            <!--Checkbox-->
+                                            <div class="form-group">
+                                                <input type="checkbox" class="remember-me">Remember me
+                                            </div>
+                                            <p>${loginError}</p>
+                                            <!--Submit btn-->
+                                            <button type="submit" class="btn btn-info">
 												<i class="fa-solid fa-anchor"></i> Log In
 											</button>
-										</form>
-									</fieldset>
-									<!--tab02 對應的 Sign Up 頁籤-->
-									<fieldset id="tab021">
-										<p>Gain access to additional features such as Watchlist and
-											Portfolio tracking.</p>
-										<!--註冊表單-->
-										<form method="post" action="/coinshell/signup">
-											<!--E-Mail-->
-											<div class="form-group input-group">
-												<div class="input-group-prepend">
-													<div class="input-group-text">
-														<i class="fas fa-user-circle"></i>
-													</div>
-												</div>
-												<input type="email" required name="e-mail" class="account form-control"
-													placeholder="E-mail" />
-											</div>
-											<!--Password-->
-											<div class="form-group form-floating">
-												<div class="input-group">
-													<div class="input-group-prepend">
-														<div class="input-group-text">
-															<i class="fa-solid fa-lock"></i>
-														</div>
-													</div>
-													<input type="password" required name="password" class="password form-control"
-														placeholder="Password" id="floatingPassword2"
-														pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
-														title="Password should contain both letter and number, with min length of 8 characters." />
-													<div class="input-group-append">
-														<span class="input-group-text"> <i id="eye2"
+                                        </form>
+                                    </fieldset>
+                                    <!--tab02 對應的 Sign Up 頁籤-->
+                                    <fieldset id="tab021">
+                                        <p>Gain access to additional features such as Watchlist and Portfolio tracking.</p>
+                                        <!--註冊表單-->
+                                        <form method="post" action="/coinshell/signup">
+                                            <!--E-Mail-->
+                                            <div class="form-group input-group">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        <i class="fas fa-user-circle"></i>
+                                                    </div>
+                                                </div>
+                                                <input type="email" required name="e-mail" class="account form-control" placeholder="E-mail" />
+                                            </div>
+                                            <!--Password-->
+                                            <div class="form-group form-floating">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <div class="input-group-text">
+                                                            <i class="fa-solid fa-lock"></i>
+                                                        </div>
+                                                    </div>
+                                                    <input type="password" required name="password" class="password form-control" placeholder="Password" id="floatingPassword2" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" title="Password should contain both letter and number, with min length of 8 characters."
+                                                    />
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text"> <i id="eye2"
 																class="fas fa-eye"></i>
 														</span>
-													</div>
-												</div>
-												<div id="pmessage">
-													<p><i class="fa-solid fa-triangle-exclamation"></i> Password should
-														contain
-														both letter and number, with
-														minimum length of 8 characters.</p>
-													<p id="letter" class="invalid">  A lowercase letter</p>
-													<p id="number" class="invalid">  A number</p>
-													<p id="length" class="invalid">  Minimum 8 characters</p>
-												</div>
+                                                    </div>
+                                                </div>
+                                                <div id="pmessage">
+                                                    <p><i class="fa-solid fa-triangle-exclamation"></i> Password should contain both letter and number, with minimum length of 8 characters.</p>
+                                                    <p id="letter" class="invalid"> A lowercase letter</p>
+                                                    <p id="number" class="invalid"> A number</p>
+                                                    <p id="length" class="invalid"> Minimum 8 characters</p>
+                                                </div>
 
-											</div>
+                                            </div>
 
-											<!--Checkbox-->
-											<div class="form-group">
-												<input type="checkbox" class="dailyshell">Get a daily post
-												of CoinShell, right to your inbox!
-											</div>
-											<!--reCAPTCHA v2-->
-											<!-- <div class="g-recaptcha" -->
-											<!-- data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhIxxxxxxx"></div> -->
+                                            <!--Checkbox-->
+                                            <div class="form-group">
+                                                <input type="checkbox" class="dailyshell">Get a daily post of CoinShell, right to your inbox!
+                                            </div>
+                                            <!--reCAPTCHA v2-->
+                                            <!-- <div class="g-recaptcha" -->
+                                            <!-- data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhIxxxxxxx"></div> -->
 
-											<!--Submit btn-->
-											<button type="submit" class="btn btn-info">
+                                            <!--Submit btn-->
+                                            <button type="submit" class="btn btn-info">
 												<i class="fa-solid fa-anchor"></i> Create an account
 											</button>
 										</form>

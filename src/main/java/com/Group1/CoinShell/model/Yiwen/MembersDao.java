@@ -29,7 +29,8 @@ public interface MembersDao extends JpaRepository<Members, Integer> {
 	 * @return
 	 */
 
-	@Query(value="SELECT MEMBERS.Id, MEMBERS.CustomizedUserAvatar, CustomizedUserAvatar.UserAvatar FROM MEMBERS LEFT JOIN CustomizedUserAvatar ON MEMBERS.Id = CustomizedUserAvatar.Id WHERE MEMBER.Id = ?1"
+
+	@Query(value="SELECT MEMBERS.Id, MEMBERS.CustomizedUserAvatar, CustomizedUserAvatar.userAvatarBase64 FROM MEMBERS  			 LEFT JOIN CustomizedUserAvatar ON MEMBERS.CustomizedUserAvatar = CustomizedUserAvatar.Id WHERE Members.Id=:id2"
 			, nativeQuery = true)
 	public List<Map<String, Object>> updateMemberAvatar(@Param("id") Integer id);
 	
@@ -40,6 +41,16 @@ public interface MembersDao extends JpaRepository<Members, Integer> {
 	@Query(value="UPDATE Members SET CustomizedUserAvatar=:avatarNumber WHERE ID=:id",nativeQuery = true)
 	public void updateCustomizedUserAvatarById(@Param("avatarNumber") Integer avatarId, @Param("id") Integer id);
   
+	
+	@Query(value="SELECT * FROM MEMBERS", nativeQuery = true)
+	public List<Members> findAllMembers();
+	
+	@Modifying
+	@Query(value="UPDATE Members SET CustomizedUserName = :customizedUserName2  WHERE Id = :id2",nativeQuery = true)
+	public void updateCustomizedUserNameById(@Param("customizedUserName2") String customizedUserName,@Param("id2")Integer id);
+	
+	
+
 }
 //	
 //	@Query(value="select m from Members m where m.Id =?1")
