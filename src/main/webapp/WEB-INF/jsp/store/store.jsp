@@ -6,7 +6,7 @@
             <jsp:include page="../NavBar/CoinShellNavBar.jsp" />
 
             <html>
-
+            <!-- 38:00 無法倫播標題-->
             <head>
                 <meta charset="UTF-8">
                 <title>Shell Shop | Coinshell</title>
@@ -14,9 +14,13 @@
                     type="image/x-icon" />
                 <link rel="stylesheet" href="${contextRoot}/css/bootstrap.min.css">
                 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-                <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-                <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
                 <link rel="stylesheet" type="text/css" href="${contextRoot}/css/storeStyle.css">
+                <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+                <script type="text/javascript" src="${contextRoot}/javascripts/store.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
             </head>
 
             <body>
@@ -63,7 +67,7 @@
                                         class="img-fluid">
                                     <div class="categories_text">
                                         <h1>Electronics</h1>
-                                        <p>Ipads, iphones, iMacs, MacMinis, MacbookPros, M1, black apples.</p>
+                                        <p>2nd hand ipads, iphones, iMacs, MacMinis, MacbookPros, M1, black apples.</p>
                                         <a href="#">Buy Now</a>
                                     </div>
                                 </div>
@@ -132,22 +136,253 @@
                             <div class="col-lg-3 col-md-4 col-sm-6">
                                 <div class="product_item">
                                     <div class="product_item_pic">
-                                        <img src="#" alt="">
-                                        <div class="label">New</div>
+                                        <img src="${contextRoot}/images/store/coinable/product-1.png" alt="">
+                                        <div class="label new">New</div>
                                         <ul class="product_hover">
-                                            <li><a href="#"><span class="arrow_axpand">
-                                            </span></a></li>
-                                            <li><a href="#"><span class="arrow_axpand">
-                                            </span></a></li>
-                                            <li><a href="#"><span class="arrow_axpand">
-                                            </span></a></li>
+                                            <li><a href="#"><i class="fa fa-arrows-alt">
+                                            </i></a></li>
+                                            <li><a href="#"><i class="fa fa-heart">
+                                            </i></a></li>
+                                            <li><a href="#"><i class="fa fa-shopping-bag">
+                                            </i></a></li>
                                         </ul>
+                                    </div>
+                                    <div class="product_item_text">
+                                        <h6><a href="#">ProductName1</a></h6>
+                                        <div class="rating">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                        <div class="product_price">NTD 11</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                <div class="product_item">
+                                    <div class="product_item_pic">
+                                        <img src="${contextRoot}/images/store/coinable/product-2.png" alt="">
+                                        <ul class="product_hover">
+                                            <li><a href="#"><i class="fa fa-arrows-alt">
+                                            </i></a></li>
+                                            <li><a href="#"><i class="fa fa-heart">
+                                            </i></a></li>
+                                            <li><a href="#"><i class="fa fa-shopping-bag">
+                                            </i></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="product_item_text">
+                                        <h6><a href="#">ProductName2</a></h6>
+                                        <div class="rating">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                        <div class="product_price">NTD 22</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                <div class="product_item">
+                                    <div class="product_item_pic">
+                                        <img src="${contextRoot}/images/store/coinable/product-3.png" alt="">
+                                        <div class="label stockout">out of stock</div>
+                                        <ul class="product_hover">
+                                            <li><a href="#"><i class="fa fa-arrows-alt">
+                                            </i></a></li>
+                                            <li><a href="#"><i class="fa fa-heart">
+                                            </i></a></li>
+                                            <li><a href="#"><i class="fa fa-shopping-bag">
+                                            </i></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="product_item_text">
+                                        <h6><a href="#">ProductName3</a></h6>
+                                        <div class="rating">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                        <div class="product_price">NTD 33</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                <div class="product_item">
+                                    <div class="product_item_pic">
+                                        <img src="${contextRoot}/images/store/coinable/product-4.png" alt="">
+                                        <ul class="product_hover">
+                                            <li><a href="#"><i class="fa fa-arrows-alt">
+                                            </i></a></li>
+                                            <li><a href="#"><i class="fa fa-heart">
+                                            </i></a></li>
+                                            <li><a href="#"><i class="fa fa-shopping-bag">
+                                            </i></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="product_item_text">
+                                        <h6><a href="#">ProductName4</a></h6>
+                                        <div class="rating">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                        <div class="product_price">NTD 44</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                <div class="product_item">
+                                    <div class="product_item_pic">
+                                        <img src="${contextRoot}/images/store/coinable/product-5.png" alt="">
+                                        <ul class="product_hover">
+                                            <li><a href="#"><i class="fa fa-arrows-alt">
+                                            </i></a></li>
+                                            <li><a href="#"><i class="fa fa-heart">
+                                            </i></a></li>
+                                            <li><a href="#"><i class="fa fa-shopping-bag">
+                                            </i></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="product_item_text">
+                                        <h6><a href="#">ProductName5</a></h6>
+                                        <div class="rating">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                        <div class="product_price">NTD 55</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                <div class="product_item">
+                                    <div class="product_item_pic">
+                                        <img src="${contextRoot}/images/store/coinable/product-6.png" alt="">
+                                        <div class="label new">New</div>
+                                        <ul class="product_hover">
+                                            <li><a href="#"><i class="fa fa-arrows-alt">
+                                            </i></a></li>
+                                            <li><a href="#"><i class="fa fa-heart">
+                                            </i></a></li>
+                                            <li><a href="#"><i class="fa fa-shopping-bag">
+                                            </i></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="product_item_text">
+                                        <h6><a href="#">ProductName6</a></h6>
+                                        <div class="rating">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                        <div class="product_price">NTD 66</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                <div class="product_item">
+                                    <div class="product_item_pic">
+                                        <img src="${contextRoot}/images/store/coinable/product-7.png" alt="">
+                                        <div class="label sale">Sale</div>
+                                        <ul class="product_hover">
+                                            <li><a href="#"><i class="fa fa-arrows-alt">
+                                            </i></a></li>
+                                            <li><a href="#"><i class="fa fa-heart">
+                                            </i></a></li>
+                                            <li><a href="#"><i class="fa fa-shopping-bag">
+                                            </i></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="product_item_text">
+                                        <h6><a href="#">ProductName7</a></h6>
+                                        <div class="rating">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                        <div class="product_price">NTD 77 <span>NTD 88</span></div> <!--span裡面是定價-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-6">
+                                <div class="product_item">
+                                    <div class="product_item_pic">
+                                        <img src="${contextRoot}/images/store/coinable/product-8.png" alt="">
+                                        <ul class="product_hover">
+                                            <li><a href="#"><i class="fa fa-arrows-alt">
+                                            </i></a></li>
+                                            <li><a href="#"><i class="fa fa-heart">
+                                            </i></a></li>
+                                            <li><a href="#"><i class="fa fa-shopping-bag">
+                                            </i></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="product_item_text">
+                                        <h6><a href="#">ProductName8</a></h6>
+                                        <div class="rating">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                        <div class="product_price">NTD 88</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
+
+                <section class="banner bg-img">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-8 m-auto">
+                                <div class="banner_slider owl-carousel">
+                                    <div class="banner_item">
+                                        <div class="banner_text">
+                                            <span>The Seagull Collection</span>
+                                            <h1>The brand new turbines</h1>
+                                            <a href="#">Buy Now</a>
+                                        </div>
+                                    </div>
+                                    <div class="banner_item">
+                                        <div class="banner_text">
+                                            <span>The Seagull Collection</span>
+                                            <h1>The brand new turbines</h1>
+                                            <a href="#">Buy Now</a>
+                                        </div>
+                                    </div>
+                                    <div class="banner_item">
+                                        <div class="banner_text">
+                                            <span>The Seagull Collection</span>
+                                            <h1>The brand new turbines</h1>
+                                            <a href="#">Buy Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+
 
             </body>
 
