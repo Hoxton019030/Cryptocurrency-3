@@ -32,10 +32,10 @@ public class MembersService {
 		membersDao.updateCustomizedUserAvatarById(avatarId, id);
 	}
 
-//	public List<Map<String, Object>> selectMemberAvatar(Integer id) {
-//		List<Map<String, Object>> member = membersDao.selectMemberAvatar(id);
-//		return member;
-//	}
+	public List<Map<String, Object>> selectMemberAvatar(Integer id) {
+		List<Map<String, Object>> member = membersDao.updateMemberAvatar(id);
+		return member;
+	}
 
 	public List<Members> findAllMembers() {
 		List<Members> member = membersDao.findAllMembers();
