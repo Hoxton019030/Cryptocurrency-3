@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
             <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
@@ -18,9 +17,12 @@
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
                 <link rel="stylesheet" type="text/css" href="${contextRoot}/css/storeStyle.css">
                 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
                 <script type="text/javascript" src="${contextRoot}/javascripts/store.js"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+                <script type="text/javascript" src="jquery.countdown.min.js" ></script>
             </head>
 
             <body>
@@ -41,7 +43,6 @@
                                         <li><a href="#">Apparels</a></li>
                                         <li><a href="#">Accessories</a></li>
                                         <li><a href="#"><i class="fa-solid fa-sailboat"></i>&nbsp;Avatars</a></li>
-                                        <li><a href="#"><i class="fa-solid fa-sailboat"></i>&nbsp;Badges</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -353,7 +354,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-8 m-auto">
-                                <div class="banner_slider owl-carousel">
+                                <div class="banner_slider owl-carousel owl-theme">
                                     <div class="banner_item">
                                         <div class="banner_text">
                                             <span>The Seagull Collection</span>
@@ -381,7 +382,46 @@
                     </div>
                 </section>
 
+                <section class="discount spad">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-6 p-0">
+                                <div class="discount_pic">
+                                    <img src="${contextRoot}/images/store/discount.png" alt="" class="img-fluid">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 p-0">
+                                <div class="discount_text">
+                                    <div class="discount_text_title">
+                                        <span>Discount</span>
+                                        <h2>Duan Wu Fest 2022</h2>
+                                        <h5><span>Sale</span> 20% OFF</h5>
+                                    </div>
+                                    <div class="discount_countdown">
+                                        <div class="countdown_item">
+                                            <span>22</span>
+                                            <p>Days</p>
+                                        </div>
+                                        <div class="countdown_item">
+                                            <span>20</span>
+                                            <p>Hours</p>
+                                        </div>
+                                        <div class="countdown_item">
+                                            <span>43</span>
+                                            <p>Min</p>
+                                        </div>
+                                        <div class="countdown_item">
+                                            <span>08</span>
+                                            <p>Sec</p>
+                                        </div>
+                                    </div>
+                                    <a href="#">Buy now</a>
+                                </div>
 
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
 
             </body>
