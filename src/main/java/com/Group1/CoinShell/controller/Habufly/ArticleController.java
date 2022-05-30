@@ -142,6 +142,11 @@ public class ArticleController {
 	@GetMapping("/viewArticle/{id}")
 	public String viewArticle(HttpSession session, Model model, @PathVariable("id") Integer id) throws IOException {
 		Article atc = aService.findById(id);
+		
+		Integer authorId = atc.getAuthorId();
+		String img = aService.findImg(authorId);
+		model.addAttribute("img", img);
+		
 		model.addAttribute("Article", atc);
 		aService.increasePageView(session, id);
 		return "forum/viewArticle";

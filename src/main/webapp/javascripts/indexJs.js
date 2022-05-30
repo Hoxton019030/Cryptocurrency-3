@@ -135,7 +135,9 @@ function upCoin(memId) {
                 }
 
             })
+
             setUpCoin();
+
             upjquery();
         },
         error: function(err) {

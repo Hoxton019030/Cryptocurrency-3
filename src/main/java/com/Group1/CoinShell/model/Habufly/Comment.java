@@ -27,6 +27,9 @@ public class Comment {
 	@Column(name="id")
 	private Integer id;
 	
+	@Column(name="user_id")
+	private Integer userId;
+	
 	@Column(name="user_name")
 	private String userName;
 	
@@ -57,8 +60,9 @@ public class Comment {
 	public Comment() {
 	}
 
-    public Comment(String userName, String userEmail, Date added, String deleted, String text, String type, Integer articleId, Integer commentId) {
+    public Comment(String userName, Integer userId,String userEmail, Date added, String deleted, String text, String type, Integer articleId, Integer commentId) {
         this.userName = userName;
+        this.userId = userId;
         this.userEmail = userEmail;
         this.added = added;
         this.deleted = deleted;
@@ -81,6 +85,14 @@ public class Comment {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
 	public String getUserName() {
@@ -123,6 +135,14 @@ public class Comment {
 		this.type = type;
 	}
 
+	public String getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(String deleted) {
+		this.deleted = deleted;
+	}
+
 	public Integer getArticleId() {
 		return articleId;
 	}
@@ -139,19 +159,13 @@ public class Comment {
 		this.commentId = commentId;
 	}
 
-	public String getDeleted() {
-		return deleted;
-	}
-
-	public void setDeleted(String deleted) {
-		this.deleted = deleted;
-	}
-
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Comment [id=");
 		builder.append(id);
+		builder.append(", userId=");
+		builder.append(userId);
 		builder.append(", userName=");
 		builder.append(userName);
 		builder.append(", userEmail=");
@@ -173,5 +187,5 @@ public class Comment {
 	}
 
 	
-
+	
 }
