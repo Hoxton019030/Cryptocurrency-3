@@ -57,13 +57,17 @@ public class Members {
 
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	@Temporal(TemporalType.TIMESTAMP)
+
 	@Column(name = "JoinTime", columnDefinition = "date", nullable = false)
 	private Date joinTime;
 
 //	@OneToOne(fetch = FetchType.EAGER, mappedBy = "members", cascade = CascadeType.ALL)
 //	private CustomizedUserAvatar customizedUserAvatar1 = new CustomizedUserAvatar();
 	
+<<<<<<< HEAD
 >>>>>>> ba55bc5dd9335cb14913836b535ca890da1ec395
+=======
+>>>>>>> f69b9001d71104c562aa9d4696b06bbd83b8a375
 	public Members() {
 	}
 
@@ -135,7 +139,6 @@ public class Members {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
 
 	public Integer getCoin() {
 		return Coin;
