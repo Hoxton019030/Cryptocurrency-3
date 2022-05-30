@@ -27,6 +27,9 @@ public interface ArticleDao extends JpaRepository<Article, Integer> {
 
 	@Query(value = "select * from article where deleted = 'n' ORDER BY added desc", countQuery = "select count (*) from article", nativeQuery = true)
 	public List<Article> findAllOrderByAddedDesc();
+
+	@Query(value = "select CustomizedUserAvatar from Members where id = :authorId", nativeQuery = true)
+	public String findImg(Integer authorId);
 	
 //	@Query(value = "select * from article where deleted = 'n'", countQuery = "select count (*) from article", nativeQuery = true)
 //	public Page<Article> findAllOrderByAddedDesc(Pageable page);

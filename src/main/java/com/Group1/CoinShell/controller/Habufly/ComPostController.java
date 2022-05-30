@@ -34,8 +34,8 @@ public class ComPostController {
     
     @ResponseBody
     @GetMapping("/viewReply")
-    public List<Comment> viewReply(@RequestParam Integer articleId, @RequestParam Integer commentId) throws IOException{
-    	List<Comment> allReply = cService.selectReply(articleId, commentId);
+    public List<Map<String,Object>> viewReply(@RequestParam Integer articleId, @RequestParam Integer commentId) throws IOException{
+    	List<Map<String,Object>> allReply = cService.selectReply(articleId, commentId);
     	return allReply;
     }
     
@@ -71,10 +71,10 @@ public class ComPostController {
     
     @ResponseBody
     @PostMapping("/editReply")
-    public List<Comment> editReply(@RequestBody Comment comm, @RequestParam Integer commentId) throws IOException{
+    public List<Map<String,Object>> editReply(@RequestBody Comment comm, @RequestParam Integer commentId) throws IOException{
     	
     	Integer articleId = comm.getArticleId();
-    	List<Comment> oldReply = cService.selectReply(articleId, commentId);
+    	List<Map<String,Object>> oldReply = cService.selectReply(articleId, commentId);
     	System.out.println(oldReply);
     	
     	if (comm.getText().equals("") || comm.getUserEmail().equals("") || comm.getUserName().equals("")) {
@@ -92,7 +92,7 @@ public class ComPostController {
     		cService.inserComm(comm);
     	}
     	
-    	List<Comment> allReply = cService.selectReply(articleId, commentId);
+    	List<Map<String,Object>> allReply = cService.selectReply(articleId, commentId);
     	return allReply;
     }
 

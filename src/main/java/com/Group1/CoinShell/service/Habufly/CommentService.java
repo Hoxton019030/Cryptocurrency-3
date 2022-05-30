@@ -31,9 +31,9 @@ public class CommentService {
 		return comm;
 	}
 
-	public List<Comment> selectReply(Integer articleId, Integer commentId) {
-		List<Comment> comm = dao.findReplyByAtcAndType(articleId, commentId);
-		return comm;
+	public List<Map<String,Object>> selectReply(Integer articleId, Integer commentId) {
+		List<Map<String,Object>> reply = dao.findReplyByAtcAndType(articleId, commentId);
+		return reply;
 	}
 	
 	public Page<Comment> findByPage(Integer pageNumber) {

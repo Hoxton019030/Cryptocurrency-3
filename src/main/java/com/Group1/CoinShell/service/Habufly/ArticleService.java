@@ -91,6 +91,11 @@ public class ArticleService {
 		List<Article> list = dao.findByTitle(titlePart);
 		return list;
 	}
+
+	public String findImg(Integer authorId) {
+		String img = dao.findImg(authorId);
+		return img;
+	}
 	
 	
 

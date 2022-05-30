@@ -21,6 +21,7 @@
     <div class="card">
         <div class="row">
             <div class="col-md-12">
+                <img style="display:block; width:100px;height:100px;" src="${img}" />
                 <h1>${Article.title}</h1>
                 <input id="aid" type="hidden" value="${Article.id}"/>
                 <input id="authorid" type="hidden" value="${Article.authorId}"/>
@@ -106,6 +107,7 @@ function closeCommentL(){
 
 async function comment(){
     await commentTo();
+    await wait(100);
     loadComment()
 }
 
@@ -130,7 +132,11 @@ function closeReply(id){
 }
 
 function doReply(id){
-    $("#"+id).toggle()
+    if ("${login == null }" == "true") {
+        $('#loginModal').modal("show")
+    }else{
+    $("#replySection"+id).toggle()
+    }
 }
 
 pageidC.addEventListener('click',switchPageC);
@@ -285,9 +291,9 @@ function displayComm(data){
                             </div>                                
                             <div class="col-4">                                
                                 <div class="pull-right reply">
-                                    <a href="#" onclick="doReply(`+id+`)"><span><i class="fa fa-reply"></i>reply</span></a>
-                                    <div id="`+id+`" class="reply-section">
-                                        <ul class="reply-l" style="display: none;">
+                                    <span onclick="doReply(`+id+`)"><i class="fa fa-reply"></i>reply</span>
+                                    <div id="replySection`+id+`" class="reply-section"  style="display: none;">
+                                        <ul class="reply-l">
                                             <li style="height:28px;line-height: 28px;overflow: hidden">
                                                 Comment content:(necessery)
                                             </li>
@@ -295,8 +301,7 @@ function displayComm(data){
                                                 <textarea id="text-r`+id+`" tabindex="1" aria-required="true"></textarea>
                                             </li>
                                             <li class="reply-btn">
-                                                <button class="submit-r" onclick="reply(`+id+`)" tabindex="5">OK!Let's do this!</button>
-                                                <p>( Ctrl+Enter Quick Submit )&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                                                <button class="submit-r" onclick="reply(`+id+`)" tabindex="5">OK!Let's do this!</button>                                                
                                             </li>
                                         </ul>
                                         <ul class="reply-r" style="display: none;">
@@ -422,13 +427,15 @@ function displayReply(data, id){
                 var mm = added.getMinutes();
                 var weekIndex = added.getDay();
                 var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
-                var weekDayPrint = weekDay[weekIndex];                  
+                var weekDayPrint = weekDay[weekIndex];  
+                var img = value.CustomizedUserAvatar;                
                 // <a class="pr-3" href="#"><img class="rounded-circle" alt="Bootstrap Media Another Preview" src="https://i.imgur.com/xELPaag.jpg" /></a>
                 $("#reply-list"+id).append(`
                 <div class="media mt-4">
                             <div class="media-body">
                                 <div class="row">
                                     <div class="col-12 d-flex">
+                                        <img style="display:block; width:100px;height:100px;" src="`+img+`" />
                                         <h5>`+value.userName+`</h5>
                                         <span>-`+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</span>
                                     </div>
