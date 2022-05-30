@@ -92,6 +92,12 @@
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
 		<!-- End使用Springmail -->
+		<!-- Start使用SpringSecurity -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<!-- End使用SpringSecurity -->
 
 
 	</dependencies>
