@@ -1,6 +1,7 @@
 package com.Group1.CoinShell.service.Habufly;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,8 +26,8 @@ public class CommentService {
 		dao.save(comm);
 	}
 
-	public List<Comment> selectComm(Integer articleId) {
-		List<Comment> comm = dao.findCommentByAtcAndType(articleId);
+	public List<Map<String,Object>> selectComm(Integer articleId) {
+		List<Map<String,Object>> comm = dao.findCommentByAtcAndType(articleId);
 		return comm;
 	}
 

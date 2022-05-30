@@ -2,6 +2,7 @@ package com.Group1.CoinShell.controller.Habufly;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -26,8 +27,8 @@ public class ComPostController {
 
     @ResponseBody
     @GetMapping("/viewComment")
-    public List<Comment> viewComment(@RequestParam Integer articleId) throws IOException{
-    	List<Comment> allComm = cService.selectComm(articleId);
+    public List<Map<String,Object>> viewComment(@RequestParam Integer articleId) throws IOException{
+    	List<Map<String,Object>> allComm = cService.selectComm(articleId);
     	return allComm;
     }
     
@@ -40,10 +41,10 @@ public class ComPostController {
     
     @ResponseBody
     @PostMapping("/editComment")
-    public List<Comment> editComment(@RequestBody Comment comm) throws IOException{
+    public List<Map<String,Object>> editComment(@RequestBody Comment comm) throws IOException{
 		
     	Integer articleId = comm.getArticleId();
-		List<Comment> oldComm = cService.selectComm(articleId);
+    	List<Map<String,Object>> oldComm = cService.selectComm(articleId);
 		System.out.println(oldComm);
 		
     	if (comm.getText().equals("") || comm.getUserEmail().equals("") || comm.getUserName().equals("")) {
@@ -64,7 +65,7 @@ public class ComPostController {
         Integer commentNum = cService.checkCommentNum(articleId, "a");
         aService.updatCommentNum(articleId, commentNum);
         
-        List<Comment> allComm = cService.selectComm(articleId);
+        List<Map<String,Object>> allComm = cService.selectComm(articleId);
         return allComm;
     }
     

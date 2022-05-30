@@ -89,9 +89,13 @@ doComment.addEventListener('click',verifyMembership);
 closeComment.addEventListener('click',closeCommentL);
 
 function verifyMembership(){
-    $(".comment-l").toggle();
-    $("#closeComment").toggle();
-    $("#doComment").hide();
+    if ("${login == null }" == "true") {
+        $('#loginModal').modal("show")
+    }else{
+        $(".comment-l").toggle();
+        $("#closeComment").toggle();
+        $("#doComment").hide();
+    }
 }
 
 function closeCommentL(){
@@ -268,14 +272,16 @@ function displayComm(data){
             var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
             var weekDayPrint = weekDay[weekIndex];
             var id = value.id;
-            var cidForReply = value.commentId;           
+            var cidForReply = value.commentId;   
+            var img = value.CustomizedUserAvatar;        
             // <img class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="https://i.imgur.com/stD0Q19.jpg" />
             $("#comment-list").append(`
                     <div class="media-body">
                         <div class="row">
                             <div class="col-8 d-flex">
-                               <h5>`+value.userName+`</h5>
-                               <span>-`+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</span>
+                                <img style="display:block; width:100px;height:100px;" src="`+img+`" />
+                                <h5>`+value.userName+`</h5>
+                                <span>-`+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</span>
                             </div>                                
                             <div class="col-4">                                
                                 <div class="pull-right reply">
@@ -298,7 +304,7 @@ function displayComm(data){
                                                 <label for="userName">Name:(necessery)</label>
                                             </li>
                                             <li>
-                                                <input type="text" id="userName-r`+id+`" size="25" tabindex="2" aria-required='true'/>
+                                                <input type="text" id="userName-r`+id+`" size="25" tabindex="2" aria-required='true' value="${login.customizedUserName}"/>
                                             </li>
                                             <li>
                                                 <label for="userEmail">E-mail:(necessery)</label>
@@ -310,7 +316,7 @@ function displayComm(data){
                                                 <input type="hidden" id="commentId`+id+`" value="`+id+`" />
                                             </li>
                                             <li>
-                                                <input type="text" id="userEmail-r`+id+`" size="25" tabindex="3" aria-required='true'/>
+                                                <input type="text" id="userEmail-r`+id+`" size="25" tabindex="3" aria-required='true' value="${login.eMail}"/>
                                             </li>
                                         </ul>
                                     </div>
