@@ -183,14 +183,17 @@
 									<span aria-hidden="true">&times;</span>
 								</button>
                             </div>
-                            <div class="modal-body">
-                                <p>You will receive an email with instructions on how to reset your password in a few minutes. You can also set a new password if you've never set one before.</p>
-                                <h6 style="margin-top: 30px;">Email Address</h6>
-                                <form action="#sendpswmail" method="#doOrPost"></form>
-                                <!--這裡要加上 javax.mail 寄送密碼驗證-->
-                                <input type="email" value="${login.eMail}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-                                <button class="btn btn-info btn-block mt-1" type="button">Send Instructions</button>
-                            </div>
+                            <form action="sendResetEmail" method="post">
+                                <div class="modal-body">
+                                    <p>You will receive an email with instructions on how to reset your password in a few minutes. You can also set a new password if you've never set one before.</p>
+                                    <h6 style="margin-top: 30px;">Email Address</h6>
+                                    <form action="#sendpswmail" method="#doOrPost"></form>
+                                    <!--這裡要加上 javax.mail 寄送密碼驗證-->
+                                    <input type="email" name="eMail" value="${login.eMail}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                    <input type="text" name="id" value="${login.id}">
+                                    <button class="btn btn-info btn-block mt-1" type="submit">Send Instructions</button>
+                                </div>
+                            </form>
                             </form>
                         </div>
                     </div>

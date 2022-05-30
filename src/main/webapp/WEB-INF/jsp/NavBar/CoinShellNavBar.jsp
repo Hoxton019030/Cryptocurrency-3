@@ -54,7 +54,7 @@
                                 </li>
                                 <li class="nav-item"><a class="nav-link" href="#">Learn</a></li>
                                 <li class="nav-item active"><a class="nav-link" href="${contextRoot}/shellshop">Shell Shop</a></li>
-                                <li class="nav-item active"><a class="nav-link" href="administrator">Backend Administrator</a></li>
+                                <li class="nav-item active"><a class="nav-link" href="http://localhost:8080/coinshell/administrator">Backend Administrator</a></li>
                             </ul>
                         </div>
                         <!-- Button trigger modal  -->
