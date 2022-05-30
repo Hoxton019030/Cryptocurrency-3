@@ -33,7 +33,7 @@
                                     <span class="input-group-text font-weight-bold" id="inputGroup-sizing-default"><i class="fa-solid fa-user-astronaut"></i>&nbsp;Avatar</span>
                                 </div>
                                 <div id="user-img">
-                                    123123123123123123123123123 <img src="${login.customizedUserAvatar }" style="border-radius: 50%; height: 100px; ">
+                                    <img src="${login.customizedUserAvatar }" style="border-radius: 50%; height: 100px; ">
                                 </div>
                                 <button class="btn btn-outline-primary" type="button" data-toggle="modal" data-target="#chooseAvatar">Avatar</button>
                                 <script>
@@ -44,11 +44,9 @@
                                         $("#user-img").empty()
                                         var url = "http://localhost:8080/coinshell/selectMemberAvatar?id=";
                                         var id = `${login.id}`;
-                                        alert(url + id);
                                         fetch(url + id).then(function(response) {
                                             return response.json()
                                         }).then(function(jsonObject) {
-                                            alert(jsonObject[0].userAvatarBase64);
                                             $("#user-img").append(`<img src="` + jsonObject[0].userAvatarBase64 + `"
 
 										style="border-radius: 50%; height: 100px; ">`);
