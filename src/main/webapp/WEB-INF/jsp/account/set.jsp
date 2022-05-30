@@ -33,10 +33,8 @@
 									<span class="input-group-text font-weight-bold"
 										id="inputGroup-sizing-default"><i class="fa-solid fa-user-astronaut"></i>&nbsp;Avatar</span>
 								</div>
-								<div id="user-img">
-									<img src="${login.customizedUserAvatar }"
-										style="border-radius: 50%; height: 100px; ">
-								</div>
+								<img src="${ login.customizedUserAvatar }" style="border-radius: 50%; height: 100px; ">
+
 								<button class="btn btn-outline-primary" type="button" data-toggle="modal"
 									data-target="#chooseAvatar">Edit Avatar</button>
 								<script>
@@ -138,50 +136,43 @@
 							</div>
 
 							<form action="selectAvatar" method="post">
-								<div class="modal-body">
-									<p>Select an avatar for your profile. You can redeem more avatars from the Rewards
-										page.
-									</p>
-									<input type="text" value="${login.id}" name="id">
-									<input type="radio" name="radio-emotion" id="sad" class="input-hidden" value="1" />
-									<label for="sad">
-										<img src="${contextRoot}/images/NavBarImg/bubbleAvatar.png" alt="I'm sad" />
-									</label>
+							<div class="modal-body">
+								<p>Select an avatar for your profile. You can redeem more avatars from the Rewards page.
+								</p>
+								<input type="radio" name="radio-emotion" id="sad" class="input-hidden" value="1" />
+								<label for="sad">
+									<img src="${contextRoot}/images/NavBarImg/bubbleAvatar.png" alt="I'm sad" />
+								</label>
 
-									<input type="radio" name="radio-emotion" id="happy1" class="input-hidden"
-										value="2" />
-									<label for="happy1">
-										<img src="${contextRoot}/images/NavBarImg/hulaAvatar.png" alt="I'm happy1" />
-									</label>
+								<input type="radio" name="radio-emotion" id="happy1" class="input-hidden" value="2" />
+								<label for="happy1">
+									<img src="${contextRoot}/images/NavBarImg/hulaAvatar.png" alt="I'm happy1" />
+								</label>
 
-									<input type="radio" name="radio-emotion" id="happy2" class="input-hidden"
-										value="3" />
-									<label for="happy2">
-										<img src="${contextRoot}/images/NavBarImg/magnetaAvatar.png" alt="I'm happy2" />
-									</label>
+								<input type="radio" name="radio-emotion" id="happy2" class="input-hidden" value="3" />
+								<label for="happy2">
+									<img src="${contextRoot}/images/NavBarImg/magnetaAvatar.png" alt="I'm happy2" />
+								</label>
+								
+								<input type="radio" name="radio-emotion" id="happy3" class="input-hidden" value="4" />
+								<label for="happy3">
+									<img src="${contextRoot}/images/NavBarImg/purAvatar.png" alt="I'm happy3" />
+								</label>
 
-									<input type="radio" name="radio-emotion" id="happy3" class="input-hidden"
-										value="4" />
-									<label for="happy3">
-										<img src="${contextRoot}/images/NavBarImg/purAvatar.png" alt="I'm happy3" />
-									</label>
-
-									<input type="radio" name="radio-emotion" id="happy4" class="input-hidden"
-										value="5" />
-									<label for="happy4">
-										<img src="${contextRoot}/images/NavBarImg/defaultAvatar.png" alt="I'm happy4" />
-									</label>
+								<input type="radio" name="radio-emotion" id="happy4" class="input-hidden" value="5" />
+								<label for="happy4">
+									<img src="${contextRoot}/images/NavBarImg/defaultAvatar.png" alt="I'm happy4" />
+								</label>
 							</form>
 
 
 
-							<p style="margin-top: 30px;">Unlock more cool avatars with myShells. <a href="#">Go to
-									Rewards page →</a></p>
-							<button type="submit" class="btn btn-info btn-block mt-4">Select</button>
-						</div>
+								<p style="margin-top: 30px;">Unlock more cool avatars with myShells. <a href="#">Go to Rewards page →</a></p>
+								<button type="submit" class="btn btn-info btn-block mt-4">Select</button>
+							</div>
 
+						</div>
 					</div>
-				</div>
 				</div>
 				</div>
 

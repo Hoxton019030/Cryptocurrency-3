@@ -23,12 +23,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Coin {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
 
-	@Column(name = "coinid")
-	private Integer coid;
+//	@Id
+//	@Column(name = "coinid")
+//	private Integer coid;
 
 	@Column(name = "name")
 	private String name;
@@ -130,21 +131,17 @@ public class Coin {
 	@Column(name = "reportUrl")
 	private String reportUrl;
 	
-	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, orphanRemoval = true,mappedBy = "coin")
-    private Set<Watch> watch = new HashSet<>();
-	
-//	@ManyToMany(mappedBy = "coin")
-//	private Set<Watch> watch = new HashSet<Watch>();
+//	@Column(name = "flag")
+//	private String flag;
 
 	public Coin() {
 	}
 
 
-
 	@Override
 	public String toString() {
-		return "Coin [id=" + id + ", coid=" + coid + ", name=" + name + ", symbol=" + symbol + ", slug=" + slug
-				+ ", tags=" + Arrays.toString(tags) + ", cmcRank=" + cmcRank + ", marketPairCount=" + marketPairCount
+		return "Coin [id=" + id + ", name=" + name + ", symbol=" + symbol + ", slug=" + slug + ", tags="
+				+ Arrays.toString(tags) + ", cmcRank=" + cmcRank + ", marketPairCount=" + marketPairCount
 				+ ", circulatingSupply=" + circulatingSupply + ", selfReportedCirculatingSupply="
 				+ selfReportedCirculatingSupply + ", totalSupply=" + totalSupply + ", maxSupply=" + maxSupply
 				+ ", isActive=" + isActive + ", lastUpdated=" + lastUpdated + ", dateAdded=" + dateAdded
@@ -155,9 +152,8 @@ public class Coin {
 				+ ", fullyDilluttedMarketCap=" + fullyDilluttedMarketCap + ", marketCapByTotalSupply="
 				+ marketCapByTotalSupply + ", dominance=" + dominance + ", turnover=" + turnover
 				+ ", ytdPriceChangePercentage=" + ytdPriceChangePercentage + ", isAudited=" + isAudited + ", auditor="
-				+ auditor + ", auditStatus=" + auditStatus + ", reportUrl=" + reportUrl + ", watch=" + watch + "]";
+				+ auditor + ", auditStatus=" + auditStatus + ", reportUrl=" + reportUrl + "]";
 	}
-
 
 
 	public Integer getId() {
@@ -166,14 +162,6 @@ public class Coin {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public Integer getCoid() {
-		return coid;
-	}
-
-	public void setCoid(Integer coid) {
-		this.coid = coid;
 	}
 
 	public String getName() {
@@ -279,8 +267,6 @@ public class Coin {
 	public void setDateAdded(String dateAdded) {
 		this.dateAdded = dateAdded;
 	}
-
-
 
 	public String getQuotesName() {
 		return quotesName;
@@ -433,20 +419,6 @@ public class Coin {
 	public void setReportUrl(String reportUrl) {
 		this.reportUrl = reportUrl;
 	}
-
-
-
-	public Set<Watch> getWatch() {
-		return watch;
-	}
-
-
-
-	public void setWatch(Set<Watch> watch) {
-		this.watch = watch;
-	}
-
-
-
 	
+
 }

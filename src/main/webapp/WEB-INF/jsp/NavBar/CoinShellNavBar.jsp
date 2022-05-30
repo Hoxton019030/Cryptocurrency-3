@@ -24,17 +24,14 @@
 
 					<!--Only for this login modal's CSS 連結-->
 					<link rel="stylesheet" href="${contextRoot}/css/loginStyle.css">
+					<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 
 					<!--reCAPTCHA v2 代碼-->
 					<script src="https://www.google.com/recaptcha/api.js"></script>
 					
-					<!-- jQuery + Bootstrap Bundle with Popper | Bootstrap 導入程式 JS -->
 					<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-					<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
-						integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
-						crossorigin="anonymous"></script>
-					
-
+					<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+					<script src="${contextRoot}/javascripts/bootstrap.bundle.min.js"></script>
 				</head>
 
 				<body>
@@ -77,6 +74,7 @@
 										${login.eMail}'s Settings
 									</button>
 									<div class="dropdown-menu dropdown-menu-right">
+<!-- 										<button class="dropdown-item" type="button">Watchlist</button> -->
 										<button class="dropdown-item" type="button">Portfolio</button>
 										<button class="dropdown-item" type="button"><a href="/coinshell/account/referral">Referral Program</a></button>
 										<button class="dropdown-item" type="button"><a href="/coinshell/account/set">Account Settings</a></button>
@@ -240,9 +238,6 @@
 						</div>
 					</div>
 					</div>
-
-
-
 
 
 					<script>
