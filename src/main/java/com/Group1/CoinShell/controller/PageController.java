@@ -27,8 +27,10 @@ public class PageController {
 		return "forum/viewAllAjax";
 	}
 	
-	
-	
+	@GetMapping("/shellshop")
+	public String shellshop() {
+		return "store/store";
+	}
 	
 	
 	

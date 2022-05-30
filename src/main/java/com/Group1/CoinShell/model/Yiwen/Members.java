@@ -59,11 +59,7 @@ public class Members {
 	@DateTimeFormat(pattern="yyyy/MM/dd")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "JoinTime", columnDefinition ="date", nullable=false)
-    private Date joinTime;
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "members",cascade = CascadeType.ALL)
-	private Set<Watch> watch = new LinkedHashSet<Watch>();
-	
+    private Date joinTime;	
 	
 //	@OneToOne(fetch = FetchType.EAGER, mappedBy = "members", cascade = CascadeType.ALL)
 //	private CustomizedUserAvatar customizedUserAvatar1 = new CustomizedUserAvatar();
@@ -81,7 +77,6 @@ public class Members {
 		this.myShell = myShell;
 		Coin = coin;
 		this.joinTime = joinTime;
-		this.watch = watch;
 		this.customizedUserAvatar = customizedUserAvatar;
 	}
 
@@ -147,14 +142,6 @@ public class Members {
 
 	public void setJoinTime(Date joinTime) {
 		this.joinTime = joinTime;
-	}
-
-	public Set<Watch> getWatch() {
-		return watch;
-	}
-
-	public void setWatch(Set<Watch> watch) {
-		this.watch = watch;
 	}
 
 	//public CustomizedUserAvatar getCustomizedUserAvatar1() {
