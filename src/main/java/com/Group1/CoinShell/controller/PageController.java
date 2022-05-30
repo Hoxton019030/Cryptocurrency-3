@@ -1,5 +1,7 @@
 package com.Group1.CoinShell.controller;
 
+import java.lang.annotation.Target;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +29,10 @@ public class PageController {
 		return "forum/viewAllAjax";
 	}
 	
-	
+	@GetMapping("/shellshop")
+	public String shellshop() {
+		return "store/store";
+	}
 	
 	
 	

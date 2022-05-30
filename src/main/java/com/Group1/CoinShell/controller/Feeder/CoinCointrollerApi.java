@@ -1,7 +1,12 @@
 package com.Group1.CoinShell.controller.Feeder;
 
+
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -12,17 +17,22 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Group1.CoinShell.model.Feeder.Coin;
 import com.Group1.CoinShell.model.Feeder.CoinDao;
+import com.Group1.CoinShell.model.Feeder.StarDTO;
+import com.Group1.CoinShell.model.Feeder.Watch;
+import com.Group1.CoinShell.model.Yiwen.Members;
 import com.Group1.CoinShell.service.Feeder.CoinService;
+import com.Group1.CoinShell.service.Feeder.WatchService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 @Component // 在 SpringbootdemoApplication 注入@EnableScheduling 搭配下面@Scheduled 以啟動定時器排程
@@ -31,9 +41,10 @@ public class CoinCointrollerApi {
 
 	@Autowired
 	private CoinService coinService;
-
 	@Autowired
 	private CoinDao coinDao;
+	@Autowired
+	private WatchService watchService;
 	                                                    // 需搭配@Component
 //	@Scheduled(initialDelay = 2000, fixedRate = 30000)  // 定時器 啟動專案 initialDelay 毫秒 後啟動 每 fixedRate 毫秒 RUN一次
 	@PostMapping("coin/insert")
@@ -100,8 +111,8 @@ public class CoinCointrollerApi {
 
 				Coin coin = new Coin();
 				
-				coin.setId(cmcRank); // 依照排名順序給ID的順序 因為要做更新 所以ID不能一直增加 故用cmcRank值只有1到100 (save方法:已經有id的值會自動變更新)
-				coin.setCoid(coid);  // 承上 也可以直接用cmcRank當作主key (在beans頁面的cmcRank上注入@id) 但我想要有id 所以用上面的方法
+				coin.setId(coid); // 依照排名順序給ID的順序 因為要做更新 所以ID不能一直增加 故用cmcRank值只有1到100 (save方法:已經有id的值會自動變更新)
+//				coin.setCoid(coid);  // 承上 也可以直接用cmcRank當作主key (在beans頁面的cmcRank上注入@id) 但我想要有id 所以用上面的方法
 				coin.setName(name);
 				coin.setSymbol(symbol);
 				coin.setSlug(slug);
@@ -144,16 +155,34 @@ public class CoinCointrollerApi {
 	//定時從資料庫抓資料 到 路徑網址 預設/coin/getAll (已經在JSP AJAX設定輪詢 這邊就不用在訂時跟資料庫要資料了)
 	//@Scheduled(initialDelay = 3000, fixedRate = 20000)
 	@GetMapping("coin/getAll")
-	public List<Coin> findAllcoin(Coin coin) {
-		List<Coin> allCoinList = coinService.findAll(coin);
+	public List<Coin> findAllcoin() {
+		List<Coin> allCoinList = coinService.findAll();
 		return allCoinList;
 	}
 	//http://localhost:8080/coinshell/coin/getAll
 	
+	@GetMapping("coin/getCoin")
+	public List<Map<String, Object>> getCoin(HttpSession session) {
+		
+		Members member =(Members) session.getAttribute("login");
+		
+		List<Map<String, Object>> result;
+
+		if(member != null) {
+		Integer memId = member.getId();
+		    result = coinService.getCoin(memId);
+		} else {
+		    result = coinService.getCoin();
+		}
+
+		return result; 
+	}
+	
+	
 	//已經在JSP AJAX設定輪詢 這邊就不用在訂時跟資料庫要資料了
 	@GetMapping("coin/page/{pageNumber}")
 	public List<Coin> findByPage(@PathVariable Integer pageNumber) {
-		Pageable pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.ASC, "id");
+		Pageable pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.ASC, "cmcRank");
 
 		Page<Coin> page = coinDao.findAll(pgb);
 
@@ -170,29 +199,58 @@ public class CoinCointrollerApi {
 		
 	}
 	
-	
 	//透過回傳NAME查詢
 	@GetMapping("/watch")
-	public List<Coin> watchCoinName(Model model, @RequestParam("name") String name) {
+	public List<Coin> watchCoinName(@RequestParam("name") String name) {
 		
 		List<Coin> coin = coinService.findByName(name);
-		
-//		model.addAttribute("watchlist", coin);
 		
 		return coin;
 	}
 	
-	//透過name跟symbol模糊查詢
+    @PostMapping("/insertWatch")
+    public Map<String, String> insertWatch(@RequestBody StarDTO dto) {
+    	
+//    	Members member =(Members) session.getAttribute("login");
+//    	Integer memId = member.getMemId();
+//    	System.out.println(memId);
+    	
+    	System.out.println("MemId:   " + dto.getMemId());
+    	System.out.println("CoinId:   " + dto.getCoinId());
+    	
+    	Watch watch = new Watch();
+    	watch.setMemberId(dto.getMemId());
+    	watch.setCoinId(dto.getCoinId());
+    	watchService.save(watch);
+    	
+    	Map<String, String> result = new HashMap<String, String>();
+    	result.put("status", "200");
+    	return result;
+    }
+    @DeleteMapping("/deleteWatch/{id}")
+    public Map<String, String> deleteWatch(@RequestBody StarDTO dto) {
+    	System.out.println("delete :  MemId =  "       + dto.getMemId());
+    	System.out.println("delete :  CoinId =  " + dto.getCoinId());
+    	
+    	 Integer memId =dto.getMemId();
+    	 Integer coinId =dto.getCoinId();
+    	
+    	watchService.deleteByCoinId(memId,coinId);
+    	
+    	Map<String, String> result = new HashMap<String, String>();
+    	result.put("status", "200");
+    	return result;
+    }
+	
+    //透過name跟symbol模糊查詢
     @ResponseBody
     @GetMapping("/coin/select")
     public List<Coin> selectCoinByName(@RequestParam String name) {
     	List<Coin> SelectCoin;
-        
+    	
     	SelectCoin = coinService.findByName2(name);
-        
-        System.out.println(SelectCoin);
-        
-        return SelectCoin;
+    	
+    	return SelectCoin;
     }
-	
+    
 }
