@@ -51,16 +51,17 @@
                                 <label for="userName">Name:(necessery)</label>
                             </li>
                             <li>
-                                <input type="text" id="userName-c" size="25" tabindex="2" aria-required='true' value="測試員熊掌1號"/>
+                                <input type="text" id="userName-c" size="25" tabindex="2" aria-required='true' value="${login.customizedUserName}"/>
                             </li>
                             <li>
                                 <label for="userEmail">E-mail:(necessery)</label>
                             </li>
                             <li>
                                 <input type="hidden" id="articleId" value="${Article.id}" />
+                                <input type="hidden" id="userId" value="${login.id}" />
                             </li>
                             <li>
-                                <input type="text" id="userEmail-c" size="25" tabindex="3" aria-required='true' value="commTest@gmail.com"/>
+                                <input type="text" id="userEmail-c" size="25" tabindex="3" aria-required='true' value="${login.eMail}"/>
                             </li>                            
                         </ul>
                     <!-- </form> -->
@@ -151,14 +152,16 @@ function commentTo(){
     var userNameC = document.getElementById("userName-c").value;
     var userEmailC = document.getElementById("userEmail-c").value;
     var textC = document.getElementById("text-c").value;
-    var articleIdC = document.getElementById("articleId").value; 
+    var articleIdC = document.getElementById("articleId").value;
+    var userIdC = document.getElementById("userId").value;
     var comm = {
         "userName":userNameC,
         "userEmail":userEmailC,
         "text":textC,
         "type":"a",
         "deleted":"n",
-        "articleId":articleIdC
+        "articleId":articleIdC,
+        "userId":userIdC
     }
     var jsonComm = JSON.stringify(comm);
     fetch('http://localhost:8080/coinshell/editComment', {
@@ -181,6 +184,7 @@ function replyTo(id){
     var textR = document.getElementById("text-r"+id).value;
     var articleIdR = document.getElementById("articleId").value; 
     var commentIdR = document.getElementById("commentId"+id).value;
+    var userIdR = document.getElementById("userId").value;
     var reply = {
         "userName":userNameR,
         "userEmail":userEmailR,
@@ -188,7 +192,8 @@ function replyTo(id){
         "type":"b",
         "deleted":"n",
         "articleId":articleIdR,
-        "commentId":commentIdR
+        "commentId":commentIdR,
+        "userId":userIdR
     }
     var jsonReply = JSON.stringify(reply);
     fetch('http://localhost:8080/coinshell/editReply?commentId='+commentIdR, {

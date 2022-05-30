@@ -14,7 +14,7 @@ padding-top: 82px;
 }
 </style>
 </head>
-
+<h1>${login.eMail}</h1>
 <div class="row justify-content-center">
 <div class="col-9">
     <form id="searchByTag">
