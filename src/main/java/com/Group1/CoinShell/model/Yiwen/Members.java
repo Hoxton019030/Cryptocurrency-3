@@ -57,9 +57,13 @@ public class Members {
 
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	@Temporal(TemporalType.TIMESTAMP)
+
 	@Column(name = "JoinTime", columnDefinition = "date", nullable = false)
 	private Date joinTime;
 
+//	@OneToOne(fetch = FetchType.EAGER, mappedBy = "members", cascade = CascadeType.ALL)
+//	private CustomizedUserAvatar customizedUserAvatar1 = new CustomizedUserAvatar();
+	
 	public Members() {
 	}
 
@@ -139,5 +143,6 @@ public class Members {
 	public void setCoin(Integer Coin) {
 		this.Coin = Coin;
 	}
+
 
 }
