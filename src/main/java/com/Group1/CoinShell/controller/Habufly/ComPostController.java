@@ -2,6 +2,7 @@ package com.Group1.CoinShell.controller.Habufly;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -26,24 +27,24 @@ public class ComPostController {
 
     @ResponseBody
     @GetMapping("/viewComment")
-    public List<Comment> viewComment(@RequestParam Integer articleId) throws IOException{
-    	List<Comment> allComm = cService.selectComm(articleId);
+    public List<Map<String,Object>> viewComment(@RequestParam Integer articleId) throws IOException{
+    	List<Map<String,Object>> allComm = cService.selectComm(articleId);
     	return allComm;
     }
     
     @ResponseBody
     @GetMapping("/viewReply")
-    public List<Comment> viewReply(@RequestParam Integer articleId, @RequestParam Integer commentId) throws IOException{
-    	List<Comment> allReply = cService.selectReply(articleId, commentId);
+    public List<Map<String,Object>> viewReply(@RequestParam Integer articleId, @RequestParam Integer commentId) throws IOException{
+    	List<Map<String,Object>> allReply = cService.selectReply(articleId, commentId);
     	return allReply;
     }
     
     @ResponseBody
     @PostMapping("/editComment")
-    public List<Comment> editComment(@RequestBody Comment comm) throws IOException{
+    public List<Map<String,Object>> editComment(@RequestBody Comment comm) throws IOException{
 		
     	Integer articleId = comm.getArticleId();
-		List<Comment> oldComm = cService.selectComm(articleId);
+    	List<Map<String,Object>> oldComm = cService.selectComm(articleId);
 		System.out.println(oldComm);
 		
     	if (comm.getText().equals("") || comm.getUserEmail().equals("") || comm.getUserName().equals("")) {
@@ -64,16 +65,16 @@ public class ComPostController {
         Integer commentNum = cService.checkCommentNum(articleId, "a");
         aService.updatCommentNum(articleId, commentNum);
         
-        List<Comment> allComm = cService.selectComm(articleId);
+        List<Map<String,Object>> allComm = cService.selectComm(articleId);
         return allComm;
     }
     
     @ResponseBody
     @PostMapping("/editReply")
-    public List<Comment> editReply(@RequestBody Comment comm, @RequestParam Integer commentId) throws IOException{
+    public List<Map<String,Object>> editReply(@RequestBody Comment comm, @RequestParam Integer commentId) throws IOException{
     	
     	Integer articleId = comm.getArticleId();
-    	List<Comment> oldReply = cService.selectReply(articleId, commentId);
+    	List<Map<String,Object>> oldReply = cService.selectReply(articleId, commentId);
     	System.out.println(oldReply);
     	
     	if (comm.getText().equals("") || comm.getUserEmail().equals("") || comm.getUserName().equals("")) {
@@ -91,7 +92,7 @@ public class ComPostController {
     		cService.inserComm(comm);
     	}
     	
-    	List<Comment> allReply = cService.selectReply(articleId, commentId);
+    	List<Map<String,Object>> allReply = cService.selectReply(articleId, commentId);
     	return allReply;
     }
 

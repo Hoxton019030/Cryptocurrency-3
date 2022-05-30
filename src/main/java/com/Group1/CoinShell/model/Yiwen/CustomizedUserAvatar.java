@@ -2,16 +2,13 @@ package com.Group1.CoinShell.model.Yiwen;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="customizedUserAvatar")
+@Table(name="CustomizedUserAvatar")
 public class CustomizedUserAvatar {
 
 	@Id
@@ -25,10 +22,12 @@ public class CustomizedUserAvatar {
 	@Column(name="aliasAvatar", columnDefinition="nvarchar(20)")
 	private String aliasAvatar;
 	
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "member_id")
-	private Members members;
+
+//	@OneToOne(fetch = FetchType.EAGER)
+//	@JoinColumn(name = "member_id")
+//	private Members members;
 	
+
 	public CustomizedUserAvatar() {
 	}
 

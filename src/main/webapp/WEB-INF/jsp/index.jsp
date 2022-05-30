@@ -11,13 +11,11 @@
                 <meta charset="UTF-8">
                 <title>CoinShell</title>
                 <link rel="Shortcut Icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/1490/1490853.png" />
-                <link href="${contextRoot}/css/bootstrap.min.css" rel="stylesheet">
-                <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
                 <link rel="stylesheet" href="/resources/demos/style.css">
-                <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-                <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-                <script src="${contextRoot}/javascripts/indexJs.js"></script>
+<!--                 index頁面css方法包 -->
                 <link rel="stylesheet" type="text/css" href="${contextRoot}/css/indexCss.css">
+<!--                 星星圖示導包 -->
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
                 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                 <style type="text/css">
                     body {
@@ -94,6 +92,8 @@
                                         <th scope="col">Market Cap</th>
                                     </tr>
                                 </thead>
+                                <tbody class="cointable" id="followTbody">
+								</tbody>
                             </table>
                         </div>
                     </div>
@@ -106,11 +106,93 @@
                 </div>
 
 
-                <script>
-                    $("#search").click(function() {
-                        loadCoinByName();
-                    })
-                </script>
+    <script src="${contextRoot}/javascripts/indexJs.js"></script>
+	<script>
+
+		var memId = '${login.id}';
+		console.log("memId=" + memId);
+	
+		$(function() {
+	   		upCoin(memId);
+		})
+		var timeoutID;
+		function setUpCoin(){
+		timeoutID  = window.setTimeout(function(){upCoin(memId)},30000);
+		}
+		
+		$("#page-overview").click(function() {
+			upCoin();
+		});
+		
+		$("#page-historical").click(function() {
+			followList();
+		});
+		
+		$("#search").click(function() {
+			loadCoinByName();
+		});
+		
+		function watch(obj) {
+			if ('${login == null }' == 'true') {
+				$('#loginModal').modal("show")
+			} else {
+				var coinId = $(obj).val();
+				var checked = $(obj).prop('checked');
+
+				if (checked == true) {
+					var param = {
+						"memId" : memId,
+						"coinId" : coinId
+					}
+					console.log("memId==" + memId + "," + "coinId==" + coinId);
+					$.ajax({
+						url : 'http://localhost:8080/coinshell/insertWatch',
+						contentType : 'application/json; charset=UTF-8',
+						dataType : 'json',
+						method : 'post',
+						data : JSON.stringify(param),
+						success : function(result) {
+							console.log("result====" + result.status)
+							console.log("成功");
+						},
+						error : function(err) {
+							debugger
+							console.log("result====" + err)
+							console.log("失敗");
+						}
+					})
+				} else {
+					var param = {
+						"memId" : memId,
+						"coinId" : coinId
+					}
+					console.log("delete:" + memId + "," + "delete:" + coinId);
+					$.ajax({
+						url : 'http://localhost:8080/coinshell/deleteWatch/'+ coinId,
+						contentType : 'application/json; charset=UTF-8',
+						dataType : 'json',
+						method : 'delete',
+						data : JSON.stringify(param),
+						success : function(result) {
+							console.log("result====" + result.status)
+							console.log("成功");
+							if (result.status == '200') {
+								$('#followTbody').find('[id="' + coinId + '"]').closest('tr').remove();
+								$('#topTbody').find('[id="' + coinId + '"]').prop('checked', false);
+							}
+						},
+						error : function(err) {
+							console.log("result====" + err)
+							console.log("失敗");
+
+						}
+					})
+				}
+			}
+		}
+		
+		
+	</script>
 
             </body>
 
