@@ -28,17 +28,17 @@ public class Commodity {
 	@Column(name="volume",nullable = false)
 	private Integer volume;
 	
-	@Column(name="photo",columnDefinition = "NVARCHAR(MAX)",nullable = false)
-	private String photo;
+	@Column(name="photo",columnDefinition = "VARBINARY(MAX)",nullable = false)
+	private byte[] photo;
 	
-	@Column(name="discribe",nullable = false)
-	private String discribe;
+	@Column(name="describe",nullable = false)
+	private String describe;
 	
 	@Column(name="shell_or_coin",nullable = false)
 	private String shellOrCoin;
 
-	public Commodity(Integer id, String commodityName, Integer coin, Integer myShell, Integer volume, String photo,
-			String discribe, String shellOrCoin) {
+	public Commodity(Integer id, String commodityName, Integer coin, Integer myShell, Integer volume, byte[] photo,
+			String describe, String shellOrCoin) {
 		super();
 		this.id = id;
 		this.commodityName = commodityName;
@@ -46,7 +46,7 @@ public class Commodity {
 		this.myShell = myShell;
 		this.volume = volume;
 		this.photo = photo;
-		this.discribe = discribe;
+		this.describe = describe;
 		this.shellOrCoin = shellOrCoin;
 	}
 
@@ -90,20 +90,20 @@ public class Commodity {
 		this.volume = volume;
 	}
 
-	public String getPhoto() {
+	public byte[] getPhoto() {
 		return photo;
 	}
 
-	public void setPhoto(String photo) {
+	public void setPhoto(byte[] photo) {
 		this.photo = photo;
 	}
 
 	public String getDiscribe() {
-		return discribe;
+		return describe;
 	}
 
-	public void setDiscribe(String discribe) {
-		this.discribe = discribe;
+	public void setDescribe(String describe) {
+		this.describe = describe;
 	}
 
 	public String getShellOrCoin() {

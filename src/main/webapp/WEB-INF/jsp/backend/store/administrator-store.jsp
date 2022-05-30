@@ -5,10 +5,14 @@
 
     <head>
         <meta charset="UTF-8">
-        <title>刪除商品</title>
+        <title>Insert title here</title>
     </head>
 
     <body>
+
+        <a href="store/addCommodity">新增商品 </a>
+        <br>
+        <a href="store/showAllCommodities">全部商品 </a>
 
     </body>
 

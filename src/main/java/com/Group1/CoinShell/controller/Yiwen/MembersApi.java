@@ -1,8 +1,12 @@
 package com.Group1.CoinShell.controller.Yiwen;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -11,10 +15,29 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.Group1.CoinShell.model.Yiwen.Members;
+import com.Group1.CoinShell.service.Yiwen.MembersService;
+
 
 //
-//@RestController     //命名為 RestController(XXXApi.java) 的類別回傳的都是JSON
-//public class MembersApi {
+@RestController     //命名為 RestController(XXXApi.java) 的類別回傳的都是JSON
+public class MembersApi {
+	
+	@Autowired
+	MembersService service;
+	
+@GetMapping(value="/selectMemberAvatar")	
+	public List<Map<String, Object>> selectMemberAvatar (@RequestParam("id")Integer id){
+		return service.selectMemberAvatar(id);
+	}
+
+	@GetMapping(value="/findAllMembers")
+	public List<Members> findAllMembers(){
+		return service.findAllMembers();
+	}
+
+//url : http://localhost:8080/coinshell/selectMemberAvatar?id=1
+
 //
 //	@Autowired
 //	private MembersDao dao;
@@ -50,25 +73,25 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 //	
 //	/**
 //	 * AccountSetting 修改使用者資料；Update my profile
-//	 * @param memId
+//	 * @param id
 //	 * @param members
 //	 * @return
 //	 */
-//	@PutMapping(value="/members/u-setting/{memId}")
-//	public Members updateMemberDetail(@PathVariable("memId") Integer memId, @RequestBody Members members) {
-//		Members ResMem = dao.updateUSettingById(memId, members);
+//	@PutMapping(value="/members/u-setting/{id}")
+//	public Members updateMemberDetail(@PathVariable("id") Integer id, @RequestBody Members members) {
+//		Members ResMem = dao.updateUSettingById(id, members);
 //		return ResMem;
 //	}
 //	
 //	/**
 //	 * 變更使用者密碼
-//	 * @param memId
+//	 * @param id
 //	 * @param members
 //	 * @return
 //	 */
-//	@PutMapping(value="/members/u-pwd/{memId}")
-//	public Members updateMemberPassword(@PathVariable("memId") Integer memId, @RequestBody Members members) {
-//		Members resMem = dao.updatePasswordById(memId, members);
+//	@PutMapping(value="/members/u-pwd/{id}")
+//	public Members updateMemberPassword(@PathVariable("id") Integer id, @RequestBody Members members) {
+//		Members resMem = dao.updatePasswordById(id, members);
 //		return resMem;
 //	}
 //}
@@ -77,12 +100,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 ///////////////////////以下無關/////////////////////////////
 /////**
 ////* AccountSetting 檢視使用者: READ my profile
-////* @param memId
+////* @param id
 ////* @return
 ////*/
 ////@GetMapping(value="members/get")
-////public Members getMembersById2(@RequestParam Integer memId) {
-////	Optional<Members> responseMem = dao.findById(memId);
+////public Members getMembersById2(@RequestParam Integer id) {
+////	Optional<Members> responseMem = dao.findById(id);
 ////	
 ////	if(responseMem.isPresent()) {
 ////		return responseMem.get();
@@ -92,12 +115,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 ////	
 ////	/**
 ////	 * AccountSetting 檢視使用者: READ my profile
-////	 * @param memId
+////	 * @param id
 ////	 * @return
 ////	 */
-////	@GetMapping(value="members/get/{memId}")
-////	public Members getMembersById(@PathVariable Integer memId) {
-////		Optional<Members> responseMem = dao.findById(memId);
+////	@GetMapping(value="members/get/{id}")
+////	public Members getMembersById(@PathVariable Integer id) {
+////		Optional<Members> responseMem = dao.findById(id);
 ////		
 ////		if(responseMem.isPresent()) {
 ////			return responseMem.get();
@@ -109,12 +132,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 ////	/**
 ////	 * (後台專用) 刪除使用者資料
 ////	 * Postman Get 方法 => localhost:8080/(context-path)/members/delete/(要刪除的id#)
-////	 * @param MemId
+////	 * @param id
 ////	 * @return
 ////	 */
-////	@GetMapping(value="members/delete/{MemId}")
-////	public boolean deleteMember(@PathVariable Integer MemId) {
-////		dao.delByMemId(MemId);
+////	@GetMapping(value="members/delete/{id}")
+////	public boolean deleteMember(@PathVariable Integer id) {
+////		dao.delByid(id);
 ////		return true;
 ////	}
 ////	
@@ -131,13 +154,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 ////	
 ////	
 ////	/**
-////	 * (後台專用) 從第一頁開始， 每頁2筆，以MemId升冪排列，根據頁面做排序
+////	 * (後台專用) 從第一頁開始， 每頁2筆，以id升冪排列，根據頁面做排序
 ////	 * @param pageNumber
 ////	 * @return
 ////	 */
 ////	@GetMapping(value="members/page/{pageNumber}")
 ////	public List<Members> findByPage(@PathVariable Integer pageNumber) {
-////		Pageable pgb = PageRequest.of(pageNumber-1, 2, Sort.Direction.ASC, "MemId");
+////		Pageable pgb = PageRequest.of(pageNumber-1, 2, Sort.Direction.ASC, "id");
 ////		Page<Members> page = dao.findAll(pgb);
 ////		List<Members> list = page.getContent();
 ////		return list;
@@ -172,6 +195,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 ////	@GetMapping(value="members/ispremium/{isPremium}")
 ////	public List<Members> findByIsPremiumTrue(@PathVariable Boolean isPremium){
 ////		return dao.findByisPremiumTrue(isPremium);
-////	}
+	}
 
 

@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
@@ -25,19 +26,20 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.Group1.CoinShell.model.Feeder.Watch;
 
 @Entity 
-@Table(name="Members",uniqueConstraints = {@UniqueConstraint(columnNames = {"E_Mail"})})
+@Table(name="members",uniqueConstraints = {@UniqueConstraint(columnNames = {"E_Mail"})})
 public class Members {
 
 	@Id
 	@Column(name = "Id", columnDefinition ="int")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer memId;
+    private Integer id;
     
 	@Column(name = "CustomizedUserName", columnDefinition ="nvarchar(60)", nullable=false)
     private String customizedUserName;
-    
-	@Column(name = "CustomizedUserAvatar", columnDefinition ="nvarchar(MAX)")
-    private String customizedUserAvatar;
+	
+	@Column(name = "CustomizedUserAvatar", columnDefinition ="int", nullable=false)
+	private Integer customizedUserAvatar;
+	
     
 	@Column(name = "E_Mail", columnDefinition ="nvarchar(100)", nullable=false)
     private String eMail;
@@ -47,6 +49,9 @@ public class Members {
     
 	@Column(name = "MyShell", columnDefinition ="money", nullable=false)
     private Integer myShell;
+	
+	@Column(name = "Coin", columnDefinition ="money", nullable=false)
+    private Integer Coin;
     
 //	@Column(name = "IsPremium", columnDefinition ="bit", nullable=false)
 //  private Boolean isPremium
@@ -59,27 +64,33 @@ public class Members {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "members",cascade = CascadeType.ALL)
 	private Set<Watch> watch = new LinkedHashSet<Watch>();
 	
+	
+	@OneToOne(fetch = FetchType.EAGER, mappedBy = "members", cascade = CascadeType.ALL)
+	private CustomizedUserAvatar customizedUserAvatar1 = new CustomizedUserAvatar();
+	
 	public Members() {
 	}
 
-	public Members(Integer memId, String customizedUserName, String customizedUserAvatar, String eMail, String password,
-			Integer myShell, Date joinTime) {
+	public Members(Integer id, String customizedUserName, String eMail, String password, Integer myShell, Integer coin,
+			Date joinTime, Set<Watch> watch, Integer customizedUserAvatar) {
 		super();
-		this.memId = memId;
+		this.id = id;
 		this.customizedUserName = customizedUserName;
-		this.customizedUserAvatar = customizedUserAvatar;
 		this.eMail = eMail;
 		this.password = password;
 		this.myShell = myShell;
+		Coin = coin;
 		this.joinTime = joinTime;
+		this.watch = watch;
+		this.customizedUserAvatar = customizedUserAvatar;
 	}
 
-	public Integer getMemId() {
-		return memId;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setMemId(Integer memId) {
-		this.memId = memId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getCustomizedUserName() {
@@ -90,11 +101,11 @@ public class Members {
 		this.customizedUserName = customizedUserName;
 	}
 
-	public String getCustomizedUserAvatar() {
+	public Integer getCustomizedUserAvatar() {
 		return customizedUserAvatar;
 	}
 
-	public void setCustomizedUserAvatar(String customizedUserAvatar) {
+	public void setCustomizedUserAvatar(Integer customizedUserAvatar) {
 		this.customizedUserAvatar = customizedUserAvatar;
 	}
 
@@ -122,6 +133,14 @@ public class Members {
 		this.myShell = myShell;
 	}
 
+	public Integer getCoin() {
+		return Coin;
+	}
+
+	public void setCoin(Integer coin) {
+		Coin = coin;
+	}
+
 	public Date getJoinTime() {
 		return joinTime;
 	}
@@ -136,6 +155,14 @@ public class Members {
 
 	public void setWatch(Set<Watch> watch) {
 		this.watch = watch;
+	}
+
+	public CustomizedUserAvatar getCustomizedUserAvatar1() {
+		return customizedUserAvatar1;
+	}
+
+	public void setCustomizedUserAvatar1(CustomizedUserAvatar customizedUserAvatar1) {
+		this.customizedUserAvatar1 = customizedUserAvatar1;
 	}
 
 	

@@ -5,34 +5,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-//@RequestMapping("/administrator")
 @Controller
 public class backendPageController {
 
 	//這個class都是用來控制後臺頁面跳轉的地方
-//	@GetMapping("/store")
-//	public String changePageInsertCommodity() {
-//		return "backend/store/administrator-store";
-//	}
+	@GetMapping("/administrator/store")
+	public String changePageCommodity() {
+		return "backend/store/administrator-store";
+	}
 	
-	@GetMapping("/store")
+	@GetMapping("administrator/store/addCommodity")
 	public String changePageAddCommodity() {
-		return "addCommodity";
+		return "backend/store/addCommodity";
 	}
 	
-	@GetMapping("/store/deleteCommodity")
-	public String changePageDeleteCommodity() {
-		return "backend/store/deleteCommodity";
-	}
-	
-	@GetMapping("/store/findCommodity")
-	public String changePageFindCommodity() {
-		return "backend/store/findCommodity";
-	}
-	
-	@GetMapping("/store/updateCommodity")
-	public String changePageUpdateCommodity() {
-		return "backend/store/updateCommodity";
+	@GetMapping("administrator/store/showAllCommodities")
+	public String changePageshowAllCommodities() {
+		return "backend/store/showAllCommodities";
 	}
 	
 }

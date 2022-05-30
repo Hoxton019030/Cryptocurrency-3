@@ -27,6 +27,14 @@
 
 					<!--reCAPTCHA v2 代碼-->
 					<script src="https://www.google.com/recaptcha/api.js"></script>
+					
+					<!-- jQuery + Bootstrap Bundle with Popper | Bootstrap 導入程式 JS -->
+					<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+					<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+						integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+						crossorigin="anonymous"></script>
+					
+
 				</head>
 
 				<body>
@@ -69,7 +77,6 @@
 										${login.eMail}'s Settings
 									</button>
 									<div class="dropdown-menu dropdown-menu-right">
-										<button class="dropdown-item" type="button">Watchlist</button>
 										<button class="dropdown-item" type="button">Portfolio</button>
 										<button class="dropdown-item" type="button"><a href="/coinshell/account/referral">Referral Program</a></button>
 										<button class="dropdown-item" type="button"><a href="/coinshell/account/set">Account Settings</a></button>
@@ -235,13 +242,8 @@
 					</div>
 
 
-					<!-- jQuery + Bootstrap Bundle with Popper | Bootstrap 導入程式 JS -->
-					<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-						integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-						crossorigin="anonymous"></script>
-					<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
-						integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
-						crossorigin="anonymous"></script>
+
+
 
 					<script>
 						//Password 顯示密碼
@@ -313,10 +315,10 @@
 							document.getElementById("pmessage").style.display = "block";
 						}
 
-						// When the user clicks outside of the password field, hide the message box
-						myInput.onblur = function () {
-							document.getElementById("pmessage").style.display = "none";
-						}
+						// // When the user clicks outside of the password field, hide the message box
+						// myInput.onblur = function () {
+						// 	document.getElementById("pmessage").style.display = "none";
+						// }
 
 						// When the user starts to type something inside the password field
 						myInput.onkeyup = function () {
