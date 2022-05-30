@@ -65,8 +65,8 @@ public class Members {
 	private Set<Watch> watch = new LinkedHashSet<Watch>();
 	
 	
-	@OneToOne(fetch = FetchType.EAGER, mappedBy = "members", cascade = CascadeType.ALL)
-	private CustomizedUserAvatar customizedUserAvatar1 = new CustomizedUserAvatar();
+//	@OneToOne(fetch = FetchType.EAGER, mappedBy = "members", cascade = CascadeType.ALL)
+//	private CustomizedUserAvatar customizedUserAvatar1 = new CustomizedUserAvatar();
 	
 	public Members() {
 	}
@@ -157,13 +157,13 @@ public class Members {
 		this.watch = watch;
 	}
 
-	public CustomizedUserAvatar getCustomizedUserAvatar1() {
-		return customizedUserAvatar1;
-	}
+	//public CustomizedUserAvatar getCustomizedUserAvatar1() {
+	//	return customizedUserAvatar1;
+	//}
 
-	public void setCustomizedUserAvatar1(CustomizedUserAvatar customizedUserAvatar1) {
-		this.customizedUserAvatar1 = customizedUserAvatar1;
-	}
+	//public void setCustomizedUserAvatar1(CustomizedUserAvatar customizedUserAvatar1) {
+	//	this.customizedUserAvatar1 = customizedUserAvatar1;
+	//}
 
 	
 }
