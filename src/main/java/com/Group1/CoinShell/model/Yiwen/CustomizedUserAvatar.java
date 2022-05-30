@@ -22,6 +22,12 @@ public class CustomizedUserAvatar {
 	@Column(name="aliasAvatar", columnDefinition="nvarchar(20)")
 	private String aliasAvatar;
 	
+
+//	@OneToOne(fetch = FetchType.EAGER)
+//	@JoinColumn(name = "member_id")
+//	private Members members;
+	
+
 	public CustomizedUserAvatar() {
 	}
 

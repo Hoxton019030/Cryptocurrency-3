@@ -3,8 +3,9 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<!DOCTYPE html>
+<html>
 <head>
-<jsp:include page="../NavBar/CoinShellNavBar.jsp" />
 <meta charset="UTF-8">
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <title>討論區</title>
@@ -14,14 +15,16 @@ padding-top: 82px;
 }
 </style>
 </head>
-
+<body>
+<jsp:include page="../NavBar/CoinShellNavBar.jsp" />
+<h1>${login.eMail}</h1>
 <div class="row justify-content-center">
 <div class="col-9">
     <form id="searchByTag">
         <select id="tag-list"></select>        
         <input id="titlePart" type="text" placeholder="關鍵字查詢(標題/內文)"/>
         <input type="button" name="submit" value="查詢" id="search"/>
-        <a href="${contextRoot}/article/add">新增文章</a>
+        <a href="${contextRoot}/article/add" id="addAtc" onclick="verifyMembership()">新增文章</a>
     </form>
     
 	<table class="table table-hover table-primary">
@@ -43,18 +46,34 @@ padding-top: 82px;
 	</table>
 </div>
 </div>
-</body>
-<script src="http://localhost:8080/coinshell/javascripts/jquery.min.js" type="text/javascript"></script>
-<script>
+<script type="text/javascript">
 var contextRoot = "http://localhost:8080/coinshell";
 //下拉選單相關
 var tag;
-var page = 1;
+// var page = 1;
 let dataNow = {};
 tagList();
 loadAtc();
 $("#tag-list").change(function(){loadAtc();})
 $("#search").click(function(){loadAtcByTitle();})
+// addAtc.addEventListener('click',verifyMembership);
+
+function verifyMembership(){
+    return false;
+    if ("${login == null }" == "true") {
+        $('#loginModal').modal("show")
+        }
+}
+
+var test = document.getElementById("addAtc");
+function stopDefault(e) {
+    if ("${login == null }" == "true"){
+        e.preventDefault();
+        $('#loginModal').modal("show")
+    }
+}
+
+test.onclick = function(e){stopDefault(e)}
 
 function loadAtc(){
     $(function() {
@@ -178,11 +197,12 @@ function pageBtn (page){
     };
 
     if(page.hasNext) {
-        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)-1)+`">Next</a></li>`;
+        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)+1)+`">Next</a></li>`;
     } else {
         str += `<li class="page-item disabled"><span class="page-link">Next</span></li>`;
     }
-    pageid.innerHTML = str;
+    pageid.innerHTML = str;    
+    console.log(str);
 }
 
 // function loadAtcByTitle(){
@@ -279,6 +299,5 @@ function pageBtn (page){
 
 
 </script>
-
-
+</body>
 </html>

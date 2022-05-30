@@ -57,6 +57,8 @@ public class Members {
 
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	@Temporal(TemporalType.TIMESTAMP)
+  
+
 
 	@Column(name = "JoinTime", columnDefinition = "date", nullable = false)
 	private Date joinTime;
@@ -78,6 +80,16 @@ public class Members {
 		this.myShell = myShell;
 		this.Coin = Coin;
 		this.joinTime = joinTime;
+		this.customizedUserAvatar = customizedUserAvatar;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+
 	}
 
 	public String getCustomizedUserName() {
@@ -128,13 +140,7 @@ public class Members {
 		this.joinTime = joinTime;
 	}
 
-	public Integer getId() {
-		return id;
-	}
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	public Integer getCoin() {
 		return Coin;

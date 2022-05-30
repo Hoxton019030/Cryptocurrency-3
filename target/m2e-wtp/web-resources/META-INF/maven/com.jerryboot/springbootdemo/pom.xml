@@ -85,6 +85,21 @@
 		</dependency>
 		<!-- End檔案上傳 -->
 
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-mail -->
+		<!-- Start使用Springmail -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+		<!-- End使用Springmail -->
+		<!-- Start使用SpringSecurity -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<!-- End使用SpringSecurity -->
+
+
 	</dependencies>
 
 	<build>

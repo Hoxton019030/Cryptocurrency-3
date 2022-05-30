@@ -1,6 +1,7 @@
 package com.Group1.CoinShell.model.Habufly;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -24,11 +25,21 @@ public interface CommentDao extends JpaRepository<Comment, Integer> {
 //		@Query(value = "select * from comment where name = :name and level = :level", nativeQuery = true)
 //		public List<Comment> findCommentByName3(@Param("name") String name, @Param("level") Integer level);
 
-		@Query(value = "select * from comment where article_id = :articleId and type = 'a' and deleted = 'n' ORDER BY added asc", nativeQuery = true)
-		public List<Comment> findCommentByAtcAndType(@Param("articleId") Integer articleId);
+//		@Query(value = "select * from comment where article_id = :articleId and type = 'a' and deleted = 'n' ORDER BY added asc", nativeQuery = true)
+//		public List<Comment> findCommentByAtcAndType(@Param("articleId") Integer articleId);
+
+		@Query(value = "select c.id,added,article_id as articleId,comment_id as commentId,deleted,text,type,user_name as userName,user_id as userId,CustomizedUserAvatar "
+				+ "from comment as c left join Members as m "
+				+ "on c.id = m.id where article_id = :articleId and type = 'a' and deleted = 'n' ORDER BY added asc", nativeQuery = true)
+		public List<Map<String,Object>> findCommentByAtcAndType(@Param("articleId") Integer articleId);
 		
-		@Query(value = "select * from comment where article_id = :articleId and comment_Id = :commentId and type = 'b' and deleted = 'n' ORDER BY added asc", nativeQuery = true)
-		public List<Comment> findReplyByAtcAndType(@Param("articleId") Integer articleId, @Param("commentId") Integer commentId);
+//		@Query(value = "select * from comment where article_id = :articleId and comment_Id = :commentId and type = 'b' and deleted = 'n' ORDER BY added asc", nativeQuery = true)
+//		public List<Comment> findReplyByAtcAndType(@Param("articleId") Integer articleId, @Param("commentId") Integer commentId);
+
+		@Query(value = "select c.id,added,article_id as articleId,comment_id as commentId,deleted,text,type,user_name as userName,user_id as userId,CustomizedUserAvatar "
+				+ "from comment as c left join Members as m "
+				+ "on c.id = m.id where article_id = :articleId and comment_Id = :commentId and type = 'b' and deleted = 'n' ORDER BY added asc", nativeQuery = true)
+		public List<Map<String,Object>> findReplyByAtcAndType(@Param("articleId") Integer articleId, @Param("commentId") Integer commentId);
 		
 		@Query(value = "select count( * ) as count from comment where article_id = :articleId and type = :type", nativeQuery = true)
 		public Integer checkCommentNumber(@Param("articleId") Integer articleId, @Param("type") String type);

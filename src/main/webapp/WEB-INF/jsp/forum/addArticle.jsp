@@ -42,6 +42,7 @@ padding-top: 82px;
 						<form:input path="readNum" value="0" type="hidden"/>
 						<form:input path="commentNum" value="0" type="hidden"/>
 						<form:input path="deleted" value="n" type="hidden"/>
+						<form:input path="authorId" value="${login.id}" type="hidden"/>
 						</div>
 						<input type="submit" name="submit" value="新增訊息於此">
 					</form:form>
