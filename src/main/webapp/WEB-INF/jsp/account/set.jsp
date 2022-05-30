@@ -31,7 +31,7 @@
 							<div class="input-group mb-3">
 								<div class="input-group-prepend">
 									<span class="input-group-text font-weight-bold"
-										id="inputGroup-sizing-default">Avatar</span>
+										id="inputGroup-sizing-default"><i class="fa-solid fa-user-astronaut"></i>&nbsp;Avatar</span>
 								</div>
 								<div id="user-img">
 									<img src="${login.customizedUserAvatar }"
@@ -54,12 +54,7 @@
                                  $("#user-img").append(`<img src="`+jsonObject[0].userAvatarBase64+`"
 										style="border-radius: 50%; height: 100px; ">`);
 								})
-
-							
 							})
-
-									
-							
 
 
 								</script>
@@ -67,7 +62,7 @@
 
 							<div class="input-group mb-3">
 								<div class="input-group-prepend">
-									<span class="input-group-text" id="inputGroup-sizing-default">User Referral
+									<span class="input-group-text" id="inputGroup-sizing-default"><i class="fa-solid fa-id-card"></i>&nbsp;User Referral
 										ID</span>
 								</div>
 								<input type="text" disabled value="${ login.id }" class="form-control"
@@ -77,7 +72,7 @@
 							<div class="input-group mb-3">
 								<div class="input-group-prepend">
 									<span class="input-group-text font-weight-bold"
-										id="inputGroup-sizing-default">UserName</span>
+										id="inputGroup-sizing-default"><i class="fa-solid fa-file-signature"></i>&nbsp;UserName</span>
 								</div>
 								<input type="text" value="${ login.customizedUserName }" class="form-control"
 									aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
@@ -86,7 +81,7 @@
 
 							<div class="input-group mb-3">
 								<div class="input-group-prepend">
-									<span class="input-group-text" id="inputGroup-sizing-default">Email Address</span>
+									<span class="input-group-text" id="inputGroup-sizing-default"><i class="fa-solid fa-envelope-open-text"></i>&nbsp;Email Address</span>
 								</div>
 								<input type="email" disabled value="${login.eMail}" class="form-control"
 									aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
@@ -94,21 +89,30 @@
 
 							<div class="input-group mb-3">
 								<div class="input-group-prepend">
-									<span class="input-group-text" id="inputGroup-sizing-default">MyShell Balance</span>
+									<span class="input-group-text" id="inputGroup-sizing-default"><i class="fa-solid fa-anchor"></i>&nbsp;MyShell Balance</span>
 								</div>
 								<input type="text" disabled value="${login.myShell}" class="form-control"
+									aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+							</div>
+							
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+								
+									<span class="input-group-text" id="inputGroup-sizing-default"><i class="fa-solid fa-sack-dollar"></i>&nbsp;Coin Balance</span>
+								</div>
+								<input type="text" disabled value="${login.coin}" class="form-control"
 									aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
 							</div>
 
 							<div class="input-group mb-3">
 								<div class="input-group-prepend">
-									<span class="input-group-text" id="inputGroup-sizing-default">Join Time</span>
+									<span class="input-group-text" id="inputGroup-sizing-default"><i class="fa-regular fa-calendar-check"></i>&nbsp;Join Time</span>
 								</div>
 								<input type="text" disabled value="${login.joinTime}" class="form-control"
 									aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
 							</div>
 							<div class="card">
-								<h5 class="card-header font-weight-normal">Password</h5>
+								<h5 class="card-header font-weight-normal"><i class="fa-solid fa-lock"></i>&nbsp;Password</h5>
 								<div class="card-body">
 									<p class="card-text">Set a unique password to protect your personal account.</p>
 									<a type="button" class="btn btn-outline-primary" data-toggle="modal"
@@ -206,16 +210,5 @@
 					</div>
 				</div>
 				</div>
-
-
-
-				<!-- jQuery + Bootstrap Bundle with Popper | Bootstrap 導入程式 JS -->
-				<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-					integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-					crossorigin="anonymous"></script>
-				<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
-					integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
-					crossorigin="anonymous"></script>
-
 
 			</body>
