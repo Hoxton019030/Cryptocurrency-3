@@ -49,6 +49,7 @@
                                         }).then(function(jsonObject) {
 
                                             $("#user-img").append(`<img src="` + jsonObject[0].userAvatarBase64 + `"
+
 										style="border-radius: 50%; height: 100px; ">`);
                                         })
                                     })
@@ -179,6 +180,7 @@
                             <div class="modal-header">
                                 <h5 class="modal-title">Reset password</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
 									<span aria-hidden="true">&times;</span>
 								</button>
                             </div>

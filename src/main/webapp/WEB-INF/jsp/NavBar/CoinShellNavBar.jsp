@@ -1,45 +1,47 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-        <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-            <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-                <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+		<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+			<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+				<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
-                <!DOCTYPE html>
-                <html lang="en">
+				<!DOCTYPE html>
+				<html lang="en">
 
-                <head>
-                    <meta charset="UTF-8">
+				<head>
+					<meta charset="UTF-8">
 
-                    <!--響應式網站-->
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+					<!--響應式網站-->
+					<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-                    <!-- Bootstrap CSS -->
-                    <link rel="stylesheet" href="${contextRoot}/css/bootstrap.min.css">
+					<!-- Bootstrap CSS -->
+					<link rel="stylesheet" href="${contextRoot}/css/bootstrap.min.css">
 
-                    <!-- 這裡放title Logo -->
-                    <link rel="icon" href="${contextRoot}/images/NavBarImg/icon.png" type="image/x-icon">
+					<!-- 這裡放title Logo -->
+					<link rel="icon" href="${contextRoot}/images/NavBarImg/icon.png" type="image/x-icon">
 
-                    <!-- FONT AWESOME: Place your kit's code here -->
-                    <script src="https://kit.fontawesome.com/0ef2a35b44.js" crossorigin="anonymous"></script>
+					<!-- FONT AWESOME: Place your kit's code here -->
+					<script src="https://kit.fontawesome.com/0ef2a35b44.js" crossorigin="anonymous"></script>
 
-                    <!--Only for this login modal's CSS 連結-->
-                    <link rel="stylesheet" href="${contextRoot}/css/loginStyle.css">
+					<!--Only for this login modal's CSS 連結-->
+					<link rel="stylesheet" href="${contextRoot}/css/loginStyle.css">
+					<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 
-                    <!--reCAPTCHA v2 代碼-->
-                    <script src="https://www.google.com/recaptcha/api.js"></script>
+					<!--reCAPTCHA v2 代碼-->
+					<script src="https://www.google.com/recaptcha/api.js"></script>
+					
+					<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+					<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+					<script src="${contextRoot}/javascripts/bootstrap.bundle.min.js"></script>
+				</head>
 
-                    <!-- jQuery + Bootstrap Bundle with Popper | Bootstrap 導入程式 JS -->
-                    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
-
-
-                </head>
-
-                <body>
-                    <!-- Start of the nv-->
-                    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-                        <a class="navbar-brand" href="${contextRoot}"><img src="${contextRoot}/images/NavBarImg/CoinShell.png" style="width: 150px;" alt="logo"></a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<body>
+					<!-- Start of the nv-->
+					<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+						<a class="navbar-brand" href="${contextRoot}"><img
+								src="${contextRoot}/images/NavBarImg/CoinShell.png" style="width: 150px;"
+								alt="logo"></a>
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+							aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 							<span class="navbar-toggler-icon"></span>
 						</button>
                         <div class="collapse navbar-collapse" id="navbarNav">
@@ -68,23 +70,25 @@
                                     <button type="button" class="btn btn-primary dropdown-toggle mr-2" data-toggle="dropdown" aria-expanded="false">
 										${login.eMail}'s Settings
 									</button>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <button class="dropdown-item" type="button">Portfolio</button>
-                                        <button class="dropdown-item" type="button"><a href="/coinshell/account/referral">Referral Program</a></button>
-                                        <button class="dropdown-item" type="button"><a href="/coinshell/account/set">Account Settings</a></button>
-                                        <button class="dropdown-item" type="button"><a href="${contextRoot}/logout">Log Out</a></button>
-                                        <!-- MemController line 110 -->
-                                    </div>
-                                </div>
-                            </c:otherwise>
-                        </c:choose>
 
-                        <!--Search navbar-->
-                        <form class="form-inline my-1 my-lg-0">
-                            <div class="input-group">
-                                <input class="form-control pl-2 p-0" type="search" placeholder="Search" aria-label="Search">
-                                <div class="input-group-append">
-                                    <button class="btn btn-secondary input-group-append" type="submit">
+									<div class="dropdown-menu dropdown-menu-right">
+<!-- 										<button class="dropdown-item" type="button">Watchlist</button> -->
+										<button class="dropdown-item" type="button">Portfolio</button>
+										<button class="dropdown-item" type="button"><a href="/coinshell/account/referral">Referral Program</a></button>
+										<button class="dropdown-item" type="button"><a href="/coinshell/account/set">Account Settings</a></button>
+										<button class="dropdown-item" type="button"><a href="${contextRoot}/logout">Log Out</a></button> <!-- MemController line 110 -->
+									</div>
+								</div>
+							</c:otherwise>
+						</c:choose>
+
+						<!--Search navbar-->
+						<form class="form-inline my-1 my-lg-0">
+							<div class="input-group">
+								<input class="form-control pl-2 p-0" type="search" placeholder="Search"
+									aria-label="Search">
+								<div class="input-group-append">
+									<button class="btn btn-secondary input-group-append" type="submit">
 										<i class="fa-solid fa-magnifying-glass"></i>
 									</button>
                                 </div>
@@ -204,133 +208,134 @@
                                             <button type="submit" class="btn btn-info">
 												<i class="fa-solid fa-anchor"></i> Create an account
 											</button>
-                                        </form>
-                                    </fieldset>
-                                </div>
-                                <div class="line"></div>
-                                <!--Footer-->
-                                <div class="modal-footer">
-                                    <div class="tnc-div">
-                                        By creating this account, you agree to our <a href="${contextRoot}/account/privacy">privacy policy</a> and <a href="${contextRoot}/account/cookie">cookie policy</a>.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
+										</form>
+									</fieldset>
+								</div>
+								<div class="line"></div>
+								<!--Footer-->
+								<div class="modal-footer">
+									<div class="tnc-div">
+										By creating this account, you agree to our <a
+											href="${contextRoot}/account/privacy">privacy policy</a> and <a
+											href="${contextRoot}/account/cookie">cookie policy</a>.
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					</div>
 
 
+					<script>
+						//Password 顯示密碼
+						$(document).ready(function () {
+							$("#eye1").click(function () {
+								if ($(this).hasClass('fa-eye')) {
+									$("#floatingPassword1").attr('type', 'text');
+								} else {
+									$("#floatingPassword1").attr('type', 'password');
+								}
+								$(this).toggleClass('fa-eye').toggleClass('fa-eye-slash');
+							});
+						});
+
+						$(document).ready(function () {
+							$("#eye2").click(function () {
+								if ($(this).hasClass('fa-eye')) {
+									$("#floatingPassword2").attr('type', 'text');
+								} else {
+									$("#floatingPassword2").attr('type', 'password');
+								}
+								$(this).toggleClass('fa-eye').toggleClass('fa-eye-slash');
+							});
+						});
+
+						//Multiple Tabs in a Modal
+						$(document).ready(function () {
+
+							$(".tabs").click(function () {
+
+								$(".tabs").removeClass("active");
+								$(".tabs h6").removeClass("font-weight-bold");
+								$(".tabs h6").addClass("text-muted");
+								$(this).children("h6").removeClass("text-muted");
+								$(this).children("h6").addClass("font-weight-bold");
+								$(this).addClass("active");
+
+								current_fs = $(".active");
+
+								next_fs = $(this).attr('id');
+								next_fs = "#" + next_fs + "1";
+
+								$("fieldset").removeClass("show");
+								$(next_fs).addClass("show");
+
+								current_fs.animate({}, {
+									step: function () {
+										current_fs.css({
+											'display': 'none',
+											'position': 'relative'
+										});
+										next_fs.css({
+											'display': 'block'
+										});
+									}
+								});
+							});
+
+						});
+
+						// password validationa form
+						var myInput = document.getElementById("floatingPassword2");
+						var letter = document.getElementById("letter");
+						var number = document.getElementById("number");
+						var length = document.getElementById("length");
+
+						// When the user clicks on the password field, show the message box
+						myInput.onfocus = function () {
+							document.getElementById("pmessage").style.display = "block";
+						}
+
+						// // When the user clicks outside of the password field, hide the message box
+						// myInput.onblur = function () {
+						// 	document.getElementById("pmessage").style.display = "none";
+						// }
+
+						// When the user starts to type something inside the password field
+						myInput.onkeyup = function () {
+							// Validate lowercase letters
+							var lowerCaseLetters = /[a-z]/g;
+							if (myInput.value.match(lowerCaseLetters)) {
+								letter.classList.remove("invalid");
+								letter.classList.add("valid");
+							} else {
+								letter.classList.remove("valid");
+								letter.classList.add("invalid");
+							}
+
+							// Validate numbers
+							var numbers = /[0-9]/g;
+							if (myInput.value.match(numbers)) {
+								number.classList.remove("invalid");
+								number.classList.add("valid");
+							} else {
+								number.classList.remove("valid");
+								number.classList.add("invalid");
+							}
+
+							// Validate length
+							if (myInput.value.length >= 8) {
+								length.classList.remove("invalid");
+								length.classList.add("valid");
+							} else {
+								length.classList.remove("valid");
+								length.classList.add("invalid");
+							}
+						}
 
 
+					</script>
 
-                    <script>
-                        //Password 顯示密碼
-                        $(document).ready(function() {
-                            $("#eye1").click(function() {
-                                if ($(this).hasClass('fa-eye')) {
-                                    $("#floatingPassword1").attr('type', 'text');
-                                } else {
-                                    $("#floatingPassword1").attr('type', 'password');
-                                }
-                                $(this).toggleClass('fa-eye').toggleClass('fa-eye-slash');
-                            });
-                        });
+				</body>
 
-                        $(document).ready(function() {
-                            $("#eye2").click(function() {
-                                if ($(this).hasClass('fa-eye')) {
-                                    $("#floatingPassword2").attr('type', 'text');
-                                } else {
-                                    $("#floatingPassword2").attr('type', 'password');
-                                }
-                                $(this).toggleClass('fa-eye').toggleClass('fa-eye-slash');
-                            });
-                        });
-
-                        //Multiple Tabs in a Modal
-                        $(document).ready(function() {
-
-                            $(".tabs").click(function() {
-
-                                $(".tabs").removeClass("active");
-                                $(".tabs h6").removeClass("font-weight-bold");
-                                $(".tabs h6").addClass("text-muted");
-                                $(this).children("h6").removeClass("text-muted");
-                                $(this).children("h6").addClass("font-weight-bold");
-                                $(this).addClass("active");
-
-                                current_fs = $(".active");
-
-                                next_fs = $(this).attr('id');
-                                next_fs = "#" + next_fs + "1";
-
-                                $("fieldset").removeClass("show");
-                                $(next_fs).addClass("show");
-
-                                current_fs.animate({}, {
-                                    step: function() {
-                                        current_fs.css({
-                                            'display': 'none',
-                                            'position': 'relative'
-                                        });
-                                        next_fs.css({
-                                            'display': 'block'
-                                        });
-                                    }
-                                });
-                            });
-
-                        });
-
-                        // password validationa form
-                        var myInput = document.getElementById("floatingPassword2");
-                        var letter = document.getElementById("letter");
-                        var number = document.getElementById("number");
-                        var length = document.getElementById("length");
-
-                        // When the user clicks on the password field, show the message box
-                        myInput.onfocus = function() {
-                            document.getElementById("pmessage").style.display = "block";
-                        }
-
-                        // // When the user clicks outside of the password field, hide the message box
-                        // myInput.onblur = function () {
-                        // 	document.getElementById("pmessage").style.display = "none";
-                        // }
-
-                        // When the user starts to type something inside the password field
-                        myInput.onkeyup = function() {
-                            // Validate lowercase letters
-                            var lowerCaseLetters = /[a-z]/g;
-                            if (myInput.value.match(lowerCaseLetters)) {
-                                letter.classList.remove("invalid");
-                                letter.classList.add("valid");
-                            } else {
-                                letter.classList.remove("valid");
-                                letter.classList.add("invalid");
-                            }
-
-                            // Validate numbers
-                            var numbers = /[0-9]/g;
-                            if (myInput.value.match(numbers)) {
-                                number.classList.remove("invalid");
-                                number.classList.add("valid");
-                            } else {
-                                number.classList.remove("valid");
-                                number.classList.add("invalid");
-                            }
-
-                            // Validate length
-                            if (myInput.value.length >= 8) {
-                                length.classList.remove("invalid");
-                                length.classList.add("valid");
-                            } else {
-                                length.classList.remove("valid");
-                                length.classList.add("invalid");
-                            }
-                        }
-                    </script>
-
-                </body>
-
-                </html>
+				</html>

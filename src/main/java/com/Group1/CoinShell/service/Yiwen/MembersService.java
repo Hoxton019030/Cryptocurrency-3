@@ -45,4 +45,5 @@ public class MembersService {
 	public void updateCustomizedUserNameById(String customizedUserName,Integer id) {
 		membersDao.updateCustomizedUserNameById(customizedUserName, id);
 	}
+
 }
