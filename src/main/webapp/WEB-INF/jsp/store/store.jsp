@@ -10,7 +10,7 @@
 
             <head>
                 <meta charset="UTF-8">
-                <title>商城</title>
+                <title>Shell Shop | Coinshell</title>
                 <link rel="Shortcut Icon" href="https://cdn-icons-png.flaticon.com/512/1490/1490853.png" type="image/x-icon" />
                 <link rel="stylesheet" href="${contextRoot}/css/bootstrap.min.css">
                 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">

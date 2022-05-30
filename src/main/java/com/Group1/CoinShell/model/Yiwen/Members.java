@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
@@ -25,7 +26,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.Group1.CoinShell.model.Feeder.Watch;
 
 @Entity 
-@Table(name="Members",uniqueConstraints = {@UniqueConstraint(columnNames = {"E_Mail"})})
+@Table(name="members",uniqueConstraints = {@UniqueConstraint(columnNames = {"E_Mail"})})
 public class Members {
 
 	@Id
@@ -35,9 +36,10 @@ public class Members {
     
 	@Column(name = "CustomizedUserName", columnDefinition ="nvarchar(60)", nullable=false)
     private String customizedUserName;
-    
-	@Column(name = "CustomizedUserAvatar", columnDefinition ="nvarchar(MAX)")
-    private Integer customizedUserAvatar;
+	
+	@Column(name = "CustomizedUserAvatar", columnDefinition ="int", nullable=false)
+	private Integer customizedUserAvatar;
+	
     
 	@Column(name = "E_Mail", columnDefinition ="nvarchar(100)", nullable=false)
     private String eMail;
@@ -57,29 +59,34 @@ public class Members {
 	@DateTimeFormat(pattern="yyyy/MM/dd")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "JoinTime", columnDefinition ="date", nullable=false)
-    private Date joinTime;
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "members",cascade = CascadeType.ALL)
-	private Set<Watch> watch = new LinkedHashSet<Watch>();
+    private Date joinTime;	
+	
+//	@OneToOne(fetch = FetchType.EAGER, mappedBy = "members", cascade = CascadeType.ALL)
+//	private CustomizedUserAvatar customizedUserAvatar1 = new CustomizedUserAvatar();
 	
 	public Members() {
 	}
 
-	
-	public Members(Integer id, String customizedUserName, Integer customizedUserAvatar, String eMail, String password,
-			Integer myShell, Integer Coin, Date joinTime, Set<Watch> watch) {
+	public Members(Integer id, String customizedUserName, String eMail, String password, Integer myShell, Integer coin,
+			Date joinTime, Set<Watch> watch, Integer customizedUserAvatar) {
 		super();
 		this.id = id;
 		this.customizedUserName = customizedUserName;
-		this.customizedUserAvatar = customizedUserAvatar;
 		this.eMail = eMail;
 		this.password = password;
 		this.myShell = myShell;
-		this.Coin = Coin;
+		Coin = coin;
 		this.joinTime = joinTime;
-		this.watch = watch;
+		this.customizedUserAvatar = customizedUserAvatar;
 	}
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public String getCustomizedUserName() {
 		return customizedUserName;
@@ -121,6 +128,14 @@ public class Members {
 		this.myShell = myShell;
 	}
 
+	public Integer getCoin() {
+		return Coin;
+	}
+
+	public void setCoin(Integer coin) {
+		Coin = coin;
+	}
+
 	public Date getJoinTime() {
 		return joinTime;
 	}
@@ -129,33 +144,13 @@ public class Members {
 		this.joinTime = joinTime;
 	}
 
-	public Set<Watch> getWatch() {
-		return watch;
-	}
+	//public CustomizedUserAvatar getCustomizedUserAvatar1() {
+	//	return customizedUserAvatar1;
+	//}
 
-	public void setWatch(Set<Watch> watch) {
-		this.watch = watch;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public Integer getCoin() {
-		return Coin;
-	}
-
-	public void setCoin(Integer Coin) {
-		this.Coin = Coin;
-	}
-
-
-	
-	
+	//public void setCustomizedUserAvatar1(CustomizedUserAvatar customizedUserAvatar1) {
+	//	this.customizedUserAvatar1 = customizedUserAvatar1;
+	//}
 
 	
 }

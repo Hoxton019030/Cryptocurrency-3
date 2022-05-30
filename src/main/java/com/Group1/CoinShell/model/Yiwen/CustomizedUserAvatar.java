@@ -2,47 +2,65 @@ package com.Group1.CoinShell.model.Yiwen;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="CustomizedUserAvatar")
+@Table(name="customizedUserAvatar")
 public class CustomizedUserAvatar {
 
 	@Id
-	@Column(name="Id", columnDefinition="int")
+	@Column(name="id", columnDefinition="int")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer avatarId;
+	private Integer id;
 	
-	@Column(name="UserAvatar", columnDefinition="nvarchar(MAX)")
-	private String customizedUserAvatar;
+	@Column(name="userAvatarBase64", columnDefinition="nvarchar(MAX)")
+	private String userAvatarBase64;
+	
+	@Column(name="aliasAvatar", columnDefinition="nvarchar(20)")
+	private String aliasAvatar;
+	
+//	@OneToOne(fetch = FetchType.EAGER)
+//	@JoinColumn(name = "member_id")
+//	private Members members;
 	
 	public CustomizedUserAvatar() {
 	}
 
-	public CustomizedUserAvatar(Integer avatarId, String customizedUserAvatar) {
+	public CustomizedUserAvatar(Integer id, String userAvatarBase64, String aliasAvatar) {
 		super();
-		this.avatarId = avatarId;
-		this.customizedUserAvatar = customizedUserAvatar;
+		this.id = id;
+		this.userAvatarBase64 = userAvatarBase64;
+		this.aliasAvatar = aliasAvatar;
 	}
 
-	public Integer getAvatarId() {
-		return avatarId;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setAvatarId(Integer avatarId) {
-		this.avatarId = avatarId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	public String getCustomizedUserAvatar() {
-		return customizedUserAvatar;
+	public String getUserAvatarBase64() {
+		return userAvatarBase64;
 	}
 
-	public void setCustomizedUserAvatar(String customizedUserAvatar) {
-		this.customizedUserAvatar = customizedUserAvatar;
+	public void setUserAvatarBase64(String userAvatarBase64) {
+		this.userAvatarBase64 = userAvatarBase64;
 	}
 
+	public String getAliasAvatar() {
+		return aliasAvatar;
+	}
+
+	public void setAliasAvatar(String aliasAvatar) {
+		this.aliasAvatar = aliasAvatar;
+	}
 
 }
