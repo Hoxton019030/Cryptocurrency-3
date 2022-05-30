@@ -60,6 +60,10 @@ public class Members {
 	@Column(name = "JoinTime", columnDefinition = "date", nullable = false)
 	private Date joinTime;
 
+//	@OneToOne(fetch = FetchType.EAGER, mappedBy = "members", cascade = CascadeType.ALL)
+//	private CustomizedUserAvatar customizedUserAvatar1 = new CustomizedUserAvatar();
+	
+>>>>>>> ba55bc5dd9335cb14913836b535ca890da1ec395
 	public Members() {
 	}
 
@@ -132,6 +136,7 @@ public class Members {
 		this.id = id;
 	}
 
+
 	public Integer getCoin() {
 		return Coin;
 	}
@@ -139,5 +144,14 @@ public class Members {
 	public void setCoin(Integer Coin) {
 		this.Coin = Coin;
 	}
+
+	//public CustomizedUserAvatar getCustomizedUserAvatar1() {
+	//	return customizedUserAvatar1;
+	//}
+
+	//public void setCustomizedUserAvatar1(CustomizedUserAvatar customizedUserAvatar1) {
+	//	this.customizedUserAvatar1 = customizedUserAvatar1;
+	//}
+
 
 }
