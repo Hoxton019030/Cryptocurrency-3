@@ -29,10 +29,7 @@ public interface MembersDao extends JpaRepository<Members, Integer> {
 	 * @return
 	 */
 
-	@Query(value="  SELECT MEMBERS.Id, MEMBERS.CustomizedUserAvatar, \r\n"
-			+ "  CustomizedUserAvatar.userAvatarBase64 FROM MEMBERS \r\n"
-			+ "  LEFT JOIN CustomizedUserAvatar ON MEMBERS.Id = \r\n"
-			+ "  CustomizedUserAvatar.Id WHERE Members.Id=:id2"
+	@Query(value="SELECT MEMBERS.Id, MEMBERS.CustomizedUserAvatar, CustomizedUserAvatar.userAvatarBase64 FROM MEMBERS  			 LEFT JOIN CustomizedUserAvatar ON MEMBERS.CustomizedUserAvatar = CustomizedUserAvatar.Id WHERE Members.Id=:id2"
 			, nativeQuery = true)
 	public List<Map<String, Object>> selectMemberAvatar(@Param("id2") Integer id);
 	
