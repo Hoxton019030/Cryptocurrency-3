@@ -179,7 +179,8 @@ li{
 }
 
 .categories .categories_text a{
-    color: #0083ce;
+    color: #64c5fd;
+    text-shadow:  0px 0px 10px #000;
     font-size: 14px;
     text-transform: uppercase;
     font-weight: 700;
@@ -381,8 +382,9 @@ li{
     height: 500px;
 }
 
+/*輪播背景底圖*/
 .banner.bg-img{
-    background-image: url(../images/store/banner-1.png);
+    background-image: url(https://picsum.photos/1520/500?grayscale);
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -399,7 +401,8 @@ li{
     margin-bottom: 15px;
 }
 
-.banner_text a{
+.banner_text a
+.discount_text a{
     font-size: 14px;
     color: #000;
     text-transform: uppercase;
@@ -484,8 +487,8 @@ li{
 }
 
 .discount_text .discount_text_title h2{
-    font-size: 40px;
-    color: #ff4000;
+    font-size: 44px;
+    color: #ff2600;
     margin-bottom:10px;
 }
 
@@ -522,9 +525,177 @@ li{
     display: inline-block;
 }
 
-.discount_countdown .countdown_item: p{
+.discount_countdown .countdown_item p{
     color: #000;
-    margin-bottom:0;
+    margin-bottom: 0;
     display: inline-block;
     font-weight: 500;
 }
+
+.shop-method-area .single-method i{
+    font-size: 45px;
+    color: #ffa220;
+    margin-bottom: 25px;
+    display: block;
+}
+
+.shop-method-area .single-method h6{
+    color: #282828;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 12 px;
+}
+
+.shop-method-area .single-method p{
+    font-size: 16px;
+}
+
+.mb-40{
+    margin-bottom: 40px;   
+}
+
+.instagram_item{
+    position: relative;
+    height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+}
+
+.instagram_item:after{
+    position: absolute;
+    left: 0;
+    top: 0;
+    height:100%;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+    opacity: 0;
+    content: '';
+    z-index: 1;
+    transition: all 0.3s;
+}
+
+.instagram_text {
+    position: absolute;
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 3;
+    transition: all 0.3s;
+}
+
+.instagram_text i{
+    font-size: 50px;
+    color:#F56040;
+    cursor: pointer;
+}
+
+.instagram_text a{
+    font-size: 16px;
+    color:#0d0d0d;
+    font-weight: 500;
+    display: block;
+    margin-top: 10px;
+}
+
+.instagram_item:hover .instagram_text{
+    opacity: 1;
+    visibility: visible;
+}
+
+.instagram_item:hover:after{
+    opacity: 1;
+}
+
+.newsletter-area{
+    background-color: #f4f4f4;
+}
+
+.newsletter-area form{
+    margin: 0 auto;
+    width: 60%;
+}
+
+.newsletter-area p{
+    font-size: 18px;
+    margin-bottom: 32px;
+    color: #777;
+    font-weight: 600;
+}
+
+.subscribe-sec input{
+    padding: 25px;
+    color: #495057;
+    border-radius: 50px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    letter-spacing: 2px;
+    box-shadow: 1px 3px 8px rgba(0,0,0,0.15);
+}
+
+.btn.submit{
+    background-color: #0083ce;
+    color: #fff;
+    padding: 15px 40px;
+    text-transform: uppercase;
+    border-radius: 50px;
+    font-size: 15px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    box-shadow: 1px 3px 8px rgba(0,0,0,0.15);
+    transition: all 0.3s;
+}
+
+.btn.submit:hover{
+    background-color: #222f5b;
+}
+
+.footer .footer_about{
+    margin-bottom: 30px;
+}
+
+.footer .footer_about p{
+    margin-bottom: 20px;
+    padding-right: 80px;
+}
+
+.footer .footer_logo{
+    margin-bottom: 20px;
+}
+
+.footer .footer_logo a{
+    font-size: 35px;
+    color: #000;
+}
+
+.footer .footer_logo a span{
+    color: #0083ce;
+    font-size: 35px;
+    font-weight: 700;
+}
+
+.footer .footer_widget{
+    margin-bottom: 30px;
+}
+
+.footer .footer_widget h6{
+    color: #111;
+    font-weight: 600;
+    text-align: uppercase;
+    margin-bottom: 12px;
+}
+
+.footer .footer_widget ul li{
+    list-style: none;
+    display: block;
+}
+
+.footer .footer_widget ul li a{
+    font-size: 14px;
+    color: #666;
+    line-height: 30px;
+}
+ 
