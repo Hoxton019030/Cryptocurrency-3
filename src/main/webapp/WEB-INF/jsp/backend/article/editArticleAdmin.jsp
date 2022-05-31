@@ -6,17 +6,14 @@
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
 <head>
-<jsp:include page="../NavBar/CoinShellNavBar.jsp" />
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+<script src="${contextRoot}/javascripts/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="${contextRoot}/css/bootstrap.min.css">
 <meta charset="UTF-8">
 <title>修改文章頁面</title>
-<style type="text/css">
-body{
-padding-top: 82px;
-}
-</style>
 </head>
 <body>
-<jsp:include page="../NavBar/CoinShellNavBar.jsp" />
 <div class="container">
 	<div class="row justify-content-center">
 		<div class="col-9">
@@ -24,7 +21,7 @@ padding-top: 82px;
 				<div class="card-header">修改文章</div>
 				<div class="card-body">
 					<!-- 			如果getmapping和postmapping的路徑一樣，action=""可以不用寫 -->
-					<form:form action="${contextRoot}/postEditArticle" method="post"
+					<form:form action="${contextRoot}/postEditArticleAdmin" method="post"
 						modelAttribute="article">
 						<form:input type="hidden" path="id"/>
 						<form:input type="hidden" path="added"/>

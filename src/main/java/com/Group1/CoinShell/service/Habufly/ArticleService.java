@@ -88,8 +88,8 @@ public class ArticleService {
 		return list;
 	}
 
-	public List<Article> findByTitle(String titlePart) {
-		List<Article> list = dao.findByTitle(titlePart);
+	public List<Map<String,Object>> findByTitle(String titlePart) {
+		List<Map<String,Object>> list = dao.findByTitle(titlePart);
 		return list;
 	}
 

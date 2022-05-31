@@ -49,19 +49,6 @@ padding-top: 82px;
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="row justify-content-center">
-		<div class="col-9">
-			<div class="card">
-<!-- 			http://tw.gitbook.net/jsp/jstl_format_formatdate_tag.html -->
-				<div class="card-header">新增時間: <fmt:formatDate pattern="yyyy-MM-dd EE 'at' HH:mm:ss" value="${lastestArticle.added}"/></div>
-				<div class="card-body">
-				
-				<c:out value="${lastestArticle.text}"></c:out>
-				
-				</div>
-			</div>
-		</div>
-	</div>
+	</div>	
 </div>
 </body>

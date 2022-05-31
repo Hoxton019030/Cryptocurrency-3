@@ -8,6 +8,10 @@
 <head>
 <meta charset="UTF-8">
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+<script src="${contextRoot}/javascripts/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="${contextRoot}/css/bootstrap.min.css">
 <title>討論區</title>
 <style type="text/css">
 body{
@@ -17,12 +21,12 @@ padding-top: 82px;
 </head>
 <body>
 <div class="row justify-content-center">
-<div class="col-12">
+<div class="col-9">
     <form id="searchByTag">
         <select id="tag-list"></select>        
         <input id="titlePart" type="text" placeholder="關鍵字查詢(標題/內文)"/>
         <input type="button" name="submit" value="查詢" id="search"/>
-        <a href="${contextRoot}/backend/article/add" id="addAtc">新增文章</a>
+        <!-- <a href="${contextRoot}/backend/article/add" id="addAtc">新增文章</a> -->
     </form>
     
 	<table class="table table-hover table-primary">
@@ -168,11 +172,12 @@ function displayData(data){
                      $("#atcTable").append(`
                         <tr class="table-info">
                         <td>` + value.tag + `</td>
-                        <td><a href="`+contextRoot+`/viewArticle/` + value.id + `" style="display: block;"><div class="b-list"><div><h3>` + value.title + `</h3></div></a><p>` + peek + `....</p></div></td>
+                        <td>` + value.CustomizedUserName + `</td>
+                        <td><a href="`+contextRoot+`/viewArticleAdmin/` + value.id + `" style="display: block;"><div class="b-list"><div><h3>` + value.title + `</h3></div></a><p>` + peek + `....</p></div></td>
                         <td align="center">` + value.readNum + ` / ` + value.commentNum + `</td>
                         <td>`+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</td>
-                        <td><a href="${contextRoot}/editArticle/`+value.id+`">修改</a></td>
-                        <td><a href="${contextRoot}/deleteArticle/`+value.id+`" onclick="return confirm('確認刪除嗎?')">刪除</a></td>
+                        <td><a href="${contextRoot}/editArticleAdmin/`+value.id+`">修改</a></td>
+                        <td><a href="${contextRoot}/deleteArticleAdmin/`+value.id+`" onclick="return confirm('確認刪除嗎?')">刪除</a></td>
                         </tr>
                     `)
                 }

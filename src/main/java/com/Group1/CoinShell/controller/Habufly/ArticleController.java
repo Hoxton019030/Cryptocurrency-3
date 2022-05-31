@@ -31,6 +31,21 @@ public class ArticleController {
 	@Autowired
 	private CommentService cService;
 
+	@GetMapping("/viewArticle/{id}")
+	public String viewArticle(HttpSession session, Model model, @PathVariable("id") Integer id) throws IOException {
+		Article atc = aService.findById(id);
+		
+		Integer authorId = atc.getAuthorId();
+		String img = aService.findImg(authorId);
+		model.addAttribute("img", img);
+		String userName = aService.getUserName(authorId);
+		model.addAttribute("userName", userName);
+		
+		model.addAttribute("Article", atc);
+		aService.increasePageView(session, id);
+		return "forum/viewArticle";
+	}
+		
 	@GetMapping("/article/add") // ModelAndView 參數一定要放在第一個
 	public ModelAndView goAddArticle(ModelAndView mav) {
 		Article atc = new Article();
@@ -75,25 +90,10 @@ public class ArticleController {
 	}
 	// http://localhost:8080/myapp/article/viewAllAjax?tag=btc
 	
-//	@ResponseBody // 由於是寫在一般Controller底下，要將java物件序列化轉成Json格式，需寫
-//	@GetMapping("/article/viewAllAjax")
-//	public Page<Article> viewArticlePage(@RequestParam String tag, @RequestParam Integer page) {
-//		Page<Article> allAtc = aService.findAll(page);
-//		
-//		if ("All".equals(tag)) {
-//			allAtc = aService.findAll(page);
-//		} else {
-//			allAtc = aService.findByPageAndTag(page, tag);
-//		}
-//		System.out.println(allAtc);
-//		return allAtc;
-//	}
-//	// http://localhost:8080/myapp/article/viewAllAjax?tag=btc
-
 	@ResponseBody
 	@GetMapping("/article/viewAllAjaxByTitle")
-	public List<Article> viewArticleByTitle(@RequestParam String titlePart) {
-		List<Article> allAtc;
+	public List<Map<String,Object>> viewArticleByTitle(@RequestParam String titlePart) {
+		List<Map<String,Object>> allAtc;
 
 		allAtc = aService.findByTitle(titlePart);
 //		System.out.println(allAtc);
@@ -109,7 +109,7 @@ public class ArticleController {
 	}
 
 	@PostMapping("/postEditArticle")
-	public String postEditArticle(Model model, @ModelAttribute("article") Article atc) {
+	public String editArticle(Model model, @ModelAttribute("article") Article atc) {
 		aService.save(atc);// save方法，有此id的話就會做update
 		Integer id = atc.getId();
 		System.out.println(id);
@@ -124,23 +124,13 @@ public class ArticleController {
 		aService.save(atc);
 		return "redirect:/forum/viewAllAjax";
 	}
-
-	@ModelAttribute("tagList")
-	public Map<String, String> getTags() {
-		Map<String, String> tagList = new LinkedHashMap<String, String>();
-		tagList.put("BTC", "比特幣");
-		tagList.put("BCH", "比特幣現金");
-		tagList.put("ETH", "以太幣");
-		tagList.put("XRP", "瑞波幣");
-		tagList.put("LTC", "萊特幣");
-		tagList.put("EOS", "柚子幣");
-		tagList.put("XLM", "恆星幣");
-		tagList.put("ADA", "艾達幣");
-		return tagList;
-	}
-
-	@GetMapping("/viewArticle/{id}")
-	public String viewArticle(HttpSession session, Model model, @PathVariable("id") Integer id) throws IOException {
+	
+//	##################################################################
+//	下方為後臺使用
+//	##################################################################
+	
+	@GetMapping("/viewArticleAdmin/{id}")
+	public String viewArticleAdmin(HttpSession session, Model model, @PathVariable("id") Integer id) throws IOException {
 		Article atc = aService.findById(id);
 		
 		Integer authorId = atc.getAuthorId();
@@ -151,8 +141,148 @@ public class ArticleController {
 		
 		model.addAttribute("Article", atc);
 		aService.increasePageView(session, id);
-		return "forum/viewArticle";
+		return "backend/article/viewArticleAdmin";
 	}
+	
+	@GetMapping("/editArticleAdmin/{id}")
+	public String editArticleAdmin(Model model, @PathVariable("id") Integer id) {
+		Article atc = aService.findById(id);
+		model.addAttribute("article", atc);
+		return "backend/article/editArticleAdmin";
+	}
+	
+	@PostMapping("/postEditArticleAdmin")
+	public String editArticleAdmin(Model model, @ModelAttribute("article") Article atc) {
+		aService.save(atc);// save方法，有此id的話就會做update
+		Integer id = atc.getId();
+		System.out.println(id);
+		model.addAttribute("id", id);
+		return "redirect:/viewArticleAdmin/" + id + "/";
+	}
+
+	@GetMapping("/deleteArticleAdmin/{id}")
+	public String deleteArticleAdmin(@PathVariable("id") Integer id) {
+		Article atc = aService.findById(id);
+		atc.setDeleted("y");
+		aService.save(atc);
+		return "redirect:/administrator/article/viewAllArticle";
+	}
+
+	@ModelAttribute("tagList")
+	public Map<String, String> getTags() {
+		Map<String, String> tagList = new LinkedHashMap<String, String>();
+		tagList.put("BTC", "BTC");
+        tagList.put("ETH", "ETH");
+        tagList.put("USDT", "USDT");
+        tagList.put("USDC", "USDC");
+        tagList.put("BNB", "BNB");
+        tagList.put("XRP", "XRP");
+        tagList.put("ADA", "ADA");
+        tagList.put("BUSD", "BUSD");
+        tagList.put("SOL", "SOL");
+        tagList.put("DOGE", "DOGE");
+        tagList.put("DOT", "DOT");
+        tagList.put("AVAX", "AVAX");
+        tagList.put("WBTC", "WBTC");
+        tagList.put("TRX", "TRX");
+        tagList.put("SHIB", "SHIB");
+        tagList.put("DAI", "DAI");
+        tagList.put("MATIC", "MATIC");
+        tagList.put("CRO", "CRO");
+        tagList.put("LEO", "LEO");
+        tagList.put("LTC", "LTC");
+        tagList.put("NEAR", "NEAR");
+        tagList.put("FTT", "FTT");
+        tagList.put("BCH", "BCH");
+        tagList.put("UNI", "UNI");
+        tagList.put("LINK", "LINK");
+        tagList.put("XLM", "XLM");
+        tagList.put("ATOM", "ATOM");
+        tagList.put("ALGO", "ALGO");
+        tagList.put("XMR", "XMR");
+        tagList.put("FLOW", "FLOW");
+        tagList.put("ETC", "ETC");
+        tagList.put("APE", "APE");
+        tagList.put("MANA", "MANA");
+        tagList.put("HBAR", "HBAR");
+        tagList.put("EGLD", "EGLD");
+        tagList.put("VET", "VET");
+        tagList.put("ICP", "ICP");
+        tagList.put("FIL", "FIL");
+        tagList.put("SAND", "SAND");
+        tagList.put("XTZ", "XTZ");
+        tagList.put("MKR", "MKR");
+        tagList.put("ZEC", "ZEC");
+        tagList.put("KCS", "KCS");
+        tagList.put("THETA", "THETA");
+        tagList.put("CAKE", "CAKE");
+        tagList.put("EOS", "EOS");
+        tagList.put("AXS", "AXS");
+        tagList.put("TUSD", "TUSD");
+        tagList.put("GRT", "GRT");
+        tagList.put("AAVE", "AAVE");
+        tagList.put("UST", "UST");
+        tagList.put("KLAY", "KLAY");
+        tagList.put("HT", "HT");
+        tagList.put("RUNE", "RUNE");
+        tagList.put("HNT", "HNT");
+        tagList.put("BTT", "BTT");
+        tagList.put("BSV", "BSV");
+        tagList.put("MIOTA", "MIOTA");
+        tagList.put("USDP", "USDP");
+        tagList.put("XEC", "XEC");
+        tagList.put("FTM", "FTM");
+        tagList.put("GMT", "GMT");
+        tagList.put("QNT", "QNT");
+        tagList.put("USDN", "USDN");
+        tagList.put("NEXO", "NEXO");
+        tagList.put("STX", "STX");
+        tagList.put("OKB", "OKB");
+        tagList.put("NEO", "NEO");
+        tagList.put("WAVES", "WAVES");
+        tagList.put("CHZ", "CHZ");
+        tagList.put("CVX", "CVX");
+        tagList.put("KSM", "KSM");
+        tagList.put("ZIL", "ZIL");
+        tagList.put("ENJ", "ENJ");
+        tagList.put("DASH", "DASH");
+        tagList.put("CELO", "CELO");
+        tagList.put("LRC", "LRC");
+        tagList.put("CRV", "CRV");
+        tagList.put("GALA", "GALA");
+        tagList.put("PAXG", "PAXG");
+        tagList.put("BAT", "BAT");
+        tagList.put("AMP", "AMP");
+        tagList.put("GNO", "GNO");
+        tagList.put("ONE", "ONE");
+        tagList.put("XDC", "XDC");
+        tagList.put("AR", "AR");
+        tagList.put("MINA", "MINA");
+        tagList.put("XEM", "XEM");
+        tagList.put("DCR", "DCR");
+        tagList.put("KDA", "KDA");
+        tagList.put("COMP", "COMP");
+        tagList.put("HOT", "HOT");
+        tagList.put("KAVA", "KAVA");
+        tagList.put("LDO", "LDO");
+        tagList.put("GT", "GT");
+        tagList.put("FEI", "FEI");
+        tagList.put("QTUM", "QTUM");
+        tagList.put("BNT", "BNT");
+        tagList.put("1INCH", "1INCH");
+        tagList.put("XYM", "XYM");
+//		tagList.put("BTC", "比特幣");
+//		tagList.put("BCH", "比特幣現金");
+//		tagList.put("ETH", "以太幣");
+//		tagList.put("XRP", "瑞波幣");
+//		tagList.put("LTC", "萊特幣");
+//		tagList.put("EOS", "柚子幣");
+//		tagList.put("XLM", "恆星幣");
+//		tagList.put("ADA", "艾達幣");
+		return tagList;
+	}
+
+
 
 //	@PostMapping("/viewArticle/{id}")
 //	public void viewArticle2(HttpSession session, Model model, @PathVariable("id") Integer id,  @RequestParam(name="p", defaultValue ="1") Integer pageNumber) throws IOException{

@@ -6,17 +6,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+<script src="${contextRoot}/javascripts/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="${contextRoot}/css/bootstrap.min.css">
+<meta charset="UTF-8">
 <title>${Article.title}</title>
-<style type="text/css">
-    body{
-    padding-top: 82px;
-    }
-</style>
 </head>
 <body>
-<jsp:include page="../NavBar/CoinShellNavBar.jsp" />
 <div class="container mb-5 mt-5">
     <div class="card">
         <div class="row">

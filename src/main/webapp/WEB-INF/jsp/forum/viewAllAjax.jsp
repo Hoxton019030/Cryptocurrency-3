@@ -17,7 +17,6 @@ padding-top: 82px;
 </head>
 <body>
 <jsp:include page="../NavBar/CoinShellNavBar.jsp" />
-<h1>${login.eMail}</h1>
 <div class="row justify-content-center">
 <div class="col-9">
     <form id="searchByTag">
@@ -120,6 +119,7 @@ function tagList(){
     for(var i=0;i<tags.length;i++){
             //inner第一行就會像是 <option value=0>商學院</option>
             inner=inner+`<option value=`+tags[i]+`>`+tags[i]+`</option>`;
+            // inner=inner+`tagList.put("`+tags[i]+`", "`+tags[i]+`");`
         }
     $("#tag-list").html(inner)
 }

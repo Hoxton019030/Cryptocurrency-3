@@ -29,9 +29,16 @@ public interface ArticleDao extends JpaRepository<Article, Integer> {
 			+ "where tag = :tag and deleted = 'n' ORDER BY added desc", countQuery = "select count (*) from article where tag = :tag and deleted = 'n'", nativeQuery = true)
 	public List<Map<String,Object>> findByTag(String tag);
 	
+	/*模糊查詢*/
 //	@Query(value = "select * from article where CHARINDEX(:titlePart, title) > 0", countQuery = "select count (*) from article where CHARINDEX(:titlePart, title) > 0", nativeQuery = true)
-	@Query(value = "select * from article where title like %?1% or text like %?1% and deleted = 'n' ORDER BY added desc", countQuery = "select count (*) from article where title like %?1% or text like %?1%", nativeQuery = true)
-	public List<Article> findByTitle(String titlePart);
+//	@Query(value = "select * from article where title like %?1% or text like %?1% and deleted = 'n' ORDER BY added desc", countQuery = "select count (*) from article where title like %?1% or text like %?1%", nativeQuery = true)
+//	public List<Article> findByTitle(String titlePart);
+	@Query(value = "select a.id,added,author_Id as articleId,comment_Num as commentNum,deleted,peek,read_Num as readNum,tag,text,title,userAvatarBase64, CustomizedUserName "
+			+ "from article as a left join "
+			+ "(Members as m inner join customizedUserAvatar as ava on m.id = ava.member_id) "
+			+ "on a.author_Id = m.id "
+			+ "where title like %?1% or text like %?1% and deleted = 'n' ORDER BY added desc", countQuery = "select count (*) from article where title like %?1% or text like %?1% and deleted = 'n'", nativeQuery = true)
+	public List<Map<String,Object>> findByTitle(String titlePart);
 	
 	/*選取全部*/
 //	@Query(value = "select * from article where deleted = 'n' ORDER BY added desc", countQuery = "select count (*) from article", nativeQuery = true)
@@ -43,7 +50,7 @@ public interface ArticleDao extends JpaRepository<Article, Integer> {
 			+ "where deleted = 'n' ORDER BY added desc", countQuery = "select count (*) from article where deleted = 'n'", nativeQuery = true)
 	public List<Map<String,Object>> findAllOrderByAddedDesc();
 
-	@Query(value = "select CustomizedUserAvatar from Members where id = :authorId", nativeQuery = true)
+	@Query(value = "select userAvatarBase64 from customizedUserAvatar where member_id = :authorId", nativeQuery = true)
 	public String findImg(Integer authorId);
 
 	@Query(value = "select customizedUserName from Members where id = :authorId", nativeQuery = true)

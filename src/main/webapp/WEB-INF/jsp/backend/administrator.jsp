@@ -12,7 +12,7 @@
 
         <br>
         <a href="administrator/store">商店商品增刪查改頁面</a>
-        <a href="administrator/article">文章增刪查改頁面</a>
+        <a href="administrator/article/viewAllArticle">文章增刪查改頁面</a>
     </body>
 
     </html>
