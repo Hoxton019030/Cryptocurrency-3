@@ -17,7 +17,7 @@ padding-top: 82px;
 </head>
 <body>
 <div class="row justify-content-center">
-<div class="col-9">
+<div class="col-12">
     <form id="searchByTag">
         <select id="tag-list"></select>        
         <input id="titlePart" type="text" placeholder="關鍵字查詢(標題/內文)"/>
@@ -28,12 +28,13 @@ padding-top: 82px;
 	<table class="table table-hover table-primary">
 		<thead class="thead-dark">
 			<tr>
-				<th scope="col" class="col-2">幣別</th>
+				<th scope="col" class="col-1">幣別</th>
+				<th scope="col" class="col-1">作者</th>
 				<th scope="col" class="col-6">文章</th>
 				<th scope="col" class="col-2" style="text-align: center;">閱讀/回復</th>
 				<th scope="col" class="col-2">建立時間</th>
-				<th scope="col" class="col-2">修改</th>
-				<th scope="col" class="col-2">刪除</th>
+				<th scope="col" class="col-1">修改</th>
+				<th scope="col" class="col-1">刪除</th>
 			</tr>
 		</thead>
 		<tbody class="sel" id="atcTable">
@@ -56,24 +57,15 @@ tagList();
 loadAtc();
 $("#tag-list").change(function(){loadAtc();})
 $("#search").click(function(){loadAtcByTitle();})
-// addAtc.addEventListener('click',verifyMembership);
 
-// function verifyMembership(){
-//     return false;
-//     if ("${login == null }" == "true") {
-//         $('#loginModal').modal("show")
-//         }
-// }
+pageid.addEventListener('click',switchPage);
 
-// var test = document.getElementById("addAtc");
-// function stopDefault(e) {
-//     if ("${login == null }" == "true"){
-//         e.preventDefault();
-//         $('#loginModal').modal("show")
-//     }
-// }
-
-// test.onclick = function(e){stopDefault(e)}
+function switchPage(e){
+e.preventDefault();
+if(e.target.nodeName !== 'A') return;
+const page = e.target.dataset.page;
+pagination(dataNow, page);
+}
 
 function loadAtc(){
     $(function() {
@@ -105,13 +97,19 @@ function loadAtcByTitle(){
     })
 }
 
-pageid.addEventListener('click',switchPage);
-
-function switchPage(e){
-e.preventDefault();
-if(e.target.nodeName !== 'A') return;
-const page = e.target.dataset.page;
-pagination(dataNow, page);
+function loadAtcById(){
+    $(function() {
+        var authorId = document.getElementById("titlePart").value;
+        console.log(tag);
+        fetch("http://localhost:8080/coinshell/article/viewAllAjaxById?=authorId"+authorId).then(function(response) {
+            return response.json();
+            // console.log(response.json())
+        }).then(function(data) {
+            console.log(data);
+            dataNow = data;
+            pagination(data, 1)
+        })
+    })
 }
 
 function tagList(){

@@ -63,8 +63,8 @@ public class ArticleController {
 
 	@ResponseBody // 由於是寫在一般Controller底下，要將java物件序列化轉成Json格式，需寫
 	@GetMapping("/article/viewAllAjax")
-	public List<Article> viewArticlePage(@RequestParam String tag) {
-		List<Article> allAtc;
+	public List<Map<String,Object>> viewArticlePage(@RequestParam String tag) {
+		List<Map<String,Object>> allAtc;
 
 		if ("All".equals(tag)) {
 			allAtc = aService.findAll();
@@ -96,7 +96,7 @@ public class ArticleController {
 		List<Article> allAtc;
 
 		allAtc = aService.findByTitle(titlePart);
-		System.out.println(allAtc);
+//		System.out.println(allAtc);
 		return allAtc;
 	}
 	// http://localhost:8080/myapp/article/viewAllAjax?tag=btc
@@ -146,6 +146,8 @@ public class ArticleController {
 		Integer authorId = atc.getAuthorId();
 		String img = aService.findImg(authorId);
 		model.addAttribute("img", img);
+		String userName = aService.getUserName(authorId);
+		model.addAttribute("userName", userName);
 		
 		model.addAttribute("Article", atc);
 		aService.increasePageView(session, id);
