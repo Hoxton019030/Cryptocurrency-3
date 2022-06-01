@@ -192,27 +192,12 @@ public class CoinCointrollerApi {
 		Integer memId = member.getId();
 		String memEMail = member.geteMail();
 		
-//		SetPrice setCoinPrice = new SetPrice();
-//		
-//		setCoinPrice.setMemberId(memId);
-////		setCoinPrice.setCoinId(1);
-//		setCoinPrice.setCoinId(coinId);
-////		setCoinPrice.setSetPrice(1);
-//		setCoinPrice.setSetPrice(setPrice);
-//		setPriceService.save(setCoinPrice);
-//		
-//		Integer setPrice1 = setCoinPrice.getSetPrice();
-//		
-//		Double coinPrice = coinService.findByCoinId2(coinId).getPrice();
-		
-//		if (setPrice1 <= coinPrice) {
-//			senderService.sendEmail(memEMail,"恭喜你","您設置的價格已達到!");
-//			System.out.println("恭喜你=================================");
-//		}
 		List<Map<String, Object>> result = coinService.getSetCoin(memId);
 		
-		if(result!=null) {
+		if(result.size()!=0) {
 			System.out.println("恭喜你=================================");
+		}else {
+			System.out.println("沒東西=================================");
 		}
 		return result; 
 	}
