@@ -9,10 +9,8 @@
     </head>
 
     <body>
-
-        <a href="store/add">新增商品 </a>
-        <br>
-        <a href="store/">全部商品 </a>
+    	<a href="article/addAdmin"></a> 
+        <a href="article/viewAllAdmin"></a>
 
     </body>
 
