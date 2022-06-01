@@ -13,6 +13,14 @@
     body{
     padding-top: 82px;
     }
+    #article-content {
+        font-size: 16px;
+        white-space: pre-wrap; /*css-3*/ 
+        white-space: -moz-pre-wrap; /*Mozilla,since1999*/ 
+        white-space: -pre-wrap; /*Opera4-6*/ 
+        white-space: -o-pre-wrap; /*Opera7*/ 
+        word-wrap: break-word; /*InternetExplorer5.5+*/ 
+    } 
 </style>
 </head>
 <body>
@@ -27,12 +35,13 @@
                 <span style="display: none;" id="editList">
                     <a href="${contextRoot}/editArticle/${Article.id}">Edit</a>
                     <a href="${contextRoot}/deleteArticle/${Article.id}" onclick="return confirm('確認刪除嗎?')">Delete</a>
-                </span>
-                <br>
+                </span>                
                 <div class="d-flex">                    
                     <img class="mr-3 rounded-circle" style="display:block; width:40px;height:40px;" src="${img}"/><h2>${userName}</h2>                               
                 </div>
-                <div>${Article.text}</div><br/>
+                <div style="align-items: center;background-color: #dbf8ff;">
+                    <pre id="article-content">${Article.text}</pre>
+                </div>
                 <hr/>
                 <button id="doComment">Leave comment here...</button>
                 <button id="closeComment" style="display: none;">Umm...let me think about it...</button>

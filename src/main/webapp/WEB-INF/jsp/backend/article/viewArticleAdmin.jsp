@@ -26,11 +26,12 @@
                     <a href="${contextRoot}/editArticle/${Article.id}">Edit</a>
                     <a href="${contextRoot}/deleteArticle/${Article.id}" onclick="return confirm('確認刪除嗎?')">Delete</a>
                 </span>
-                <br>
                 <div class="d-flex">                    
                     <img class="mr-3 rounded-circle" style="display:block; width:40px;height:40px;" src="${img}"/><h2>${userName}</h2>                               
                 </div>
-                <div>${Article.text}</div><br/>
+                <div style="align-items: center;background-color: #dbf8ff;">
+                    <pre id="article-content">${Article.text}</pre>
+                </div>
                 <hr/>
                 <div class="row section_title">
                     <div class="col-md-12" id="comment-list">
