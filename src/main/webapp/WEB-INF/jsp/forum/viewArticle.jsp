@@ -84,11 +84,11 @@
                     <div class="col-md-12" id="comment-list">
 
                     </div>
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination" id="pageidC">
-                        </ul>
-                    </nav>
                 </div>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination" id="pageidC">
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>
@@ -305,9 +305,12 @@ function displayComm(data){
                     <div class="media-body">
                         <div class="row">
                             <div class="col-8 d-flex">
-                                <img class="mr-3 rounded-circle" style="display:block; width:40px;height:40px;" src="`+img+`" /><h5>`+value.userName+`</h5>
-                                <span>-`+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</span>
-                            </div>                                
+                                <img class="mr-3 rounded-circle" style="display:block; width:40px;height:40px;" src="`+img+`" />
+                                <div>
+                                    <span>`+value.userName+`</span>
+                                    <span> — `+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</span>
+                                </div>
+                            </div>                            
                             <div class="col-4">                                
                                 <div class="pull-right reply">
                                     <span onclick="doReply(`+id+`)"><i class="fa fa-reply"></i>reply</span>
@@ -346,14 +349,14 @@ function displayComm(data){
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>    
                         `+value.text+`
                         <span onclick="loadReply(`+id+`)" id="showR`+id+`"><i class="fa fa-reply"></i>See reply</span>
                         <span onclick="closeReply(`+id+`)" id="closeR`+id+`" style="display: none"><i class="fa fa-reply"></i>Close reply</span>
-                        <div id="reply-list`+id+`">
+                        <div id="reply-list`+id+`" class="reply-list">
                         </div>
                         <nav aria-label="Page navigation example">
-                            <ul class="pagination pageR" id="pageidR`+id+`" onclick="switchPageR(event,`+id+`)"></ul>
+                            <ul class="pagination pagination-sm pageR" id="pageidR`+id+`" onclick="switchPageR(event,`+id+`)"></ul>
                         </nav>                       
                     </div>
                     `)                    
@@ -455,9 +458,11 @@ function displayReply(data, id){
                                 <div class="row">
                                     <div class="col-12 d-flex">
                                         <img class="mr-3 rounded-circle" style="display:block; width:40px;height:40px;" src="`+img+`" />
-                                        <h5>`+value.userName+`</h5>
-                                        <span>-`+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</span>
-                                    </div>
+                                        <div>
+                                            <span>`+value.userName+`</span>
+                                            <span> — `+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</span>
+                                        </div>
+                                    </div>                                    
                                 </div>
                                 `+value.text+`
                             </div>
@@ -467,6 +472,7 @@ function displayReply(data, id){
 }
 
 function pageBtnSm(page){
+    // alert(123);
     console.log("page的ID是:"+page.id);
     let str = '';
     const total = page.pageTotal;
