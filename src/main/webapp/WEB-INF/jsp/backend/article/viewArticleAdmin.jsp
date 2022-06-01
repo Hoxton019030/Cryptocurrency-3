@@ -6,89 +6,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+<script src="${contextRoot}/javascripts/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="${contextRoot}/css/bootstrap.min.css">
+<meta charset="UTF-8">
 <title>${Article.title}</title>
-<style type="text/css">
-    body{
-    padding-top: 82px;
-    }
-    #article-content {
-        font-size: 16px;
-        white-space: pre-wrap; /*css-3*/ 
-        white-space: -moz-pre-wrap; /*Mozilla,since1999*/ 
-        white-space: -pre-wrap; /*Opera4-6*/ 
-        white-space: -o-pre-wrap; /*Opera7*/ 
-        word-wrap: break-word; /*InternetExplorer5.5+*/ 
-        margin-bottom:0;
-    } 
-</style>
 </head>
 <body>
-<jsp:include page="../NavBar/CoinShellNavBar.jsp" />
 <div class="container mb-5 mt-5">
     <div class="card">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12">                             
                 <h1>${Article.title}</h1>
                 <input id="aid" type="hidden" value="${Article.id}"/>
                 <input id="authorid" type="hidden" value="${Article.authorId}"/>
-                <span style="display: none;" id="editList">
+                <span id="editList">
                     <a href="${contextRoot}/editArticle/${Article.id}">Edit</a>
                     <a href="${contextRoot}/deleteArticle/${Article.id}" onclick="return confirm('確認刪除嗎?')">Delete</a>
                 </span>
-                <div class="d-flex flex-row">
-                    <img class="mr-3 rounded-circle" style="display:block; width:65px; height:65px" src="${img}"/>
-                    <div class="d-flex flex-column">
-                        <span class="name"><h3>${userName}</h3></span>
-                        <span class="date text-black-50">${Article.added}</span>
-                    </div>
+                <div class="d-flex">                    
+                    <img class="mr-3 rounded-circle" style="display:block; width:40px;height:40px;" src="${img}"/><h2>${userName}</h2>                               
                 </div>
-                <div style="align-items: center;background-color: #dbf8ff;" class="mt-2 mb-2">
+                <div style="align-items: center;background-color: #dbf8ff;">
                     <pre id="article-content">${Article.text}</pre>
                 </div>
-                <div class="m-1">                    
-                    <button id="doComment" class="btn btn-primary btn-sm shadow-none">Comment</button>
-                </div>
-                <div id="respond">
-                    <div class="comment-l bg-light p-2" style="display: none;">
-                        <div class="d-flex flex-row align-items-start">
-                            <img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
-                            <textarea class="form-control ml-1 shadow-none textarea" id="text-c" tabindex="1" placeholder="我其實也不是一定要評論"  style="resize:none;width:600px;height:90px;">我其實也不是一定要評論</textarea>
-                        </div>
-                        <div class="mt-2 text-right">
-                            <button class="btn btn-primary btn-sm shadow-none" type="button" id="submit-c" tabindex="2">Post comment</button>
-                            <button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button" id="closeComment" style="display: none;">Cancel</button>
-                        </div>
-                    </div>
-                    <ul class="comment-r" style="display: none;">
-                        <li>
-                            <label for="userName">Name:(necessery)</label>
-                        </li>
-                        <li>
-                            <input type="text" id="userName-c" size="25" tabindex="2" aria-required='true' value="${login.customizedUserName}"/>
-                        </li>
-                        <li>
-                            <label for="userEmail">E-mail:(necessery)</label>
-                        </li>
-                        <li>
-                            <input type="hidden" id="articleId" value="${Article.id}" />
-                            <input type="hidden" id="userId" value="${login.id}" />
-                        </li>
-                        <li>
-                            <input type="text" id="userEmail-c" size="25" tabindex="3" aria-required='true' value="${login.eMail}"/>
-                        </li>                            
-                    </ul>
-                </div>
+                <hr/>
                 <div class="row section_title">
                     <div class="col-md-12" id="comment-list">
 
                     </div>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination" id="pageidC">
+                        </ul>
+                    </nav>
                 </div>
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination" id="pageidC">
-                    </ul>
-                </nav>
             </div>
         </div>
     </div>
@@ -98,25 +51,14 @@ var page = 1;
 let commDataNow = {};
 let replyDataNow = {};
 loadComment();
-verifyMembershipOnload();
 $("#submit-c").click(function(){comment()})
 doComment.addEventListener('click',verifyMembership);
 closeComment.addEventListener('click',closeCommentL);
 
-function verifyMembershipOnload(){
-    if ("${Article.authorId}" == "${login.id}") {
-        $("#editList").toggle()
-    }
-}
-
 function verifyMembership(){
-    if ("${login == null }" == "true") {
-        $('#loginModal').modal("show")
-    }else{
         $(".comment-l").toggle();
         $("#closeComment").toggle();
         $("#doComment").hide();
-    }
 }
 
 function closeCommentL(){
@@ -152,11 +94,7 @@ function closeReply(id){
 }
 
 function doReply(id){
-    if ("${login == null }" == "true") {
-        $('#loginModal').modal("show")
-    }else{
     $("#replySection"+id).toggle()
-    }
 }
 
 pageidC.addEventListener('click',switchPageC);
@@ -302,58 +240,21 @@ function displayComm(data){
             var img = value.userAvatarBase64;        
             // <img class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="https://i.imgur.com/stD0Q19.jpg" />
             $("#comment-list").append(`
-                    <div class="media-body rounded">
+                    <div class="media-body">
                         <div class="row">
-                            <div class="col-8 d-flex flex-row">
-                                <img class="mr-3 rounded-circle" style="display:block; width:48px; height:48px" src="`+img+`" />
-                                <div class="d-flex flex-column">
-                                    <span class="name">`+value.userName+`</span>
-                                    <span class="date"> — `+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</span>
-                                </div>
-                            </div>
-                        </div>                      
-                        <div class="mt-2">`+value.text+`</div>
-                        <div>                                
-                            <div class="reply">
-                                <div class="m-1">                    
-                                    <button onclick="doReply(`+id+`)" class="fa fa-reply">Reply</button>
-                                </div>
-                                <div id="replySection`+id+`" class="reply-section"  style="display: none;">
-                                    <div class="reply-l bg-light p-2">
-                                        <div class="d-flex flex-row align-items-start">
-                                            <img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
-                                            <textarea class="form-control ml-1 shadow-none textarea" id="text-r`+id+`" tabindex="1" placeholder="我其實也不是一定要說什麼" aria-required="true"></textarea>
-                                        </div>
-                                        <div class="mt-2 text-right">
-                                            <button class="btn btn-primary btn-sm shadow-none submit-r" type="button" onclick="reply(`+id+`)">Reply</button>                                            
-                                        </div>
-                                    </div>
-                                    <ul class="reply-r" style="display: none;">
-                                        <li>
-                                            <input type="text" id="userName-r`+id+`" size="25" tabindex="2" aria-required='true' value="${login.customizedUserName}"/>
-                                        </li>
-                                        <li>
-                                            <input type="hidden" id="articleId" value="${Article.id}" />
-                                        </li>
-                                        <li>
-                                            <input type="hidden" id="commentId`+id+`" value="`+id+`" />
-                                        </li>
-                                        <li>
-                                            <input type="text" id="userEmail-r`+id+`" size="25" tabindex="3" aria-required='true' value="${login.eMail}"/>
-                                        </li>
-                                    </ul>
-                                </div>
+                            <div class="col-8 d-flex">
+                                <img class="mr-3 rounded-circle" style="display:block; width:40px;height:40px;" src="`+img+`" /><h5>`+value.userName+`</h5>
+                                <span>-`+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</span>
                             </div>
                         </div>
-                        <span onclick="loadReply(`+id+`)" id="showR`+id+`"><i class="fa fa-chevron-down"></i>See reply</span>
-                        <span onclick="closeReply(`+id+`)" id="closeR`+id+`" style="display: none"><i class="fa fa-chevron-up"></i>Close reply</span>
-                        <div class="ml-5">
-                            <div id="reply-list`+id+`" class="reply-list">
-                            </div>
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination pagination-sm pageR" id="pageidR`+id+`" onclick="switchPageR(event,`+id+`)"></ul>
-                            </nav>                       
+                        `+value.text+`
+                        <span onclick="loadReply(`+id+`)" id="showR`+id+`"><i class="fa fa-reply"></i>See reply</span>
+                        <span onclick="closeReply(`+id+`)" id="closeR`+id+`" style="display: none"><i class="fa fa-reply"></i>Close reply</span>
+                        <div id="reply-list`+id+`">
                         </div>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination pageR" id="pageidR`+id+`" onclick="switchPageR(event,`+id+`)"></ul>
+                        </nav>                       
                     </div>
                     `)                    
             })
@@ -449,16 +350,14 @@ function displayReply(data, id){
                 var img = value.userAvatarBase64;                
                 // <a class="pr-3" href="#"><img class="rounded-circle" alt="Bootstrap Media Another Preview" src="https://i.imgur.com/xELPaag.jpg" /></a>
                 $("#reply-list"+id).append(`
-                        <div class="media mt-4">
-                            <div class="media-body rounded">
+                <div class="media mt-4">
+                            <div class="media-body">
                                 <div class="row">
-                                    <div class="col-8 d-flex flex-row">
-                                        <img class="mr-3 rounded-circle" style="display:block; width:48px; height:48px" src="`+img+`" />
-                                        <div class="d-flex flex-column">
-                                            <span class="name">`+value.userName+`</span>
-                                            <span class="date"> — `+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</span>
-                                        </div>
-                                    </div>                                  
+                                    <div class="col-12 d-flex">
+                                        <img style="display:block; width:100px;height:100px;" src="`+img+`" />
+                                        <h5>`+value.userName+`</h5>
+                                        <span>-`+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</span>
+                                    </div>
                                 </div>
                                 `+value.text+`
                             </div>
@@ -468,7 +367,6 @@ function displayReply(data, id){
 }
 
 function pageBtnSm(page){
-    // alert(123);
     console.log("page的ID是:"+page.id);
     let str = '';
     const total = page.pageTotal;

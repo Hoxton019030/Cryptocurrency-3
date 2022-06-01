@@ -1,6 +1,7 @@
 package com.Group1.CoinShell.service.Habufly;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
@@ -31,7 +32,7 @@ public class ArticleService {
 		return dao.findFirstByOrderByAddedDesc();
 	}
 	
-	public List<Article> findAll(){
+	public List<Map<String,Object>> findAll(){
 		return dao.findAllOrderByAddedDesc();
 	}
 	
@@ -82,19 +83,24 @@ public class ArticleService {
 //		return list;
 //	}
 	
-	public List<Article> findByTag(String tag) {
-		List<Article> list = dao.findByTag(tag);
+	public List<Map<String,Object>> findByTag(String tag) {
+		List<Map<String,Object>> list = dao.findByTag(tag);
 		return list;
 	}
 
-	public List<Article> findByTitle(String titlePart) {
-		List<Article> list = dao.findByTitle(titlePart);
+	public List<Map<String,Object>> findByTitle(String titlePart) {
+		List<Map<String,Object>> list = dao.findByTitle(titlePart);
 		return list;
 	}
 
 	public String findImg(Integer authorId) {
 		String img = dao.findImg(authorId);
 		return img;
+	}
+
+	public String getUserName(Integer authorId) {
+		String userName = dao.getUserName(authorId);
+		return userName;
 	}
 	
 	
