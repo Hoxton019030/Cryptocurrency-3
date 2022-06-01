@@ -104,10 +104,10 @@
                             <div class="modal-content">
                                 <!--Header-->
                                 <div class="modal-header row d-flex justify-content-between mx-1 mx-sm-6 mb-0 pb-0 border-0">
-                                    <div class="tabs" id="tab01">
+                                    <div class="tabs active" id="tab01">
                                         <h6 class="font-weight-bold">Log In</h6>
                                     </div>
-                                    <div class="tabs active" id="tab02">
+                                    <div class="tabs" id="tab02">
                                         <h6 class="text-muted">Sign Up</h6>
                                     </div>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
