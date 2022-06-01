@@ -38,6 +38,7 @@ public class ArticleController {
 		Integer authorId = atc.getAuthorId();
 		String img = aService.findImg(authorId);
 		model.addAttribute("img", img);
+		System.out.println("#############################################################"+img);
 		String userName = aService.getUserName(authorId);
 		model.addAttribute("userName", userName);
 		

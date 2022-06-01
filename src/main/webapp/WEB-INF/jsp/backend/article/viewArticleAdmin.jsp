@@ -18,57 +18,20 @@
 <div class="container mb-5 mt-5">
     <div class="card">
         <div class="row">
-            <div class="col-md-12">
-                <img style="display:block; width:100px;height:100px;" src="${img}" />
-                <p>${img}</p>
+            <div class="col-md-12">                             
                 <h1>${Article.title}</h1>
                 <input id="aid" type="hidden" value="${Article.id}"/>
                 <input id="authorid" type="hidden" value="${Article.authorId}"/>
-                <span style="display: none;" id="editList">
+                <span id="editList">
                     <a href="${contextRoot}/editArticle/${Article.id}">Edit</a>
                     <a href="${contextRoot}/deleteArticle/${Article.id}" onclick="return confirm('確認刪除嗎?')">Delete</a>
                 </span>
                 <br>
-                <h2>${userName}</h2>
+                <div class="d-flex">                    
+                    <img class="mr-3 rounded-circle" style="display:block; width:40px;height:40px;" src="${img}"/><h2>${userName}</h2>                               
+                </div>
                 <div>${Article.text}</div><br/>
                 <hr/>
-                <button id="doComment">Leave comment here...</button>
-                <button id="closeComment" style="display: none;">Umm...let me think about it...</button>
-                <div id="respond">
-                    <!-- <form id="commentform"> -->                        
-                        <ul class="comment-l" style="display: none;">
-                            <li style="height:28px;line-height: 28px;overflow: hidden">
-                                <label for="text">Comment:(necessery)</label>
-                            </li>
-                            <li>
-                                <textarea id="text-c" tabindex="1" placeholder="我其實也不是一定要評論" style="resize:none;width:600px;height:90px;">我其實也不是一定要評論</textarea>
-                            </li>
-                            <li class="comment-btn">
-                                <button href="#" id="submit-c" tabindex="5">OK!Let's do this!</button>
-                                <!-- <p>( Ctrl+Enter Quick Submit )&nbsp;&nbsp;&nbsp;&nbsp;</p>                                     -->
-                            </li>                   
-                        </ul>
-
-                        <ul class="comment-r" style="display: none;">
-                            <li>
-                                <label for="userName">Name:(necessery)</label>
-                            </li>
-                            <li>
-                                <input type="text" id="userName-c" size="25" tabindex="2" aria-required='true' value="${login.customizedUserName}"/>
-                            </li>
-                            <li>
-                                <label for="userEmail">E-mail:(necessery)</label>
-                            </li>
-                            <li>
-                                <input type="hidden" id="articleId" value="${Article.id}" />
-                                <input type="hidden" id="userId" value="${login.id}" />
-                            </li>
-                            <li>
-                                <input type="text" id="userEmail-c" size="25" tabindex="3" aria-required='true' value="${login.eMail}"/>
-                            </li>                            
-                        </ul>
-                    <!-- </form> -->
-                </div>
                 <div class="row section_title">
                     <div class="col-md-12" id="comment-list">
 
@@ -87,25 +50,14 @@ var page = 1;
 let commDataNow = {};
 let replyDataNow = {};
 loadComment();
-verifyMembershipOnload();
 $("#submit-c").click(function(){comment()})
 doComment.addEventListener('click',verifyMembership);
 closeComment.addEventListener('click',closeCommentL);
 
-function verifyMembershipOnload(){
-    if ("${Article.authorId}" == "${login.id}") {
-        $("#editList").toggle()
-    }
-}
-
 function verifyMembership(){
-    if ("${login == null }" == "true") {
-        $('#loginModal').modal("show")
-    }else{
         $(".comment-l").toggle();
         $("#closeComment").toggle();
         $("#doComment").hide();
-    }
 }
 
 function closeCommentL(){
@@ -141,11 +93,7 @@ function closeReply(id){
 }
 
 function doReply(id){
-    if ("${login == null }" == "true") {
-        $('#loginModal').modal("show")
-    }else{
     $("#replySection"+id).toggle()
-    }
 }
 
 pageidC.addEventListener('click',switchPageC);
@@ -288,53 +236,14 @@ function displayComm(data){
             var weekDayPrint = weekDay[weekIndex];
             var id = value.id;
             var cidForReply = value.commentId;   
-            var img = value.CustomizedUserAvatar;        
+            var img = value.userAvatarBase64;        
             // <img class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="https://i.imgur.com/stD0Q19.jpg" />
             $("#comment-list").append(`
                     <div class="media-body">
                         <div class="row">
                             <div class="col-8 d-flex">
-                                <img style="display:block; width:100px;height:100px;" src="`+img+`" />
-                                <h5>`+value.userName+`</h5>
+                                <img class="mr-3 rounded-circle" style="display:block; width:40px;height:40px;" src="`+img+`" /><h5>`+value.userName+`</h5>
                                 <span>-`+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</span>
-                            </div>                                
-                            <div class="col-4">                                
-                                <div class="pull-right reply">
-                                    <span onclick="doReply(`+id+`)"><i class="fa fa-reply"></i>reply</span>
-                                    <div id="replySection`+id+`" class="reply-section"  style="display: none;">
-                                        <ul class="reply-l">
-                                            <li style="height:28px;line-height: 28px;overflow: hidden">
-                                                Comment content:(necessery)
-                                            </li>
-                                            <li>
-                                                <textarea id="text-r`+id+`" tabindex="1" aria-required="true"></textarea>
-                                            </li>
-                                            <li class="reply-btn">
-                                                <button class="submit-r" onclick="reply(`+id+`)" tabindex="5">OK!Let's do this!</button>                                                
-                                            </li>
-                                        </ul>
-                                        <ul class="reply-r" style="display: none;">
-                                            <li>
-                                                <label for="userName">Name:(necessery)</label>
-                                            </li>
-                                            <li>
-                                                <input type="text" id="userName-r`+id+`" size="25" tabindex="2" aria-required='true' value="${login.customizedUserName}"/>
-                                            </li>
-                                            <li>
-                                                <label for="userEmail">E-mail:(necessery)</label>
-                                            </li>
-                                            <li>
-                                                <input type="hidden" id="articleId" value="${Article.id}" />
-                                            </li>
-                                            <li>
-                                                <input type="hidden" id="commentId`+id+`" value="`+id+`" />
-                                            </li>
-                                            <li>
-                                                <input type="text" id="userEmail-r`+id+`" size="25" tabindex="3" aria-required='true' value="${login.eMail}"/>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         `+value.text+`
@@ -437,7 +346,7 @@ function displayReply(data, id){
                 var weekIndex = added.getDay();
                 var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
                 var weekDayPrint = weekDay[weekIndex];  
-                var img = value.CustomizedUserAvatar;                
+                var img = value.userAvatarBase64;                
                 // <a class="pr-3" href="#"><img class="rounded-circle" alt="Bootstrap Media Another Preview" src="https://i.imgur.com/xELPaag.jpg" /></a>
                 $("#reply-list"+id).append(`
                 <div class="media mt-4">

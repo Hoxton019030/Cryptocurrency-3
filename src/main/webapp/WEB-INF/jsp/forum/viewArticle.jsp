@@ -21,8 +21,6 @@
     <div class="card">
         <div class="row">
             <div class="col-md-12">
-                <img style="display:block; width:100px;height:100px;" src="${img}" />
-                <p>${img}</p>
                 <h1>${Article.title}</h1>
                 <input id="aid" type="hidden" value="${Article.id}"/>
                 <input id="authorid" type="hidden" value="${Article.authorId}"/>
@@ -31,7 +29,9 @@
                     <a href="${contextRoot}/deleteArticle/${Article.id}" onclick="return confirm('確認刪除嗎?')">Delete</a>
                 </span>
                 <br>
-                <h2>${userName}</h2>
+                <div class="d-flex">                    
+                    <img class="mr-3 rounded-circle" style="display:block; width:40px;height:40px;" src="${img}"/><h2>${userName}</h2>                               
+                </div>
                 <div>${Article.text}</div><br/>
                 <hr/>
                 <button id="doComment">Leave comment here...</button>
@@ -290,14 +290,13 @@ function displayComm(data){
             var weekDayPrint = weekDay[weekIndex];
             var id = value.id;
             var cidForReply = value.commentId;   
-            var img = value.CustomizedUserAvatar;        
+            var img = value.userAvatarBase64;        
             // <img class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="https://i.imgur.com/stD0Q19.jpg" />
             $("#comment-list").append(`
                     <div class="media-body">
                         <div class="row">
                             <div class="col-8 d-flex">
-                                <img style="display:block; width:100px;height:100px;" src="`+img+`" />
-                                <h5>`+value.userName+`</h5>
+                                <img class="mr-3 rounded-circle" style="display:block; width:40px;height:40px;" src="`+img+`" /><h5>`+value.userName+`</h5>
                                 <span>-`+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</span>
                             </div>                                
                             <div class="col-4">                                
@@ -439,14 +438,14 @@ function displayReply(data, id){
                 var weekIndex = added.getDay();
                 var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
                 var weekDayPrint = weekDay[weekIndex];  
-                var img = value.CustomizedUserAvatar;                
+                var img = value.userAvatarBase64;                
                 // <a class="pr-3" href="#"><img class="rounded-circle" alt="Bootstrap Media Another Preview" src="https://i.imgur.com/xELPaag.jpg" /></a>
                 $("#reply-list"+id).append(`
                 <div class="media mt-4">
                             <div class="media-body">
                                 <div class="row">
                                     <div class="col-12 d-flex">
-                                        <img style="display:block; width:100px;height:100px;" src="`+img+`" />
+                                        <img class="mr-3 rounded-circle" style="display:block; width:40px;height:40px;" src="`+img+`" />
                                         <h5>`+value.userName+`</h5>
                                         <span>-`+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</span>
                                     </div>
