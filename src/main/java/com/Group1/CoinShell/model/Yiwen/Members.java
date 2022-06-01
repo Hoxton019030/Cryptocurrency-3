@@ -26,7 +26,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.Group1.CoinShell.model.Feeder.Watch;
 
 @Entity
-@Table(name = "Members", uniqueConstraints = { @UniqueConstraint(columnNames = { "E_Mail" }) })
+@Table(name = "members", uniqueConstraints = { @UniqueConstraint(columnNames = { "E_Mail" }) })
 public class Members {
 
 	@Id

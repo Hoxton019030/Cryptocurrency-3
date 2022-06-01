@@ -10,8 +10,18 @@
 
     <body> 後台人員管理介面
 
-        <br>
-        <a href="administrator/store">商店商品增刪查改頁面</a>
+       <ul>
+       <li><a href="administrator/store">商店商品增刪查改頁面</a></li>
+       <li></li>
+       <li></li>
+       <li></li>
+       <li></li>
+       <li></li>
+       <li></li>
+       <li><a href="administrator/account">使用者與會員頭像增刪查詢修改</a></li>
+       
+       </ul>
+
     </body>
 
     </html>

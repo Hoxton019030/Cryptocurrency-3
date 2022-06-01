@@ -31,17 +31,15 @@ public class CustomizedUserAvatarController {
 	
 	@PostMapping("administrator/account/uploadcua")
 	public String addNewAvatar(@RequestParam("alias")String aliasAvatar, 
-								  @RequestParam("base64")String userAvatarBase64) {
+								  @RequestParam("file")MultipartFile  userAvatar) {
 		CustomizedUserAvatar cua = new CustomizedUserAvatar();
 		cua.setAliasAvatar(aliasAvatar);
-		cua.setUserAvatarBase64(userAvatarBase64);
-		// 後台傳入照片 in VarBinary(MAX)   #######################################
-//		try {
-//			byte[] bytes = file.getBytes();   //如果改用 varbinary 的話, base64就要改名成 MultipartFile file(formerly userAvatarBase64)
-//			cua.setUserAvatarBase64(bytes);
-//		}catch (IOException e) {
-//			e.printStackTrace();
-//		}
+		try {
+			byte[] bytes = userAvatar.getBytes();   //如果改用 varbinary 的話, base64就要改名成 MultipartFile file(formerly userAvatarBase64)
+			cua.setUserAvatar(bytes);
+		}catch (IOException e) {
+			e.printStackTrace();
+		}
 		cuaDao.save(cua);
 		return "redirect:/administrator/account";
 	}
@@ -65,8 +63,13 @@ public class CustomizedUserAvatarController {
 		return "backend/store/one_cua";
 	}
 	
-	//updateById
-	//public String editAvatar  line 63 ~ 74 updatexxxbyid
+	@PostMapping("administrator/account/editcua")
+	public String editAvatar (@RequestParam("alias") String aliasAvatar, 
+							  @RequestParam("file") byte[] userAvatar,
+							  @RequestParam("id") Integer id) {
+		cuaService.updateAvatarById(aliasAvatar, userAvatar, id);
+		return "redirect:/administrator/account/showAllAvatars";
+	}
  
 
 }

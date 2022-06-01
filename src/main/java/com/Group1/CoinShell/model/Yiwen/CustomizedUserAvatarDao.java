@@ -15,11 +15,11 @@ public interface CustomizedUserAvatarDao extends JpaRepository<CustomizedUserAva
 	 * 加入使用者頭像
 	 * 
 	 * @param aliasAvatar
-	 * @param userAvatarBase64
+	 * @param userAvatar
 	 */
-	@Query(value = "INSERT INTO CustomizedUserAvatar (aliasAvatar, userAvatarBase64) VALUES(:aliasAvatar2, :userAvatarBase642)", nativeQuery = true)
+	@Query(value = "INSERT INTO CustomizedUserAvatar (aliasAvatar, userAvatar) VALUES(:aliasAvatar2, :userAvatar2)", nativeQuery = true)
 	public void insertAvatar(@Param("aliasAvatar2") String aliasAvatar,
-			@Param("userAvatarBase642") String userAvatarBase64);
+						     @Param("userAvatar2") byte[] userAvatar);
 
 	/**
 	 * 透過Id刪除使用者頭像
@@ -39,6 +39,10 @@ public interface CustomizedUserAvatarDao extends JpaRepository<CustomizedUserAva
 	public CustomizedUserAvatar findAvatarById(@Param("id2") Integer id);
 
 //updateById
+	@Query(value = "UPDATE customizedUserAvatar SET aliasAvatar = :aliasAvatar2, userAvatar = :userAvatar2 WHERE id = :id2", nativeQuery = true)
+	public void updateAvatarById(@Param("aliasAvatar2") String aliasAvatar, 
+								 @Param("userAvatar2") byte[] userAvatar,
+								 @Param("id2")Integer id);
 
 //findAll
 	@Query(value = "SELECT * FROM customizedUserAvatar", nativeQuery = true)
