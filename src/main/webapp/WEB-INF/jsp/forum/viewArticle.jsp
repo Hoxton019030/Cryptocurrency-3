@@ -20,6 +20,7 @@
         white-space: -pre-wrap; /*Opera4-6*/ 
         white-space: -o-pre-wrap; /*Opera7*/ 
         word-wrap: break-word; /*InternetExplorer5.5+*/ 
+        margin-bottom:0;
     } 
 </style>
 </head>
@@ -35,50 +36,49 @@
                 <span style="display: none;" id="editList">
                     <a href="${contextRoot}/editArticle/${Article.id}">Edit</a>
                     <a href="${contextRoot}/deleteArticle/${Article.id}" onclick="return confirm('確認刪除嗎?')">Delete</a>
-                </span>                
-                <div class="d-flex">                    
-                    <img class="mr-3 rounded-circle" style="display:block; width:40px;height:40px;" src="${img}"/><h2>${userName}</h2>                               
+                </span>
+                <div class="d-flex flex-row">
+                    <img class="mr-3 rounded-circle" style="display:block; width:65px; height:65px" src="${img}"/>
+                    <div class="d-flex flex-column">
+                        <span class="name"><h3>${userName}</h3></span>
+                        <span class="date text-black-50">${Article.added}</span>
+                    </div>
                 </div>
-                <div style="align-items: center;background-color: #dbf8ff;">
+                <div style="align-items: center;background-color: #dbf8ff;" class="mt-2 mb-2">
                     <pre id="article-content">${Article.text}</pre>
                 </div>
-                <hr/>
-                <button id="doComment">Leave comment here...</button>
-                <button id="closeComment" style="display: none;">Umm...let me think about it...</button>
+                <div class="m-1">                    
+                    <button id="doComment" class="btn btn-primary btn-sm shadow-none">Comment</button>
+                </div>
                 <div id="respond">
-                    <!-- <form id="commentform"> -->                        
-                        <ul class="comment-l" style="display: none;">
-                            <li style="height:28px;line-height: 28px;overflow: hidden">
-                                <label for="text">Comment:(necessery)</label>
-                            </li>
-                            <li>
-                                <textarea id="text-c" tabindex="1" placeholder="我其實也不是一定要評論" style="resize:none;width:600px;height:90px;">我其實也不是一定要評論</textarea>
-                            </li>
-                            <li class="comment-btn">
-                                <button href="#" id="submit-c" tabindex="5">OK!Let's do this!</button>
-                                <!-- <p>( Ctrl+Enter Quick Submit )&nbsp;&nbsp;&nbsp;&nbsp;</p>                                     -->
-                            </li>                   
-                        </ul>
-
-                        <ul class="comment-r" style="display: none;">
-                            <li>
-                                <label for="userName">Name:(necessery)</label>
-                            </li>
-                            <li>
-                                <input type="text" id="userName-c" size="25" tabindex="2" aria-required='true' value="${login.customizedUserName}"/>
-                            </li>
-                            <li>
-                                <label for="userEmail">E-mail:(necessery)</label>
-                            </li>
-                            <li>
-                                <input type="hidden" id="articleId" value="${Article.id}" />
-                                <input type="hidden" id="userId" value="${login.id}" />
-                            </li>
-                            <li>
-                                <input type="text" id="userEmail-c" size="25" tabindex="3" aria-required='true' value="${login.eMail}"/>
-                            </li>                            
-                        </ul>
-                    <!-- </form> -->
+                    <div class="comment-l bg-light p-2" style="display: none;">
+                        <div class="d-flex flex-row align-items-start">
+                            <img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+                            <textarea class="form-control ml-1 shadow-none textarea" id="text-c" tabindex="1" placeholder="我其實也不是一定要評論"  style="resize:none;width:600px;height:90px;">我其實也不是一定要評論</textarea>
+                        </div>
+                        <div class="mt-2 text-right">
+                            <button class="btn btn-primary btn-sm shadow-none" type="button" id="submit-c" tabindex="2">Post comment</button>
+                            <button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button" id="closeComment" style="display: none;">Cancel</button>
+                        </div>
+                    </div>
+                    <ul class="comment-r" style="display: none;">
+                        <li>
+                            <label for="userName">Name:(necessery)</label>
+                        </li>
+                        <li>
+                            <input type="text" id="userName-c" size="25" tabindex="2" aria-required='true' value="${login.customizedUserName}"/>
+                        </li>
+                        <li>
+                            <label for="userEmail">E-mail:(necessery)</label>
+                        </li>
+                        <li>
+                            <input type="hidden" id="articleId" value="${Article.id}" />
+                            <input type="hidden" id="userId" value="${login.id}" />
+                        </li>
+                        <li>
+                            <input type="text" id="userEmail-c" size="25" tabindex="3" aria-required='true' value="${login.eMail}"/>
+                        </li>                            
+                    </ul>
                 </div>
                 <div class="row section_title">
                     <div class="col-md-12" id="comment-list">
@@ -302,62 +302,58 @@ function displayComm(data){
             var img = value.userAvatarBase64;        
             // <img class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="https://i.imgur.com/stD0Q19.jpg" />
             $("#comment-list").append(`
-                    <div class="media-body">
+                    <div class="media-body rounded">
                         <div class="row">
-                            <div class="col-8 d-flex">
-                                <img class="mr-3 rounded-circle" style="display:block; width:40px;height:40px;" src="`+img+`" />
-                                <div>
-                                    <span>`+value.userName+`</span>
-                                    <span> — `+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</span>
-                                </div>
-                            </div>                            
-                            <div class="col-4">                                
-                                <div class="pull-right reply">
-                                    <span onclick="doReply(`+id+`)"><i class="fa fa-reply"></i>reply</span>
-                                    <div id="replySection`+id+`" class="reply-section"  style="display: none;">
-                                        <ul class="reply-l">
-                                            <li style="height:28px;line-height: 28px;overflow: hidden">
-                                                Comment content:(necessery)
-                                            </li>
-                                            <li>
-                                                <textarea id="text-r`+id+`" tabindex="1" aria-required="true"></textarea>
-                                            </li>
-                                            <li class="reply-btn">
-                                                <button class="submit-r" onclick="reply(`+id+`)" tabindex="5">OK!Let's do this!</button>                                                
-                                            </li>
-                                        </ul>
-                                        <ul class="reply-r" style="display: none;">
-                                            <li>
-                                                <label for="userName">Name:(necessery)</label>
-                                            </li>
-                                            <li>
-                                                <input type="text" id="userName-r`+id+`" size="25" tabindex="2" aria-required='true' value="${login.customizedUserName}"/>
-                                            </li>
-                                            <li>
-                                                <label for="userEmail">E-mail:(necessery)</label>
-                                            </li>
-                                            <li>
-                                                <input type="hidden" id="articleId" value="${Article.id}" />
-                                            </li>
-                                            <li>
-                                                <input type="hidden" id="commentId`+id+`" value="`+id+`" />
-                                            </li>
-                                            <li>
-                                                <input type="text" id="userEmail-r`+id+`" size="25" tabindex="3" aria-required='true' value="${login.eMail}"/>
-                                            </li>
-                                        </ul>
-                                    </div>
+                            <div class="col-8 d-flex flex-row">
+                                <img class="mr-3 rounded-circle" style="display:block; width:48px; height:48px" src="`+img+`" />
+                                <div class="d-flex flex-column">
+                                    <span class="name">`+value.userName+`</span>
+                                    <span class="date"> — `+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</span>
                                 </div>
                             </div>
-                        </div>    
-                        `+value.text+`
-                        <span onclick="loadReply(`+id+`)" id="showR`+id+`"><i class="fa fa-reply"></i>See reply</span>
-                        <span onclick="closeReply(`+id+`)" id="closeR`+id+`" style="display: none"><i class="fa fa-reply"></i>Close reply</span>
-                        <div id="reply-list`+id+`" class="reply-list">
+                        </div>                      
+                        <div class="mt-2">`+value.text+`</div>
+                        <div>                                
+                            <div class="reply">
+                                <div class="m-1">                    
+                                    <button onclick="doReply(`+id+`)" class="fa fa-reply">Reply</button>
+                                </div>
+                                <div id="replySection`+id+`" class="reply-section"  style="display: none;">
+                                    <div class="reply-l bg-light p-2">
+                                        <div class="d-flex flex-row align-items-start">
+                                            <img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+                                            <textarea class="form-control ml-1 shadow-none textarea" id="text-r`+id+`" tabindex="1" placeholder="我其實也不是一定要說什麼" aria-required="true"></textarea>
+                                        </div>
+                                        <div class="mt-2 text-right">
+                                            <button class="btn btn-primary btn-sm shadow-none submit-r" type="button" onclick="reply(`+id+`)">Reply</button>                                            
+                                        </div>
+                                    </div>
+                                    <ul class="reply-r" style="display: none;">
+                                        <li>
+                                            <input type="text" id="userName-r`+id+`" size="25" tabindex="2" aria-required='true' value="${login.customizedUserName}"/>
+                                        </li>
+                                        <li>
+                                            <input type="hidden" id="articleId" value="${Article.id}" />
+                                        </li>
+                                        <li>
+                                            <input type="hidden" id="commentId`+id+`" value="`+id+`" />
+                                        </li>
+                                        <li>
+                                            <input type="text" id="userEmail-r`+id+`" size="25" tabindex="3" aria-required='true' value="${login.eMail}"/>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination pagination-sm pageR" id="pageidR`+id+`" onclick="switchPageR(event,`+id+`)"></ul>
-                        </nav>                       
+                        <span onclick="loadReply(`+id+`)" id="showR`+id+`"><i class="fa fa-chevron-down"></i>See reply</span>
+                        <span onclick="closeReply(`+id+`)" id="closeR`+id+`" style="display: none"><i class="fa fa-chevron-up"></i>Close reply</span>
+                        <div class="ml-5">
+                            <div id="reply-list`+id+`" class="reply-list">
+                            </div>
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination pagination-sm pageR" id="pageidR`+id+`" onclick="switchPageR(event,`+id+`)"></ul>
+                            </nav>                       
+                        </div>
                     </div>
                     `)                    
             })
@@ -453,16 +449,16 @@ function displayReply(data, id){
                 var img = value.userAvatarBase64;                
                 // <a class="pr-3" href="#"><img class="rounded-circle" alt="Bootstrap Media Another Preview" src="https://i.imgur.com/xELPaag.jpg" /></a>
                 $("#reply-list"+id).append(`
-                <div class="media mt-4">
-                            <div class="media-body">
+                        <div class="media mt-4">
+                            <div class="media-body rounded">
                                 <div class="row">
-                                    <div class="col-12 d-flex">
-                                        <img class="mr-3 rounded-circle" style="display:block; width:40px;height:40px;" src="`+img+`" />
-                                        <div>
-                                            <span>`+value.userName+`</span>
-                                            <span> — `+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</span>
+                                    <div class="col-8 d-flex flex-row">
+                                        <img class="mr-3 rounded-circle" style="display:block; width:48px; height:48px" src="`+img+`" />
+                                        <div class="d-flex flex-column">
+                                            <span class="name">`+value.userName+`</span>
+                                            <span class="date"> — `+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</span>
                                         </div>
-                                    </div>                                    
+                                    </div>                                  
                                 </div>
                                 `+value.text+`
                             </div>
