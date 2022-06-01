@@ -21,14 +21,10 @@ public class CustomizedUserAvatarService {
 		cuaDao.save(cuAvatar);
 	}
 	
-	public CustomizedUserAvatar findAvatarById(Integer id) {
-		CustomizedUserAvatar resCua = cuaDao.findAvatarById(id);
-		return resCua;
-	}
 	
 	//Insert
-	public void insertAvatar(String aliasAvatar, String userAvatarBase64) {
-		cuaDao.insertAvatar(aliasAvatar, userAvatarBase64);
+	public void insertAvatar(String aliasAvatar, byte[] userAvatar) {
+		cuaDao.insertAvatar(aliasAvatar, userAvatar);
 	}
 	
 	//DeletebyId
@@ -43,8 +39,15 @@ public class CustomizedUserAvatarService {
 	}
 	
 	//findById
+	public CustomizedUserAvatar findAvatarById(Integer Id) {
+		CustomizedUserAvatar resCua = cuaDao.findAvatarById(Id);
+		return resCua;
+	}
 	
 	//updateById
+	public void updateAvatarById(String aliasAvatar, byte[] userAvatar, Integer id) {
+		cuaDao.updateAvatarById(aliasAvatar, userAvatar, id);
+	}
 	
 	//findAll
 	public List<CustomizedUserAvatar> findAllAvatars(){

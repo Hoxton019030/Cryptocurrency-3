@@ -23,7 +23,7 @@ public class CustomizedUserAvatarApi {
 	}
 	//http://localhost:8080/coinshell/allCUA
 	
-	//findAvatarByName
+	
 	@GetMapping("/CUA")
 	public List<CustomizedUserAvatar> findAvatarByName(@RequestParam("name")String aliasAvatar){
 		List<CustomizedUserAvatar> cuaList = cuaService.findAvatarByName(aliasAvatar);
