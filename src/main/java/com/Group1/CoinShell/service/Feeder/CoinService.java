@@ -41,6 +41,11 @@ public class CoinService {
 	public List<Map<String, Object>> getCoin() {
 		return coindao.getCoin();
 		}
+	
+	public List<Map<String, Object>> getSetCoin(Integer memberId) {
+		return coindao.getSetCoin(memberId);
+	}
+	
 	//給watch用name抓幣用
 	public List<Coin> findByName(String name) {
 		return coindao.findByName(name);
@@ -48,8 +53,7 @@ public class CoinService {
 	
 	//透過name跟symbol模糊查詢幣
 	public List<Coin> findByName2(String name) {
-	    List<Coin> list = coindao.findByName2(name);
-	    return list;
+		return  coindao.findByName2(name);
 	    }
 	
 	//型態為Coin
@@ -57,9 +61,14 @@ public class CoinService {
 		return coindao.findByName3(name);
 	}
 
-	//型態為Coin
+	//型態為List<Coin>
 	public List<Coin> findByCoinId(Integer id) {
 		return coindao.findByCoinId(id);
+	}
+	
+	//型態為Coin
+	public Coin findByCoinId2(Integer id) {
+		return coindao.findByCoinId2(id);
 	}
 	
 	public String getContent(String strUrl) {

@@ -59,7 +59,7 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Top</th>
-                                        <th scope="col">Watch</th>
+                                        <th scope="col">#</th>
                                         <th scope="col">Name</th>
                                         <th scope="col">Currency</th>
                                         <th scope="col">Price</th>
@@ -69,6 +69,7 @@
                                         <th scope="col">30d%</th>
                                         <th scope="col">Volume24h</th>
                                         <th scope="col">Market Cap</th>
+                                        <th scope="col">Line Chart</th>
                                     </tr>
                                 </thead>
                                 <tbody class="cointable">
@@ -80,7 +81,7 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Top</th>
-                                        <th scope="col">Watch</th>
+                                        <th scope="col">#</th>
                                         <th scope="col">Name</th>
                                         <th scope="col">Currency</th>
                                         <th scope="col">Price</th>
@@ -89,7 +90,7 @@
                                         <th scope="col">7d%</th>
                                         <th scope="col">30d%</th>
                                         <th scope="col">Volume24h</th>
-                                        <th scope="col">Market Cap</th>
+                                        <th scope="col">Line Chart</th>
                                     </tr>
                                 </thead>
                                 <tbody class="cointable" id="followTbody">

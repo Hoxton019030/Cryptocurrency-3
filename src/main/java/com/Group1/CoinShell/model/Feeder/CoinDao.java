@@ -25,6 +25,9 @@ public interface CoinDao extends JpaRepository<Coin, Integer> {
 	@Query(value="select * from coin where id = :id", nativeQuery=true)
 	public List<Coin> findByCoinId(@Param("id") Integer id);
 	
+	@Query(value="select * from coin where id = :id", nativeQuery=true)
+	public Coin findByCoinId2(@Param("id") Integer id);
+	
 	@Query(value="select * from coin where symbol =:currencyName3",nativeQuery = true)
 	public Coin findLastestCurrencyInformation(@Param("currencyName3")String currencyName); 
 	
@@ -39,4 +42,14 @@ public interface CoinDao extends JpaRepository<Coin, Integer> {
 	//如果未登入 memberId為空 則跑此無參方法
 	@Query(value=" select c.*, 'N' as flag from coin c order by cmcRank asc ", nativeQuery=true)
 	public List<Map<String, Object>> getCoin();
+
+	@Query(value=" select distinct c.* from coin c join watch w on w.coinId = c.id "
+		+ "             and w.memberId = :memberId"
+		+ " join setPrice s on s.coinId = c.id"
+		+ "             and s.memberId = :memberId"
+		+ " where s.setPrice <= c.price"
+		+ " order by cmcRank asc ", nativeQuery=true)
+	public List<Map<String, Object>> getSetCoin(Integer memberId);
 }
+
+

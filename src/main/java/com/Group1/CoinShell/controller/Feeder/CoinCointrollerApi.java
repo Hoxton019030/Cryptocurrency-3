@@ -28,11 +28,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.Group1.CoinShell.model.Feeder.Coin;
 import com.Group1.CoinShell.model.Feeder.CoinDao;
+import com.Group1.CoinShell.model.Feeder.SetPrice;
 import com.Group1.CoinShell.model.Feeder.StarDTO;
 import com.Group1.CoinShell.model.Feeder.Watch;
 import com.Group1.CoinShell.model.Yiwen.Members;
 import com.Group1.CoinShell.service.Feeder.CoinService;
+import com.Group1.CoinShell.service.Feeder.SetPriceService;
 import com.Group1.CoinShell.service.Feeder.WatchService;
+import com.Group1.CoinShell.service.Hoxton.EmailSenderService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 @Component // 在 SpringbootdemoApplication 注入@EnableScheduling 搭配下面@Scheduled 以啟動定時器排程
@@ -45,8 +48,12 @@ public class CoinCointrollerApi {
 	private CoinDao coinDao;
 	@Autowired
 	private WatchService watchService;
+	@Autowired
+	private EmailSenderService senderService;
+	@Autowired
+	private SetPriceService setPriceService;
 	                                                    // 需搭配@Component
-//	@Scheduled(initialDelay = 2000, fixedRate = 30000)  // 定時器 啟動專案 initialDelay 毫秒 後啟動 每 fixedRate 毫秒 RUN一次
+	@Scheduled(initialDelay = 2000, fixedRate = 30000)  // 定時器 啟動專案 initialDelay 毫秒 後啟動 每 fixedRate 毫秒 RUN一次
 	@PostMapping("coin/insert")
 	public void updateCoin() throws JsonProcessingException {
 		// 測試定時器有沒有動 顯示當前時間
@@ -175,6 +182,38 @@ public class CoinCointrollerApi {
 		    result = coinService.getCoin();
 		}
 
+		return result; 
+	}
+	
+	@GetMapping("coin/getSetCoin")
+	public List<Map<String, Object>> getSetCoin(HttpSession session) {
+		
+		Members member =(Members) session.getAttribute("login");
+		Integer memId = member.getId();
+		String memEMail = member.geteMail();
+		
+//		SetPrice setCoinPrice = new SetPrice();
+//		
+//		setCoinPrice.setMemberId(memId);
+////		setCoinPrice.setCoinId(1);
+//		setCoinPrice.setCoinId(coinId);
+////		setCoinPrice.setSetPrice(1);
+//		setCoinPrice.setSetPrice(setPrice);
+//		setPriceService.save(setCoinPrice);
+//		
+//		Integer setPrice1 = setCoinPrice.getSetPrice();
+//		
+//		Double coinPrice = coinService.findByCoinId2(coinId).getPrice();
+		
+//		if (setPrice1 <= coinPrice) {
+//			senderService.sendEmail(memEMail,"恭喜你","您設置的價格已達到!");
+//			System.out.println("恭喜你=================================");
+//		}
+		List<Map<String, Object>> result = coinService.getSetCoin(memId);
+		
+		if(result!=null) {
+			System.out.println("恭喜你=================================");
+		}
 		return result; 
 	}
 	
