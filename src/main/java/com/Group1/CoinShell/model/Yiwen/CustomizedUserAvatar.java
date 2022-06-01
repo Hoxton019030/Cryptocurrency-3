@@ -16,10 +16,10 @@ public class CustomizedUserAvatar {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(name="userAvatarBase64", columnDefinition="nvarchar(MAX)")
+	@Column(name="userAvatarBase64", columnDefinition="nvarchar(MAX)", nullable = false)
 	private String userAvatarBase64;
 	
-	@Column(name="aliasAvatar", columnDefinition="nvarchar(20)")
+	@Column(name="aliasAvatar", columnDefinition="nvarchar(50)", nullable = false)
 	private String aliasAvatar;
 	
 
