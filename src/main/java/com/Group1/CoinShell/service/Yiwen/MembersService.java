@@ -45,4 +45,25 @@ public class MembersService {
 	public void updateCustomizedUserNameById(String customizedUserName,Integer id) {
 		membersDao.updateCustomizedUserNameById(customizedUserName, id);
 	}
+	
+	
+	
+	public Members findById(int id) {
+		Optional<Members> option = membersDao.findById(id);
+		
+		if (option.isPresent()) {
+			return option.get();
+		}
+		return null;
+	}
+	public Members countReward(int Id, int reward) {
+
+		// 得到使用者全部的獎勵
+		Members members = findById(Id);
+		int myShell = members.getMyShell();
+		// 累加獎勵
+		members.setMyShell(myShell + reward);
+		
+		return members;
+	}
 }
