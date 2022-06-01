@@ -8,6 +8,12 @@
             <jsp:include page="NavBar/CoinShellNavBar.jsp" />
 
             <head>
+            <style type="text/css">
+			body{
+				padding-top: 82px;
+				}
+			</style>
+			
                 <meta charset="UTF-8">
                 <title>CoinShell</title>
                 <link rel="Shortcut Icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/1490/1490853.png" />
@@ -101,15 +107,36 @@
 
 
                 </div>
+<!-- Button trigger modal -->
+<button type="button" style="display:none" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
 
-
-
-                </div>
-
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">CoinName:${coin.Name}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h6>current price:${coin.price}</h6>
+      	<h6><input type="radio" name="h" checked/>higher &nbsp;<input type="radio"  name="h"/>lower</h6>
+        <h5>USD<input type="text" placeholder="Set Price"></h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
 
     <script src="${contextRoot}/javascripts/indexJs.js"></script>
 	<script>
-
 		var memId = '${login.id}';
 		console.log("memId=" + memId);
 	
@@ -135,7 +162,8 @@
 		
 		function watch(obj) {
 			if ('${login == null }' == 'true') {
-				$('#loginModal').modal("show")
+// 				$('#loginModal').modal("show")
+				$('#exampleModal').modal("show")
 			} else {
 				var coinId = $(obj).val();
 				var checked = $(obj).prop('checked');

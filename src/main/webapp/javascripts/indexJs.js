@@ -42,9 +42,11 @@ function upCoin(memId) {
                 
                 if(value.flag == 'Y'){
 				coinList +='<td><label><input type="checkbox" class="check" checked id="' + value.id + '" value="' + value.id + '" onClick="watch(this)"><span class="star"><i  class="fa-solid fa-star"></i></span></label></td>'
+				coinList +='<td><label><input type="checkbox" class="checkbell" checked id="' + value.id + '" value="' + value.id + '" onClick="watch(this)"><span class="bell"><i class="fa-solid fa-bell"></i></span></label></td>'
 				}
 				else{
 				coinList +='<td><label><input type="checkbox" class="check" id="' + value.id + '" value="' + value.id + '" onClick="watch(this)"><span class="star"><i  class="fa-solid fa-star"></i></span></label></td>'
+				coinList +='<td><label><input type="checkbox" class="checkbell" id="' + value.id + '" value="' + value.id + '" onClick="watch(this)"><span class="bell"><i class="fa-solid fa-bell"></i></span></label></td>'
 				}
 				
 				
