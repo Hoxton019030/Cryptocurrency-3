@@ -231,7 +231,7 @@
 		            $('#loginModal').modal("show")
 		        } ;
 		        
-		    	if(checked==true) {
+		    	if(checked==true && '${login == null }' != 'true') {
 		            $('#exampleModal').modal("show")
 		        };
 		        
