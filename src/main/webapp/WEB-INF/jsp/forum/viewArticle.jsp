@@ -38,7 +38,7 @@
                     <a href="${contextRoot}/deleteArticle/${Article.id}" onclick="return confirm('確認刪除嗎?')">Delete</a>
                 </span>
                 <div class="d-flex flex-row divToGetImg">
-                    <img class="mr-3 rounded-circle" style="display:block; width:65px; height:65px" src="${img}"/>
+                    <img class="mr-3 rounded-circle" style="display:block; width:65px; height:65px" src="data:image/gif;base64,${img}"/>
                     <div class="d-flex flex-column">
                         <span class="name"><h3>${userName}</h3></span>
                         <span class="date text-black-50">${Article.added}</span>
@@ -104,7 +104,13 @@ doComment.addEventListener('click',verifyMembership);
 closeComment.addEventListener('click',closeCommentL);
 
 // function getImg(){
-//     $(".divToGetAuthorImg img").replaceWith(`<img class="mr-3 rounded-circle" style="display:block; width:48px; height:48px" src="data:image/gif;base64,`+img+`" />`)
+//     fetch("http://localhost:8080/coinshell/viewComment?articleId="+aid).then(function(response) {
+//             return response.json();
+//             console.log(response.json())
+//         }).then(function(data) {
+//             var aImg = value.
+//             $(".divToGetAuthorImg img").replaceWith(`<img class="mr-3 rounded-circle" style="display:block; width:48px; height:48px" src="data:image/gif;base64,`+img+`" />`)
+//         })
 // }
 
 function verifyMembershipOnload(){
@@ -229,6 +235,7 @@ function replyTo(id){
         "commentId":commentIdR,
         "userId":userIdR
     }
+    console.log(reply);
     var jsonReply = JSON.stringify(reply);
     fetch('http://localhost:8080/coinshell/editReply?commentId='+commentIdR, {
         method:'POST',
@@ -325,8 +332,8 @@ function displayComm(data){
                                 <div id="replySection`+id+`" class="reply-section"  style="display: none;">
                                     <div class="reply-l bg-light p-2">
                                         <div class="d-flex flex-row align-items-start">
-                                            <img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
-                                            <textarea class="form-control ml-1 shadow-none textarea" id="text-r`+id+`" tabindex="1" placeholder="我其實也不是一定要說什麼" aria-required="true"></textarea>
+                                            <img class="rounded-circle" src="data:image/gif;base64,${memImg}" width="40">
+                                            <textarea class="form-control ml-1 shadow-none textarea" id="text-r`+id+`" tabindex="1" placeholder="Reply here..." aria-required="true">我其實也不是一定要說什麼</textarea>
                                         </div>
                                         <div class="mt-2 text-right">
                                             <button class="btn btn-primary btn-sm shadow-none submit-r" type="button" onclick="reply(`+id+`)">Reply</button>                                            
@@ -334,7 +341,7 @@ function displayComm(data){
                                     </div>
                                     <ul class="reply-r" style="display: none;">
                                         <li>
-                                            <input type="text" id="userName-r`+id+`" size="25" tabindex="2" aria-required='true' value="${login.customizedUserName}"/>
+                                            <input type="text" id="userName-r`+id+`" value="${login.customizedUserName}"/>
                                         </li>
                                         <li>
                                             <input type="hidden" id="articleId" value="${Article.id}" />
@@ -390,7 +397,7 @@ function pageBtn(page){
 
 function loadReply(id){
     $(function() {
-        var aid = document.getElementById("aid").value;
+        var aid = document.getElementById("articleId").value;
         console.log(aid);
         var cid = id;
         console.log(cid);

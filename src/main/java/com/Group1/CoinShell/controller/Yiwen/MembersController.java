@@ -1,5 +1,6 @@
 package com.Group1.CoinShell.controller.Yiwen;
 import java.text.SimpleDateFormat;
+import java.util.Base64;
 import java.util.Date;
 
 import javax.servlet.http.Cookie;
@@ -103,8 +104,10 @@ public class MembersController {
 		}
 		httpSession.setAttribute("login", memRes);
 		
+		/*張翔使用：取得登入中的使用者圖片，存入session*/
 		Integer memId = memRes.getId();
-		String img = dao.getImg(memId);
+		byte[] imgByte = dao.getImg(memId);
+		String img = Base64.getEncoder().encodeToString(imgByte);
 		httpSession.setAttribute("memImg", img);
 		
 		return "index";

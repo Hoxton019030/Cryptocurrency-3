@@ -55,7 +55,7 @@ public interface ArticleDao extends JpaRepository<Article, Integer> {
 			+ "left join Members as m "
 			+ "on c.id = m.CustomizedUserAvatar "
 			+ "where m.id = :authorId", nativeQuery = true)
-	public String findImg(Integer authorId);
+	public byte[] findImg(Integer authorId);
 
 	@Query(value = "select customizedUserName from Members where id = :authorId", nativeQuery = true)
 	public String getUserName(Integer authorId);

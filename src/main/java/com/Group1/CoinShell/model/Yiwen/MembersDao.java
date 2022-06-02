@@ -53,7 +53,7 @@ public interface MembersDao extends JpaRepository<Members, Integer> {
 			+ "  left join Members as m"
 			+ "  on c.id = m.CustomizedUserAvatar"
 			+ "  where m.id = :id", nativeQuery = true)
-	public String getImg(Integer id);
+	public byte[] getImg(Integer id);
 	
 	
 }
