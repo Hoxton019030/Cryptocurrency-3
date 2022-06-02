@@ -44,6 +44,7 @@ public class MembersController {
 	@PostMapping("/signup")
 	public String signUp(@RequestParam("e-mail")String eMail ,@RequestParam("password") String password) {
 		SimpleDateFormat sdf = new SimpleDateFormat();
+		senderService.sendEmail(eMail, "恭喜你註冊CoinShell會員！", "歡迎你"+eMail+"！　\r\n 一起在虛擬貨幣的海洋中漫遊吧！");
 		Date date = new Date();
 		Members member = new Members();
 		member.setCustomizedUserAvatar(5);
@@ -54,6 +55,7 @@ public class MembersController {
 		member.setPassword(password);
 		member.setCustomizedUserName("New User");
 		memService.save(member);
+		
 		return "signupOK";
 	}
 	
