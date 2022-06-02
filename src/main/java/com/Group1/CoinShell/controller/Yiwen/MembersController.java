@@ -30,7 +30,7 @@ public class MembersController {
 	MembersService memService;
 	
 	@Autowired
-	private EmailSenderService senderService;
+	EmailSenderService senderService;
 	
 	@Autowired
 	MembersDao dao;
@@ -152,8 +152,18 @@ public class MembersController {
 		return "/account/set";
 	}
 	
+	@PostMapping("account/sendResetEmail")
+	public String sendResetEmail
+	(@RequestParam("eMail")String eMail) {
+		senderService.sendEmail(eMail, "重置密碼認證信", "更改你的密碼呦");
+		return "redirect:/";
+	}
+	
+	
+//	@GetMapping("account/resetPassword")
+//	public String resetPassword
+//	(@RequestParam("id"))
 	
 	
 
 }
-

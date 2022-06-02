@@ -17,8 +17,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.Group1.CoinShell.model.Yiwen.Members;
 import com.Group1.CoinShell.service.Yiwen.MembersService;
 
-
-
 @RestController  
 public class MembersApi {
 	
@@ -38,6 +36,7 @@ public class MembersApi {
 		return memList;
 	}
 }
+
 
 //	@Autowired
 //	private MembersDao dao;
@@ -195,6 +194,5 @@ public class MembersApi {
 ////	@GetMapping(value="members/ispremium/{isPremium}")
 ////	public List<Members> findByIsPremiumTrue(@PathVariable Boolean isPremium){
 ////		return dao.findByisPremiumTrue(isPremium);
-////	}
-
+	}
 

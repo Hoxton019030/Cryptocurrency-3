@@ -11,6 +11,10 @@ public class StarDTO {
 	private Integer memId;
 	@JsonProperty("coinId")
 	private Integer coinId;
+	@JsonProperty("setPrice")
+	private Float setPrice;
+	
+	private String type;
 	
 	public Integer getMemId() {
 		return memId;
@@ -23,6 +27,18 @@ public class StarDTO {
 	}
 	public void setCoinId(Integer coinId) {
 		this.coinId = coinId;
+	}
+	public Float getSetPrice() {
+		return setPrice;
+	}
+	public void setSetPrice(Float setPrice) {
+		this.setPrice = setPrice;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
 	}
 	
 

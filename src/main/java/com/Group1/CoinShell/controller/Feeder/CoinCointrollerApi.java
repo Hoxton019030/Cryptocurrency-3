@@ -28,11 +28,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.Group1.CoinShell.model.Feeder.Coin;
 import com.Group1.CoinShell.model.Feeder.CoinDao;
+import com.Group1.CoinShell.model.Feeder.SetPrice;
 import com.Group1.CoinShell.model.Feeder.StarDTO;
 import com.Group1.CoinShell.model.Feeder.Watch;
 import com.Group1.CoinShell.model.Yiwen.Members;
 import com.Group1.CoinShell.service.Feeder.CoinService;
+import com.Group1.CoinShell.service.Feeder.SetPriceService;
 import com.Group1.CoinShell.service.Feeder.WatchService;
+import com.Group1.CoinShell.service.Hoxton.EmailSenderService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 @Component // 在 SpringbootdemoApplication 注入@EnableScheduling 搭配下面@Scheduled 以啟動定時器排程
@@ -45,6 +48,10 @@ public class CoinCointrollerApi {
 	private CoinDao coinDao;
 	@Autowired
 	private WatchService watchService;
+	@Autowired
+	private EmailSenderService senderService;
+	@Autowired
+	private SetPriceService setPriceService;
 	                                                    // 需搭配@Component
 	@Scheduled(initialDelay = 2000, fixedRate = 30000)  // 定時器 啟動專案 initialDelay 毫秒 後啟動 每 fixedRate 毫秒 RUN一次
 	@PostMapping("coin/insert")
@@ -177,6 +184,72 @@ public class CoinCointrollerApi {
 
 		return result; 
 	}
+	
+	@PostMapping("coin/getSetCoin")
+	public Map<String, String> insertSetCoin(@RequestBody StarDTO dto,HttpSession session) {
+		
+		Members member =(Members) session.getAttribute("login");
+//		Integer memId = member.getId();
+		String memEMail = member.geteMail();
+		
+		Integer memId = dto.getMemId();
+		Integer coinId =dto.getCoinId();
+		Float price =dto.getSetPrice(); 
+		String type =dto.getType();
+		
+		System.out.println("MemId:   " + memId);
+    	System.out.println("CoinId:   " + coinId);
+    	System.out.println("setPrice:   " + price);
+    	System.out.println("type:   " + type);
+    	
+    	SetPrice setPrice =new SetPrice();
+    	setPrice.setMemberId(memId);
+    	setPrice.setCoinId(coinId);
+    	setPrice.setSetPrice(price);
+    	setPriceService.save(setPrice);
+    	
+    	String coinNAME = coinService.findByCoinId2(coinId).getName();
+    	
+    	if(type=="H") {
+		List<Map<String, Object>> heigher = coinService.getHeighSetCoin(memId);
+		if(heigher.size()!=0) {
+//			senderService.sendEmail(memEMail, "恭喜您設置的" + coinNAME + "達成目標", "恭喜您設置的 "+ coinNAME + " 價格已達到 USD: " + price + " ,系統已為您清除設置條件");
+			System.out.println("恭喜你=================================");
+			setPriceService.deletegetSetCoin(memId, coinId);
+		}else {
+			System.out.println("沒東西=================================");
+			}
+    	}
+    	else {
+    	List<Map<String, Object>> lower = coinService.getLowerSetCoin(memId);
+		if(lower.size()!=0) {
+//			senderService.sendEmail(memEMail, "恭喜您設置的" + coinNAME + "達成目標", "恭喜您設置的 "+ coinNAME + " 價格已達到 USD: " + price + " ,系統已為您清除設置條件");
+			System.out.println("恭喜你=================================");
+			setPriceService.deletegetSetCoin(memId, coinId);
+		}else {
+			System.out.println("沒東西=================================");
+			}
+    	}
+		
+		Map<String, String> result = new HashMap<String, String>();
+    	result.put("status", "200");
+    	return result;
+	}
+	
+	@DeleteMapping("coin/deletegetSetCoin/{id}")
+    public Map<String, String> deletegetSetCoin(@RequestBody StarDTO dto) {
+    	System.out.println("delete :  MemId =  "       + dto.getMemId());
+    	System.out.println("delete :  CoinId =  " + dto.getCoinId());
+    	
+    	 Integer memId =dto.getMemId();
+    	 Integer coinId =dto.getCoinId();
+    	
+    	 setPriceService.deletegetSetCoin(memId,coinId);
+    	
+    	Map<String, String> result = new HashMap<String, String>();
+    	result.put("status", "200");
+    	return result;
+    }
 	
 	
 	//已經在JSP AJAX設定輪詢 這邊就不用在訂時跟資料庫要資料了
