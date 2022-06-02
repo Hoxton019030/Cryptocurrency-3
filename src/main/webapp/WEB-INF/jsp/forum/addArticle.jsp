@@ -4,7 +4,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page isELIgnored="false" %>
-
+<!DOCTYPE html>
+<html>
 <head>
 <meta charset="UTF-8">
 <c:set var="contextRoot" value="${pageContext.request.contextPath}"/>
@@ -26,7 +27,7 @@ padding-top: 82px;
 				<div class="card-body">
 					<!-- 			如果getmapping和postmapping的路徑一樣，action=""可以不用寫 -->
 					<form:form action="${contextRoot}/article/add" method="post"
-						modelAttribute="article">
+						modelAttribute="article" class="articleForm">
 						<div class="input-group">
 							<form:select path="tag">
 								<form:option value="NONE" label="請選擇幣別標籤" />
@@ -35,7 +36,7 @@ padding-top: 82px;
 							<form:input path="title"/>
 						</div>
 						<div class="input-group">
-							<form:textarea path="text" class="form-control" />
+							<form:textarea wrap="Virtual" path="text" class="form-control" id="textarea"/>
 							<!-- 				此text是Article的屬性 -->
 						</div>
 						<div>
@@ -44,24 +45,23 @@ padding-top: 82px;
 						<form:input path="deleted" value="n" type="hidden"/>
 						<form:input path="authorId" value="${login.id}" type="hidden"/>
 						</div>
-						<input type="submit" name="submit" value="新增訊息於此">
+						<input type="submit" name="submit" value="Submit">
 					</form:form>
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="row justify-content-center">
-		<div class="col-9">
-			<div class="card">
-<!-- 			http://tw.gitbook.net/jsp/jstl_format_formatdate_tag.html -->
-				<div class="card-header">新增時間: <fmt:formatDate pattern="yyyy-MM-dd EE 'at' HH:mm:ss" value="${lastestArticle.added}"/></div>
-				<div class="card-body">
-				
-				<c:out value="${lastestArticle.text}"></c:out>
-				
-				</div>
-			</div>
-		</div>
-	</div>
+	</div>	
 </div>
+<!-- <script type="text/javascript">
+function upload(){
+var content = document.getElementById("#textarea").val();
+// var reg=new RegExp("\r\n","g");
+// str = str.replace(reg,"<br>");
+content = content.replace(/\n|\r\n/g,"<br>");
+// $("#textarea").value = content;
+document.getElementById(".articleForm").submit();
+}
+
+</script> -->
 </body>
+</html>
