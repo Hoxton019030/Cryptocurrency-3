@@ -50,8 +50,8 @@
 											class="sr-only">(current)</span></a></li>
                                 <li class="nav-item active"><a class="nav-link" href="${contextRoot}/viewAllAjax">BeachTown<span
 											class="sr-only">(current)</span></a></li>
-                                <li class="nav-item"><a class="nav-link" href="#">Portfolio</a>
-                                </li>
+                                <li class="nav-item active"><a class="nav-link" href="${contextRoot}/portfolio">Portfolio<span
+											class="sr-only">(current)</span></a></li>
                                 <li class="nav-item"><a class="nav-link" href="#">Learn</a></li>
                                 <li class="nav-item active"><a class="nav-link" href="${contextRoot}/shellshop">Shell Shop</a></li>
                                 <li class="nav-item active"><a class="nav-link"

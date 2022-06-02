@@ -8,6 +8,12 @@
             <jsp:include page="NavBar/CoinShellNavBar.jsp" />
 
             <head>
+            <style type="text/css">
+			body{
+				padding-top: 82px;
+				}
+			</style>
+			
                 <meta charset="UTF-8">
                 <title>CoinShell</title>
                 <link rel="Shortcut Icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/1490/1490853.png" />
@@ -59,7 +65,8 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Top</th>
-                                        <th scope="col">Watch</th>
+                                        <th scope="col">#</th>
+                                        <th scope="col">setting</th>
                                         <th scope="col">Name</th>
                                         <th scope="col">Currency</th>
                                         <th scope="col">Price</th>
@@ -69,6 +76,7 @@
                                         <th scope="col">30d%</th>
                                         <th scope="col">Volume24h</th>
                                         <th scope="col">Market Cap</th>
+                                        <th scope="col">Line Chart</th>
                                     </tr>
                                 </thead>
                                 <tbody class="cointable">
@@ -80,7 +88,8 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Top</th>
-                                        <th scope="col">Watch</th>
+                                        <th scope="col">#</th>
+                                        <th scope="col">setting</th>
                                         <th scope="col">Name</th>
                                         <th scope="col">Currency</th>
                                         <th scope="col">Price</th>
@@ -89,7 +98,7 @@
                                         <th scope="col">7d%</th>
                                         <th scope="col">30d%</th>
                                         <th scope="col">Volume24h</th>
-                                        <th scope="col">Market Cap</th>
+                                        <th scope="col">Line Chart</th>
                                     </tr>
                                 </thead>
                                 <tbody class="cointable" id="followTbody">
@@ -100,15 +109,36 @@
 
 
                 </div>
+<!-- Button trigger modal -->
+<button type="button" style="display:none" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
 
-
-
-                </div>
-
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">CoinName:${coin.Name}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h6>current price:${coin.price}</h6>
+      	<h6><input type="radio" name="h" id="heigh" value="H" checked/>higher &nbsp;<input type="radio" id="low" value="L" name="h"/>lower</h6>
+        <h5>USD<input id="setPrice" type="number" placeholder="Set Price"></h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" data-dismiss="modal" id="save">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
 
     <script src="${contextRoot}/javascripts/indexJs.js"></script>
 	<script>
-
 		var memId = '${login.id}';
 		console.log("memId=" + memId);
 	
@@ -129,7 +159,7 @@
 		});
 		
 		$("#search").click(function() {
-			loadCoinByName();
+			loadCoinByName(memId);
 		});
 		
 		function watch(obj) {
@@ -156,7 +186,6 @@
 							console.log("成功");
 						},
 						error : function(err) {
-							debugger
 							console.log("result====" + err)
 							console.log("失敗");
 						}
@@ -190,6 +219,87 @@
 				}
 			}
 		}
+		
+		
+		
+		function set(obj) {
+			var checked = $(obj).prop('checked');
+	        var coinId   = $(obj).val();
+	        
+	        
+		    	if ('${login == null }' == 'true') {
+		            $('#loginModal').modal("show")
+		        } ;
+		        
+		    	if(checked==true) {
+		            $('#exampleModal').modal("show")
+		        };
+		        
+		    	$("#save").off("click").on("click",function() {
+		    		var setPrice = document.getElementById("setPrice").value;
+		    		var type = $("[name='h']:checked").val();
+		    		var param = {
+		                    "memId" : memId,
+		                    "coinId" : coinId,
+		                    "setPrice": setPrice,
+		                    "type":type
+		               			 }
+	            	console.log("按下了");
+	                console.log("memId==" + memId + "," + "coinId==" + coinId + "," + "setPrice==" + setPrice + "," + "type==" +type);
+	                if(setPrice=""){
+	                	$('#topTbody,#followTbody').find('[id="' + coinId + '"]').prop('checked', false);
+	                }
+	                else{
+	                $.ajax({
+	                    url : 'http://localhost:8080/coinshell/coin/getSetCoin',
+	                    contentType : 'application/json; charset=UTF-8',
+	                    dataType : 'json',
+	                    method : 'post',
+	                    data : JSON.stringify(param),
+	                    success : function(result) {
+	                        console.log("result====" + result.status)
+	                        console.log("成功");
+	                    },
+	                    error : function(err) {
+	                        console.log("result====" + err)
+	                        console.log("失敗");
+	                    }
+	                })
+	                }
+	             })
+		    	
+	            if(checked == false) {
+	            	
+	            	var setPrice =document.getElementById("setPrice").value;
+		    		var param    = {
+		                    "memId" : memId,
+		                    "coinId" : coinId,
+		                    "setPrice": setPrice
+		               			 }
+		    		
+	                console.log("delete:" + memId + "," + "delete:" + coinId+ "," + "delete:" + setPrice);
+	                $.ajax({
+	                    url : 'http://localhost:8080/coinshell/coin/deletegetSetCoin/'+ coinId,
+	                    contentType : 'application/json; charset=UTF-8',
+	                    dataType : 'json',
+	                    method : 'delete',
+	                    data : JSON.stringify(param),
+	                    success : function(result) {
+	                        console.log("result====" + result.status)
+	                        console.log("成功");
+	                        if (result.status == '200') {
+	                            $('#topTbody,#followTbody').find('[id="' + coinId + '"]').prop('checked', false);
+	                        }
+	                    },
+	                    error : function(err) {
+	                        console.log("result====" + err)
+	                        console.log("失敗");
+
+	                    }
+	                })
+	            }
+	        }
+		
 		
 		
 	</script>

@@ -10,6 +10,7 @@ public class EmailSenderService {
 	@Autowired
 	private JavaMailSender mailSender;
 
+	//參數:會員註冊EMAIL回傳值 , 標題:"自定義字串" , 內文:"自定義字串"
 	public void sendEmail(String toEmail, String subject, String body) {
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setFrom("za546321@gmail.com");
