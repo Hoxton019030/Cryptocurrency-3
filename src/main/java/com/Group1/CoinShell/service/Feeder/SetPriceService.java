@@ -16,4 +16,8 @@ public class SetPriceService {
 	public void save(SetPrice setPrice) {
 		setPriceDao.save(setPrice);
 	}
+	
+	public int deletegetSetCoin(Integer memId, Integer coinId) {
+		return setPriceDao.deletegetSetCoin(memId,coinId);
+    }
 } 

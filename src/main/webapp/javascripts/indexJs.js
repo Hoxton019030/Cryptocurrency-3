@@ -42,13 +42,17 @@ function upCoin(memId) {
                 
                 if(value.flag == 'Y'){
 				coinList +='<td><label><input type="checkbox" class="check" checked id="' + value.id + '" value="' + value.id + '" onClick="watch(this)"><span class="star"><i  class="fa-solid fa-star"></i></span></label></td>'
-				coinList +='<td><label><input type="checkbox" class="checkbell" checked id="' + value.id + '" value="' + value.id + '" onClick="watch(this)"><span class="bell"><i class="fa-solid fa-bell"></i></span></label></td>'
 				}
 				else{
 				coinList +='<td><label><input type="checkbox" class="check" id="' + value.id + '" value="' + value.id + '" onClick="watch(this)"><span class="star"><i  class="fa-solid fa-star"></i></span></label></td>'
-				coinList +='<td><label><input type="checkbox" class="checkbell" id="' + value.id + '" value="' + value.id + '" onClick="watch(this)"><span class="bell"><i class="fa-solid fa-bell"></i></span></label></td>'
 				}
 				
+				if(value.setting == '1'){
+				coinList +='<td><label><input type="checkbox" class="checkbell" checked id="' + value.id + '" value="' + value.id + '" onClick="set(this)"><span class="bell"><i class="fa-solid fa-bell"></i></span></label></td>'
+				}
+				else{
+				coinList +='<td><label><input type="checkbox" class="checkbell" id="' + value.id + '" value="' + value.id + '" onClick="set(this)"><span class="bell"><i class="fa-solid fa-bell"></i></span></label></td>'
+				}
 				
                 coinList += '<td><img class=currencyIcon src="' + contextRoot + '/images/currencyIcon/' + value.symbol + '.png" alt=""><a href="http://localhost:8080/coinshell/individualCryptocurrencyInformation?currencyName=' + value.symbol + '&currentlyDay=' + value.lastUpdated.substr(0, 10) + '">' + value.name + '</a></td>'
                 coinList += '<td>' + value.symbol + '</td>'
@@ -59,7 +63,7 @@ function upCoin(memId) {
                 coinList += '<td class="30d">' + value.percentChange30d + '</td>'
                 coinList += '<td class="vol24h">' + value.volume24h + '</td>'
                 coinList += '<td class="market">' + value.marketCap + '</td>'
-                coinList += '<td style="width:10px;height:10px"><canvas id="myChart' + value.cmcRank + '"></canvas></td>'
+//                coinList += '<td style="width:10px;height:10px"><canvas id="myChart' + value.cmcRank + '"></canvas></td>'
                 coinList += '</tr>';
                 
                 $('#top').append(coinList);
@@ -139,7 +143,7 @@ function upCoin(memId) {
 
             })
 
-            setUpCoin();
+//            setUpCoin();
 
             upjquery();
         },
@@ -164,7 +168,7 @@ function followList() {
 		method: 'get',
 		success: function(result) {
 		$('#watch tr td').remove();
-		$('#portfolio tr td').remove();
+//		$('#portfolio tr td').remove();
 		console.log(result)
 		$.each(result, function(index, value) {
 		coinList  = '';
@@ -173,6 +177,13 @@ function followList() {
 		coinList += '<td>' + value.cmcRank + '</td>'
 			                    
 		coinList +='<td><label><input type="checkbox" class="check" checked id="' + value.id + '" value="' + value.id + '" onClick="watch(this)"><span class="star"><i  class="fa-solid fa-star"></i></span></label></td>'
+		
+		if(value.setting == '1'){
+		coinList +='<td><label><input type="checkbox" class="checkbell" checked id="' + value.id + '" value="' + value.id + '" onClick="set(this)"><span class="bell"><i class="fa-solid fa-bell"></i></span></label></td>'
+		}
+		else{
+		coinList +='<td><label><input type="checkbox" class="checkbell" id="' + value.id + '" value="' + value.id + '" onClick="set(this)"><span class="bell"><i class="fa-solid fa-bell"></i></span></label></td>'
+		}
 			    				
 		coinList += '<td><img class=currencyIcon src="' + contextRoot + '/images/currencyIcon/' + value.symbol + '.png" alt=""><a href="http://localhost:8080/coinshell/individualCryptocurrencyInformation?currencyName=' + value.symbol + '&currentlyDay=' + value.lastUpdated.substr(0, 10) + '">' + value.name + '</a></td>'
 		coinList += '<td>' + value.symbol + '</td>'
@@ -183,10 +194,10 @@ function followList() {
 		coinList += '<td class="30d">' + value.percentChange30d + '</td>'
 		coinList += '<td class="vol24h">' + value.volume24h + '</td>'
 		coinList += '<td class="market">' + value.marketCap + '</td>'
-		coinList += '<td style="width:10px;height:10px"><canvas id="myChart' + value.cmcRank + '"></canvas></td>'
+//		coinList += '<td style="width:10px;height:10px"><canvas id="myChart' + value.cmcRank + '"></canvas></td>'
 		coinList += '</tr>';
 			                    
-		$('#watch,#portfolio').append(coinList);
+		$('#watch').append(coinList);
 		
 		  //注入折線圖至id=canvas
                 var xmlHttp = new XMLHttpRequest();

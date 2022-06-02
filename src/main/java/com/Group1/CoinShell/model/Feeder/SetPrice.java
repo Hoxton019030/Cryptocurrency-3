@@ -24,7 +24,7 @@ public class SetPrice {
 	private Integer coinId;
 	
 	@Column(name = "setPrice")
-	private Integer setPrice;
+	private Float setPrice;
 	
 	public SetPrice() {
 	}
@@ -59,12 +59,12 @@ public class SetPrice {
 		this.coinId = coinId;
 	}
 
-	public Integer getSetPrice() {
+	public Float getSetPrice() {
 		return setPrice;
 	}
 
-	public void setSetPrice(Integer setPrice) {
-		this.setPrice = setPrice;
+	public void setSetPrice(Float price) {
+		this.setPrice = price;
 	}
 	
 	

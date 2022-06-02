@@ -53,7 +53,7 @@ public class CoinCointrollerApi {
 	@Autowired
 	private SetPriceService setPriceService;
 	                                                    // 需搭配@Component
-	@Scheduled(initialDelay = 2000, fixedRate = 30000)  // 定時器 啟動專案 initialDelay 毫秒 後啟動 每 fixedRate 毫秒 RUN一次
+//	@Scheduled(initialDelay = 2000, fixedRate = 30000)  // 定時器 啟動專案 initialDelay 毫秒 後啟動 每 fixedRate 毫秒 RUN一次
 	@PostMapping("coin/insert")
 	public void updateCoin() throws JsonProcessingException {
 		// 測試定時器有沒有動 顯示當前時間
@@ -185,22 +185,71 @@ public class CoinCointrollerApi {
 		return result; 
 	}
 	
-	@GetMapping("coin/getSetCoin")
-	public List<Map<String, Object>> getSetCoin(HttpSession session) {
+	@PostMapping("coin/getSetCoin")
+	public Map<String, String> insertSetCoin(@RequestBody StarDTO dto,HttpSession session) {
 		
 		Members member =(Members) session.getAttribute("login");
-		Integer memId = member.getId();
+//		Integer memId = member.getId();
 		String memEMail = member.geteMail();
 		
-		List<Map<String, Object>> result = coinService.getSetCoin(memId);
+		Integer memId = dto.getMemId();
+		Integer coinId =dto.getCoinId();
+		Float price =dto.getSetPrice(); 
+		String type =dto.getType();
 		
-		if(result.size()!=0) {
+		System.out.println("MemId:   " + memId);
+    	System.out.println("CoinId:   " + coinId);
+    	System.out.println("setPrice:   " + price);
+    	System.out.println("type:   " + type);
+    	
+    	SetPrice setPrice =new SetPrice();
+    	setPrice.setMemberId(memId);
+    	setPrice.setCoinId(coinId);
+    	setPrice.setSetPrice(price);
+    	setPriceService.save(setPrice);
+    	
+    	String coinNAME = coinService.findByCoinId2(coinId).getName();
+    	
+    	if(type=="H") {
+		List<Map<String, Object>> heigher = coinService.getHeighSetCoin(memId);
+		if(heigher.size()!=0) {
+//			senderService.sendEmail(memEMail, "恭喜您設置的" + coinNAME + "達成目標", "恭喜您設置的 "+ coinNAME + " 價格已達到 USD: " + price + " ,系統已為您清除設置條件");
 			System.out.println("恭喜你=================================");
+			setPriceService.deletegetSetCoin(memId, coinId);
 		}else {
 			System.out.println("沒東西=================================");
-		}
-		return result; 
+			}
+    	}
+    	else {
+    	List<Map<String, Object>> lower = coinService.getLowerSetCoin(memId);
+		if(lower.size()!=0) {
+//			senderService.sendEmail(memEMail, "恭喜您設置的" + coinNAME + "達成目標", "恭喜您設置的 "+ coinNAME + " 價格已達到 USD: " + price + " ,系統已為您清除設置條件");
+			System.out.println("恭喜你=================================");
+			setPriceService.deletegetSetCoin(memId, coinId);
+		}else {
+			System.out.println("沒東西=================================");
+			}
+    	}
+		
+		Map<String, String> result = new HashMap<String, String>();
+    	result.put("status", "200");
+    	return result;
 	}
+	
+	@DeleteMapping("coin/deletegetSetCoin/{id}")
+    public Map<String, String> deletegetSetCoin(@RequestBody StarDTO dto) {
+    	System.out.println("delete :  MemId =  "       + dto.getMemId());
+    	System.out.println("delete :  CoinId =  " + dto.getCoinId());
+    	
+    	 Integer memId =dto.getMemId();
+    	 Integer coinId =dto.getCoinId();
+    	
+    	 setPriceService.deletegetSetCoin(memId,coinId);
+    	
+    	Map<String, String> result = new HashMap<String, String>();
+    	result.put("status", "200");
+    	return result;
+    }
 	
 	
 	//已經在JSP AJAX設定輪詢 這邊就不用在訂時跟資料庫要資料了

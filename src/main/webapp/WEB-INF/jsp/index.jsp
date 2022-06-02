@@ -66,6 +66,7 @@
                                     <tr>
                                         <th scope="col">Top</th>
                                         <th scope="col">#</th>
+                                        <th scope="col">setting</th>
                                         <th scope="col">Name</th>
                                         <th scope="col">Currency</th>
                                         <th scope="col">Price</th>
@@ -88,6 +89,7 @@
                                     <tr>
                                         <th scope="col">Top</th>
                                         <th scope="col">#</th>
+                                        <th scope="col">setting</th>
                                         <th scope="col">Name</th>
                                         <th scope="col">Currency</th>
                                         <th scope="col">Price</th>
@@ -114,7 +116,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">CoinName:${coin.Name}</h5>
@@ -124,12 +126,12 @@
       </div>
       <div class="modal-body">
         <h6>current price:${coin.price}</h6>
-      	<h6><input type="radio" name="h" checked/>higher &nbsp;<input type="radio"  name="h"/>lower</h6>
-        <h5>USD<input type="text" placeholder="Set Price"></h5>
+      	<h6><input type="radio" name="h" id="heigh" value="H" checked/>higher &nbsp;<input type="radio" id="low" value="L" name="h"/>lower</h6>
+        <h5>USD<input id="setPrice" type="number" placeholder="Set Price"></h5>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save</button>
+        <button type="submit" class="btn btn-primary" data-dismiss="modal" id="save">Save</button>
       </div>
     </div>
   </div>
@@ -157,13 +159,12 @@
 		});
 		
 		$("#search").click(function() {
-			loadCoinByName();
+			loadCoinByName(memId);
 		});
 		
 		function watch(obj) {
 			if ('${login == null }' == 'true') {
-// 				$('#loginModal').modal("show")
-				$('#exampleModal').modal("show")
+				$('#loginModal').modal("show")
 			} else {
 				var coinId = $(obj).val();
 				var checked = $(obj).prop('checked');
@@ -185,7 +186,6 @@
 							console.log("成功");
 						},
 						error : function(err) {
-							debugger
 							console.log("result====" + err)
 							console.log("失敗");
 						}
@@ -219,6 +219,87 @@
 				}
 			}
 		}
+		
+		
+		
+		function set(obj) {
+			var checked = $(obj).prop('checked');
+	        var coinId   = $(obj).val();
+	        
+	        
+		    	if ('${login == null }' == 'true') {
+		            $('#loginModal').modal("show")
+		        } ;
+		        
+		    	if(checked==true) {
+		            $('#exampleModal').modal("show")
+		        };
+		        
+		    	$("#save").off("click").on("click",function() {
+		    		var setPrice = document.getElementById("setPrice").value;
+		    		var type = $("[name='h']:checked").val();
+		    		var param = {
+		                    "memId" : memId,
+		                    "coinId" : coinId,
+		                    "setPrice": setPrice,
+		                    "type":type
+		               			 }
+	            	console.log("按下了");
+	                console.log("memId==" + memId + "," + "coinId==" + coinId + "," + "setPrice==" + setPrice + "," + "type==" +type);
+	                if(setPrice=""){
+	                	$('#topTbody,#followTbody').find('[id="' + coinId + '"]').prop('checked', false);
+	                }
+	                else{
+	                $.ajax({
+	                    url : 'http://localhost:8080/coinshell/coin/getSetCoin',
+	                    contentType : 'application/json; charset=UTF-8',
+	                    dataType : 'json',
+	                    method : 'post',
+	                    data : JSON.stringify(param),
+	                    success : function(result) {
+	                        console.log("result====" + result.status)
+	                        console.log("成功");
+	                    },
+	                    error : function(err) {
+	                        console.log("result====" + err)
+	                        console.log("失敗");
+	                    }
+	                })
+	                }
+	             })
+		    	
+	            if(checked == false) {
+	            	
+	            	var setPrice =document.getElementById("setPrice").value;
+		    		var param    = {
+		                    "memId" : memId,
+		                    "coinId" : coinId,
+		                    "setPrice": setPrice
+		               			 }
+		    		
+	                console.log("delete:" + memId + "," + "delete:" + coinId+ "," + "delete:" + setPrice);
+	                $.ajax({
+	                    url : 'http://localhost:8080/coinshell/coin/deletegetSetCoin/'+ coinId,
+	                    contentType : 'application/json; charset=UTF-8',
+	                    dataType : 'json',
+	                    method : 'delete',
+	                    data : JSON.stringify(param),
+	                    success : function(result) {
+	                        console.log("result====" + result.status)
+	                        console.log("成功");
+	                        if (result.status == '200') {
+	                            $('#topTbody,#followTbody').find('[id="' + coinId + '"]').prop('checked', false);
+	                        }
+	                    },
+	                    error : function(err) {
+	                        console.log("result====" + err)
+	                        console.log("失敗");
+
+	                    }
+	                })
+	            }
+	        }
+		
 		
 		
 	</script>

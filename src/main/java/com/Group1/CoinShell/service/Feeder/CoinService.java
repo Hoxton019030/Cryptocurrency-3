@@ -42,8 +42,11 @@ public class CoinService {
 		return coindao.getCoin();
 		}
 	
-	public List<Map<String, Object>> getSetCoin(Integer memberId) {
-		return coindao.getSetCoin(memberId);
+	public List<Map<String, Object>> getHeighSetCoin(Integer memberId) {
+		return coindao.getHeighSetCoin(memberId);
+	}
+	public List<Map<String, Object>> getLowerSetCoin(Integer memberId) {
+		return coindao.getLowerSetCoin(memberId);
 	}
 	
 	//給watch用name抓幣用

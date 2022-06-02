@@ -32,10 +32,13 @@ public interface CoinDao extends JpaRepository<Coin, Integer> {
 	public Coin findLastestCurrencyInformation(@Param("currencyName3")String currencyName); 
 	
 	//判斷memberId追蹤那些幣 設 flag=Y
-	@Query(value=" select distinct c.*, case when w.coinId is not null then 'Y' else 'N' end as flag"
+	@Query(value=" select distinct c.*, case when w.coinId is not null then 'Y' else 'N' end as flag,"
+			+ "	case when s.coinId is not null then '1' else '0' end as setting "
             + " from coin c "
             + " left join watch w on w.memberId = :memberId"
             + "                        and w.coinId = c.id "
+            + "left join setPrice s on s.memberId = :memberId"
+            + "                         and s.coinId = c.id"
             + " order by cmcRank asc ", nativeQuery=true)
 	public List<Map<String, Object>> getCoin(Integer memberId);
 	
@@ -43,13 +46,20 @@ public interface CoinDao extends JpaRepository<Coin, Integer> {
 	@Query(value=" select c.*, 'N' as flag from coin c order by cmcRank asc ", nativeQuery=true)
 	public List<Map<String, Object>> getCoin();
 
-	@Query(value=" select distinct c.* from coin c join watch w on w.coinId = c.id "
-		+ "             and w.memberId = :memberId"
-		+ " join setPrice s on s.coinId = c.id"
+	//tyep=H 當前價 >= 目標價
+	@Query(value=" select distinct c.* from coin c join setPrice s on s.coinId = c.id"
 		+ "             and s.memberId = :memberId"
 		+ " where s.setPrice <= c.price"
 		+ " order by cmcRank asc ", nativeQuery=true)
-	public List<Map<String, Object>> getSetCoin(Integer memberId);
+	public List<Map<String, Object>> getHeighSetCoin(Integer memberId);
+	
+	//tyep=L 當前價 <= 目標價
+	@Query(value=" select distinct c.* from coin c join setPrice s on s.coinId = c.id"
+			+ "             and s.memberId = :memberId"
+			+ " where s.setPrice >= c.price"
+			+ " order by cmcRank asc ", nativeQuery=true)
+		public List<Map<String, Object>> getLowerSetCoin(Integer memberId);
+	
 }
 
 
