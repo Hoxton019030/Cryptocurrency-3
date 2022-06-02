@@ -61,7 +61,7 @@
                                 `<tr>
                             <td>` + value.id + `</td>
                             <td>` + value.aliasAvatar + `</td>
-                            <td><img src="data:image/gif;base64,` + value.userAvatar + `" width=300px hight=300px></td>
+                            <td><img src="data:image/gif;base64,` + value.userAvatar + `" width=65px hight=65px></td>
                             <td> <a href="editcua?id=` + value.id + `">編輯</a></td>
                             <td ><a href="deletecua?id=` + value.id + `">刪除</a> </td> 
                                 </tr>

@@ -2,20 +2,14 @@ package com.Group1.CoinShell.controller.Yiwen;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.Group1.CoinShell.model.Yiwen.Members;
 import com.Group1.CoinShell.service.Yiwen.MembersService;
+
+
 
 @RestController  
 public class MembersApi {
@@ -36,7 +30,6 @@ public class MembersApi {
 		return memList;
 	}
 }
-
 
 //	@Autowired
 //	private MembersDao dao;
@@ -194,5 +187,6 @@ public class MembersApi {
 ////	@GetMapping(value="members/ispremium/{isPremium}")
 ////	public List<Members> findByIsPremiumTrue(@PathVariable Boolean isPremium){
 ////		return dao.findByisPremiumTrue(isPremium);
-	}
+////	}
+
 
