@@ -52,11 +52,10 @@ public class PunchListController {
 			// 計算獎勵 回傳給Member
 			Members member = membersService.countReward(id, reward);
 			// 儲存要回傳的使用者資料
-			model.addAttribute("member", member);
 			
+			model.addAttribute("member", member);
 			System.out.println("0000000");
 		}
-
 		return "punchOK";
 	}
 
