@@ -32,10 +32,10 @@ public class MembersService {
 		membersDao.updateCustomizedUserAvatarById(avatarId, id);
 	}
 
-//	public List<Map<String, Object>> selectMemberAvatar(Integer id) {
-//		List<Map<String, Object>> member = membersDao.selectMemberAvatar(id);
-//		return member;
-//	}
+	public List<Map<String, Object>> selectMemberAvatar(Integer id) {
+		List<Map<String, Object>> member = membersDao.selectMemberAvatar(id);
+		return member;
+	}
 
 	public List<Members> findAllMembers() {
 		List<Members> member = membersDao.findAllMembers();
@@ -45,5 +45,25 @@ public class MembersService {
 	public void updateCustomizedUserNameById(String customizedUserName,Integer id) {
 		membersDao.updateCustomizedUserNameById(customizedUserName, id);
 	}
+	
+	
+	
+	public Members findById(int id) {
+		Optional<Members> option = membersDao.findById(id);
+		
+		if (option.isPresent()) {
+			return option.get();
+		}
+		return null;
+	}
+	public Members countReward(int Id, int reward) {
 
+		// 得到使用者全部的獎勵
+		Members members = findById(Id);
+		int myShell = members.getMyShell();
+		// 累加獎勵
+		members.setMyShell(myShell + reward);
+		
+		return members;
+	}
 }

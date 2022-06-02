@@ -1,8 +1,12 @@
 package com.Group1.CoinShell.controller.Yiwen;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -11,10 +15,29 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.Group1.CoinShell.model.Yiwen.Members;
+import com.Group1.CoinShell.service.Yiwen.MembersService;
+
 
 //
-//@RestController     //命名為 RestController(XXXApi.java) 的類別回傳的都是JSON
-//public class MembersApi {
+@RestController     //命名為 RestController(XXXApi.java) 的類別回傳的都是JSON
+public class MembersApi {
+	
+	@Autowired
+	MembersService service;
+	
+@GetMapping(value="/selectMemberAvatar")	
+	public List<Map<String, Object>> selectMemberAvatar (@RequestParam("id")Integer id){
+		return service.selectMemberAvatar(id);
+	}
+
+	@GetMapping(value="/findAllMembers")
+	public List<Members> findAllMembers(){
+		return service.findAllMembers();
+	}
+
+//url : http://localhost:8080/coinshell/selectMemberAvatar?id=1
+
 //
 //	@Autowired
 //	private MembersDao dao;
@@ -172,6 +195,5 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 ////	@GetMapping(value="members/ispremium/{isPremium}")
 ////	public List<Members> findByIsPremiumTrue(@PathVariable Boolean isPremium){
 ////		return dao.findByisPremiumTrue(isPremium);
-////	}
-
+	}
 

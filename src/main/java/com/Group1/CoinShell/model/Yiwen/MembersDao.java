@@ -29,10 +29,9 @@ public interface MembersDao extends JpaRepository<Members, Integer> {
 	 * @return
 	 */
 
-
 	@Query(value="SELECT MEMBERS.Id, MEMBERS.CustomizedUserAvatar, CustomizedUserAvatar.userAvatarBase64 FROM MEMBERS  			 LEFT JOIN CustomizedUserAvatar ON MEMBERS.CustomizedUserAvatar = CustomizedUserAvatar.Id WHERE Members.Id=:id2"
 			, nativeQuery = true)
-	public List<Map<String, Object>> updateMemberAvatar(@Param("id") Integer id);
+	public List<Map<String, Object>> selectMemberAvatar(@Param("id2") Integer id);
 	
 	@Query(value="SELECT * FROM Members WHERE Id = :id2", nativeQuery = true)
 	public Members findMemberById (@Param("id2") Integer Id);
@@ -50,7 +49,6 @@ public interface MembersDao extends JpaRepository<Members, Integer> {
 	public void updateCustomizedUserNameById(@Param("customizedUserName2") String customizedUserName,@Param("id2")Integer id);
 	
 	
-
 }
 //	
 //	@Query(value="select m from Members m where m.Id =?1")
