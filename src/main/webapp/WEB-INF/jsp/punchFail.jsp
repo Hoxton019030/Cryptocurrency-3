@@ -1,14 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
+
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-<jsp:include page="../NavBar/CoinShellNavBar.jsp" />
+<jsp:include page="NavBar/CoinShellNavBar.jsp" />
+<title>Shop</title>
 
 <head>
 <meta charset="UTF-8">
-<title>My Shell</title>
+<title>punch Ok</title>
 <style type="text/css">
 
 /* The side navigation menu */
@@ -85,43 +87,18 @@ body {
 }
 </style>
 
-</head>
 
-<body>
 
-	<!-- side bar 側邊欄位 -->
-	<div class="sidebar">
-		<a href="${contextRoot}/shop/myshell">My Shell</a> <a
-			href="${contextRoot}/shop/shop">Shop</a>
+<h1>首頁</h1>
+
+<!--Page content-->
+<div class="container"
+	style="margin-top: 30px; background-color: #fff; border-radius: 30px;">
+	<div class="col-9">
+
+		<font size="5">
+				<strong><font color="red">${message}</font></strong>
+		</font>
 	</div>
-
-
-	<!--Page content-->
-	<div class="container"
-		style="margin-top: 30px; background-color: #fff; border-radius: 30px;">
-		<div class="col-9">
-
-			<!-- "簽到" 跳轉頁面 -->
-			<!-- <div> -->
-			<%-- <a href="OK?Id=${sessionScope.login.id}"><button>簽到</button></a> --%>
-			<!-- </div> -->
-
-
-			<!-- "圖片" 跳轉頁面 -->
-			<h1>Punch-In List</h1>
-			<div class="buttonPic">
-				<a href="OK?Id=${sessionScope.login.id}"><img
-					src="https://i.pinimg.com/564x/07/6b/2d/076b2dd9557795ba4c215d23e7d09c6b.jpg"
-					alt=""></a>
-			</div>
-
-
-		</div>
-	</div>
-	</div>
-
-
-</body>
-
-</style>
-
+	<br>
+	<hr>

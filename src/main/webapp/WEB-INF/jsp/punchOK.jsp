@@ -77,30 +77,50 @@ div.content {
 body {
 	padding-top: 82px;
 }
+
+.buttonPic img {
+	/* 	position: absolute; */
+	border-style: none;
+	width: 200px;
+	height: 200px;
+	object-fit: cover;
+}
 </style>
 
-<h1>首頁</h1>
-
-<%-- <div>${message}${time}</div> --%>
-<!-- <div> -->
-<!-- 	<a href="reCount?Id=1&chage=min"><button>把上次簽到時間變為未滿24hr</button></a> -->
-<!-- </div> -->
-<!-- <div> -->
-<!-- 	<a href="reCount?Id=1&chage=mid"><button>把上次簽到時間變24hr前</button></a> -->
-<!-- </div> -->
-<!-- <div> -->
-<!-- 	<a href="reCount?Id=1&chage=max"><button>把上次簽到時間變為48hr前</button></a> -->
-<!-- </div> -->
+</head>
+<body>
+	<!-- side bar 側邊欄位 -->
+	<div class="sidebar">
+		<a href="${contextRoot}/shop/myshell">My Shell</a> <a
+			href="${contextRoot}/shop/shop">Shop</a>
+	</div>
 
 
-<div>
-	<div>簽到ID:${member.id}</div>
-	<div>今天可獲得的Shell:${getReward}</div>
-	<div>目前累計:${member.myShell}</div>
-	<div>累計簽到天數:${member.punchList.punchCount}</div>
-	<div>上次簽到時間:${member.punchList.punchDateTimes}</div>
-	<div>${message}</div>
-	<!-- 	<a href="ok?Id=1"><button>簽到</button></a> -->
-</div>
-<br>
-<hr>
+	<!--Page content-->
+	<div class="container"
+		style="margin-top: 30px; background-color: #fff; border-radius: 30px;">
+		<div class="col-9">
+
+			<font size="5">
+
+				<div>
+
+					<strong><font color="red">${message}</font></strong> <br> <u><script
+							language="javascript">
+　				var Today=new Date();
+　				document.write(" Date " + Today.getFullYear()+ " / " + (Today.getMonth()+1) + " / " + Today.getDate() + " ");
+				</script></u>
+				</div>
+
+				<div>
+
+					<div>ID:${member.id}</div>
+					<div>Today's Shell:${getReward}</div>
+					<div>My Total Shell:${member.myShell}</div>
+					<%-- 	<div>Punch Count Days:${member.punchListMemberId.punchCount}</div> --%>
+					<%-- 	<div>Last Punch Time:${member.punchListMemberId.punchDateTimes}</div> --%>
+			</font>
+		</div>
+		<br>
+		<hr>
+</body>

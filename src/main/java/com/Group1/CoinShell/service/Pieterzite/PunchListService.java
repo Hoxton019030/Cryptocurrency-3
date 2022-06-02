@@ -1,6 +1,7 @@
 package com.Group1.CoinShell.service.Pieterzite;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.Id;
@@ -9,6 +10,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.Group1.CoinShell.model.Feeder.Coin;
 import com.Group1.CoinShell.model.Pieterzite.PunchList;
 import com.Group1.CoinShell.model.Pieterzite.PunchListDao;
 import com.Group1.CoinShell.model.Yiwen.Members;
@@ -26,13 +28,14 @@ public class PunchListService {
 	
 	// 簽到
 	public PunchList goPunchIn(int Id) {
-		Optional<PunchList> optional = punchListDao.findByMembersId(Id);
+		Optional<PunchList> optional = punchListDao.findByPunchListMemberId(Id);
 		
 		if(optional.isPresent()) {
 			PunchList punchList = optional.get();
 			Date now = new Date();
 			long nowtime = 0; 
 			nowtime = now.getTime();
+
 			
 // 有簽到記錄
 			
@@ -69,7 +72,6 @@ public class PunchListService {
 			return punchList;
 		}
 		
-		
 // 沒有簽到記錄 
 		
 		else {
@@ -86,8 +88,11 @@ public class PunchListService {
 				
 				return newPunchList;
 			}
-			
 		}
 		return null;
+	}
+
+	public Optional<PunchList> findByPunchListMemberId(int memberId) {
+		return punchListDao.findByPunchListMemberId(memberId);
 	}
 }
