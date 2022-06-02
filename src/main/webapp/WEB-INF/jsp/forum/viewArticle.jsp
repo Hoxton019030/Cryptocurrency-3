@@ -37,7 +37,7 @@
                     <a href="${contextRoot}/editArticle/${Article.id}">Edit</a>
                     <a href="${contextRoot}/deleteArticle/${Article.id}" onclick="return confirm('確認刪除嗎?')">Delete</a>
                 </span>
-                <div class="d-flex flex-row">
+                <div class="d-flex flex-row divToGetImg">
                     <img class="mr-3 rounded-circle" style="display:block; width:65px; height:65px" src="${img}"/>
                     <div class="d-flex flex-column">
                         <span class="name"><h3>${userName}</h3></span>
@@ -52,8 +52,8 @@
                 </div>
                 <div id="respond">
                     <div class="comment-l bg-light p-2" style="display: none;">
-                        <div class="d-flex flex-row align-items-start">
-                            <img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+                        <div class="d-flex flex-row align-items-start divToGetImg">
+                            <img class="rounded-circle" src="data:image/gif;base64,${memImg}" width="40">
                             <textarea class="form-control ml-1 shadow-none textarea" id="text-c" tabindex="1" placeholder="我其實也不是一定要評論"  style="resize:none;width:600px;height:90px;">我其實也不是一定要評論</textarea>
                         </div>
                         <div class="mt-2 text-right">
@@ -102,6 +102,10 @@ verifyMembershipOnload();
 $("#submit-c").click(function(){comment()})
 doComment.addEventListener('click',verifyMembership);
 closeComment.addEventListener('click',closeCommentL);
+
+// function getImg(){
+//     $(".divToGetAuthorImg img").replaceWith(`<img class="mr-3 rounded-circle" style="display:block; width:48px; height:48px" src="data:image/gif;base64,`+img+`" />`)
+// }
 
 function verifyMembershipOnload(){
     if ("${Article.authorId}" == "${login.id}") {
@@ -299,13 +303,13 @@ function displayComm(data){
             var weekDayPrint = weekDay[weekIndex];
             var id = value.id;
             var cidForReply = value.commentId;   
-            var img = value.userAvatarBase64;        
-            // <img class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="https://i.imgur.com/stD0Q19.jpg" />
+            var img = value.userAvatar;        
+            // <img class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="https://i.imgur.com/stD0Q19.jpg" />            
             $("#comment-list").append(`
                     <div class="media-body rounded">
                         <div class="row">
                             <div class="col-8 d-flex flex-row">
-                                <img class="mr-3 rounded-circle" style="display:block; width:48px; height:48px" src="`+img+`" />
+                                <img class="mr-3 rounded-circle" style="display:block; width:48px; height:48px" src="data:image/gif;base64,`+img+`" />
                                 <div class="d-flex flex-column">
                                     <span class="name">`+value.userName+`</span>
                                     <span class="date"> — `+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</span>
@@ -446,14 +450,14 @@ function displayReply(data, id){
                 var weekIndex = added.getDay();
                 var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
                 var weekDayPrint = weekDay[weekIndex];  
-                var img = value.userAvatarBase64;                
+                var img = value.userAvatar;                
                 // <a class="pr-3" href="#"><img class="rounded-circle" alt="Bootstrap Media Another Preview" src="https://i.imgur.com/xELPaag.jpg" /></a>
                 $("#reply-list"+id).append(`
                         <div class="media mt-4">
                             <div class="media-body rounded">
                                 <div class="row">
                                     <div class="col-8 d-flex flex-row">
-                                        <img class="mr-3 rounded-circle" style="display:block; width:48px; height:48px" src="`+img+`" />
+                                        <img class="mr-3 rounded-circle" style="display:block; width:48px; height:48px" src="data:image/gif;base64,`+img+`" />
                                         <div class="d-flex flex-column">
                                             <span class="name">`+value.userName+`</span>
                                             <span class="date"> — `+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</span>

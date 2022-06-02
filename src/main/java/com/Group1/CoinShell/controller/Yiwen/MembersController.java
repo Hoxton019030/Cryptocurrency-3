@@ -102,6 +102,11 @@ public class MembersController {
 			return "redirect:/";
 		}
 		httpSession.setAttribute("login", memRes);
+		
+		Integer memId = memRes.getId();
+		String img = dao.getImg(memId);
+		httpSession.setAttribute("memImg", img);
+		
 		return "index";
 	}
 	
