@@ -31,7 +31,7 @@ public interface CustomizedUserAvatarDao extends JpaRepository<CustomizedUserAva
 	public void deleteAvatarById(@Param("id2") Integer id);
 
 //findbyName
-	@Query(value = "SELECT * FROM customizedUserAvatar WHER aliasAvatar LIKE '%'+:aliasAvatar2+'%'", nativeQuery = true)
+	@Query(value = "SELECT * FROM customizedUserAvatar WHERE aliasAvatar LIKE '%'+:aliasAvatar2+'%'", nativeQuery = true)
 	public List<CustomizedUserAvatar> findAvatarByName(@Param("aliasAvatar2") String aliasAvatar);
 
 //findById

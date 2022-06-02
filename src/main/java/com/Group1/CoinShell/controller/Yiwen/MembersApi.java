@@ -1,8 +1,11 @@
 package com.Group1.CoinShell.controller.Yiwen;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -11,11 +14,31 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.Group1.CoinShell.model.Yiwen.Members;
+import com.Group1.CoinShell.service.Yiwen.MembersService;
 
-//
-//@RestController     //命名為 RestController(XXXApi.java) 的類別回傳的都是JSON
-//public class MembersApi {
-//
+
+
+@RestController  
+public class MembersApi {
+	
+	@Autowired
+	private MembersService memService;
+
+
+	@GetMapping("/allMem")
+	public List<Members> findAllMembers(){
+		List<Members> allMemList = memService.findAllMembers();
+		return allMemList;
+	}
+	
+	@GetMapping("/Mem")
+	public List<Members> findMemberByName(@RequestParam("name")String customizedUserName){
+		List<Members> memList = memService.findMemberByName(customizedUserName);
+		return memList;
+	}
+}
+
 //	@Autowired
 //	private MembersDao dao;
 //	
