@@ -34,6 +34,11 @@ public class PageController {
 		return "store/store";
 	}
 	
+	@GetMapping("/portfolio")
+	public String portfolio() {
+		return "/portfolio";
+	}
+	
 	
 	
 	
