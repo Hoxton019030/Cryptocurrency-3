@@ -1,5 +1,6 @@
 package com.Group1.CoinShell.service.Yiwen;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -7,6 +8,7 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import com.Group1.CoinShell.model.Yiwen.Members;
@@ -36,10 +38,10 @@ public class MembersService {
 		List<Map<String, Object>> member = membersDao.selectMemberAvatar(id);
 		return member;
 	}
-
+  
 	public List<Members> findAllMembers() {
-		List<Members> member = membersDao.findAllMembers();
-		return member;
+		List<Members> memList = membersDao.findAllMembers();
+		return memList;
 	}
 	
 	public void updateCustomizedUserNameById(String customizedUserName,Integer id) {
@@ -58,12 +60,42 @@ public class MembersService {
 	}
 	public Members countReward(int Id, int reward) {
 
-		// 得到使用者全部的獎勵
-		Members members = findById(Id);
-		int myShell = members.getMyShell();
-		// 累加獎勵
-		members.setMyShell(myShell + reward);
+	// insertMember
+	public void insertMember(Integer coin, Integer customizedUserAvatar,
+			 String customizedUserName, String eMail, Date joinTime, Integer myShell, String password) {
+		membersDao.insertMember(coin, customizedUserAvatar, customizedUserName, eMail, joinTime, myShell, password);
+	};
+	
+	// deleteMemberById
+	public void deleteMemberById(Integer id) {
+		membersDao.deleteMemberById(id);
+	}
 		
-		return members;
+	// findMemberByName
+	public List<Members> findMemberByName(String customizedUserName){
+		List<Members> memList = membersDao.findMemberByName(customizedUserName);
+		return memList;
+	}
+
+		
+	// findById  
+	public Members findMemberById (Integer Id) {
+		Members resMem = membersDao.findMemberById(Id);
+		return resMem;
+	}
+		
+	// updateMemberById
+	public void updateMemberById(Integer coin, Integer customizedUserAvatar, String customizedUserName,
+			 String eMail, Date joinTime, Integer myShell, String password, Integer id) {
+		membersDao.updateMemberById(coin, customizedUserAvatar, customizedUserName, eMail, joinTime, myShell, password, id);
+	}
+		
+	// 得到使用者全部的獎勵
+	Members members = findById(Id);
+	int myShell = members.getMyShell();
+	// 累加獎勵
+	members.setMyShell(myShell + reward);
+		
+	return members;
 	}
 }

@@ -39,7 +39,7 @@ public class Members {
 	@Column(name = "CustomizedUserName", columnDefinition = "nvarchar(60)", nullable = false)
 	private String customizedUserName;
 
-	@Column(name = "CustomizedUserAvatar", columnDefinition = "nvarchar(MAX)")
+	@Column(name = "CustomizedUserAvatar", columnDefinition = "nvarchar(50)")
 	private Integer customizedUserAvatar;
 
 	@Column(name = "E_Mail", columnDefinition = "nvarchar(100)", nullable = false)
@@ -59,9 +59,6 @@ public class Members {
 
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	@Temporal(TemporalType.TIMESTAMP)
-  
-
-
 	@Column(name = "JoinTime", columnDefinition = "date", nullable = false)
 	private Date joinTime;
 	

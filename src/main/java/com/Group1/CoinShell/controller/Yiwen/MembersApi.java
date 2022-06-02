@@ -1,7 +1,6 @@
 package com.Group1.CoinShell.controller.Yiwen;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -18,27 +17,27 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.Group1.CoinShell.model.Yiwen.Members;
 import com.Group1.CoinShell.service.Yiwen.MembersService;
 
-
-//
-@RestController     //命名為 RestController(XXXApi.java) 的類別回傳的都是JSON
+@RestController  
 public class MembersApi {
 	
 	@Autowired
-	MembersService service;
-	
-@GetMapping(value="/selectMemberAvatar")	
-	public List<Map<String, Object>> selectMemberAvatar (@RequestParam("id")Integer id){
-		return service.selectMemberAvatar(id);
-	}
+	private MembersService memService;
 
-	@GetMapping(value="/findAllMembers")
+
+	@GetMapping("/allMem")
 	public List<Members> findAllMembers(){
-		return service.findAllMembers();
+		List<Members> allMemList = memService.findAllMembers();
+		return allMemList;
 	}
+	
+	@GetMapping("/Mem")
+	public List<Members> findMemberByName(@RequestParam("name")String customizedUserName){
+		List<Members> memList = memService.findMemberByName(customizedUserName);
+		return memList;
+	}
+}
 
-//url : http://localhost:8080/coinshell/selectMemberAvatar?id=1
 
-//
 //	@Autowired
 //	private MembersDao dao;
 //	
