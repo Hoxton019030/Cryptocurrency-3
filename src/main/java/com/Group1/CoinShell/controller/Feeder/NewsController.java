@@ -27,7 +27,7 @@ public class NewsController {
 	@Autowired
 	private NewsService newsService;
 
-//	@Scheduled(cron="0 0 12 * * ?") //cron表達式 每日12點執行
+//	@Scheduled(cron="0 0 12 * * ?") //cron表達式 每日12點執行(等於更新當日新聞)
 	@Scheduled(initialDelay = 2000, fixedRate = 86400000)// 定時器 啟動專案 initialDelay 毫秒 後啟動 每 fixedRate 毫秒 RUN一次
 	@PostMapping("news/insert")
 	public void inserNews() throws JsonProcessingException {
@@ -35,6 +35,7 @@ public class NewsController {
 		LocalDate todaysDate = LocalDate.now();
 		System.out.println(todaysDate);
 
+		// 網址中插入變數todaysDate  為取得每日新聞 EX 2022-06-03
 		String strUrl = "https://newsapi.org/v2/everything?q=cryptocurrency&from=" + todaysDate + "&to=" + todaysDate
 				      + "&sortBy=popularity&apiKey=984ba8ce4d3a426a99cf05daed1742e6";
 		String newsStr = coinService.getContent(strUrl);
@@ -78,4 +79,10 @@ public class NewsController {
 		return news;
 	}
     
+	//找到最新20筆 以求更新頁面每日新聞
+	@GetMapping("news/getTop20")
+	public List<News> findByNewsTop20Id() {
+		List<News> top20NewsList = newsService.findByNewsTop20Id();
+		return top20NewsList;
+	}
 }

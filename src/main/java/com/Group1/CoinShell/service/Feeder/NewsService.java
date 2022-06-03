@@ -28,4 +28,8 @@ public class NewsService {
 	public List<News> findByNewsId(Integer id) {
 		return newsdao.findByNewsId(id);
 	}
+	
+	public List<News> findByNewsTop20Id() {
+		return newsdao.findByNewsTop20Id();
+	}
 }

@@ -12,4 +12,7 @@ public interface NewsDao extends JpaRepository <News, Integer>{
 
 	@Query(value="select * from News where id = :id", nativeQuery=true)
 	public List<News> findByNewsId(@Param("id") Integer id);
+	
+	@Query(value="SELECT top 20 * FROM News  ORDER BY id DESC", nativeQuery=true)
+	public List<News> findByNewsTop20Id();
 }

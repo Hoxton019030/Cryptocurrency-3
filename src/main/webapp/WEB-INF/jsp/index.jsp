@@ -424,7 +424,7 @@
 		    var num8 = status[7];
 			console.log("亂數值為==" + status)
 				$.ajax({
-			        url: "http://localhost:8080/coinshell/news/getAll",
+			        url: "http://localhost:8080/coinshell/news/getTop20",
 			        contentType: 'application/json; charset=UTF-8',
 			        dataType: 'json',
 			        method: 'get',
