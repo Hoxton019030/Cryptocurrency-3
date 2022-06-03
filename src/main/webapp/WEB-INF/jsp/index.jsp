@@ -432,14 +432,14 @@
 			            console.log(result)
 			            $.each(result, function(index, value) {
 // 			            	console.log("id==" + result[num1].id + ",url==" +result[num1].url)
-			            $('#n1').html('<a href="#" onclick="window.open(' + result[num1].url +')"><img class="newsimg" src="' + result[num1].imgUrl + '" alt=""></a>');
-			            $('#n2').html('<a href="#" onclick="window.open(' + result[num2].url +')"><img class="newsimg" src="' + result[num2].imgUrl + '" alt=""></a>');
-			            $('#n3').html('<a href="#" onclick="window.open(' + result[num3].url +')"><img class="newsimg" src="' + result[num3].imgUrl + '" alt=""></a>');
-			            $('#n4').html('<a href="#" onclick="window.open(' + result[num4].url +')"><img class="newsimg" src="' + result[num4].imgUrl + '" alt=""></a>');
-			            $('#n5').html('<a href="#" onclick="window.open(' + result[num5].url +')"><img class="newsimg" src="' + result[num5].imgUrl + '" alt=""></a>');
-			            $('#n6').html('<a href="#" onclick="window.open(' + result[num6].url +')"><img class="newsimg" src="' + result[num6].imgUrl + '" alt=""></a>');
-			            $('#n7').html('<a href="#" onclick="window.open(' + result[num7].url +')"><img class="newsimg" src="' + result[num7].imgUrl + '" alt=""></a>');
-			            $('#n8').html('<a href="#" onclick="window.open(' + result[num8].url +')"><img class="newsimg" src="' + result[num8].imgUrl + '" alt=""></a>');
+			            $('#n1').html(`<a href="#" onclick="window.open('` + result[num1].url +`')"><img class="newsimg" src="` + result[num1].imgUrl + `" alt=""></a>`);
+			            $('#n2').html(`<a href="#" onclick="window.open('` + result[num2].url +`')"><img class="newsimg" src="` + result[num2].imgUrl + `" alt=""></a>`);
+			            $('#n3').html(`<a href="#" onclick="window.open('` + result[num3].url +`')"><img class="newsimg" src="` + result[num3].imgUrl + `" alt=""></a>`);
+			            $('#n4').html(`<a href="#" onclick="window.open('` + result[num4].url +`')"><img class="newsimg" src="` + result[num4].imgUrl + `" alt=""></a>`);
+			            $('#n5').html(`<a href="#" onclick="window.open('` + result[num5].url +`')"><img class="newsimg" src="` + result[num5].imgUrl + `" alt=""></a>`);
+			            $('#n6').html(`<a href="#" onclick="window.open('` + result[num6].url +`')"><img class="newsimg" src="` + result[num6].imgUrl + `" alt=""></a>`);
+			            $('#n7').html(`<a href="#" onclick="window.open('` + result[num7].url +`')"><img class="newsimg" src="` + result[num7].imgUrl + `" alt=""></a>`);
+			            $('#n8').html(`<a href="#" onclick="window.open('` + result[num8].url +`')"><img class="newsimg" src="` + result[num8].imgUrl + `" alt=""></a>`);
 			        	})
                     },
                     error : function(err) {
