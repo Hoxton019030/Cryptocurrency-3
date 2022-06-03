@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.JSONArray;
@@ -25,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.Group1.CoinShell.model.Feeder.Coin;
 import com.Group1.CoinShell.model.Feeder.CoinDao;
@@ -42,6 +45,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 @RestController
 public class CoinCointrollerApi {
 
+	private static final String Requestmethod = null;
 	@Autowired
 	private CoinService coinService;
 	@Autowired
@@ -53,7 +57,7 @@ public class CoinCointrollerApi {
 	@Autowired
 	private SetPriceService setPriceService;
 	                                                    // 需搭配@Component
-	@Scheduled(initialDelay = 2000, fixedRate = 30000)  // 定時器 啟動專案 initialDelay 毫秒 後啟動 每 fixedRate 毫秒 RUN一次
+	@Scheduled(initialDelay = 2000, fixedRate = 60000)  // 定時器 啟動專案 initialDelay 毫秒 後啟動 每 fixedRate 毫秒 RUN一次
 	@PostMapping("coin/insert")
 	public void updateCoin() throws JsonProcessingException {
 		// 測試定時器有沒有動 顯示當前時間
@@ -325,5 +329,26 @@ public class CoinCointrollerApi {
     	
     	return SelectCoin;
     }
+    
+//    @PostMapping("/")
+//    public Coin coinList(Model model,@RequestBody StarDTO dto){
+//    	System.out.println("拿到了吧~~~~~~~~~" + dto.getCoinId());
+//    	Coin coin = coinService.findByCoinId2(dto.getCoinId());
+//    	System.out.println(coin);
+//		model.addAttribute("coin", coin);
+//		System.out.println(model);
+//		
+//		
+//		return coin;
+//    }
+    
+    //點選鈴鐺 拿到coinId > 跑findByCoinId方法> 回傳物件 >給AJAX拿
+	@GetMapping("/coin/getId")
+	public List<Coin> coinList(@RequestParam Integer coinId) {
+		
+		List<Coin> coin = coinService.findByCoinId(coinId);
+		
+		return coin;
+	}
     
 }
