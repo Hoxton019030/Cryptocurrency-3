@@ -11,37 +11,75 @@
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 <script src="${contextRoot}/javascripts/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="${contextRoot}/css/bootstrap.min.css">
+<script src="https://kit.fontawesome.com/0ef2a35b44.js" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <title>${Article.title}</title>
 </head>
 <body>
+<a href="${contextRoot}/administrator/article">討論區刪改查頁面</a>
 <div class="container mb-5 mt-5">
     <div class="card">
         <div class="row">
-            <div class="col-md-12">                             
+            <div class="col-md-12">
                 <h1>${Article.title}</h1>
                 <input id="aid" type="hidden" value="${Article.id}"/>
                 <input id="authorid" type="hidden" value="${Article.authorId}"/>
-                <span id="editList">
-                    <a href="${contextRoot}/editArticle/${Article.id}">Edit</a>
-                    <a href="${contextRoot}/deleteArticle/${Article.id}" onclick="return confirm('確認刪除嗎?')">Delete</a>
+                <span class="editFunction">
+                    <a href="${contextRoot}/editArticle/${Article.id}"><i class="fa fa-edit" aria-hidden="true"></i>Edit</a>
+                    <a href="${contextRoot}/deleteArticle/${Article.id}" onclick="return confirm('確認刪除嗎?')"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
                 </span>
-                <div class="d-flex">                    
-                    <img class="mr-3 rounded-circle" style="display:block; width:40px;height:40px;" src="${img}"/><h2>${userName}</h2>                               
+                <div class="d-flex flex-row divToGetImg">
+                    <img class="mr-3 rounded-circle" style="display:block; width:65px; height:65px" src="data:image/gif;base64,${img}"/>
+                    <div class="d-flex flex-column">
+                        <span class="name"><h3>${userName}</h3></span>
+                        <span class="date text-black-50">${Article.added}</span>
+                    </div>
                 </div>
-                <div style="align-items: center;background-color: #dbf8ff;">
+                <div style="align-items: center;background-color: #dbf8ff;" class="mt-2 mb-2">
                     <pre id="article-content">${Article.text}</pre>
                 </div>
-                <hr/>
+                <div class="m-1">                    
+                    <button id="doComment" class="btn btn-primary btn-sm shadow-none">Comment</button>
+                </div>
+                <div id="respond">
+                    <div class="comment-l bg-light p-2" style="display: none;">
+                        <div class="d-flex flex-row align-items-start divToGetImg">
+                            <img class="rounded-circle" src="data:image/gif;base64,${memImg}" width="40">
+                            <textarea class="form-control ml-1 shadow-none textarea" id="text-c" tabindex="1" placeholder="我其實也不是一定要評論"  style="resize:none;width:600px;height:90px;">我其實也不是一定要評論</textarea>
+                        </div>
+                        <div class="mt-2 text-right">
+                            <button class="btn btn-primary btn-sm shadow-none" type="button" id="submit-c" tabindex="2">Post comment</button>
+                            <button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button" id="closeComment">Cancel</button>
+                        </div>
+                    </div>
+                    <ul class="comment-r" style="display: none;">
+                        <li>
+                            <label for="userName">Name:(necessery)</label>
+                        </li>
+                        <li>
+                            <input type="text" id="userName-c" size="25" tabindex="2" aria-required='true' value="${login.customizedUserName}"/>
+                        </li>
+                        <li>
+                            <label for="userEmail">E-mail:(necessery)</label>
+                        </li>
+                        <li>
+                            <input type="hidden" id="articleId" value="${Article.id}" />
+                            <input type="hidden" id="userId" value="${login.id}" />
+                        </li>
+                        <li>
+                            <input type="text" id="userEmail-c" size="25" tabindex="3" aria-required='true' value="${login.eMail}"/>
+                        </li>                            
+                    </ul>
+                </div>
                 <div class="row section_title">
                     <div class="col-md-12" id="comment-list">
 
                     </div>
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination" id="pageidC">
-                        </ul>
-                    </nav>
                 </div>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination" id="pageidC">
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>
@@ -51,26 +89,42 @@ var page = 1;
 let commDataNow = {};
 let replyDataNow = {};
 loadComment();
+// verifyMembershipOnload();
 $("#submit-c").click(function(){comment()})
 doComment.addEventListener('click',verifyMembership);
 closeComment.addEventListener('click',closeCommentL);
 
+function verifyMembershipOnload(){
+    if ("${Article.authorId}" == "${login.id}") {
+        $(".editFunction").show()
+    }
+}
+
 function verifyMembership(){
-        $(".comment-l").toggle();
-        $("#closeComment").toggle();
+    if ("${login == null }" == "true") {
+        $('#loginModal').modal("show")
+    }else{
+        $(".comment-l").show();        
         $("#doComment").hide();
+    }
 }
 
 function closeCommentL(){
     $(".comment-l").hide();
-    $("#doComment").toggle();
-    $("#closeComment").hide();
+    $("#doComment").show();    
+}
+
+function closeEditForm(){
+    $(".editForm").empty();
+    $(".reply-section").hide();
 }
 
 async function comment(){
     await commentTo();
     await wait(100);
-    loadComment()
+    loadComment();
+    $(".comment-l").hide();
+    $("#doComment").show(); 
 }
 
 async function wait(ms) {
@@ -83,18 +137,23 @@ async function wait(ms) {
 async function reply(id){
     await replyTo(id);
     await wait(100);
-    loadReply(id)
+    loadReply(id);
+    $("#replySection"+id).hide()
 }
 
 function closeReply(id){
     $("#reply-list"+id).empty();
     $("#pageidR"+id).empty();
-    $("#showR"+id).toggle();
+    $("#showR"+id).show();
     $("#closeR"+id).hide();
 }
 
 function doReply(id){
-    $("#replySection"+id).toggle()
+    if ("${login == null }" == "true") {
+        $('#loginModal').modal("show")
+    }else{
+    $("#replySection"+id).show()
+    }
 }
 
 pageidC.addEventListener('click',switchPageC);
@@ -132,7 +191,7 @@ function commentTo(){
         "userId":userIdC
     }
     var jsonComm = JSON.stringify(comm);
-    fetch('http://localhost:8080/coinshell/editComment', {
+    fetch('http://localhost:8080/coinshell/doComment', {
         // credentials: 'include',
         method:'POST',
         headers: {
@@ -163,8 +222,9 @@ function replyTo(id){
         "commentId":commentIdR,
         "userId":userIdR
     }
+    console.log(reply);
     var jsonReply = JSON.stringify(reply);
-    fetch('http://localhost:8080/coinshell/editReply?commentId='+commentIdR, {
+    fetch('http://localhost:8080/coinshell/doReply?commentId='+commentIdR, {
         method:'POST',
         headers: {
             'Content-Type': 'application/json'    
@@ -228,7 +288,7 @@ function displayComm(data){
     $("#comment-list").empty();
     $.each(data, function(index, value) {
             var added = new Date(Date.parse(value.added));
-            var MM = added.getMonth();
+            var MM = added.getMonth()+1;
             var dd = added.getDate();
             var HH = added.getHours();
             var mm = added.getMinutes();
@@ -237,26 +297,68 @@ function displayComm(data){
             var weekDayPrint = weekDay[weekIndex];
             var id = value.id;
             var cidForReply = value.commentId;   
-            var img = value.userAvatarBase64;        
-            // <img class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="https://i.imgur.com/stD0Q19.jpg" />
+            var img = value.userAvatar;        
+            // <img class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="https://i.imgur.com/stD0Q19.jpg" />            
             $("#comment-list").append(`
-                    <div class="media-body">
+                    <div class="media-body rounded">
                         <div class="row">
-                            <div class="col-8 d-flex">
-                                <img class="mr-3 rounded-circle" style="display:block; width:40px;height:40px;" src="`+img+`" /><h5>`+value.userName+`</h5>
-                                <span>-`+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</span>
+                            <div class="col-8 d-flex flex-row">
+                                <img class="mr-3 rounded-circle" style="display:block; width:48px; height:48px" src="data:image/gif;base64,`+img+`" />
+                                <div class="d-flex flex-column">
+                                    <span class="name">`+value.userName+`</span>
+                                    <span class="date"> — `+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</span>
+                                </div>
+                            </div>
+                        </div>                      
+                        <div class="mt-2">`+value.text+`</div>
+                        <div>                                
+                            <div class="reply">
+                                <div class="m-1">                    
+                                    <button onclick="doReply(`+id+`)" class="fa fa-reply">Reply</button>
+                                    <a href="#" id="editSection`+id+`" onclick="editSection(event,`+id+`)" class="editFunction"><i class="fa fa-edit" aria-hidden="true"></i>Edit</a>
+                                    <a href="#" onclick="deleteC(event,`+id+`)" class="editFunction"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
+                                </div>
+                                <div id="editForm`+id+`" class="editForm">
+                                </div>
+                                <div id="replySection`+id+`" class="reply-section"  style="display: none;">
+                                    <div class="reply-l bg-light p-2">
+                                        <div class="d-flex flex-row align-items-start">
+                                            <img class="rounded-circle" src="data:image/gif;base64,${memImg}" width="40">
+                                            <textarea class="form-control ml-1 shadow-none textarea" id="text-r`+id+`" tabindex="1" placeholder="Reply here..." aria-required="true">我其實也不是一定要說什麼</textarea>
+                                        </div>
+                                        <div class="mt-2 text-right">
+                                            <button class="btn btn-primary btn-sm shadow-none submit-r" type="button" onclick="reply(`+id+`)">Reply</button>
+                                            <button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button" onclick="closeEditForm()">Cancel</button>
+                                        </div>
+                                    </div>
+                                    <ul class="reply-r" style="display: none;">
+                                        <li>
+                                            <input type="text" id="userName-r`+id+`" value="${login.customizedUserName}"/>
+                                        </li>
+                                        <li>
+                                            <input type="hidden" id="articleId" value="${Article.id}" />
+                                        </li>
+                                        <li>
+                                            <input type="hidden" id="commentId`+id+`" value="`+id+`" />
+                                        </li>
+                                        <li>
+                                            <input type="text" id="userEmail-r`+id+`" size="25" tabindex="3" aria-required='true' value="${login.eMail}"/>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                        `+value.text+`
-                        <span onclick="loadReply(`+id+`)" id="showR`+id+`"><i class="fa fa-reply"></i>See reply</span>
-                        <span onclick="closeReply(`+id+`)" id="closeR`+id+`" style="display: none"><i class="fa fa-reply"></i>Close reply</span>
-                        <div id="reply-list`+id+`">
+                        <span onclick="loadReply(`+id+`)" id="showR`+id+`"><i class="fa fa-chevron-down"></i>See reply</span>
+                        <span onclick="closeReply(`+id+`)" id="closeR`+id+`" style="display: none"><i class="fa fa-chevron-up"></i>Close reply</span>
+                        <div class="ml-5">
+                            <div id="reply-list`+id+`" class="reply-list">
+                            </div>
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination pagination-sm pageR" id="pageidR`+id+`" onclick="switchPageR(event,`+id+`)"></ul>
+                            </nav>                       
                         </div>
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination pageR" id="pageidR`+id+`" onclick="switchPageR(event,`+id+`)"></ul>
-                        </nav>                       
                     </div>
-                    `)                    
+                    `)
             })
         }
 
@@ -286,14 +388,14 @@ function pageBtn(page){
 }
 
 function loadReply(id){
+    $("#reply-list"+id).empty();
+    $("#showR"+id).hide();
+    $("#closeR"+id).show();
     $(function() {
-        var aid = document.getElementById("aid").value;
+        var aid = document.getElementById("articleId").value;
         console.log(aid);
         var cid = id;
         console.log(cid);
-        $("#reply-list"+id).empty();
-        $("#showR"+id).hide();
-        $("#closeR"+id).toggle();
         fetch("http://localhost:8080/coinshell/viewReply?articleId="+aid+"&commentId="+cid).then(function(response) {
             return response.json();
             console.log(response.json())
@@ -307,7 +409,7 @@ function loadReply(id){
 
 async function replyPagination(array, nowPage, id){
     console.log("傳過來是第幾頁"+nowPage);
-    console.log("傳過來是"+array);
+    console.log("傳過來是"+array.length);
     const dataTotal = array.length;
     const perpage = 5;
     const pageTotal = Math.ceil(dataTotal / perpage);
@@ -333,40 +435,52 @@ async function replyPagination(array, nowPage, id){
         id
     } 
     console.log(page);
-    pageBtnSm(page)
+    if(dataTotal!=0){
+        pageBtnSm(page)
+    }
 }
 
 function displayReply(data, id){
     $("#reply-list"+id).empty();
     $.each(data, function(index, value) {
                 var added = new Date(Date.parse(value.added));
-                var MM = added.getMonth();
+                var MM = added.getMonth()+1;
                 var dd = added.getDate();
                 var HH = added.getHours();
                 var mm = added.getMinutes();
                 var weekIndex = added.getDay();
                 var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
                 var weekDayPrint = weekDay[weekIndex];  
-                var img = value.userAvatarBase64;                
+                var img = value.userAvatar;
+                var thisId = value.id;             
                 // <a class="pr-3" href="#"><img class="rounded-circle" alt="Bootstrap Media Another Preview" src="https://i.imgur.com/xELPaag.jpg" /></a>
                 $("#reply-list"+id).append(`
-                <div class="media mt-4">
-                            <div class="media-body">
+                        <div class="media mt-4">
+                            <div class="media-body rounded">
                                 <div class="row">
-                                    <div class="col-12 d-flex">
-                                        <img style="display:block; width:100px;height:100px;" src="`+img+`" />
-                                        <h5>`+value.userName+`</h5>
-                                        <span>-`+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</span>
-                                    </div>
+                                    <div class="col-8 d-flex flex-row">
+                                        <img class="mr-3 rounded-circle" style="display:block; width:48px; height:48px" src="data:image/gif;base64,`+img+`" />
+                                        <div class="d-flex flex-column">
+                                            <span class="name">`+value.userName+`</span>
+                                            <span class="date"> — `+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</span>
+                                        </div>
+                                    </div>                                  
                                 </div>
                                 `+value.text+`
                             </div>
                         </div>
-                        `)                    
+                        <div class="m-1">
+                                <a href="#" id="editSection`+thisId+`" onclick="editSectionR(event,`+thisId+`)" class="editFunction"><i class="fa fa-edit" aria-hidden="true"></i>Edit</a>
+                                <a href="#" onclick="deleteR(event,`+thisId+`)" class="editFunction"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
+                        </div>
+                        <div id="editFormR`+thisId+`" class="editForm">
+                        </div>
+                        `)              
             })
 }
 
 function pageBtnSm(page){
+    // alert(123);
     console.log("page的ID是:"+page.id);
     let str = '';
     const total = page.pageTotal;
@@ -390,56 +504,229 @@ function pageBtnSm(page){
     } else {
         str += `<li class="page-item disabled"><span class="page-link">Next</span></li>`;
     }
-    // pageidR.innerHTML = str;
     
     console.log('pageidR'+page.id);
     $("#pageidR"+page.id).empty();
     $("#pageidR"+page.id).append(str);
-    // var el = document.getElementById("pageidR"+page.id);
-    // console.log("這是?????"+el);
-    // el.innerHTML = str;
-    // var listener = document.querySelector("#pageidR"+page.id);
-    // console.log(listener);
-    // listener.addEventListener('click',switchPageR);
 
     console.log("載入成功");
     console.log(str);
 }
 
-// function deleteAtc(){
-//     alert("確認刪除?")
-// }
+function editSection(e, id){
+    e.preventDefault();
+    $("#editForm"+id).empty();
+    fetch("http://localhost:8080/coinshell/editSection?cid="+id).then(function(response) {
+            return response.json();
+            console.log(response.json())
+        }).then(function(data) {
+            $.each(data, function(index, value) {
+                var added = new Date(Date.parse(value.added));
+                var addedFF = Date.parse(value.added);
+                var MM = added.getMonth()+1;
+                var dd = added.getDate();
+                var HH = added.getHours();
+                var mm = added.getMinutes();
+                var weekIndex = added.getDay();
+                var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+                var weekDayPrint = weekDay[weekIndex];  
+                var img = value.userAvatar;                
+                // <a class="pr-3" href="#"><img class="rounded-circle" alt="Bootstrap Media Another Preview" src="https://i.imgur.com/xELPaag.jpg" /></a>
+                $("#editForm"+id).append(`
+                        <div class="reply-l bg-light p-2">
+                            <div class="d-flex flex-row align-items-start">
+                                <img class="rounded-circle" src="data:image/gif;base64,${memImg}" width="40">
+                                <textarea class="form-control ml-1 shadow-none textarea" id="text-CR`+id+`" tabindex="1" placeholder="Reply here..." aria-required="true">`+value.text+`</textarea>
+                            </div>
+                            <div class="mt-2 text-right">
+                                <button class="btn btn-primary btn-sm shadow-none submit-CR" type="button" onclick="postEdit(`+id+`)">Edit</button>
+                                <button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button" onclick="closeEditForm()">Cancel</button>
+                            </div>
+                        </div>
+                        <ul class="reply-r" style="display: none;">
+                            <li>
+                                <input type="text" id="userName-CR`+id+`" value="${login.customizedUserName}"/>
+                            </li>
+                            <li>
+                                <input type="hidden" id="articleId" value="${Article.id}" />
+                            </li>
+                            <li>
+                                <input type="hidden" id="commentId`+id+`" value="`+value.commentId+`" />
+                                <input type="hidden" id="deleted`+id+`" value="`+value.deleted+`" />
+                                <input type="hidden" id="type`+id+`" value="`+value.type+`" />
+                                <input type="hidden" id="added`+id+`" value="`+addedFF+`" />
+                            </li>
+                            <li>
+                                <input type="text" id="userEmail-CR`+id+`" size="25" tabindex="3" aria-required='true' value="${login.eMail}"/>
+                            </li>
+                        </ul>
+                        `)                    
+            })
+        })
+}
 
-   //驗證Email的正確性
-// function mail_test(thisform) {
-//     with (thisform) {
-//     user_email = commentform.user_email.value;
-//     if (!/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(user_email)) {
-//         alert("電子郵件格式錯誤");
-//         commentform.user_email.focus();
-//         return false
-//     }else{return true}
-//     }
-// }
-// $('.btn-respond').click(function(){
-//     alert(123)
-//     $(this).next('.container').css('display','block')
-// })
+function editSectionR(e, id){
+    e.preventDefault();
+    $("#editForm"+id).empty();
+    $("#editFormR"+id).empty();
+    fetch("http://localhost:8080/coinshell/editSection?cid="+id).then(function(response) {
+            return response.json();
+            console.log(response.json())
+        }).then(function(data) {
+            $.each(data, function(index, value) {
+                var added = new Date(Date.parse(value.added));
+                var addedFF = Date.parse(value.added);
+                var MM = added.getMonth()+1;
+                var dd = added.getDate();
+                var HH = added.getHours();
+                var mm = added.getMinutes();
+                var weekIndex = added.getDay();
+                var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+                var weekDayPrint = weekDay[weekIndex];  
+                var img = value.userAvatar;                
+                // <a class="pr-3" href="#"><img class="rounded-circle" alt="Bootstrap Media Another Preview" src="https://i.imgur.com/xELPaag.jpg" /></a>
+                $("#editFormR"+id).append(`
+                        <div class="reply-l bg-light p-2">
+                            <div class="d-flex flex-row align-items-start">
+                                <img class="rounded-circle" src="data:image/gif;base64,${memImg}" width="40">
+                                <textarea class="form-control ml-1 shadow-none textarea" id="text-CR`+id+`" tabindex="1" placeholder="Reply here..." aria-required="true">`+value.text+`</textarea>
+                            </div>
+                            <div class="mt-2 text-right">
+                                <button class="btn btn-primary btn-sm shadow-none submit-CR" type="button" onclick="postEditR(`+id+`)">Edit</button>
+                                <button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button" onclick="closeEditForm()">Cancel</button>
+                            </div>
+                        </div>
+                        <ul class="reply-r" style="display: none;">
+                            <li>
+                                <input type="text" id="userName-CR`+id+`" value="${login.customizedUserName}"/>
+                            </li>
+                            <li>
+                                <input type="hidden" id="articleId" value="${Article.id}" />
+                            </li>
+                            <li>
+                                <input type="hidden" id="commentId`+id+`" value="`+value.commentId+`" />
+                                <input type="hidden" id="deleted`+id+`" value="`+value.deleted+`" />
+                                <input type="hidden" id="type`+id+`" value="`+value.type+`" />
+                                <input type="hidden" id="added`+id+`" value="`+addedFF+`" />
+                            </li>
+                            <li>
+                                <input type="text" id="userEmail-CR`+id+`" size="25" tabindex="3" aria-required='true' value="${login.eMail}"/>
+                            </li>
+                        </ul>
+                        `)                    
+            })
+        })
+}
 
+async function postEdit(id){
+    var userNameCR = document.getElementById("userName-CR"+id).value;
+    var userEmailCR = document.getElementById("userEmail-CR"+id).value;
+    var textCR = document.getElementById("text-CR"+id).value;
+    var articleIdCR = document.getElementById("articleId").value; 
+    var commentIdCR = document.getElementById("commentId"+id).value;
+    var userIdCR = document.getElementById("userId").value;
+    var deleted = document.getElementById("deleted"+id).value;
+    var added = document.getElementById("added"+id).value;
+    var type = document.getElementById("type"+id).value;
+    var reply = {
+        "id": id,
+        "added": added,
+        "userName":userNameCR,
+        "userEmail":userEmailCR,
+        "text":textCR,
+        "type":type,
+        "deleted":deleted,
+        "articleId":articleIdCR,
+        "commentId":commentIdCR,
+        "userId":userIdCR
+    }
+    var jsonReply = JSON.stringify(reply);
+    console.log("回憶"+reply.added);
+    fetch('http://localhost:8080/coinshell/postEdit', {
+        method:'POST',
+        headers: {
+            'Content-Type': 'application/json'    
+        },
+        body:jsonReply
+    }).catch(error => console.log('Error:', error))
+    .then(res => {
+            return res.json();
+        }).then(result =>{
+            console.log(result);
+        });
+    await wait(100);
+    $("#editForm"+id).empty();
+    loadComment();
+    loadReply(id)
+}
 
-//   $('.btn-respond').each(function(){
-// 	$(this).click(function(){
-//       $(this).next('.container').css('display', 'block');
-//     });
-//   });
-//   //取消回复
-//   $('.btn-revoke').each(function(){
-//     $(this).click(function(){
-//       $(this).parent().css('display','none');
-//     });
-//   });
+async function postEditR(id){
+    var userNameCR = document.getElementById("userName-CR"+id).value;
+    var userEmailCR = document.getElementById("userEmail-CR"+id).value;
+    var textCR = document.getElementById("text-CR"+id).value;
+    var articleIdCR = document.getElementById("articleId").value; 
+    var commentIdCR = document.getElementById("commentId"+id).value;
+    var userIdCR = document.getElementById("userId").value;
+    var deleted = document.getElementById("deleted"+id).value;
+    var added = document.getElementById("added"+id).value;
+    var type = document.getElementById("type"+id).value;
+    var reply = {
+        "id": id,
+        "added": added,
+        "userName":userNameCR,
+        "userEmail":userEmailCR,
+        "text":textCR,
+        "type":type,
+        "deleted":deleted,
+        "articleId":articleIdCR,
+        "commentId":commentIdCR,
+        "userId":userIdCR
+    }
+    var jsonReply = JSON.stringify(reply);
+    console.log("回憶"+reply.added);
+    fetch('http://localhost:8080/coinshell/postEdit', {
+        method:'POST',
+        headers: {
+            'Content-Type': 'application/json'    
+        },
+        body:jsonReply
+    }).catch(error => console.log('Error:', error))
+    .then(res => {
+            return res.json();
+        }).then(result =>{
+            console.log(result);
+        });
+    await wait(100);
+    $("#editForm"+id).empty();
+    loadComment();
+    loadReply(id)
+}
 
+function deleteC(e, id){
+    e.preventDefault();
+    var aid = document.getElementById("aid").value;
+    if(confirm('Are you sure your want to delete?')){
+    fetch('http://localhost:8080/coinshell/deleteCR?id='+id+"&articleId="+aid)
+    .catch(error => console.log('Error:', error))
+    .then(result =>{
+            console.log(result);
+        })
+    .then(loadComment())
+    }
+}
 
+function deleteR(e, id){
+    e.preventDefault();
+    var aid = document.getElementById("aid").value;
+    if(confirm('Are you sure your want to delete?')){
+    fetch('http://localhost:8080/coinshell/deleteCR?id='+id+"&articleId="+aid)
+    .catch(error => console.log('Error:', error))
+    .then(result =>{
+            console.log(result);
+        })
+        .then(loadComment())
+}
+}
 </script>
 </body>
 </html>

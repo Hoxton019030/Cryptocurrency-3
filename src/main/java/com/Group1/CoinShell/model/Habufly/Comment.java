@@ -36,7 +36,7 @@ public class Comment {
 	@Column(name="user_email")
 	private String userEmail;
 
-	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss")
+//	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss")
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")//M指月份m指分鐘//這是丟出來的資料型態
 	@Temporal(TemporalType.TIMESTAMP)//這是存進去的資料型態
 	@Column(name="added", columnDefinition = "datetime")

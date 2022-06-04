@@ -30,7 +30,7 @@ public class backendPageController {
 		return "backend/store/showAllCommodities";
 	}
 	
-	@GetMapping("/administrator/article/viewAllArticle")
+	@GetMapping("/administrator/article")
 	public String changePageArticle() {
 		return "backend/article/viewAllArticle";
 	}
