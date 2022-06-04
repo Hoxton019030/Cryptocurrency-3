@@ -8,8 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "setPrice")
-public class SetPrice {
+@Table(name = "setPriceH")
+public class SetPriceH {
 
 	
 	@Id
@@ -23,16 +23,16 @@ public class SetPrice {
 	@Column(name = "coinId")
 	private Integer coinId;
 	
-	@Column(name = "setPrice")
-	private Float setPrice;
+	@Column(name = "setPriceH")
+	private Float setPriceH;
 	
-	public SetPrice() {
+	public SetPriceH() {
 	}
 
 	@Override
 	public String toString() {
 		return "SetPrice [setPriceId=" + setPriceId + ", memberId=" + memberId + ", coinId=" + coinId + ", setPrice="
-				+ setPrice + "]";
+				+ setPriceH + "]";
 	}
 
 	public Integer getSetPriceId() {
@@ -59,13 +59,15 @@ public class SetPrice {
 		this.coinId = coinId;
 	}
 
-	public Float getSetPrice() {
-		return setPrice;
+	public Float getSetPriceH() {
+		return setPriceH;
 	}
 
-	public void setSetPrice(Float price) {
-		this.setPrice = price;
+	public void setSetPriceH(Float setPriceH) {
+		this.setPriceH = setPriceH;
+	}
+
+
 	}
 	
 	
-}

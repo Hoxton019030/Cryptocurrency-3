@@ -6,11 +6,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface SetPriceDao extends JpaRepository<SetPrice, Integer> {
+public interface SetPriceHDao extends JpaRepository<SetPriceH, Integer> {
 
 	
 	//刪除語句 回傳int 搭配@Modifyung
 		@Modifying
-		@Query(value="delete setPrice where memberId = :memberId and coinId = :coinId", nativeQuery=true )
+		@Query(value="delete setPriceH where memberId = :memberId and coinId = :coinId", nativeQuery=true )
 		public int deletegetSetCoin(Integer memberId ,Integer coinId);
 }

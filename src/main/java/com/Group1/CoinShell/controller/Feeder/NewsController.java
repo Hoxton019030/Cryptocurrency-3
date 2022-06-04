@@ -27,7 +27,7 @@ public class NewsController {
 	@Autowired
 	private NewsService newsService;
 
-//	@Scheduled(cron="0 0 12 * * ?") //cron表達式 每日12點執行(等於更新當日新聞)
+//	@Scheduled(cron="0 0 14 * * ?") //cron表達式 每日12點執行(等於更新當日新聞)
 	@Scheduled(initialDelay = 2000, fixedRate = 86400000)// 定時器 啟動專案 initialDelay 毫秒 後啟動 每 fixedRate 毫秒 RUN一次
 	@PostMapping("news/insert")
 	public void inserNews() throws JsonProcessingException {
@@ -40,7 +40,7 @@ public class NewsController {
 				      + "&sortBy=popularity&apiKey=984ba8ce4d3a426a99cf05daed1742e6";
 		String newsStr = coinService.getContent(strUrl);
 
-		String newsStr1 = newsStr.substring(newsStr.indexOf("["), newsStr.lastIndexOf("]") + 1); // +1 為切到 " ] " 後面一個字元
+		String newsStr1 = newsStr.substring(newsStr.indexOf("["), newsStr.lastIndexOf("]") + 1);    // +1 為切到 " ] " 後面一個字元
 																									// ( 目的為保留 " ] ")
 
 		JSONArray jArray = new JSONArray(newsStr1);
@@ -51,16 +51,19 @@ public class NewsController {
 				
 				String title  = jo.getString("title");
 				String url    = jo.getString("url");
-				String imgUrl = jo.getString("urlToImage");
+				String imgUrl = jo.get("urlToImage").toString();  //圖片網只有時為null 不能直接用getString
 				
-				News news = new News();
-				
-				news.setTitle(title);
-				news.setUrl(url);
-				news.setImgUrl(imgUrl);
-				news.setDate(todaysDate.toString());
-				
-				newsService.save(news);
+				//圖片網址不為空才存SQL
+				if(imgUrl != "null") {
+					News news = new News();
+					
+					news.setTitle(title);
+					news.setUrl(url);
+					news.setImgUrl(imgUrl);
+					news.setDate(todaysDate.toString());
+					
+					newsService.save(news);
+				}
 			}
 		}
 	}
