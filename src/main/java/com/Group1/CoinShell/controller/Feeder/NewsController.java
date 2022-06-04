@@ -1,19 +1,27 @@
 package com.Group1.CoinShell.controller.Feeder;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.Group1.CoinShell.model.Feeder.Coin;
 import com.Group1.CoinShell.model.Feeder.News;
+import com.Group1.CoinShell.model.Feeder.StarDTO;
+import com.Group1.CoinShell.model.Feeder.Watch;
 import com.Group1.CoinShell.service.Feeder.CoinService;
 import com.Group1.CoinShell.service.Feeder.NewsService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -88,4 +96,70 @@ public class NewsController {
 		List<News> top20NewsList = newsService.findByNewsTop20Id();
 		return top20NewsList;
 	}
+	
+	//刪除 傳ID回來找到對應ID刪除
+	@DeleteMapping("/deleteNews/{id}")
+    public Map<String, String> deleteNews(@RequestBody StarDTO dto) {
+    	System.out.println("delete :  NewsId =  " + dto.getNewsId());
+    	
+    	
+    	newsService.deleteByNewsId(dto.getNewsId());
+    	
+    	Map<String, String> result = new HashMap<String, String>();
+    	result.put("status", "200");
+    	return result;
+    }
+	
+    //模糊查詢
+    @ResponseBody
+    @GetMapping("/news/select")
+    public List<News> selectCoinByTitle(@RequestParam String title) {
+    	List<News> SelectNews;
+    	SelectNews = newsService.findByTitle(title);
+    	
+    	return SelectNews;
+    }
+    
+    
+    @PostMapping("/news/add")
+    public Map<String, String> addNews(@RequestBody StarDTO dto) {
+    	LocalDate todaysDate = LocalDate.now();
+    	System.out.println("Title:   " + dto.getNewsTitle());
+    	System.out.println("Url:   " + dto.getNewsUrl());
+    	System.out.println("ImgUrl:   " + dto.getNewsImgUrl());
+    	
+    	News news = new News();
+    	news.setTitle(dto.getNewsTitle());
+    	news.setUrl(dto.getNewsUrl());
+    	news.setImgUrl(dto.getNewsImgUrl());
+    	news.setDate(todaysDate.toString());
+    	
+    	newsService.save(news);
+    	
+    	Map<String, String> result = new HashMap<String, String>();
+    	result.put("status", "200");
+    	return result;
+    }
+    
+    @PostMapping("/news/upSave")
+    public Map<String, String> upSaveNews(@RequestBody StarDTO dto) {
+    	LocalDate todaysDate = LocalDate.now();
+    	System.out.println("id:   " + dto.getNewsId());
+    	System.out.println("Title:   " + dto.getNewsTitle());
+    	System.out.println("Url:   " + dto.getNewsUrl());
+    	System.out.println("ImgUrl:   " + dto.getNewsImgUrl());
+    	
+    	News news = new News();
+    	news.setId(dto.getNewsId());
+    	news.setTitle(dto.getNewsTitle());
+    	news.setUrl(dto.getNewsUrl());
+    	news.setImgUrl(dto.getNewsImgUrl());
+    	news.setDate(todaysDate.toString());
+    	
+    	newsService.save(news);
+    	
+    	Map<String, String> result = new HashMap<String, String>();
+    	result.put("status", "200");
+    	return result;
+    }
 }

@@ -35,5 +35,10 @@ public class backendPageController {
 		return "backend/article/viewAllArticle";
 	}
 	
+	@GetMapping("/administrator/news")
+	public String changePageNews() {
+		return "backend/news/administrator-news";
+	}
+	
 
 }

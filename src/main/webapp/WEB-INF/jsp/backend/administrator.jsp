@@ -18,7 +18,7 @@
 
        <ul>
        <li><a href="administrator/store">商店商品增刪查改頁面</a></li>
-       <li></li>
+       <li><a href="administrator/news">新聞增刪查改頁面</a></li>
        <li></li>
        <li></li>
        <li></li>

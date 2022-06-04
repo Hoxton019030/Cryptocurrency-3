@@ -1,0 +1,49 @@
+body{
+background-color: rgba(128, 128, 128, 0.22)
+}
+
+table{
+table-layout: fixed;
+}
+
+td{
+white-space: nowrap;       /*禁止td換行*/
+overflow: hidden;          /*隱藏X,Y滾動條*/
+text-overflow: ellipsis;   /*將顯示不完的以...顯示*/
+}
+
+
+.id{
+width: 45px;
+}
+
+.title{
+width: 200px;
+}
+
+.url{
+width: 500px;
+}
+
+.imgUrl{
+width: 160px;
+}
+
+.newsImg{
+width: 150px;
+height: 60px;
+border-radius: 10px;
+}
+
+.date{
+width: 80px;
+}
+
+.update{
+width: 70px;
+}
+
+.delete{
+width: 70px;
+}
+
