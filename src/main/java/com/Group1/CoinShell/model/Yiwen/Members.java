@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
@@ -24,6 +25,7 @@ import javax.persistence.UniqueConstraint;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.Group1.CoinShell.model.Feeder.Watch;
+import com.Group1.CoinShell.model.Pieterzite.PunchList;
 
 @Entity
 @Table(name = "members", uniqueConstraints = { @UniqueConstraint(columnNames = { "E_Mail" }) })
@@ -37,7 +39,7 @@ public class Members {
 	@Column(name = "CustomizedUserName", columnDefinition = "nvarchar(60)", nullable = false)
 	private String customizedUserName;
 
-	@Column(name = "CustomizedUserAvatar", columnDefinition = "nvarchar(MAX)")
+	@Column(name = "CustomizedUserAvatar", columnDefinition = "nvarchar(50)")
 	private Integer customizedUserAvatar;
 
 	@Column(name = "E_Mail", columnDefinition = "nvarchar(100)", nullable = false)
@@ -57,12 +59,11 @@ public class Members {
 
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	@Temporal(TemporalType.TIMESTAMP)
-  
-
-
 	@Column(name = "JoinTime", columnDefinition = "date", nullable = false)
 	private Date joinTime;
-
+	
+	@OneToOne(fetch = FetchType.EAGER, mappedBy = "member", cascade = CascadeType.ALL )
+	private PunchList punchList = new PunchList();
 //	@OneToOne(fetch = FetchType.EAGER, mappedBy = "members", cascade = CascadeType.ALL)
 //	private CustomizedUserAvatar customizedUserAvatar1 = new CustomizedUserAvatar();
 	
@@ -82,6 +83,8 @@ public class Members {
 		this.joinTime = joinTime;
 		this.customizedUserAvatar = customizedUserAvatar;
 	}
+	
+	
 
 	public Integer getId() {
 		return id;
