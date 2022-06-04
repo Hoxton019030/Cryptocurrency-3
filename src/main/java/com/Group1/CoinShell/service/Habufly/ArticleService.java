@@ -1,5 +1,6 @@
 package com.Group1.CoinShell.service.Habufly;
 
+import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -94,7 +95,8 @@ public class ArticleService {
 	}
 
 	public String findImg(Integer authorId) {
-		String img = dao.findImg(authorId);
+		byte[] imgByte = dao.findImg(authorId);
+		String img = Base64.getEncoder().encodeToString(imgByte);
 		return img;
 	}
 

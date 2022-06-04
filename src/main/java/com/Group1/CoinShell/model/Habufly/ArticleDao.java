@@ -22,7 +22,7 @@ public interface ArticleDao extends JpaRepository<Article, Integer> {
 	/*查詢tag*/	
 //	@Query(value = "select * from article where tag = :tag and deleted = 'n' ORDER BY added desc", countQuery = "select count (*) from article where tag = :tag", nativeQuery = true)
 //	public List<Article> findByTag(String tag);
-	@Query(value = "select a.id,added,author_Id as articleId,comment_Num as commentNum,deleted,peek,read_Num as readNum,tag,text,title,userAvatarBase64, CustomizedUserName "
+	@Query(value = "select a.id,added,author_Id as articleId,comment_Num as commentNum,deleted,peek,read_Num as readNum,tag,text,title,userAvatar, CustomizedUserName "
 			+ "from article as a left join "
 			+ "(Members as m inner join CustomizedUserAvatar as c on m.customizedUserAvatar = c.id) "
 			+ "on a.author_Id = m.id "
@@ -33,7 +33,7 @@ public interface ArticleDao extends JpaRepository<Article, Integer> {
 //	@Query(value = "select * from article where CHARINDEX(:titlePart, title) > 0", countQuery = "select count (*) from article where CHARINDEX(:titlePart, title) > 0", nativeQuery = true)
 //	@Query(value = "select * from article where title like %?1% or text like %?1% and deleted = 'n' ORDER BY added desc", countQuery = "select count (*) from article where title like %?1% or text like %?1%", nativeQuery = true)
 //	public List<Article> findByTitle(String titlePart);
-	@Query(value = "select a.id,added,author_Id as articleId,comment_Num as commentNum,deleted,peek,read_Num as readNum,tag,text,title,userAvatarBase64, CustomizedUserName "
+	@Query(value = "select a.id,added,author_Id as articleId,comment_Num as commentNum,deleted,peek,read_Num as readNum,tag,text,title,userAvatar, CustomizedUserName "
 			+ "from article as a left join "
 			+ "(Members as m inner join CustomizedUserAvatar as c on m.customizedUserAvatar = c.id) "
 			+ "on a.author_Id = m.id "
@@ -43,19 +43,19 @@ public interface ArticleDao extends JpaRepository<Article, Integer> {
 	/*選取全部*/
 //	@Query(value = "select * from article where deleted = 'n' ORDER BY added desc", countQuery = "select count (*) from article", nativeQuery = true)
 //	public List<Article> findAllOrderByAddedDesc();
-	@Query(value = "select a.id,added,author_Id as articleId,comment_Num as commentNum,deleted,peek,read_Num as readNum,tag,text,title,userAvatarBase64, CustomizedUserName "
+	@Query(value = "select a.id,added,author_Id as articleId,comment_Num as commentNum,deleted,peek,read_Num as readNum,tag,text,title,userAvatar, CustomizedUserName "
 			+ "from article as a left join "
 			+ "(Members as m inner join CustomizedUserAvatar as c on m.customizedUserAvatar = c.id) "
 			+ "on a.author_Id = m.id "
 			+ "where deleted = 'n' ORDER BY added desc", countQuery = "select count (*) from article where deleted = 'n'", nativeQuery = true)
 	public List<Map<String,Object>> findAllOrderByAddedDesc();
 
-	@Query(value = "select userAvatarBase64 "
+	@Query(value = "select userAvatar "
 			+ "from customizedUserAvatar as c "
 			+ "left join Members as m "
 			+ "on c.id = m.CustomizedUserAvatar "
 			+ "where m.id = :authorId", nativeQuery = true)
-	public String findImg(Integer authorId);
+	public byte[] findImg(Integer authorId);
 
 	@Query(value = "select customizedUserName from Members where id = :authorId", nativeQuery = true)
 	public String getUserName(Integer authorId);

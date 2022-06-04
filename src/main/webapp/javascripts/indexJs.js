@@ -1,5 +1,5 @@
 $(function() {
-    $("#tabs").tabs();
+   $("#tabs").tabs();
 });
 //jquery控制分頁的功能
 
@@ -26,27 +26,28 @@ var today = day.getFullYear() + "-" + month + "-" + day.getDate();
 
 
 function upCoin(memId) {
-    var url = "http://localhost:8080/coinshell/coin/getCoin"
-    $.ajax({
-        url: url,
-        contentType: 'application/json; charset=UTF-8', //送過去的
-        dataType: 'json', //傳回來的
-        method: 'get',
-        success: function(result) {
-            $('#top tr td').remove();
-            console.log(result)
-            $.each(result, function(index, value) {
-            	coinList  = '';
-                coinList += '<tr>'
-                coinList += '<td>' + value.cmcRank + '</td>'
-                
-                if(value.flag == 'Y'){
+   var url = "http://localhost:8080/coinshell/coin/getCoin"
+   $.ajax({
+       url: url,
+       contentType: 'application/json; charset=UTF-8', //送過去的
+       dataType: 'json', //傳回來的
+       method: 'get',
+       success: function(result) {
+           $('#top tr td').remove();
+           console.log(result)
+           $.each(result, function(index, value) {
+           	coinList  = '';
+               coinList += '<tr>'
+               coinList += '<td>' + value.cmcRank + '</td>'
+               
+               if(value.flag == 'Y'){
 				coinList +='<td><label><input type="checkbox" class="check" checked id="' + value.id + '" value="' + value.id + '" onClick="watch(this)"><span class="star"><i  class="fa-solid fa-star"></i></span></label></td>'
 				}
 				else{
 				coinList +='<td><label><input type="checkbox" class="check" id="' + value.id + '" value="' + value.id + '" onClick="watch(this)"><span class="star"><i  class="fa-solid fa-star"></i></span></label></td>'
 				}
 				
+
 				if(value.setting == '1'){
 				coinList +='<td><label><input type="checkbox" class="checkbell" checked id="' + value.id + '" value="' + value.id + '" onClick="set(this)"><span class="bell"><i class="fa-solid fa-bell"></i></span></label></td>'
 				}
@@ -200,78 +201,79 @@ function followList() {
 		$('#watch').append(coinList);
 		
 		  //注入折線圖至id=canvas
-                var xmlHttp = new XMLHttpRequest();
-                var url = "http://localhost:8080/coinshell/historical/get30days?currencyName=" + value.symbol;
-                xmlHttp.open("GET", url, true);
-                xmlHttp.send();
-                xmlHttp.onreadystatechange = function() {
-                    // alert(value.id);
-                    // console.log(value.id)
-                    if (this.readyState == 4 && this.status == 200) {
-                        var data = JSON.parse(this.responseText);
-                        var days = data.map(function(elem) {
-                            return elem.informationDate.substr(0, 14).replace('T', '').replace('-', '').replace('-', '').replace(':', '');
-                        });
-                        var price = data.map(function(elem) {
-                            return elem.USD_Price_of_Cryptocurrency;
-                        });
+               var xmlHttp = new XMLHttpRequest();
+               var url = "http://localhost:8080/coinshell/historical/get30days?currencyName=" + value.symbol;
+               xmlHttp.open("GET", url, true);
+               xmlHttp.send();
+               xmlHttp.onreadystatechange = function() {
+                   // alert(value.id);
+                   // console.log(value.id)
+                   if (this.readyState == 4 && this.status == 200) {
+                       var data = JSON.parse(this.responseText);
+                       var days = data.map(function(elem) {
+                           return elem.informationDate.substr(0, 14).replace('T', '').replace('-', '').replace('-', '').replace(':', '');
+                       });
+                       var price = data.map(function(elem) {
+                           return elem.USD_Price_of_Cryptocurrency;
+                       });
 
-                        // const canvasTest = document.getElementById('canvasTest');
-                        // const ctx = canvasTest.getContext('2d');
-                        const ctx = document.getElementById('myChart' + value.cmcRank).getContext('2d');
-                        
-                        const myChart = new Chart(ctx, {
-                            type: 'line',
-                            data: {
-                                labels: days,
-                                pointHitRadius: 0,
-                                datasets: [{
-                                    label: 'US',
-                                    data: price,
-                                    backgroundColor: [
-                                        'transparent'
-                                    ],
-                                    borderColor: 'green',
-                                    borderWidth: 3,
-                                    lineTension: 0,
-                                }]
-                            },
-                            options: {
-                                plugins: {
-                                    tooltip: {
-                                        mode: 'nearest',
-                                        intersect: false
-                                    }
-                                },
-                                elements: {
-                                    line: {
-                                        lineTension: 0
-                                    },
-                                    point: {
-                                        radius: 0
-                                    }
-                                },
-                                scales: {
-                                    xAxes: [{
-                                        type: 'time',
-                                        time: {
-                                            unit: 'hour',
-                                        },
+                       // const canvasTest = document.getElementById('canvasTest');
+                       // const ctx = canvasTest.getContext('2d');
+                       const ctx = document.getElementById('myChart' + value.cmcRank).getContext('2d');
+                       
+                       const myChart = new Chart(ctx, {
+                           type: 'line',
+                           data: {
+                               labels: days,
+                               pointHitRadius: 0,
+                               datasets: [{
+                                   label: 'US',
+                                   data: price,
+                                   backgroundColor: [
+                                       'transparent'
+                                   ],
+                                   borderColor: 'green',
+                                   borderWidth: 3,
+                                   lineTension: 0,
+                               }]
+                           },
+                           options: {
+                               plugins: {
+                                   tooltip: {
+                                       mode: 'nearest',
+                                       intersect: false
+                                   }
+                               },
+                               elements: {
+                                   line: {
+                                       lineTension: 0
+                                   },
+                                   point: {
+                                       radius: 0
+                                   }
+                               },
+                               scales: {
+                                   xAxes: [{
+                                       type: 'time',
+                                       time: {
+                                           unit: 'hour',
+                                       },
 
-                                    }],
-                                    yAxes: {
-                                        beginAtZero: false
-                                    }
-                                },
-                                animation: {
-                                    duration: 0
-                                }
+                                   }],
+                                   yAxes: {
+                                       beginAtZero: false
+                                   }
+                               },
+                               animation: {
+                                   duration: 0
+                               }
 
-                            }
-                        });
-                    }
-                 }
+                           }
+                       });
+                   }
+                }
 				}
+
             })
             window.clearTimeout(timeoutID);
             window.setTimeout(function(){followList()},15000);
@@ -282,60 +284,60 @@ function followList() {
         }
     })
 }
-     
-     
-     
-     
+    
+    
+    
+    
 //     window.clearTimeout(timeoutID);
 //		 	window.setTimeout(function(){followList()},10000);
 //            upjquery();                   
 
 
 function loadCoinByName(memId) {
-    var coinName = document.getElementById("coinName").value;
-    $.ajax({
-        url: 'http://localhost:8080/coinshell/coin/select?name=' + coinName,
-        contentType: 'application/json; charset=UTF-8', //送過去的
-        dataType: 'json', //傳回來的
-        method: 'get',
-        success: function(result) {
-            $('#top tr td').remove();
-            console.log(result)
-            $.each(result, function(index, value) {
-                coinList  = '';
-                coinList += '<tr>'
-                coinList += '<td>' + value.cmcRank + '</td>'
-                
-                if(value.flag == 'Y'){
+   var coinName = document.getElementById("coinName").value;
+   $.ajax({
+       url: 'http://localhost:8080/coinshell/coin/select?name=' + coinName,
+       contentType: 'application/json; charset=UTF-8', //送過去的
+       dataType: 'json', //傳回來的
+       method: 'get',
+       success: function(result) {
+           $('#top tr td').remove();
+           console.log(result)
+           $.each(result, function(index, value) {
+               coinList  = '';
+               coinList += '<tr>'
+               coinList += '<td>' + value.cmcRank + '</td>'
+               
+               if(value.flag == 'Y'){
 				coinList +='<td><label><input type="checkbox" class="check" checked id="' + value.id + '" value="' + value.id + '" onClick="watch(this)"><span class="star"><i  class="fa-solid fa-star"></i></span></label></td>'
 				}
 				else{
 				coinList +='<td><label><input type="checkbox" class="check" id="' + value.id + '" value="' + value.id + '" onClick="watch(this)"><span class="star"><i  class="fa-solid fa-star"></i></span></label></td>'
 				}
 				
-                coinList += '<td><img class=currencyIcon src="' + contextRoot + '/images/currencyIcon/' + value.symbol + '.png" alt=""><a href="http://localhost:8080/coinshell/individualCryptocurrencyInformation?currencyName=' + value.symbol + '&currentlyDay=' + value.lastUpdated.substr(0, 10) + '">' + value.name + '</a></td>'
-                coinList += '<td>' + value.symbol + '</td>'
-                coinList += '<td class="price">' + value.price + '</td>'
-                coinList += '<td class="1h">' + value.percentChange1h + '</td>'
-                coinList += '<td class="24h">' + value.percentChange24h + '</td>'
-                coinList += '<td class="7d">' + value.percentChange7d + '</td>'
-                coinList += '<td class="30d">' + value.percentChange30d + '</td>'
-                coinList += '<td class="vol24h">' + value.volume24h + '</td>'
-                coinList += '<td class="market">' + value.marketCap + '</td>'
-                coinList += '<td style="width:10px;height:10px"><canvas id="myChart' + value.id + '"></canvas></td>'
-                coinList += '</tr>';
-                
-            	$('#top').append(coinList);
-             })
-                window.clearTimeout(timeoutID);
-                //查詢後持續即時更新
-                window.setTimeout(function(){loadCoinByName()},30000);
-            	upjquery();
-        },
-        error: function(err) {
-            console.log(err)
-        }
-    })
+               coinList += '<td><img class=currencyIcon src="' + contextRoot + '/images/currencyIcon/' + value.symbol + '.png" alt=""><a href="http://localhost:8080/coinshell/individualCryptocurrencyInformation?currencyName=' + value.symbol + '&currentlyDay=' + value.lastUpdated.substr(0, 10) + '">' + value.name + '</a></td>'
+               coinList += '<td>' + value.symbol + '</td>'
+               coinList += '<td class="price">' + value.price + '</td>'
+               coinList += '<td class="1h">' + value.percentChange1h + '</td>'
+               coinList += '<td class="24h">' + value.percentChange24h + '</td>'
+               coinList += '<td class="7d">' + value.percentChange7d + '</td>'
+               coinList += '<td class="30d">' + value.percentChange30d + '</td>'
+               coinList += '<td class="vol24h">' + value.volume24h + '</td>'
+               coinList += '<td class="market">' + value.marketCap + '</td>'
+               coinList += '<td style="width:10px;height:10px"><canvas id="myChart' + value.id + '"></canvas></td>'
+               coinList += '</tr>';
+               
+           	$('#top').append(coinList);
+            })
+               window.clearTimeout(timeoutID);
+               //查詢後持續即時更新
+               window.setTimeout(function(){loadCoinByName()},30000);
+           	upjquery();
+       },
+       error: function(err) {
+           console.log(err)
+       }
+   })
 }
 
 
@@ -343,39 +345,40 @@ function loadCoinByName(memId) {
 
 function upjquery() {
 
-    //.toLocaleString =>千分位 
-    //(undefined, {maximumFractionDigits: 0}) =>去小數點 設1則顯示小數點後1位
-    //如果用 (td.toFixed(0)).toLocaleString(); 會失敗 只會顯示無小數點 但不會千分位
+   //.toLocaleString =>千分位 
+   //(undefined, {maximumFractionDigits: 0}) =>去小數點 設1則顯示小數點後1位
+   //如果用 (td.toFixed(0)).toLocaleString(); 會失敗 只會顯示無小數點 但不會千分位
 
-    $('.vol24h,.market').each(function(i, el) {
-        var td = parseFloat($(el).text());
-        if (!isNaN(td)) {
-            $(el).text('$' + td.toLocaleString(undefined, { maximumFractionDigits: 0 }));
-        }
-    });
-
-
-    //取小數後2位+百分比
+   $('.vol24h,.market').each(function(i, el) {
+       var td = parseFloat($(el).text());
+       if (!isNaN(td)) {
+           $(el).text('$' + td.toLocaleString(undefined, { maximumFractionDigits: 0 }));
+       }
+   });
 
 
-    $('.1h,.24h,.7d,.30d').each(function(i, el) {
-        var td = parseFloat($(el).text());
-        if (!isNaN(td)) {
-            $(el).text(td.toFixed(2) + '%');
-        }
-    });
-
-    //取小數後兩位 + 前面加上錢字號
-
-    $('.price,.price1').each(function(i, el) {
-        var td = parseFloat($(el).text());
-        if (!isNaN(td)) {
-            $(el).text('$' + td.toFixed(2));
-        }
-    });
+   //取小數後2位+百分比
 
 
-    //判斷大於0顯綠 反之顯紅
+   $('.1h,.24h,.7d,.30d').each(function(i, el) {
+       var td = parseFloat($(el).text());
+       if (!isNaN(td)) {
+           $(el).text(td.toFixed(2) + '%');
+       }
+   });
+
+   //取小數後兩位 + 前面加上錢字號
+
+   $('.price,.price1').each(function(i, el) {
+       var td = parseFloat($(el).text());
+       if (!isNaN(td)) {
+           $(el).text('$' + td.toFixed(2));
+       }
+   });
+
+
+   //判斷大於0顯綠 反之顯紅
+
 
     $(function() {
         $('.1h,.24h,.7d,.30d').each(function() {
@@ -390,3 +393,4 @@ function upjquery() {
         });
     });
 }
+
