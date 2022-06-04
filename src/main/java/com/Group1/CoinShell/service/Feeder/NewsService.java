@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.Group1.CoinShell.model.Feeder.Coin;
 import com.Group1.CoinShell.model.Feeder.News;
 import com.Group1.CoinShell.model.Feeder.NewsDao;
 
@@ -29,7 +30,19 @@ public class NewsService {
 		return newsdao.findByNewsId(id);
 	}
 	
+	//最新20筆
 	public List<News> findByNewsTop20Id() {
 		return newsdao.findByNewsTop20Id();
 	}
+	
+	//刪除
+	public void deleteByNewsId(Integer id) {
+		newsdao.deleteById(id);
+	}
+	
+	//模糊查詢幣
+	public List<News> findByTitle(String title) {
+		return  newsdao.findByTitle(title);
+	    }
+	
 }
