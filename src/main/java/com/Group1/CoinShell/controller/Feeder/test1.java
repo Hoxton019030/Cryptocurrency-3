@@ -1,5 +1,6 @@
 //package com.Group1.CoinShell.controller.Feeder;
 //
+//import java.time.LocalDate;
 //import java.util.List;
 //
 //import javax.servlet.http.HttpSession;
@@ -43,13 +44,14 @@
 ////		Integer memId4 = membersdao.findMemberByEMail("").getId();
 //	
 //		
-//		
-//		SetPrice setPrice = new SetPrice();
-//		
-//		setPrice.setMemberId(1);
-//		setPrice.setCoinId(1);
-//		setPrice.setSetPrice(1);
-//		setPriceService.save(setPrice);
+//		LocalDate todaysDate = LocalDate.now();
+//		System.out.println(todaysDate);
+////		SetPrice setPrice = new SetPrice();
+////		
+////		setPrice.setMemberId(1);
+////		setPrice.setCoinId(1);
+////		setPrice.setSetPrice(1);
+////		setPriceService.save(setPrice);
 ////		String coin1 = coinService.findById1(75).getId();
 ////		String coin2 = coinService.findById1(77).getName();
 ////		String coin3 = coinService.findById1(15).getName();

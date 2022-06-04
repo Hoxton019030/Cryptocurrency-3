@@ -50,8 +50,8 @@
 											class="sr-only">(current)</span></a></li>
                                 <li class="nav-item active"><a class="nav-link" href="${contextRoot}/viewAllAjax">BeachTown<span
 											class="sr-only">(current)</span></a></li>
-                                <li class="nav-item active"><a class="nav-link" href="${contextRoot}/portfolio">Portfolio<span
-											class="sr-only">(current)</span></a></li>
+<%--                                 <li class="nav-item active"><a class="nav-link" href="${contextRoot}/portfolio">Portfolio<span --%>
+<!-- 											class="sr-only">(current)</span></a></li> -->
                                 <li class="nav-item"><a class="nav-link" href="#">Learn</a></li>
                                 <li class="nav-item active"><a class="nav-link" href="${contextRoot}/shellshop">Shell Shop</a></li>
                                 <li class="nav-item active"><a class="nav-link"
@@ -76,7 +76,7 @@
 
 									<div class="dropdown-menu dropdown-menu-right">
 <!-- 										<button class="dropdown-item" type="button">Watchlist</button> -->
-										<button class="dropdown-item" type="button">Portfolio</button>
+<!-- 										<button class="dropdown-item" type="button">Portfolio</button> -->
 										<button class="dropdown-item" type="button"><a href="/coinshell/account/referral">Referral Program</a></button>
 										<button class="dropdown-item" type="button"><a href="/coinshell/account/set">Account Settings</a></button>
 										<button class="dropdown-item" type="button"><a href="${contextRoot}/logout">Log Out</a></button> <!-- MemController line 110 -->
@@ -86,17 +86,17 @@
 						</c:choose>
 
 						<!--Search navbar-->
-						<form class="form-inline my-1 my-lg-0">
-							<div class="input-group">
-								<input class="form-control pl-2 p-0" type="search" placeholder="Search"
-									aria-label="Search">
-								<div class="input-group-append">
-									<button class="btn btn-secondary input-group-append" type="submit">
-										<i class="fa-solid fa-magnifying-glass"></i>
-									</button>
-                                </div>
-                            </div>
-                        </form>
+<%-- 						<form class="form-inline my-1 my-lg-0"> --%>
+<!-- 							<div class="input-group"> -->
+<!-- 								<input class="form-control pl-2 p-0" type="search" placeholder="Search" -->
+<!-- 									aria-label="Search"> -->
+<!-- 								<div class="input-group-append"> -->
+<!-- 									<button class="btn btn-secondary input-group-append" type="submit"> -->
+<!-- 										<i class="fa-solid fa-magnifying-glass"></i> -->
+<!-- 									</button> -->
+<!--                                 </div> -->
+<!--                             </div> -->
+<%--                         </form> --%>
                     </nav>
                     <!-- End of the Navbar -->
 

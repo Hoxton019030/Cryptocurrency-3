@@ -49,10 +49,10 @@ function upCoin(memId) {
 				
 
 				if(value.setting == '1'){
-				coinList +='<td><label><input type="checkbox" class="checkbell" checked id="' + value.id + '" value="' + value.id + '" onClick="set(this)"><span class="bell"><i class="fa-solid fa-bell"></i></span></label></td>'
+				coinList +='<td><label><input type="checkbox" class="checkbell" checked id="bell' + value.id + '" value="' + value.id + '" onClick="set(this)"><span class="bell"><i class="fa-solid fa-bell"></i></span></label></td>'
 				}
 				else{
-				coinList +='<td><label><input type="checkbox" class="checkbell" id="' + value.id + '" value="' + value.id + '" onClick="set(this)"><span class="bell"><i class="fa-solid fa-bell"></i></span></label></td>'
+				coinList +='<td><label><input type="checkbox" class="checkbell" id="bell' + value.id + '" value="' + value.id + '" onClick="set(this)"><span class="bell"><i class="fa-solid fa-bell"></i></span></label></td>'
 				}
 				
                 coinList += '<td><img class=currencyIcon src="' + contextRoot + '/images/currencyIcon/' + value.symbol + '.png" alt=""><a href="http://localhost:8080/coinshell/individualCryptocurrencyInformation?currencyName=' + value.symbol + '&currentlyDay=' + value.lastUpdated.substr(0, 10) + '">' + value.name + '</a></td>'
@@ -180,10 +180,10 @@ function followList() {
 		coinList +='<td><label><input type="checkbox" class="check" checked id="' + value.id + '" value="' + value.id + '" onClick="watch(this)"><span class="star"><i  class="fa-solid fa-star"></i></span></label></td>'
 		
 		if(value.setting == '1'){
-		coinList +='<td><label><input type="checkbox" class="checkbell" checked id="' + value.id + '" value="' + value.id + '" onClick="set(this)"><span class="bell"><i class="fa-solid fa-bell"></i></span></label></td>'
+		coinList +='<td><label><input type="checkbox" class="checkbell" checked id="bell' + value.id + '" value="' + value.id + '" onClick="set(this)"><span class="bell"><i class="fa-solid fa-bell"></i></span></label></td>'
 		}
 		else{
-		coinList +='<td><label><input type="checkbox" class="checkbell" id="' + value.id + '" value="' + value.id + '" onClick="set(this)"><span class="bell"><i class="fa-solid fa-bell"></i></span></label></td>'
+		coinList +='<td><label><input type="checkbox" class="checkbell" id="bell' + value.id + '" value="' + value.id + '" onClick="set(this)"><span class="bell"><i class="fa-solid fa-bell"></i></span></label></td>'
 		}
 			    				
 		coinList += '<td><img class=currencyIcon src="' + contextRoot + '/images/currencyIcon/' + value.symbol + '.png" alt=""><a href="http://localhost:8080/coinshell/individualCryptocurrencyInformation?currencyName=' + value.symbol + '&currentlyDay=' + value.lastUpdated.substr(0, 10) + '">' + value.name + '</a></td>'
