@@ -43,6 +43,13 @@ public interface MembersDao extends JpaRepository<Members, Integer> {
 	@Modifying
 	@Query(value="UPDATE Members SET CustomizedUserName = :customizedUserName2  WHERE Id = :id2",nativeQuery = true)
 	public void updateCustomizedUserNameById(@Param("customizedUserName2") String customizedUserName,@Param("id2")Integer id);
+
+	/*經由Members的CustomizedUserAvatar，取得customizedUserAvatar的userAvatarBase64*/
+	@Query(value="select userAvatar from CustomizedUserAvatar as c"
+			+ "  left join Members as m"
+			+ "  on c.id = m.CustomizedUserAvatar"
+			+ "  where m.id = :id", nativeQuery = true)
+	public byte[] getImg(Integer id);
 	
 	// TODO insertMember
 	@Query(value="INSERT INTO members (coin, customizedUserAvatar, customizedUserName, e_Mail, joinTime, myShell, password) "
