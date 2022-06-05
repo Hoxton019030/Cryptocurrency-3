@@ -16,8 +16,7 @@
 				<div class="sidebar">
 					<a href="${contextRoot}/aboutUs/intro">About Our Team</a> <a
 						href="${contextRoot}/account/cookie">Cookie Policy</a> <a
-						href="${contextRoot}/account/privacy">Privacy Policy</a> <a href="#">Admin
-						Log In</a>
+						href="${contextRoot}/account/privacy">Privacy Policy</a> 
 				</div>
 
 				<!--Page content-->
