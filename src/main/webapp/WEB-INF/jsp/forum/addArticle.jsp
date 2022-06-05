@@ -21,23 +21,23 @@ padding-top: 82px;
 <div class="container">
 	<div class="row justify-content-center">
 		<div class="col-9">
-			<h1>新增留言</h1>
 			<div class="card">
-				<div class="card-header">新增訊息</div>
+				<div class="card-header">新增文章</div>
 				<div class="card-body">
 					<!-- 			如果getmapping和postmapping的路徑一樣，action=""可以不用寫 -->
 					<form:form action="${contextRoot}/article/add" method="post"
 						modelAttribute="article" class="articleForm">
-						<div class="input-group">
+						<div class="input-group">							
 							<form:select path="tag">
 								<form:option value="NONE" label="請選擇幣別標籤" />
 								<form:options items="${tagList}"/>
 							</form:select>
-							<form:input path="title"/>
+						</div>
+						<div class="input-group">													
+							<form:input path="title" placeholder="請輸入文章標題⋯"/>
 						</div>
 						<div class="input-group">
-							<form:textarea wrap="Virtual" path="text" class="form-control" id="textarea"/>
-							<!-- 				此text是Article的屬性 -->
+							<form:textarea wrap="Virtual" path="text" class="form-control" id="textarea" placeholder="請輸入文章內容⋯"/>							
 						</div>
 						<div>
 						<form:input path="readNum" value="0" type="hidden"/>

@@ -31,6 +31,7 @@ public class ComPostController {
     	List<Map<String,Object>> allComm = cService.selectComm(articleId);
     	return allComm;
     }
+ // http://localhost:8080/coinshell/viewComment?articleId=1
     
     @ResponseBody
     @GetMapping("/viewReply")
@@ -40,8 +41,8 @@ public class ComPostController {
     }
     
     @ResponseBody
-    @PostMapping("/editComment")
-    public List<Map<String,Object>> editComment(@RequestBody Comment comm) throws IOException{
+    @PostMapping("/doComment")
+    public List<Map<String,Object>> doComment(@RequestBody Comment comm) throws IOException{
 		
     	Integer articleId = comm.getArticleId();
     	List<Map<String,Object>> oldComm = cService.selectComm(articleId);
@@ -70,8 +71,8 @@ public class ComPostController {
     }
     
     @ResponseBody
-    @PostMapping("/editReply")
-    public List<Map<String,Object>> editReply(@RequestBody Comment comm, @RequestParam Integer commentId) throws IOException{
+    @PostMapping("/doReply")
+    public List<Map<String,Object>> doReply(@RequestBody Comment comm, @RequestParam Integer commentId) throws IOException{
     	
     	Integer articleId = comm.getArticleId();
     	List<Map<String,Object>> oldReply = cService.selectReply(articleId, commentId);
@@ -96,18 +97,51 @@ public class ComPostController {
     	return allReply;
     }
 
-//    @PostMapping("/editReply")
-//    public void editReply(HttpServletResponse respone, @ModelAttribute(name = "reply") Comment comm, @PathParam("articleId") Integer articleId, @RequestParam("text") String text, @RequestParam("userName") String userName, @RequestParam("userEmail") String userEmail) throws IOException {
-//    	if (text.equals("") || userEmail.equals("") || userName.equals("")) {
-//    		respone.sendRedirect("viewArticle/"+articleId);
-//    		return;
-//        }
-//    	synchronized (ComPostController.class){
-//            cService.inserComm(comm);
-//            }
-//    		respone.sendRedirect("viewArticle/"+articleId);
-//    }
-
+    @ResponseBody
+    @GetMapping("/editSection")
+    public List<Map<String,Object>> editSection(@RequestParam Integer cid) throws IOException {
+		List<Map<String,Object>> cR;
+		
+		cR = cService.findCRById(cid);
+		return cR;
+    }
+ // http://localhost:8080/coinshell/editSection?cid=1
+    
+    @ResponseBody
+    @PostMapping("/postEdit")
+    public void postEdit(@RequestBody Comment comm) throws IOException{
+    	   	
+    	if (comm.getText().equals("") || comm.getUserEmail().equals("") || comm.getUserName().equals("")) {
+    		return;
+    	}
+    	//判斷Email的正則表達
+    	String checkemail = "^([a-z0-9A-Z]+[-|_|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
+    	Pattern regex = Pattern.compile(checkemail);
+    	Matcher matcher = regex.matcher(comm.getUserEmail());
+    	if (matcher.matches()==false){
+    		return;
+    	}
+    	//設定同時只能執行一個              
+    	synchronized (ComPostController.class){
+    		cService.inserComm(comm);
+    	}
+    	
+    	return;
+    }
+    // http://localhost:8080/coinshell/postEdit
+    
+    @GetMapping("/deleteCR")
+    public void deleteCR(@RequestParam Integer id, @RequestParam Integer articleId)throws IOException {
+    	//刪除
+    	cService.delete(id); 
+    	
+    	//取得該Article的評論數並更新
+        Integer commentNum = cService.checkCommentNum(articleId, "a");
+        aService.updatCommentNum(articleId, commentNum);
+        
+    	return;
+    }
+    
 //    @RequestMapping(value = "/manage/deletecomment", method = RequestMethod.POST)
 //    public @ResponseBody String setArticle(@RequestParam int id,@RequestParam int page,HttpServletRequest request)throws IOException{
 ////        String Iid = request.getParameter("delete");
