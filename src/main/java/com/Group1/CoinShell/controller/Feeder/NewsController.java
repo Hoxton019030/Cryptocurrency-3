@@ -78,7 +78,7 @@ public class NewsController {
 
 	@GetMapping("news/getAll")
 	public List<News> findAllNews() {
-		List<News> allNewsList = newsService.findAll();
+		List<News> allNewsList = newsService.findAllOrderByDESC();
 		return allNewsList;
 	}
 	

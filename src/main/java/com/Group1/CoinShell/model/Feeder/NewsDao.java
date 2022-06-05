@@ -21,4 +21,7 @@ public interface NewsDao extends JpaRepository <News, Integer>{
 	//模糊查詢TITLE
 	@Query(value = "select * from News where title like %?1% or date like %?1% ORDER BY id asc", countQuery = "select count (*) from News where title like %?1% or date like %?1%", nativeQuery = true)
     public List<News> findByTitle(String title);
+	
+	@Query(value="SELECT * FROM News  ORDER BY id DESC", nativeQuery=true)
+	public List<News> findAllOrderByDESC();
 }

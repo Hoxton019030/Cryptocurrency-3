@@ -125,7 +125,7 @@ function getNews(){
 function pagination(array, nowPage){
                 console.log(nowPage);
                 const dataTotal = array.length;
-                const perpage = 10;
+                const perpage = 15;
                 const pageTotal = Math.ceil(dataTotal / perpage);
                 console.log(`全部資料:`+dataTotal+` 每一頁顯示:`+perpage+`筆`);
                 let currentPage = nowPage;
@@ -247,7 +247,7 @@ function add(){
 	            console.log(result)
 	            console.log("成功");
 	            parent.location.reload();
-	            document.querySelector('#ttest').scrollIntoView()
+// 	            document.querySelector('#ttest').scrollIntoView()
 	        },
 	        error: function(err) {
 	            console.log(err)
@@ -327,6 +327,7 @@ function update(obj) {
                 newsList += '</tr>';
                 
                 $('#newsUpdateTable').append(newsList);
+                document.querySelector('#test').scrollIntoView()
             })
         },
         error: function(err) {

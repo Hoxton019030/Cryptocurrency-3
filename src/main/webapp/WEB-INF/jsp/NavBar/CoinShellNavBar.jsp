@@ -189,8 +189,8 @@
                                                             <i class="fa-solid fa-lock"></i>
                                                         </div>
                                                     </div>
-                                                    <input type="password" required name="password" class="password form-control" placeholder="Password" id="floatingPassword2" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" title="Password should contain both letter and number, with min length of 8 characters."
-                                                    />
+                                                    <input type="password" required name="password" class="password form-control" placeholder="Password" id="floatingPassword2" 
+                                                    pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" title="Password should contain both letter and number, with min length of 8 characters." />
                                                     <div class="input-group-append">
                                                         <span class="input-group-text"> <i id="eye2"
 																class="fas fa-eye"></i>
@@ -352,8 +352,6 @@
 								length.classList.add("invalid");
 							}
 						}
-
-
 					</script>
 
 				</body>
