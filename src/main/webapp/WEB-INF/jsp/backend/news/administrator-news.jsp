@@ -19,43 +19,41 @@
 
 
 <div id="test">
-							<table class="table table-hover" id="newsAddTable">
-                                <thead class="bg-success">
-                                    <tr>
-                                        <th scope="col" style="width:105px;">Title</th>
-                                        <th scope="col" style="width:150px;">Url</th>
-                                        <th scope="col" style="width:150px;">ImgUrl</th>
-                                        <th scope="col" style="width:20px;">Add</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                                    <tr>
-                                    <td><input type="text" size="55px" id="newsAddTitle"></td>
-                                    <td><input type="text" size="85px" id="newsAddUrl"></td>
-                                    <td><input type="text" size="85px" id="newsAddImgUrl"></td>
-                                    <td><input type="button" style="width:100px;"class="btn btn-success" value="Add" onClick="add()"></td>
-                                    </tr>
-                                    
-                                    
-                            <table class="table table-hover" id="newsUpdateTable">
-                                <thead class="bg-info">
-                                    <tr>
-                                        <th scope="col" style="width:1px;">ID</th>
-                                        <th scope="col" style="width:80px;">Title</th>
-                                        <th scope="col" style="width:145px;">Url</th>
-                                        <th scope="col" style="width:145px;">ImgUrl</th>
-                                        <th scope="col" style="width:28px;">Update</th>
-                                    </tr>
-                                </thead>
-                                	<tr>
-                                       <td>ID</td>
-                                       <td><input type="text" style="width:330px;" id="newsUpdateTitle"></td>
-                                       <td><input type="text" style="width:640px;" id="newsUpdateUrl"></td>
-                                       <td><input type="text" style="width:640px;" id="newsUpdateImgUrl"></td>
-                                       <td><button  style="width:100px;"class="btn btn-info" onClick="">Update</button></td>
-                                    </tr>
-                            </table>
-
+	<table class="table table-hover" id="newsAddTable">
+        <thead class="bg-success">
+            <tr>
+                <th scope="col" style="width:105px;">Title</th>
+                <th scope="col" style="width:150px;">Url</th>
+                <th scope="col" style="width:150px;">ImgUrl</th>
+                <th scope="col" style="width:20px;">Add</th>
+            </tr>
+        </thead>
+    </table>
+            <tr>
+            <td><input type="text" size="55px" id="newsAddTitle"></td>
+            <td><input type="text" size="85px" id="newsAddUrl"></td>
+            <td><input type="text" size="85px" id="newsAddImgUrl"></td>
+            <td><input type="button" style="width:100px;"class="btn btn-success" value="Add" onClick="add()"></td>
+            </tr>
+            
+    <table class="table table-hover" id="newsUpdateTable">
+        <thead class="bg-info">
+            <tr>
+                <th scope="col" style="width:1px;">ID</th>
+                <th scope="col" style="width:80px;">Title</th>
+                <th scope="col" style="width:145px;">Url</th>
+                <th scope="col" style="width:145px;">ImgUrl</th>
+                <th scope="col" style="width:28px;">Update</th>
+            </tr>
+        </thead>
+        	<tr>
+               <td>ID</td>
+               <td><input type="text" style="width:330px;" id="newsUpdateTitle"></td>
+               <td><input type="text" style="width:640px;" id="newsUpdateUrl"></td>
+               <td><input type="text" style="width:640px;" id="newsUpdateImgUrl"></td>
+               <td><button  style="width:100px;"class="btn btn-info" onClick="">Update</button></td>
+            </tr>
+    </table>
                                     
                                     
     <form class="form-inline my-1 my-lg-0">
@@ -67,44 +65,96 @@
         </div>
     </form>
 
-
-
-							<table class="table table-hover" id="newsTable">
-                                <thead class="bg-primary" id="newsthead">
-                                    <tr>
-                                        <th scope="col" class="id"    >ID</th>
-                                        <th scope="col" class="title" >Title</th>
-                                        <th scope="col" class="url"   >Url</th>
-                                        <th scope="col" class="imgUrl">ImgUrl</th>
-                                        <th scope="col" class="date"  >Date</th>
-                                        <th scope="col" class="update">Update</th>
-                                        <th scope="col" class="delete">Delete</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="newsTbody">
-                                </tbody>
-                            </table>
-                         </div>
+	<table class="table table-hover" id="newsTable">
+        <thead class="bg-primary">
+            <tr>
+                <th scope="col" class="id"    >ID</th>
+                <th scope="col" class="title" >Title</th>
+                <th scope="col" class="url"   >Url</th>
+                <th scope="col" class="imgUrl">ImgUrl</th>
+                <th scope="col" class="date"  >Date</th>
+                <th scope="col" class="update">Update</th>
+                <th scope="col" class="delete">Delete</th>
+            </tr>
+        </thead>
+        <tbody id="newsTbody">
+        </tbody>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination" id="pageid">
+            </ul>
+        </nav>
+    </table>
+     </div>
                          <div id="ttest"></div>
-
+</body>                           
 <script>
-
-allNews();
-
 $("#searchNews").click(function() {
 	loadNewsByTitle();
 });
 
-function allNews() {
+let dataNow ={};
+getNews();
+// allNews();
+
+pageid.addEventListener('click',switchPage);
+
+function switchPage(e){
+e.preventDefault();
+if(e.target.nodeName !== 'A') return;
+const page = e.target.dataset.page;
+pagination(dataNow, page);
+}
+
+function getNews(){
     $.ajax({
         url: "http://localhost:8080/coinshell/news/getAll",
         contentType: 'application/json; charset=UTF-8', 
         dataType: 'json', 
         method: 'get',
-        success: function(result) {
-            console.log(result)
-            $.each(result, function(index, value) {
-            	newsList  = '';
+        success: function(data) {
+            console.log(data);
+            dataNow = data;
+            pagination(data, 1)
+        },
+        error: function(err) {
+            console.log(err)
+        }
+})
+}
+
+function pagination(array, nowPage){
+                console.log(nowPage);
+                const dataTotal = array.length;
+                const perpage = 10;
+                const pageTotal = Math.ceil(dataTotal / perpage);
+                console.log(`全部資料:`+dataTotal+` 每一頁顯示:`+perpage+`筆`);
+                let currentPage = nowPage;
+                if (currentPage > pageTotal) {currentPage = pageTotal;}
+                const minData = (currentPage * perpage) - perpage + 1 ;
+                const maxData = (currentPage * perpage) ;
+                const data = [];
+                array.forEach((item, index) => {
+                    const num = index + 1;
+                    if ( num >= minData && num <= maxData) {
+                        data.push(item);
+                    }
+                })
+                console.log(data);
+                displayData(data)
+                const page = {
+                    pageTotal,
+                    currentPage,
+                    hasPage: currentPage > 1,
+                    hasNext: currentPage < pageTotal,
+                } 
+                console.log(page);
+                pageBtn (page)
+            }
+
+function displayData(data){
+    $('#newsTbody').empty();
+    $.each(data, function(index, value) {                
+                newsList  = '';
             	
             	newsList += '<tr>'
             	newsList += '<td>' + value.id + '</td>'
@@ -112,23 +162,72 @@ function allNews() {
                 newsList += `<td><a href="" onclick="window.open('` + value.url + `')">` + value.url + `</a></td>`
 	            newsList += '<td><img class="newsImg" src="' + value.imgUrl + '"alt=""><a href="' + value.imgUrl + '"></a></td>'
                 newsList += '<td>' + value.date + '</td>'
-                newsList += '<td><a href="#test"><button id="up'  + value.id + '" class="btn btn-info" value="' + value.id + '" onClick="update(this)">Update</button></a></td>'
+                newsList += '<td><button id="up'  + value.id + '" class="btn btn-info" value="' + value.id + '" onClick="update(this)">Update</button></td>'
                 newsList += '<td><button id="del' + value.id + '" class="btn btn-danger"  value="' + value.id + '" onClick="del(this)">Delete</button></td>'
                 newsList += '</tr>';
                 
                 $('#newsTable').append(newsList);
-            })
-        },
-        error: function(err) {
-            console.log(err)
-        }
-    })
+                })
 }
+
+function pageBtn (page){
+    let str = '';
+    const total = page.pageTotal;
+    if(page.hasPage) {
+        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)-1)+`">Previous</a></li>`;
+    } else {
+        str += `<li class="page-item disabled"><span class="page-link">Previous</span></li>`;
+    }
+    
+    for(let i = 1; i <= total; i++){
+        if(Number(page.currentPage) === i) {
+            str +=`<li class="page-item active"><a class="page-link" href="#" data-page="`+i+`">`+i+`</a></li>`;
+        } else {
+            str +=`<li class="page-item"><a class="page-link" href="#" data-page="`+i+`">`+i+`</a></li>`;
+        }
+    };
+
+    if(page.hasNext) {
+        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)+1)+`">Next</a></li>`;
+    } else {
+        str += `<li class="page-item disabled"><span class="page-link">Next</span></li>`;
+    }
+    pageid.innerHTML = str;    
+    console.log(str);
+}
+
+// function allNews() {
+//     $.ajax({
+//         url: "http://localhost:8080/coinshell/news/getAll",
+//         contentType: 'application/json; charset=UTF-8', 
+//         dataType: 'json', 
+//         method: 'get',
+//         success: function(result) {
+//             console.log(result)
+//             $.each(result, function(index, value) {
+//             	newsList  = '';
+            	
+//             	newsList += '<tr>'
+//             	newsList += '<td>' + value.id + '</td>'
+//                 newsList += '<td class="title">' + value.title + '</td>'
+//                 newsList += `<td><a href="" onclick="window.open('` + value.url + `')">` + value.url + `</a></td>`
+// 	            newsList += '<td><img class="newsImg" src="' + value.imgUrl + '"alt=""><a href="' + value.imgUrl + '"></a></td>'
+//                 newsList += '<td>' + value.date + '</td>'
+//                 newsList += '<td><button id="up'  + value.id + '" class="btn btn-info" value="' + value.id + '" onClick="update(this)">Update</button></td>'
+//                 newsList += '<td><button id="del' + value.id + '" class="btn btn-danger"  value="' + value.id + '" onClick="del(this)">Delete</button></td>'
+//                 newsList += '</tr>';
+                
+//                 $('#newsTable').append(newsList);
+//             })
+//         },
+//         error: function(err) {
+//             console.log(err)
+//         }
+//     })
+// }
 
 
 function add(){
-	var r = confirm("確定新增嗎?");
-	if(r==true){
 	var title = document.getElementById("newsAddTitle").value;
 	var url = document.getElementById("newsAddUrl").value;
 	var imgUrl = document.getElementById("newsAddImgUrl").value;
@@ -156,7 +255,7 @@ function add(){
 	        }
 	    })
 	}
-}
+
 
 function del(obj) {
 	var r = confirm("確定刪除嗎?");
@@ -195,24 +294,10 @@ function loadNewsByTitle() {
         contentType: 'application/json; charset=UTF-8', 
         dataType: 'json', 
         method: 'get',
-        success: function(result) {
-            $('#newsTable tr td').remove();
-            console.log(result)
-            $.each(result, function(index, value) {
-            	newsList  = '';
-            	
-            	newsList += '<tr>'
-            	newsList += '<td>' + value.id + '</td>'
-                newsList += '<td class="title">' + value.title + '</td>'
-                newsList += `<td><a href="" onclick="window.open('` + value.url + `')">` + value.url + `</a></td>`
-	            newsList += '<td><img class="newsImg" src="' + value.imgUrl + '"alt=""><a href="' + value.imgUrl + '"></a></td>'
-                newsList += '<td>' + value.date + '</td>'
-                newsList += '<td><button id="up'  + value.id + '" class="btn btn-primary" value="' + value.id + '" onClick="(this)">Update</button></td>'
-                newsList += '<td><button id="del' + value.id + '" class="btn btn-danger"  value="' + value.id + '" onClick="del(this)">Delete</button></td>'
-                newsList += '</tr>';
-                
-                $('#newsTable').append(newsList);
-            })
+        success: function(data) {
+            console.log(data);
+            dataNow = data;
+            pagination(data, 1)
         },
         error: function(err) {
             console.log(err)
@@ -284,5 +369,4 @@ function upSave(obj){
 
 
 </script>
-</body>
 </html>

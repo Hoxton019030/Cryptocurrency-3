@@ -18,7 +18,8 @@
 
 					<!-- 這裡放title Logo -->
 					<link rel="icon" href="${contextRoot}/images/NavBarImg/icon.png" type="image/x-icon">
-
+					<!-- =導覽列 效果 -->
+					<link rel="stylesheet" href="${contextRoot}/css/navBar.css">
 					<!-- FONT AWESOME: Place your kit's code here -->
 					<script src="https://kit.fontawesome.com/0ef2a35b44.js" crossorigin="anonymous"></script>
 
@@ -32,6 +33,7 @@
 					<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 					<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 					<script src="${contextRoot}/javascripts/bootstrap.bundle.min.js"></script>
+					
 				</head>
 
 				<body>
@@ -44,22 +46,27 @@
 							aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 							<span class="navbar-toggler-icon"></span>
 						</button>
-                        <div class="collapse navbar-collapse" id="navbarNav">
-                            <ul class="navbar-nav">
-                                <li class="nav-item active"><a class="nav-link" href="${contextRoot}/aboutUs/intro">About us<span
-											class="sr-only">(current)</span></a></li>
-                                <li class="nav-item active"><a class="nav-link" href="${contextRoot}/viewAllAjax">BeachTown<span
-											class="sr-only">(current)</span></a></li>
-<%--                                 <li class="nav-item active"><a class="nav-link" href="${contextRoot}/portfolio">Portfolio<span --%>
-<!-- 											class="sr-only">(current)</span></a></li> -->
-                                <li class="nav-item"><a class="nav-link" href="#">Learn</a></li>
-                                <li class="nav-item active"><a class="nav-link" href="${contextRoot}/shellshop">Shell Shop</a></li>
-                                <li class="nav-item active"><a class="nav-link"
-										href="${contextRoot}/shop/myshell">shop<span
-											class="sr-only">(current)</span></a></li>
-                                <li class="nav-item active"><a class="nav-link" href="http://localhost:8080/coinshell/administrator">Backend Administrator</a></li>
-                            </ul>
-                        </div>
+						
+		<!-- 導覽列 -->
+		
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item active"><a class="nav-link" href="${contextRoot}/aboutUs/intro" style="color: #3C3C3C">About-Us
+						<span class="sr-only">(current)</span></a></li>
+
+				<li class="nav-item active"><a class="nav-link"	href="${contextRoot}/viewAllAjax" style="color: #3C3C3C">BeachTown
+						<span class="sr-only">(current)</span></a></li>
+
+<!-- 				<li class="nav-item"><a class="nav-link" href="#" style="color: #3C3C3C">Learn </a></li> -->
+
+				<li class="nav-item active"><a class="nav-link" href="${contextRoot}/shop/myshell" style="color: #3C3C3C">Shop
+						<span class="sr-only">(current)</span></a></li>
+
+				<li id="backend" class="nav-item active"><a class="nav-link" href="${contextRoot}/administrator"
+					style="color: #3C3C3C">Backend-Administrator </a></li>
+			</ul>
+		</div>
+
                         <!-- Button trigger modal  -->
                         <c:choose>
                             <c:when test="${login == null }">
@@ -231,6 +238,15 @@
 
 
 					<script>
+					var memId = '${login.id}';
+					
+					$(function run() {
+						if(memId != '1' && memId != '2' && memId != '3' && memId != '4' && memId != '5'){
+							console.log("成功??");
+						$("#backend").hide();
+							}
+						})
+					
 						//Password 顯示密碼
 						$(document).ready(function () {
 							$("#eye1").click(function () {

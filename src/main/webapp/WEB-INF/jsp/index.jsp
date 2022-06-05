@@ -4,12 +4,7 @@
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <jsp:include page="NavBar/CoinShellNavBar.jsp" />
 
-            <head>
-            <style type="text/css">
-			body{
-				padding-top: 82px;
-				}
-			</style>
+<head>
 			
                 <meta charset="UTF-8">
                 <title>CoinShell</title>
@@ -25,12 +20,11 @@
 <!--                 應該是走勢圖 -->
                 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                 
-
+</head>
             <body>
-<div>
 <p />
+<div class="news-image">
   <h2 class="news">&emsp;Coin news</h2>
-  <br />
   <div class="slider responsive">
     <div id="n1">
       <img class="newsimg" src="https://picsum.photos/400/200/?random=2" alt="">
@@ -58,7 +52,7 @@
     </div>
   </div>
 </div>
-
+<br />
  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
   {
   "symbols": [
@@ -116,22 +110,23 @@
                     <div class="banner">
                         <div class="news-banner-font">&emsp;Top Coin</div>
                     </div>
-                    <div id="tabs">
+                    <div class="top-coin-imges" id="tabs">
                         <ul>
                             <li><a href="#overview" id="page-overview">TOP 100</a></li>
                             <li><a href="#focus" id="page-historical">Follow List</a></li>
                         </ul>
                         <div id="overview">
-
-						<form class="form-inline my-1 my-lg-0">
-							<div class="input-group">
-								<input id="coinName" class="form-control pl-2 p-0" type="text" aria-label="Search">
-								<div class="input-group-append">
-									<input type="button" name="submit" value="Search" id="search" class="btn btn-outline-success my-2 my-sm-0" />
-                                </div>
-                            </div>
-                        </form>
                         
+				<!--  search -->
+				<form class="form-inline">
+						<input class="form-control" id="coinName" type="text"
+							placeholder="Search">
+						<button class="btn btn-outline-primary " type="button"
+							name="submit" value="search" id="search">Search</button>
+				</form>
+				
+					<br />
+					
                             <table class="table table-hover" id="top">
                                 <thead>
                                     <tr>
@@ -178,9 +173,50 @@
                             </table>
                         </div>
                     </div>
-
-
                 </div>
+               
+               
+               <!-- footer  -->
+	<div class="main-footer">
+		<div class="container">
+			<div class="footer-item">
+				<h4>About Us</h4>
+				<nav>
+					<a href="#"><i class="fa fa-angle-right"></i> About Us01</a> <a
+						href="#"><i class="fa fa-angle-right"></i> About Us02</a> <a
+						href="#"><i class="fa fa-angle-right"></i> About Us03</a>
+				</nav>
+			</div>
+			<div class="footer-item">
+				<h4>Company</h4>
+				<nav>
+					<a href="#"><i class="fa fa-angle-right"></i> Privacy Policy</a> <a
+						href="#"><i class="fa fa-angle-right"></i> Community Rules</a> <a
+						href="#"><i class="fa fa-angle-right"></i> Disclaimer</a> <a
+						href="#"><i class="fa fa-angle-right"></i> Terms of use</a>
+				</nav>
+			</div>
+			<div class="footer-item">
+				<h4>Socials</h4>
+				<nav>
+					<a href="#"><i class="fa fa-angle-right"></i> Facebook</a> <a
+						href="#"><i class="fa fa-angle-right"></i> Twitter</a> <a href="#"><i
+						class="fa fa-angle-right"></i> Instagram</a> <a href="#"><i
+						class="fa fa-angle-right"></i> Interactive Chat</a>
+				</nav>
+			</div>
+			<div class="footer-item footer-subs">
+				<h4>subscribe</h4>
+				<form>
+					<input type="text" name=""> <input type="submit"
+						value="subscribe">
+				</form>
+			</div>
+		</div>
+		<div class="conpyright">Coin Market &copy; Coin Shell</div>
+	</div>
+               
+               
                
 <!-- Button trigger modal -->
 <button type="button" style="display:none" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
