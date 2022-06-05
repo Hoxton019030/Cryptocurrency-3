@@ -16,42 +16,46 @@
 <title>news</title>
 </head>
 <body>
-	<table class="table table-hover" id="newsAddTable">
-        <thead class="bg-success">
-            <tr>
-                <th scope="col" style="width:105px;">Title</th>
-                <th scope="col" style="width:150px;">Url</th>
-                <th scope="col" style="width:150px;">ImgUrl</th>
-                <th scope="col" style="width:20px;">Add</th>
-            </tr>
-        </thead>
-    </table>
-            <tr>
-            <td><input type="text" size="55px" id="newsAddTitle"></td>
-            <td><input type="text" size="85px" id="newsAddUrl"></td>
-            <td><input type="text" size="85px" id="newsAddImgUrl"></td>
-            <td><input type="button" style="width:100px;"class="btn btn-success" value="Add" onClick="add()"></td>
-            </tr>
-            
-            
-    <table class="table table-hover" id="newsUpdateTable">
-        <thead class="bg-info">
-            <tr>
-                <th scope="col" style="width:1px;">ID</th>
-                <th scope="col" style="width:80px;">Title</th>
-                <th scope="col" style="width:145px;">Url</th>
-                <th scope="col" style="width:145px;">ImgUrl</th>
-                <th scope="col" style="width:28px;">Update</th>
-            </tr>
-        </thead>
-        	<tr>
-               <td>ID</td>
-               <td><input type="text" style="width:330px;" id="newsUpdateTitle"></td>
-               <td><input type="text" style="width:640px;" id="newsUpdateUrl"></td>
-               <td><input type="text" style="width:640px;" id="newsUpdateImgUrl"></td>
-               <td><button  style="width:100px;"class="btn btn-info" onClick="">Update</button></td>
-            </tr>
-    </table>
+
+
+<div id="test">
+							<table class="table table-hover" id="newsAddTable">
+                                <thead class="bg-success">
+                                    <tr>
+                                        <th scope="col" style="width:105px;">Title</th>
+                                        <th scope="col" style="width:150px;">Url</th>
+                                        <th scope="col" style="width:150px;">ImgUrl</th>
+                                        <th scope="col" style="width:20px;">Add</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                                    <tr>
+                                    <td><input type="text" size="55px" id="newsAddTitle"></td>
+                                    <td><input type="text" size="85px" id="newsAddUrl"></td>
+                                    <td><input type="text" size="85px" id="newsAddImgUrl"></td>
+                                    <td><input type="button" style="width:100px;"class="btn btn-success" value="Add" onClick="add()"></td>
+                                    </tr>
+                                    
+                                    
+                            <table class="table table-hover" id="newsUpdateTable">
+                                <thead class="bg-info">
+                                    <tr>
+                                        <th scope="col" style="width:1px;">ID</th>
+                                        <th scope="col" style="width:80px;">Title</th>
+                                        <th scope="col" style="width:145px;">Url</th>
+                                        <th scope="col" style="width:145px;">ImgUrl</th>
+                                        <th scope="col" style="width:28px;">Update</th>
+                                    </tr>
+                                </thead>
+                                	<tr>
+                                       <td>ID</td>
+                                       <td><input type="text" style="width:330px;" id="newsUpdateTitle"></td>
+                                       <td><input type="text" style="width:640px;" id="newsUpdateUrl"></td>
+                                       <td><input type="text" style="width:640px;" id="newsUpdateImgUrl"></td>
+                                       <td><button  style="width:100px;"class="btn btn-info" onClick="">Update</button></td>
+                                    </tr>
+                            </table>
+
                                     
                                     
     <form class="form-inline my-1 my-lg-0">
@@ -64,22 +68,25 @@
     </form>
 
 
-	<table class="table table-hover" id="newsTable">
-        <thead class="bg-primary">
-            <tr>
-                <th scope="col" class="id"    >ID</th>
-                <th scope="col" class="title" >Title</th>
-                <th scope="col" class="url"   >Url</th>
-                <th scope="col" class="imgUrl">ImgUrl</th>
-                <th scope="col" class="date"  >Date</th>
-                <th scope="col" class="update">Update</th>
-                <th scope="col" class="delete">Delete</th>
-            </tr>
-        </thead>
-        <tbody id="newsTbody">
-        </tbody>
-    </table>
-</body>                           
+
+							<table class="table table-hover" id="newsTable">
+                                <thead class="bg-primary" id="newsthead">
+                                    <tr>
+                                        <th scope="col" class="id"    >ID</th>
+                                        <th scope="col" class="title" >Title</th>
+                                        <th scope="col" class="url"   >Url</th>
+                                        <th scope="col" class="imgUrl">ImgUrl</th>
+                                        <th scope="col" class="date"  >Date</th>
+                                        <th scope="col" class="update">Update</th>
+                                        <th scope="col" class="delete">Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="newsTbody">
+                                </tbody>
+                            </table>
+                         </div>
+                         <div id="ttest"></div>
+
 <script>
 
 allNews();
@@ -105,7 +112,7 @@ function allNews() {
                 newsList += `<td><a href="" onclick="window.open('` + value.url + `')">` + value.url + `</a></td>`
 	            newsList += '<td><img class="newsImg" src="' + value.imgUrl + '"alt=""><a href="' + value.imgUrl + '"></a></td>'
                 newsList += '<td>' + value.date + '</td>'
-                newsList += '<td><button id="up'  + value.id + '" class="btn btn-info" value="' + value.id + '" onClick="update(this)">Update</button></td>'
+                newsList += '<td><a href="#test"><button id="up'  + value.id + '" class="btn btn-info" value="' + value.id + '" onClick="update(this)">Update</button></a></td>'
                 newsList += '<td><button id="del' + value.id + '" class="btn btn-danger"  value="' + value.id + '" onClick="del(this)">Delete</button></td>'
                 newsList += '</tr>';
                 
@@ -120,6 +127,8 @@ function allNews() {
 
 
 function add(){
+	var r = confirm("確定新增嗎?");
+	if(r==true){
 	var title = document.getElementById("newsAddTitle").value;
 	var url = document.getElementById("newsAddUrl").value;
 	var imgUrl = document.getElementById("newsAddImgUrl").value;
@@ -139,6 +148,7 @@ function add(){
 	            console.log(result)
 	            console.log("成功");
 	            parent.location.reload();
+	            document.querySelector('#ttest').scrollIntoView()
 	        },
 	        error: function(err) {
 	            console.log(err)
@@ -146,7 +156,7 @@ function add(){
 	        }
 	    })
 	}
-
+}
 
 function del(obj) {
 	var r = confirm("確定刪除嗎?");
@@ -274,4 +284,5 @@ function upSave(obj){
 
 
 </script>
+</body>
 </html>
