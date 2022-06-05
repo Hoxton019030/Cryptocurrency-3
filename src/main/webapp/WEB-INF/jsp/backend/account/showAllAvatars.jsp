@@ -1,26 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <jsp:include page="../backendNavBar.jsp" />
     
-<!DOCTYPE html>
-<html>
-
- <head>
-        <meta charset="UTF-8">
-        <title>全部使用者頭像列表</title>
-        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-        <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-        <style>
-            table,
-            tr,
-            th,
-            td {
-                border: 1px solid black;
-                border-collapse: collapse;
-            }
-        </style>
-    </head>
+<head>
+<meta charset="UTF-8">
+<title>圖像管理 | CoinShell Backend</title>
+</head>
 
     <body>
         <h1>使用者頭像列表</h1>

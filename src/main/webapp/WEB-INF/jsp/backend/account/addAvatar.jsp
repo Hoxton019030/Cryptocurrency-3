@@ -1,18 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <jsp:include page="../backendNavBar.jsp" />
-<!DOCTYPE html>
-<html>
+    
 <head>
 <meta charset="UTF-8">
-<title>新增會員圖像</title>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-<script src="${contextRoot}/javascripts/indexJs.js"></script>
-<script>
-</script>
+<title>新增會員圖像 | CoinShell Backend</title>
 </head>
 <body>
 <h2>新增會員圖像</h2>
@@ -29,4 +24,3 @@
 
 <script></script>
 </body>
-</html>

@@ -29,13 +29,16 @@
 .navbar-custom{
 	background-color: black;
 }
+li{
+	font-size:40px;
+	}
 </style>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 <script src="${contextRoot}/javascripts/bootstrap.bundle.min.js"></script>
 </head>
-<nav class="navbar navbar-expand-lg navbar-custom">
+<nav class="navbar navbar-expand-lg navbar-custom navbar-dark">
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -43,12 +46,17 @@
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="${contextRoot}/administrator"><img
-			src="${contextRoot}/images/NavBarImg/logo-bknd.png"
-			style="width: 180px;" alt="logo"><span class="sr-only"></a>
+        <a class="nav-link" href="${contextRoot}"><img
+			src="${contextRoot}/images/NavBarImg/logo-ftnd.png"
+			style="height: 70px;" alt="logo"><span class="sr-only"></a>
       </li>
       <li class="nav-item active font-custom">
-        <a class="nav-link" href="administrator/store">商店商品</a>
+        <a class="nav-link" href="${contextRoot}/administrator">
+        <img src="${contextRoot}/images/NavBarImg/logo-bknd.png"
+			style="height: 70px;" alt="logo"></a>
+      </li>
+      <li class="nav-item active font-custom">
+        <a class="nav-link" href="administrator/store">商品</a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="${contextRoot}/administrator/news">新聞</a>
@@ -56,14 +64,8 @@
       <li class="nav-item active">
         <a class="nav-link" href="administrator/article">文章</a>
       </li>
-      <li class="nav-item dropdown active">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-expanded="false">
-          使用者與會員
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="administrator/account">使用者</a>
-          <a class="dropdown-item" href="administrator/account">頭像</a>
-        </div>
+      <li class="nav-item active">
+        <a class="nav-link" href="administrator/account">會員</a>
       </li>
     </ul>
   </div>
