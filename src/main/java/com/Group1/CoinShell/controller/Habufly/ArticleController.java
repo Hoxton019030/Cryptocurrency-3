@@ -89,7 +89,7 @@ public class ArticleController {
 		}
 		return allAtc;
 	}
-	// http://localhost:8080/myapp/article/viewAllAjax?tag=btc
+	// http://localhost:8080/coinshell/article/viewAllAjax?tag=btc
 	
 	@ResponseBody
 	@GetMapping("/article/viewAllAjaxByTitle")
@@ -100,7 +100,17 @@ public class ArticleController {
 //		System.out.println(allAtc);
 		return allAtc;
 	}
-	// http://localhost:8080/myapp/article/viewAllAjax?tag=btc
+	// http://localhost:8080/coinshell/article/viewAllAjax?tag=btc
+	
+	@ResponseBody
+	@GetMapping("/article/viewAllAjaxByAuthorId")
+	public List<Map<String,Object>> viewArticleByAuthorId(@RequestParam String authorId) {
+		List<Map<String,Object>> allAtc;
+		
+		allAtc = aService.findByAuthorId(authorId);
+		return allAtc;
+	}
+	// http://localhost:8080/coinshell/article/viewAllAjaxByAuthorId?authorId=btc
 
 	@GetMapping("/editArticle/{id}")
 	public String editArticle(Model model, @PathVariable("id") Integer id) {
@@ -115,7 +125,7 @@ public class ArticleController {
 		Integer id = atc.getId();
 		System.out.println(id);
 		model.addAttribute("id", id);
-		return "redirect:/forum/viewArticle/" + id + "/";
+		return "redirect:/viewArticle/" + id + "/";
 	}
 
 	@GetMapping("/deleteArticle/{id}")
@@ -123,13 +133,12 @@ public class ArticleController {
 		Article atc = aService.findById(id);
 		atc.setDeleted("y");
 		aService.save(atc);
-		return "redirect:/forum/viewAllAjax";
+		return "redirect:/viewAllAjax";
 	}
 	
 //	##################################################################
 //	下方為後臺使用
 //	##################################################################
-	
 	@GetMapping("/viewArticleAdmin/{id}")
 	public String viewArticleAdmin(HttpSession session, Model model, @PathVariable("id") Integer id) throws IOException {
 		Article atc = aService.findById(id);
@@ -144,6 +153,41 @@ public class ArticleController {
 		aService.increasePageView(session, id);
 		return "backend/article/viewArticleAdmin";
 	}
+	
+	@ResponseBody // 由於是寫在一般Controller底下，要將java物件序列化轉成Json格式，需寫
+	@GetMapping("/article/viewAllAjaxAdmin")
+	public List<Map<String,Object>> viewArticlePageAdmin(@RequestParam String tag) {
+		List<Map<String,Object>> allAtc;
+
+		if ("All".equals(tag)) {
+			allAtc = aService.findAllAdmin();
+		} else {
+			allAtc = aService.findByTagAdmin(tag);
+		}
+		return allAtc;
+	}
+	// http://localhost:8080/coinshell/article/viewAllAjax?tag=btc
+	
+	@ResponseBody
+	@GetMapping("/article/viewAllAjaxByTitleAdmin")
+	public List<Map<String,Object>> viewArticleByTitleAdmin(@RequestParam String titlePart) {
+		List<Map<String,Object>> allAtc;
+
+		allAtc = aService.findByTitleAdmin(titlePart);
+//		System.out.println(allAtc);
+		return allAtc;
+	}
+	// http://localhost:8080/coinshell/article/viewAllAjax?tag=btc
+	
+	@ResponseBody
+	@GetMapping("/article/viewAllAjaxByAuthorIdAdmin")
+	public List<Map<String,Object>> viewArticleByAuthorIdAdmin(@RequestParam String authorId) {
+		List<Map<String,Object>> allAtc;
+		
+		allAtc = aService.findByAuthorIdAdmin(authorId);
+		return allAtc;
+	}
+	// http://localhost:8080/coinshell/article/viewAllAjaxByAuthorId?authorId=btc
 	
 	@GetMapping("/editArticleAdmin/{id}")
 	public String editArticleAdmin(Model model, @PathVariable("id") Integer id) {
@@ -166,7 +210,7 @@ public class ArticleController {
 		Article atc = aService.findById(id);
 		atc.setDeleted("y");
 		aService.save(atc);
-		return "redirect:/administrator/article/viewAllArticle";
+		return "backend/article/viewAllArticle";
 	}
 
 	@ModelAttribute("tagList")

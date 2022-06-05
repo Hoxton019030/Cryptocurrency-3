@@ -5,13 +5,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
+<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <head>
 <meta charset="UTF-8">
-<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="${contextRoot}/css/bootstrap.min.css"/>
 <script src="${contextRoot}/javascripts/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" href="${contextRoot}/css/bootstrap.min.css">
+<script src="https://kit.fontawesome.com/0ef2a35b44.js" crossorigin="anonymous"></script>
 <title>討論區</title>
 <style type="text/css">
 body{
@@ -27,18 +28,17 @@ padding-top: 82px;
         <input id="titlePart" type="text" placeholder="關鍵字查詢(標題/內文)"/>
         <input type="button" name="submit" value="查詢" id="search"/>
         <!-- <a href="${contextRoot}/backend/article/add" id="addAtc">新增文章</a> -->
-    </form>
-    
+    </form>    
 	<table class="table table-hover table-primary">
 		<thead class="thead-dark">
 			<tr>
 				<th scope="col" class="col-1">幣別</th>
 				<th scope="col" class="col-1">作者</th>
-				<th scope="col" class="col-6">文章</th>
-				<th scope="col" class="col-2" style="text-align: center;">閱讀/回復</th>
-				<th scope="col" class="col-2">建立時間</th>
-				<th scope="col" class="col-1">修改</th>
-				<th scope="col" class="col-1">刪除</th>
+				<th scope="col" class="col-4">文章</th>
+				<th scope="col" class="col-1.5" style="text-align: center;">閱讀/回復</th>
+				<th scope="col" class="col-1.5">建立時間</th>
+				<th scope="col" class="col-1.5">修改</th>
+				<th scope="col" class="col-1.5">狀態</th>
 			</tr>
 		</thead>
 		<tbody class="sel" id="atcTable">
@@ -75,7 +75,7 @@ function loadAtc(){
     $(function() {
         var tag = document.getElementById("tag-list").value;
         console.log(tag);
-        fetch("http://localhost:8080/coinshell/article/viewAllAjax?tag="+tag).then(function(response) {
+        fetch("http://localhost:8080/coinshell/article/viewAllAjaxAdmin?tag="+tag).then(function(response) {
             return response.json();
             // console.log(response.json())
         }).then(function(data) {
@@ -90,7 +90,7 @@ function loadAtcByTitle(){
     $(function() {
         var titlePart = document.getElementById("titlePart").value;
         console.log(tag);
-        fetch("http://localhost:8080/coinshell/article/viewAllAjaxByTitle?titlePart="+titlePart).then(function(response) {
+        fetch("http://localhost:8080/coinshell/article/viewAllAjaxByTitleAdmin?titlePart="+titlePart).then(function(response) {
             return response.json();
             // console.log(response.json())
         }).then(function(data) {
@@ -101,11 +101,10 @@ function loadAtcByTitle(){
     })
 }
 
-function loadAtcById(){
+function loadAtcByAuthorId(authorId){
     $(function() {
-        var authorId = document.getElementById("titlePart").value;
-        console.log(tag);
-        fetch("http://localhost:8080/coinshell/article/viewAllAjaxById?=authorId"+authorId).then(function(response) {
+        console.log(authorId);
+        fetch("http://localhost:8080/coinshell/article/viewAllAjaxByAuthorIdAdmin?authorId="+authorId).then(function(response) {
             return response.json();
             // console.log(response.json())
         }).then(function(data) {
@@ -159,7 +158,7 @@ function displayData(data){
     $("#atcTable").empty();
     $.each(data, function(index, value) {
                 const added = new Date(Date.parse(value.added));
-                const MM = added.getMonth();
+                const MM = added.getMonth()+1;
                 const dd = added.getDate();
                 const HH = added.getHours();
                 const mm = added.getMinutes();
@@ -167,17 +166,23 @@ function displayData(data){
                 const weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
                 const weekDayPrint = weekDay[weekIndex];  
                 const peek = value.text.substr(0,100);
+                let deleted = value.deleted;
+                if (deleted=="n"){
+                    deleted = "存活";
+                }else{
+                    deleted = "刪除";
+                }
                 // console.log(peek);
                 // console.log(array);
                      $("#atcTable").append(`
                         <tr class="table-info">
                         <td>` + value.tag + `</td>
-                        <td>` + value.CustomizedUserName + `</td>
-                        <td><a href="`+contextRoot+`/viewArticleAdmin/` + value.id + `" style="display: block;"><div class="b-list"><div><h3>` + value.title + `</h3></div></a><p>` + peek + `....</p></div></td>
+                        <td><a href="#" style="display: block;" onclick="loadAtcByAuthorId(`+value.authorId+`)"><div class="b-list"><div>` + value.CustomizedUserName + `</div></a><p class="text-black-50">ID:` + value.authorId + `</p></div></td>                       
+                        <td><a href="`+contextRoot+`/viewArticleAdmin/` + value.id + `" style="display: block;"><div class="b-list"><div>` + value.title + `</div></a><p>` + peek + `....</p></div></td>
                         <td align="center">` + value.readNum + ` / ` + value.commentNum + `</td>
                         <td>`+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</td>
-                        <td><a href="${contextRoot}/editArticleAdmin/`+value.id+`">修改</a></td>
-                        <td><a href="${contextRoot}/deleteArticleAdmin/`+value.id+`" onclick="return confirm('確認刪除嗎?')">刪除</a></td>
+                        <td><a href="${contextRoot}/editArticleAdmin/`+value.id+`"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
+                        <td>`+deleted+`<a href="${contextRoot}/deleteArticleAdmin/`+value.id+`" onclick="return confirm('確認刪除嗎?')"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
                         </tr>
                     `)
                 }

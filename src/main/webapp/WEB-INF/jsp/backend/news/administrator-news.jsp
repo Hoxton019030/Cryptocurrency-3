@@ -17,6 +17,7 @@
 </head>
 <body>
 
+
 <div id="test">
 							<table class="table table-hover" id="newsAddTable">
                                 <thead class="bg-success">
@@ -54,16 +55,18 @@
                                        <td><button  style="width:100px;"class="btn btn-info" onClick="">Update</button></td>
                                     </tr>
                             </table>
+
                                     
                                     
-                         <form class="form-inline my-1 my-lg-0">
-							<div class="input-group">
-								<input id="newsTitle" class="form-control pl-2 p-0" type="text" aria-label="Search">
-								<div class="input-group-append">
-									<input type="button" name="submit" value="Search" id="searchNews" class="btn btn-outline-dark my-2 my-sm-0" />
-                                </div>
-                            </div>
-                        </form>
+    <form class="form-inline my-1 my-lg-0">
+		<div class="input-group">
+			<input id="newsTitle" class="form-control pl-2 p-0" type="text" aria-label="Search">
+			<div class="input-group-append">
+				<input type="button" name="submit" value="Search" id="searchNews" class="btn btn-outline-dark my-2 my-sm-0" />
+            </div>
+        </div>
+    </form>
+
 
 
 							<table class="table table-hover" id="newsTable">
@@ -83,6 +86,7 @@
                             </table>
                          </div>
                          <div id="ttest"></div>
+
 <script>
 
 allNews();

@@ -32,7 +32,7 @@ padding-top: 82px;
 				<th scope="col" class="col-2">幣別</th>
 				<th scope="col" class="col-6">文章</th>
 				<th scope="col" class="col-2" style="text-align: center;">閱讀/回復</th>
-				<th scope="col" class="col-2">建立時間</th>
+				<th scope="col" class="col-2">來自</th>
 			</tr>
 		</thead>
 		<tbody class="sel" id="atcTable">
@@ -104,6 +104,20 @@ function loadAtcByTitle(){
     })
 }
 
+function loadAtcByAuthorId(authorId){
+    $(function() {
+        console.log(authorId);
+        fetch("http://localhost:8080/coinshell/article/viewAllAjaxByAuthorId?authorId="+authorId).then(function(response) {
+            return response.json();
+            // console.log(response.json())
+        }).then(function(data) {
+            console.log(data);
+            dataNow = data;
+            pagination(data, 1)
+        })
+    })
+}
+
 pageid.addEventListener('click',switchPage);
 
 function switchPage(e){
@@ -157,7 +171,7 @@ function displayData(data){
     $("#atcTable").empty();
     $.each(data, function(index, value) {
                 const added = new Date(Date.parse(value.added));
-                const MM = added.getMonth();
+                const MM = added.getMonth()+1;
                 const dd = added.getDate();
                 const HH = added.getHours();
                 const mm = added.getMinutes();
@@ -170,9 +184,14 @@ function displayData(data){
                      $("#atcTable").append(`
                         <tr class="table-info">
                         <td>` + value.tag + `</td>
-                        <td><a href="`+contextRoot+`/viewArticle/` + value.id + `" style="display: block;"><div class="b-list"><div><h3>` + value.title + `</h3></div></a><p>` + peek + `....</p></div></td>
+                        <td><a href="`+contextRoot+`/viewArticle/` + value.id + `" style="display: block;"><div class="b-list"><div>` + value.title + `</div></a><p>` + peek + `....</p></div></td>
                         <td align="center">` + value.readNum + ` / ` + value.commentNum + `</td>
-                        <td>`+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</td>
+                        <td>
+                            <div class="b-list">
+                                <span><a href="#" style="display: block;" onclick="loadAtcByAuthorId(`+value.authorId+`)">` + value.CustomizedUserName + `</a></span>                                    
+                                <span class="text-black-50">`+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</span>
+                            </div>
+                        </td>
                         </tr>
                     `)
                 }
