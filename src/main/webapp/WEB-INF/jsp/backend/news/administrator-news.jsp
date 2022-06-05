@@ -4,7 +4,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-
+<jsp:include page="../backendNavBar.jsp" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +16,7 @@
 <title>news</title>
 </head>
 <body>
-
+<p />
 
 <div id="test">
 	<table class="table table-hover" id="newsAddTable">
@@ -63,6 +63,11 @@
 				<input type="button" name="submit" value="Search" id="searchNews" class="btn btn-outline-dark my-2 my-sm-0" />
             </div>
         </div>
+        <hr />
+                <nav aria-label="Page navigation example">
+            <ul class="pagination" id="pageid">
+            </ul>
+        </nav>
     </form>
 
 	<table class="table table-hover" id="newsTable">
@@ -79,10 +84,10 @@
         </thead>
         <tbody id="newsTbody">
         </tbody>
-        <nav aria-label="Page navigation example">
-            <ul class="pagination" id="pageid">
-            </ul>
-        </nav>
+<!--         <nav aria-label="Page navigation example"> -->
+<!--             <ul class="pagination" id="pageid"> -->
+<!--             </ul> -->
+<!--         </nav> -->
     </table>
      </div>
                          <div id="ttest"></div>

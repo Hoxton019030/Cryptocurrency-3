@@ -51,7 +51,7 @@
         <a class="nav-link" href="administrator/store">商店商品</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="administrator/news">新聞</a>
+        <a class="nav-link" href="${contextRoot}/administrator/news">新聞</a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="administrator/article">文章</a>
