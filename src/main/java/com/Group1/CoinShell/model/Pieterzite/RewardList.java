@@ -20,7 +20,14 @@ public class RewardList {
 	@Column(name = "reward") // 對應獎勵
 	private Integer reward;
 	
+	@SuppressWarnings("unused")
 	private  RewardList() {
+	}
+
+	public RewardList(Integer days, Integer reward) {
+		super();
+		this.days = days;
+		this.reward = reward;
 	}
 
 	public Integer getDays() {
