@@ -45,4 +45,9 @@ public class NewsService {
 		return  newsdao.findByTitle(title);
 	    }
 	
+	//找全部後降冪
+	public List<News> findAllOrderByDESC() {
+		return newsdao.findAllOrderByDESC();
+	}
+	
 }
