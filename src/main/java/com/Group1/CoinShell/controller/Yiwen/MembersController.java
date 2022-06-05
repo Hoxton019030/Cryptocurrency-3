@@ -108,8 +108,13 @@ public class MembersController {
 		
 		/*張翔使用：取得登入中的使用者圖片，存入session*/
 		Integer memId = memRes.getId();
-		byte[] imgByte = dao.getImg(memId);
-		String img = Base64.getEncoder().encodeToString(imgByte);
+		String img = null;
+		try {
+			byte[] imgByte = dao.getImg(memId);
+			img = Base64.getEncoder().encodeToString(imgByte);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		httpSession.setAttribute("memImg", img);
 		
 		return "index";
