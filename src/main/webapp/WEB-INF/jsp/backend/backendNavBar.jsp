@@ -65,7 +65,7 @@ li{
         <a class="nav-link" href="administrator/article">文章</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="administrator/account">會員</a>
+        <a class="nav-link" href="${contextRoot}/adm-account">會員</a>
       </li>
     </ul>
   </div>
