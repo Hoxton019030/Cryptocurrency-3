@@ -5,7 +5,6 @@
             <jsp:include page="../NavBar/CoinShellNavBar.jsp" />
 
             <html>
-            <!-- 38:00 無法倫播標題-->
 
             <head>
                 <meta charset="UTF-8">

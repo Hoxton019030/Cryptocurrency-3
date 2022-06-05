@@ -7,27 +7,27 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class backendAcPageController {
 
 	//這個class都是用來控制後臺頁面跳轉的地方
-	@GetMapping("/administrator/account")
+	@GetMapping("/adm-account")
 	public String changePageAccount() {
 		return "backend/account/administrator-account";
 	}
 	
-	@GetMapping("administrator/account/addAvatar")
+	@GetMapping("/adm-addAvatar")
 	public String changePageAddCua() {
 		return "backend/account/addAvatar";
 	}
 	
-	@GetMapping("administrator/account/showAllAvatars")
+	@GetMapping("/adm-showAllAvatars")
 	public String changePageshowAllCuas() {
 		return "backend/account/showAllAvatars";
 	}
 	
-	@GetMapping("administrator/account/addMember")
+	@GetMapping("/adm-addMember")
 	public String changePageAddMem() {
 		return "backend/account/addMember";
 	}
 	
-	@GetMapping("administrator/account/showAllMembers")
+	@GetMapping("/adm-showAllMembers")
 	public String changePageshowAllMems() {
 		return "backend/account/showAllMembers";
 	}
