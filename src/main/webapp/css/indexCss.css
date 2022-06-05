@@ -82,6 +82,12 @@ body {
 td {
     width: 90px;
     height: 90px;
+    font-weight: 650;
+    text-align: center;
+}
+
+th {
+	text-align: center;
 }
 
 .star,.bell{

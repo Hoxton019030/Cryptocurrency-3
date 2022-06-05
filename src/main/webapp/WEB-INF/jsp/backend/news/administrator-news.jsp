@@ -16,8 +16,8 @@
 <title>news</title>
 </head>
 <body>
-</body>
 
+<div id="test">
 							<table class="table table-hover" id="newsAddTable">
                                 <thead class="bg-success">
                                     <tr>
@@ -67,7 +67,7 @@
 
 
 							<table class="table table-hover" id="newsTable">
-                                <thead class="bg-primary">
+                                <thead class="bg-primary" id="newsthead">
                                     <tr>
                                         <th scope="col" class="id"    >ID</th>
                                         <th scope="col" class="title" >Title</th>
@@ -81,6 +81,8 @@
                                 <tbody id="newsTbody">
                                 </tbody>
                             </table>
+                         </div>
+                         <div id="ttest"></div>
 <script>
 
 allNews();
@@ -106,7 +108,7 @@ function allNews() {
                 newsList += `<td><a href="" onclick="window.open('` + value.url + `')">` + value.url + `</a></td>`
 	            newsList += '<td><img class="newsImg" src="' + value.imgUrl + '"alt=""><a href="' + value.imgUrl + '"></a></td>'
                 newsList += '<td>' + value.date + '</td>'
-                newsList += '<td><button id="up'  + value.id + '" class="btn btn-info" value="' + value.id + '" onClick="update(this)">Update</button></td>'
+                newsList += '<td><a href="#test"><button id="up'  + value.id + '" class="btn btn-info" value="' + value.id + '" onClick="update(this)">Update</button></a></td>'
                 newsList += '<td><button id="del' + value.id + '" class="btn btn-danger"  value="' + value.id + '" onClick="del(this)">Delete</button></td>'
                 newsList += '</tr>';
                 
@@ -121,6 +123,8 @@ function allNews() {
 
 
 function add(){
+	var r = confirm("確定新增嗎?");
+	if(r==true){
 	var title = document.getElementById("newsAddTitle").value;
 	var url = document.getElementById("newsAddUrl").value;
 	var imgUrl = document.getElementById("newsAddImgUrl").value;
@@ -140,6 +144,7 @@ function add(){
 	            console.log(result)
 	            console.log("成功");
 	            parent.location.reload();
+	            document.querySelector('#ttest').scrollIntoView()
 	        },
 	        error: function(err) {
 	            console.log(err)
@@ -147,7 +152,7 @@ function add(){
 	        }
 	    })
 	}
-
+}
 
 function del(obj) {
 	var r = confirm("確定刪除嗎?");
@@ -275,4 +280,5 @@ function upSave(obj){
 
 
 </script>
+</body>
 </html>

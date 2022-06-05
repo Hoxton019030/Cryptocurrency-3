@@ -1,17 +1,25 @@
 body{
-background-color: rgba(128, 128, 128, 0.22)
+background-color: rgba(128, 128, 128, 0.22);
 }
 
 table{
 table-layout: fixed;
 }
 
+#newsTable tr:not(:first-child):hover {
+	background-color: rgb(138, 226, 234);
+}
+
 td{
 white-space: nowrap;       /*禁止td換行*/
 overflow: hidden;          /*隱藏X,Y滾動條*/
 text-overflow: ellipsis;   /*將顯示不完的以...顯示*/
+font-weight: 650;
 }
 
+th {
+	text-align: center;
+}
 
 .id{
 width: 45px;
