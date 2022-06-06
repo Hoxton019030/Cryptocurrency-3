@@ -12,7 +12,8 @@
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 <link rel="stylesheet" href="${contextRoot}/css/bootstrap.min.css"/>
 <script src="${contextRoot}/javascripts/bootstrap.bundle.min.js"></script>
-<script src="https://kit.fontawesome.com/0ef2a35b44.js" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/f844132572.js" crossorigin="anonymous"></script>
+
 <title>討論區</title>
 <style type="text/css">
 body{
@@ -35,7 +36,7 @@ padding-top: 82px;
 				<th scope="col" class="col-1">幣別</th>
 				<th scope="col" class="col-1">作者</th>
 				<th scope="col" class="col-4">文章</th>
-				<th scope="col" class="col-1.5" style="text-align: center;">閱讀/回復</th>
+				<th scope="col" class="col-1.5" style="text-align: center;">讚數/閱讀/回復</th>
 				<th scope="col" class="col-1.5">建立時間</th>
 				<th scope="col" class="col-1.5">修改</th>
 				<th scope="col" class="col-1.5">狀態</th>
@@ -179,10 +180,10 @@ function displayData(data){
                         <td>` + value.tag + `</td>
                         <td><a href="#" style="display: block;" onclick="loadAtcByAuthorId(`+value.authorId+`)"><div class="b-list"><div>` + value.CustomizedUserName + `</div></a><p class="text-black-50">ID:` + value.authorId + `</p></div></td>                       
                         <td><a href="`+contextRoot+`/viewArticleAdmin/` + value.id + `" style="display: block;"><div class="b-list"><div>` + value.title + `</div></a><p>` + peek + `....</p></div></td>
-                        <td align="center">` + value.readNum + ` / ` + value.commentNum + `</td>
+                        <td align="center">`+value.goodNum+`/` + value.readNum + ` / ` + value.commentNum + `</td>
                         <td>`+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</td>
                         <td><a href="${contextRoot}/editArticleAdmin/`+value.id+`"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
-                        <td>`+deleted+`<a href="${contextRoot}/deleteArticleAdmin/`+value.id+`" onclick="return confirm('確認刪除嗎?')"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+                        <td>`+deleted+`[<a href="${contextRoot}/deleteArticleAdmin/`+value.id+`" onclick="return confirm('確認刪除嗎?')"><i class="fa-solid fa-trash"></i></a>][<a href="${contextRoot}/undoArticleAdmin/`+value.id+`"><i class="fa-solid fa-trash-can-arrow-up"></i></a>]</td>
                         </tr>
                     `)
                 }

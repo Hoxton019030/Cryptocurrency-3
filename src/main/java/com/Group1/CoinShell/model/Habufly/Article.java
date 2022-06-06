@@ -34,8 +34,8 @@ public class Article {
 	@Column(name="text", columnDefinition = "nvarchar(MAX)")//預設是varchar(255)，因為可能有中文改為nvarchar
 	private String text;
 	
-	@Column(name="peek", columnDefinition = "nvarchar(200)")//預設是varchar(255)，因為可能有中文改為nvarchar
-	private String peek;
+	@Column(name="good_Num", nullable=false, columnDefinition = "INT default 0")
+	private Integer goodNum;
 	
 	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss")
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")//M指月份m指分鐘//這是丟出來的資料型態
@@ -63,6 +63,14 @@ public class Article {
 		if(added==null) {
 			added = new Date();
 		}
+	}
+
+	public Integer getGoodNum() {
+		return goodNum;
+	}
+
+	public void setGoodNum(Integer goodNum) {
+		this.goodNum = goodNum;
 	}
 
 	public Integer getId() {
@@ -95,14 +103,6 @@ public class Article {
 
 	public void setText(String text) {
 		this.text = text;
-	}
-
-	public String getPeek() {
-		return peek;
-	}
-
-	public void setPeek(String peek) {
-		this.peek = peek;
 	}
 
 	public Date getAdded() {
@@ -150,27 +150,27 @@ public class Article {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Article [id=");
 		builder.append(id);
-		builder.append(", author_Id=");
+		builder.append(", authorId=");
 		builder.append(authorId);
 		builder.append(", title=");
 		builder.append(title);
 		builder.append(", text=");
 		builder.append(text);
-		builder.append(", peek=");
-		builder.append(peek);
+		builder.append(", goodNum=");
+		builder.append(goodNum);
 		builder.append(", added=");
 		builder.append(added);
 		builder.append(", tag=");
 		builder.append(tag);
-		builder.append(", read_Num=");
+		builder.append(", readNum=");
 		builder.append(readNum);
-		builder.append(", comment_Num=");
+		builder.append(", commentNum=");
 		builder.append(commentNum);
 		builder.append(", deleted=");
 		builder.append(deleted);
 		builder.append("]");
 		return builder.toString();
-	}
+	}	
 	
 	
 	

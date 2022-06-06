@@ -150,20 +150,20 @@ public class MembersController {
 		return "redirect:/account/set";
 	}
 	
-	
-    @ResponseBody
-    @GetMapping("/selectMemAvatar")
-    public String selectMemAvatar(@RequestParam("id") Integer id) {
-        String img = null;
-        try {
-            byte[] imgByte = dao.getImg(id);
-            img = Base64.getEncoder().encodeToString(imgByte);
-        }catch(Exception e) {
-            e.printStackTrace();
-        }
-        return img;
-    }
-	
+	@ResponseBody
+	@GetMapping("/selectMemAvatar")
+	public String selectMemAvatar(@RequestParam("id") Integer id) {
+		String img = null;
+		try {
+			byte[] imgByte = dao.getImg(id);
+			img = Base64.getEncoder().encodeToString(imgByte);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return img;
+	}
+
 	@PostMapping("account/changeUsername")
 	public String updateCustomizedUserNameById
 	(@RequestParam("customizedUserName")String customizedUserName,
@@ -183,6 +183,7 @@ public class MembersController {
 		return "redirect:/";
 	}
 	
+
 	@GetMapping("account/getAll")
 	public List<Members> findAllMembers(){
 		List<Members> allMemList = memService.findAllMembers();
@@ -244,6 +245,7 @@ public class MembersController {
 		return SelectAccount;
 	}
 	
+
 	
 //	@GetMapping("account/resetPassword")
 //	public String resetPassword

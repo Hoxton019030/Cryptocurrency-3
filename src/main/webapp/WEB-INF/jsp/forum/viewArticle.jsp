@@ -21,7 +21,16 @@
         white-space: -o-pre-wrap; /*Opera7*/ 
         word-wrap: break-word; /*InternetExplorer5.5+*/ 
         margin-bottom:0;
-    } 
+    }
+    .heart{
+     color: rgb(206, 202, 202);
+        }
+    .check{
+     display: none;
+    }
+    .check:checked + span{
+     color: rgb(255, 0, 106);
+    }
 </style>
 </head>
 <body>
@@ -48,6 +57,7 @@
                     <pre id="article-content">${Article.text}</pre>
                 </div>
                 <div class="m-1">                    
+                    <span id="goodsSection"><label><input type="checkbox" class="check" onClick="doGoods(${Article.id}, ${login.id})"><span class="heart"><i class="fa-solid fa-heart"></i></span></label>${Article.goodNum}</span>
                     <button id="doComment" class="btn btn-primary btn-sm shadow-none">Comment</button>
                 </div>
                 <div id="respond">
@@ -74,6 +84,7 @@
                         <li>
                             <input type="hidden" id="articleId" value="${Article.id}" />
                             <input type="hidden" id="userId" value="${login.id}" />
+                            <input type="hidden" id="goodNum" value="${Article.goodNum}" />
                         </li>
                         <li>
                             <input type="text" id="userEmail-c" size="25" tabindex="3" aria-required='true' value="${login.eMail}"/>
@@ -98,24 +109,69 @@ var page = 1;
 let commDataNow = {};
 let replyDataNow = {};
 loadComment();
-// verifyMembershipOnload();
+verifyMembershipOnload();
 $("#submit-c").click(function(){comment()})
 doComment.addEventListener('click',verifyMembership);
 closeComment.addEventListener('click',closeCommentL);
 
-// function getImg(){
-//     fetch("http://localhost:8080/coinshell/viewComment?articleId="+aid).then(function(response) {
-//             return response.json();
-//             console.log(response.json())
-//         }).then(function(data) {
-//             var aImg = value.
-//             $(".divToGetAuthorImg img").replaceWith(`<img class="mr-3 rounded-circle" style="display:block; width:48px; height:48px" src="data:image/gif;base64,`+img+`" />`)
-//         })
-// }
+/*點讚功能：verifyMembershipOnload();goods();doGoods();afterGoods*/
+function goods(){
+        $("#goodsSection").empty();
+        let id = document.getElementById("aid").value;
+        let userId = document.getElementById("userId").value;
+        // let goodNum = Number(document.getElementById("goodNum").value);
+        fetch("http://localhost:8080/coinshell/countGoods?id="+id+"&userId="+userId).then(function(response) {
+                return response.json();
+                console.log(response);
+            }).then(function(array) {
+                let count = array[0];
+                let goodNum = array[1];
+                console.log("讚過嗎?"+count+"總讚數"+goodNum);
+            if(count==0){                
+                $("#goodsSection").append(`<label><input type="checkbox" class="check" onClick="doGoods(`+id+`,`+userId+`)"><span class="heart"><i class="fa-solid fa-heart"></i></span>`+goodNum+`</label>`)
+            }else{                
+                $("#goodsSection").append(`<label><input type="checkbox" class="check" checked onClick="doGoods(`+id+`,`+userId+`)"><span class="heart"><i class="fa-solid fa-heart"></i></span>`+goodNum+`</label>`)
+            }
+        })
+}
+
+function doGoods(id, userId) {
+    if ("${login == null }" == "true") {
+        $('#loginModal').modal("show")
+    }else{
+        fetch("http://localhost:8080/coinshell/doGoods?id="+id+"&userId="+userId)
+        .then(function(result){console.log("result====" + result.status);console.log("成功")})
+        .catch(err => console.log(err))
+        .then(function(){
+            wait(100);
+            afterGoods()
+        })
+    }
+}
+
+function afterGoods(){
+    $("#goodsSection").empty();
+    let id = document.getElementById("aid").value;
+    let userId = document.getElementById("userId").value;
+    // let goodNum = Number(document.getElementById("goodNum").value);
+    fetch("http://localhost:8080/coinshell/countGoods?id="+id+"&userId="+userId).then(function(response) {
+            return response.json();
+            console.log(response);
+        }).then(function(array) {
+            let count = array[0];
+            let goodNum = array[1];
+            console.log("讚過嗎?"+count+"總讚數"+goodNum);
+        if(count==0){                
+            $("#goodsSection").append(`<label><input type="checkbox" class="check" onClick="doGoods(`+id+`,`+userId+`)"><span class="heart"><i class="fa-solid fa-heart"></i></span>`+goodNum+`</label>`)
+        }else{                
+            $("#goodsSection").append(`<label><input type="checkbox" class="check" checked onClick="doGoods(`+id+`,`+userId+`)"><span class="heart"><i class="fa-solid fa-heart"></i></span>`+goodNum+`</label>`)
+        }
+    })
+}
 
 function verifyMembershipOnload(){
-    if ("${Article.authorId}" == "${login.id}") {
-        $(".editFunction").show()
+    if ("${login == null }" == "false") {
+        goods()
     }
 }
 
@@ -754,36 +810,6 @@ function deleteR(e, id){
         .then(loadComment())
 }
 }
-   //驗證Email的正確性
-// function mail_test(thisform) {
-//     with (thisform) {
-//     user_email = commentform.user_email.value;
-//     if (!/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(user_email)) {
-//         alert("電子郵件格式錯誤");
-//         commentform.user_email.focus();
-//         return false
-//     }else{return true}
-//     }
-// }
-// $('.btn-respond').click(function(){
-//     alert(123)
-//     $(this).next('.container').css('display','block')
-// })
-
-
-//   $('.btn-respond').each(function(){
-// 	$(this).click(function(){
-//       $(this).next('.container').css('display', 'block');
-//     });
-//   });
-//   //取消回复
-//   $('.btn-revoke').each(function(){
-//     $(this).click(function(){
-//       $(this).parent().css('display','none');
-//     });
-//   });
-
-
 </script>
 </body>
 </html>
