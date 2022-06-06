@@ -22,6 +22,7 @@ public class MembersConfig {
         	admin1.setJoinTime(date);
         	admin1.setPassword("a1234567");
         	admin1.setCustomizedUserName("admin_Pieterzite");
+        	admin1.setCustomizedUserAvatar(5);
         	Members admin2 = new Members();
         	admin2.setId(2);
         	admin2.setMyShell(1000);
@@ -30,6 +31,7 @@ public class MembersConfig {
         	admin2.setJoinTime(date);
         	admin2.setPassword("a1234567");
         	admin2.setCustomizedUserName("admin_Hoxton");
+        	admin2.setCustomizedUserAvatar(5);
         	Members admin3 = new Members();
         	admin3.setId(3);
         	admin3.setMyShell(1000);
@@ -38,6 +40,7 @@ public class MembersConfig {
         	admin3.setJoinTime(date);
         	admin3.setPassword("a1234567");
         	admin3.setCustomizedUserName("admin_Feeder");
+        	admin3.setCustomizedUserAvatar(5);
         	Members admin4 = new Members();
         	admin4.setId(4);
         	admin4.setMyShell(1000);
@@ -46,6 +49,7 @@ public class MembersConfig {
         	admin4.setJoinTime(date);
         	admin4.setPassword("a1234567");
         	admin4.setCustomizedUserName("admin_Bear");
+        	admin4.setCustomizedUserAvatar(5);
         	Members admin5 = new Members();
         	admin5.setId(5);
         	admin5.setMyShell(1000);
@@ -54,6 +58,7 @@ public class MembersConfig {
         	admin5.setJoinTime(date);
         	admin5.setPassword("a1234567");
         	admin5.setCustomizedUserName("admin_Yiwen");
+        	admin5.setCustomizedUserAvatar(5);
         	memDao.saveAll(List.of(admin1, admin2, admin3, admin4, admin5));
         };
     }

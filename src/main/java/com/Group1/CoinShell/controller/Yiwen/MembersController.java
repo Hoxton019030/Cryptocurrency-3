@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.Group1.CoinShell.model.Yiwen.Members;
@@ -66,6 +67,8 @@ public class MembersController {
 		return "/account/set";
 	}
 	
+	
+	
 	@GetMapping("/account/referral")
 	public String getReferral(Model model) {
 		model.addAttribute("memberBean", new Members());
@@ -108,8 +111,13 @@ public class MembersController {
 		
 		/*張翔使用：取得登入中的使用者圖片，存入session*/
 		Integer memId = memRes.getId();
-		byte[] imgByte = dao.getImg(memId);
-		String img = Base64.getEncoder().encodeToString(imgByte);
+		String img = null;
+		try {
+			byte[] imgByte = dao.getImg(memId);
+			img = Base64.getEncoder().encodeToString(imgByte);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		httpSession.setAttribute("memImg", img);
 		
 		return "index";
@@ -143,10 +151,19 @@ public class MembersController {
 	}
 	
 	
-	@PostMapping("")
-	public String selectAvatar(@Param("emotion") Integer customizedUserAvatar) {
-		return null;
-	}
+    @ResponseBody
+    @GetMapping("/selectMemAvatar")
+    public String selectMemAvatar(@RequestParam("id") Integer id) {
+        String img = null;
+        try {
+            byte[] imgByte = dao.getImg(id);
+            img = Base64.getEncoder().encodeToString(imgByte);
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+        
+        return img;
+    }
 	
 	@PostMapping("account/changeUsername")
 	public String updateCustomizedUserNameById
