@@ -40,7 +40,7 @@ public class NewsService {
 		newsdao.deleteById(id);
 	}
 	
-	//模糊查詢幣
+	//模糊查詢Title
 	public List<News> findByTitle(String title) {
 		return  newsdao.findByTitle(title);
 	    }
