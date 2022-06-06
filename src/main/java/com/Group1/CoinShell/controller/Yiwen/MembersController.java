@@ -1,7 +1,11 @@
 package com.Group1.CoinShell.controller.Yiwen;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Base64;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -13,9 +17,11 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -123,12 +129,6 @@ public class MembersController {
 		return "index";
 	}
 	
-	
-//	public String updateAvatar() {
-//		
-//		return null;
-//	}
-	
 	@GetMapping("/logout")
 	public String LogOut(HttpSession httpSession, HttpServletRequest request, HttpServletResponse response,
 			RedirectAttributes redirectAttributes) {
@@ -150,21 +150,20 @@ public class MembersController {
 		return "redirect:/account/set";
 	}
 	
-	
-    @ResponseBody
-    @GetMapping("/selectMemAvatar")
-    public String selectMemAvatar(@RequestParam("id") Integer id) {
-        String img = null;
-        try {
-            byte[] imgByte = dao.getImg(id);
-            img = Base64.getEncoder().encodeToString(imgByte);
-        }catch(Exception e) {
-            e.printStackTrace();
-        }
-        
-        return img;
-    }
-	
+	@ResponseBody
+	@GetMapping("/selectMemAvatar")
+	public String selectMemAvatar(@RequestParam("id") Integer id) {
+		String img = null;
+		try {
+			byte[] imgByte = dao.getImg(id);
+			img = Base64.getEncoder().encodeToString(imgByte);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return img;
+	}
+
 	@PostMapping("account/changeUsername")
 	public String updateCustomizedUserNameById
 	(@RequestParam("customizedUserName")String customizedUserName,
@@ -184,19 +183,69 @@ public class MembersController {
 		return "redirect:/";
 	}
 	
-	@ResponseBody
-	@GetMapping("/selectMemAvatar")
-	public String selectMemAvatar(@RequestParam("id") Integer id) {
-		String img = null;
-		try {
-			byte[] imgByte = dao.getImg(id);
-			img = Base64.getEncoder().encodeToString(imgByte);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-		return img;
+
+	@GetMapping("account/getAll")
+	public List<Members> findAllMembers(){
+		List<Members> allMemList = memService.findAllMembers();
+		return allMemList;
 	}
+	
+	/**
+	 * 後台 AJAX 新增
+	 * @param dto
+	 * @return
+	 */
+	@PostMapping("/account/add")
+	public Map<String, String> addAccount(@RequestBody OkrDTO dto) {
+		Date date = new Date();
+		System.out.println("Name: " + dto.getName());
+		System.out.println("Email: " + dto.getEmail());
+		System.out.println("Password: " + dto.getPassword());
+		
+		Members mem = new Members();
+		mem.setCustomizedUserName(dto.getName());
+		mem.seteMail(dto.getEmail());
+		mem.setPassword(dto.getPassword());
+		mem.setJoinTime(date);
+		mem.setCustomizedUserAvatar(5);
+		mem.setMyShell(1000);
+		mem.setCoin(1000);
+		
+		memService.save(mem);
+		
+		Map<String, String> result = new HashMap<String, String>();
+		result.put("status", "200");
+		return result;
+	}
+	
+	/**
+	 * 後台 AJAX 刪除: 傳會員ID回來找到對應ID刪除
+	 */
+	@DeleteMapping("/deleteAccount/{id}")
+	public Map<String, String> deleteAccount(@RequestBody OkrDTO dto){
+		System.out.println("delete : memId = " + dto.getId());
+		
+		memService.deleteMemberById(dto.getId());
+		
+		Map<String, String> result = new HashMap<String, String>();
+		result.put("status", "200");
+		return result;
+	}
+	
+	/**
+	 * 模糊查詢
+	 * @param name
+	 * @return
+	 */
+	@ResponseBody
+	@GetMapping("/account/select")
+	public List<Members> selectAccountByName(@RequestParam String name) {
+		List<Members> SelectAccount;
+		SelectAccount = memService.findMemberByName(name);
+		return SelectAccount;
+	}
+	
+
 	
 //	@GetMapping("account/resetPassword")
 //	public String resetPassword

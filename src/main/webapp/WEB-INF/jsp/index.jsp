@@ -250,10 +250,9 @@
 	<script>
 		var memId = '${login.id}';
 		console.log("memId=" + memId);
-	
+			setNews();
 		$(document).ready(function() {
 	   		upCoin(memId);
-	   		setNews();
 		});
 		
 		var timeoutID;

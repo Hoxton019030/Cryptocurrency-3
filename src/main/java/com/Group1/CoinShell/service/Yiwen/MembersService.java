@@ -55,7 +55,7 @@ public class MembersService {
 		membersDao.deleteMemberById(id);
 	}
 		
-	// findMemberByName
+	// findMemberByName 模糊查詢
 	public List<Members> findMemberByName(String customizedUserName){
 		List<Members> memList = membersDao.findMemberByName(customizedUserName);
 		return memList;
