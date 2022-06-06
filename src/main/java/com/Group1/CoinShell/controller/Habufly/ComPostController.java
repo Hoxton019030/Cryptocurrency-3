@@ -34,6 +34,21 @@ public class ComPostController {
  // http://localhost:8080/coinshell/viewComment?articleId=1
     
     @ResponseBody
+    @GetMapping("/viewReplyAdmin")
+    public List<Map<String,Object>> viewReplyAdmin(@RequestParam Integer articleId, @RequestParam Integer commentId) throws IOException{
+    	List<Map<String,Object>> allReply = cService.selectReplyAdmin(articleId, commentId);
+    	return allReply;
+    }
+    
+    @ResponseBody
+    @GetMapping("/viewCommentAdmin")
+    public List<Map<String,Object>> viewCommentAdmin(@RequestParam Integer articleId) throws IOException{
+    	List<Map<String,Object>> allComm = cService.selectCommAdmin(articleId);
+    	return allComm;
+    }
+ // http://localhost:8080/coinshell/viewComment?articleId=1
+    
+    @ResponseBody
     @GetMapping("/viewReply")
     public List<Map<String,Object>> viewReply(@RequestParam Integer articleId, @RequestParam Integer commentId) throws IOException{
     	List<Map<String,Object>> allReply = cService.selectReply(articleId, commentId);
@@ -130,10 +145,24 @@ public class ComPostController {
     }
     // http://localhost:8080/coinshell/postEdit
     
+    @ResponseBody
     @GetMapping("/deleteCR")
     public void deleteCR(@RequestParam Integer id, @RequestParam Integer articleId)throws IOException {
     	//刪除
     	cService.delete(id); 
+    	
+    	//取得該Article的評論數並更新
+        Integer commentNum = cService.checkCommentNum(articleId, "a");
+        aService.updatCommentNum(articleId, commentNum);
+        
+    	return;
+    }
+    
+    @ResponseBody
+    @GetMapping("/undoCR")
+    public void undoCR(@RequestParam Integer id, @RequestParam Integer articleId)throws IOException {
+    	//刪除
+    	cService.undoCR(id); 
     	
     	//取得該Article的評論數並更新
         Integer commentNum = cService.checkCommentNum(articleId, "a");

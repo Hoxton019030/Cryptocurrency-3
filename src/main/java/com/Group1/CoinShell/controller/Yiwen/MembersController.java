@@ -184,6 +184,19 @@ public class MembersController {
 		return "redirect:/";
 	}
 	
+	@ResponseBody
+	@GetMapping("/selectMemAvatar")
+	public String selectMemAvatar(@RequestParam("id") Integer id) {
+		String img = null;
+		try {
+			byte[] imgByte = dao.getImg(id);
+			img = Base64.getEncoder().encodeToString(imgByte);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return img;
+	}
 	
 //	@GetMapping("account/resetPassword")
 //	public String resetPassword

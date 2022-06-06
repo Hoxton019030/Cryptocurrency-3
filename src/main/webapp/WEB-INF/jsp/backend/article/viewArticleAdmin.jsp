@@ -14,6 +14,17 @@
 <script src="https://kit.fontawesome.com/0ef2a35b44.js" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <title>${Article.title}</title>
+<style type="text/css">
+    #article-content {
+        font-size: 16px;
+        white-space: pre-wrap; /*css-3*/ 
+        white-space: -moz-pre-wrap; /*Mozilla,since1999*/ 
+        white-space: -pre-wrap; /*Opera4-6*/ 
+        white-space: -o-pre-wrap; /*Opera7*/ 
+        word-wrap: break-word; /*InternetExplorer5.5+*/ 
+        margin-bottom:0;
+    } 
+</style>
 </head>
 <body>
 <a href="${contextRoot}/administrator/article">討論區刪改查頁面</a>
@@ -38,10 +49,11 @@
                 <div style="align-items: center;background-color: #dbf8ff;" class="mt-2 mb-2">
                     <pre id="article-content">${Article.text}</pre>
                 </div>
-                <div class="m-1">                    
-                    <button id="doComment" class="btn btn-primary btn-sm shadow-none">Comment</button>
+                <div class="m-1">                 
+                    <span id="goodsSection"><label><input type="checkbox" class="check"><span class="heart"><i class="fa-solid fa-heart"></i></span></label>${Article.goodNum}</span>  
+                    <!-- <button id="doComment" class="btn btn-primary btn-sm shadow-none">Comment</button> -->
                 </div>
-                <div id="respond">
+                <!-- <div id="respond">
                     <div class="comment-l bg-light p-2" style="display: none;">
                         <div class="d-flex flex-row align-items-start divToGetImg">
                             <img class="rounded-circle" src="data:image/gif;base64,${memImg}" width="40">
@@ -51,8 +63,8 @@
                             <button class="btn btn-primary btn-sm shadow-none" type="button" id="submit-c" tabindex="2">Post comment</button>
                             <button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button" id="closeComment">Cancel</button>
                         </div>
-                    </div>
-                    <ul class="comment-r" style="display: none;">
+                    </div> -->
+                    <!-- <ul class="comment-r" style="display: none;">
                         <li>
                             <label for="userName">Name:(necessery)</label>
                         </li>
@@ -70,7 +82,7 @@
                             <input type="text" id="userEmail-c" size="25" tabindex="3" aria-required='true' value="${login.eMail}"/>
                         </li>                            
                     </ul>
-                </div>
+                </div> -->
                 <div class="row section_title">
                     <div class="col-md-12" id="comment-list">
 
@@ -90,42 +102,42 @@ let commDataNow = {};
 let replyDataNow = {};
 loadComment();
 // verifyMembershipOnload();
-$("#submit-c").click(function(){comment()})
-doComment.addEventListener('click',verifyMembership);
-closeComment.addEventListener('click',closeCommentL);
+// $("#submit-c").click(function(){comment()})
+// doComment.addEventListener('click',verifyMembership);
+// closeComment.addEventListener('click',closeCommentL);
 
-function verifyMembershipOnload(){
-    if ("${Article.authorId}" == "${login.id}") {
-        $(".editFunction").show()
-    }
-}
+// function verifyMembershipOnload(){
+//     if ("${Article.authorId}" == "${login.id}") {
+//         $(".editFunction").show()
+//     }
+// }
 
-function verifyMembership(){
-    if ("${login == null }" == "true") {
-        $('#loginModal').modal("show")
-    }else{
-        $(".comment-l").show();        
-        $("#doComment").hide();
-    }
-}
+// function verifyMembership(){
+//     if ("${login == null }" == "true") {
+//         $('#loginModal').modal("show")
+//     }else{
+//         $(".comment-l").show();        
+//         $("#doComment").hide();
+//     }
+// }
 
-function closeCommentL(){
-    $(".comment-l").hide();
-    $("#doComment").show();    
-}
+// function closeCommentL(){
+//     $(".comment-l").hide();
+//     $("#doComment").show();    
+// }
 
 function closeEditForm(){
     $(".editForm").empty();
     $(".reply-section").hide();
 }
 
-async function comment(){
-    await commentTo();
-    await wait(100);
-    loadComment();
-    $(".comment-l").hide();
-    $("#doComment").show(); 
-}
+// async function comment(){
+//     await commentTo();
+//     await wait(100);
+//     loadComment();
+//     $(".comment-l").hide();
+//     $("#doComment").show(); 
+// }
 
 async function wait(ms) {
     console.log('ok')
@@ -134,12 +146,12 @@ async function wait(ms) {
     });
 }
 
-async function reply(id){
-    await replyTo(id);
-    await wait(100);
-    loadReply(id);
-    $("#replySection"+id).hide()
-}
+// async function reply(id){
+//     await replyTo(id);
+//     await wait(100);
+//     loadReply(id);
+//     $("#replySection"+id).hide()
+// }
 
 function closeReply(id){
     $("#reply-list"+id).empty();
@@ -148,13 +160,13 @@ function closeReply(id){
     $("#closeR"+id).hide();
 }
 
-function doReply(id){
-    if ("${login == null }" == "true") {
-        $('#loginModal').modal("show")
-    }else{
-    $("#replySection"+id).show()
-    }
-}
+// function doReply(id){
+//     if ("${login == null }" == "true") {
+//         $('#loginModal').modal("show")
+//     }else{
+//     $("#replySection"+id).show()
+//     }
+// }
 
 pageidC.addEventListener('click',switchPageC);
 
@@ -175,75 +187,75 @@ function switchPageR(e, id){
     console.log("現在的reply是"+replyDataNow);
 }
 
-function commentTo(){
-    var userNameC = document.getElementById("userName-c").value;
-    var userEmailC = document.getElementById("userEmail-c").value;
-    var textC = document.getElementById("text-c").value;
-    var articleIdC = document.getElementById("articleId").value;
-    var userIdC = document.getElementById("userId").value;
-    var comm = {
-        "userName":userNameC,
-        "userEmail":userEmailC,
-        "text":textC,
-        "type":"a",
-        "deleted":"n",
-        "articleId":articleIdC,
-        "userId":userIdC
-    }
-    var jsonComm = JSON.stringify(comm);
-    fetch('http://localhost:8080/coinshell/doComment', {
-        // credentials: 'include',
-        method:'POST',
-        headers: {
-            'Content-Type': 'application/json'    
-        },
-        body:jsonComm    
-    }).then(res => {
-            return res.json();
-        }).then(result =>{
-            console.log(result);
-        });
-};
+// function commentTo(){
+//     var userNameC = document.getElementById("userName-c").value;
+//     var userEmailC = document.getElementById("userEmail-c").value;
+//     var textC = document.getElementById("text-c").value;
+//     var articleIdC = document.getElementById("articleId").value;
+//     var userIdC = document.getElementById("userId").value;
+//     var comm = {
+//         "userName":userNameC,
+//         "userEmail":userEmailC,
+//         "text":textC,
+//         "type":"a",
+//         "deleted":"n",
+//         "articleId":articleIdC,
+//         "userId":userIdC
+//     }
+//     var jsonComm = JSON.stringify(comm);
+//     fetch('http://localhost:8080/coinshell/doComment', {
+//         // credentials: 'include',
+//         method:'POST',
+//         headers: {
+//             'Content-Type': 'application/json'    
+//         },
+//         body:jsonComm    
+//     }).then(res => {
+//             return res.json();
+//         }).then(result =>{
+//             console.log(result);
+//         });
+// };
 
-function replyTo(id){
-    var userNameR = document.getElementById("userName-r"+id).value;
-    var userEmailR = document.getElementById("userEmail-r"+id).value;
-    var textR = document.getElementById("text-r"+id).value;
-    var articleIdR = document.getElementById("articleId").value; 
-    var commentIdR = document.getElementById("commentId"+id).value;
-    var userIdR = document.getElementById("userId").value;
-    var reply = {
-        "userName":userNameR,
-        "userEmail":userEmailR,
-        "text":textR,
-        "type":"b",
-        "deleted":"n",
-        "articleId":articleIdR,
-        "commentId":commentIdR,
-        "userId":userIdR
-    }
-    console.log(reply);
-    var jsonReply = JSON.stringify(reply);
-    fetch('http://localhost:8080/coinshell/doReply?commentId='+commentIdR, {
-        method:'POST',
-        headers: {
-            'Content-Type': 'application/json'    
-        },
-        body:jsonReply
-    }).catch(error => console.log('Error:', error))
-    .then(res => {
-            return res.json();
-        }).then(result =>{
-            console.log(result);
-        });
-}
+// function replyTo(id){
+//     var userNameR = document.getElementById("userName-r"+id).value;
+//     var userEmailR = document.getElementById("userEmail-r"+id).value;
+//     var textR = document.getElementById("text-r"+id).value;
+//     var articleIdR = document.getElementById("articleId").value; 
+//     var commentIdR = document.getElementById("commentId"+id).value;
+//     var userIdR = document.getElementById("userId").value;
+//     var reply = {
+//         "userName":userNameR,
+//         "userEmail":userEmailR,
+//         "text":textR,
+//         "type":"b",
+//         "deleted":"n",
+//         "articleId":articleIdR,
+//         "commentId":commentIdR,
+//         "userId":userIdR
+//     }
+//     console.log(reply);
+//     var jsonReply = JSON.stringify(reply);
+//     fetch('http://localhost:8080/coinshell/doReply?commentId='+commentIdR, {
+//         method:'POST',
+//         headers: {
+//             'Content-Type': 'application/json'    
+//         },
+//         body:jsonReply
+//     }).catch(error => console.log('Error:', error))
+//     .then(res => {
+//             return res.json();
+//         }).then(result =>{
+//             console.log(result);
+//         });
+// }
 
 function loadComment(){
     $(function() {
         var aid = document.getElementById("aid").value;
         console.log(aid);
         $("#comment-list").empty();
-        fetch("http://localhost:8080/coinshell/viewComment?articleId="+aid).then(function(response) {
+        fetch("http://localhost:8080/coinshell/viewCommentAdmin?articleId="+aid).then(function(response) {
             return response.json();
             console.log(response.json())
         }).then(function(data) {
@@ -297,8 +309,13 @@ function displayComm(data){
             var weekDayPrint = weekDay[weekIndex];
             var id = value.id;
             var cidForReply = value.commentId;   
-            var img = value.userAvatar;        
-            // <img class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="https://i.imgur.com/stD0Q19.jpg" />            
+            var img = value.userAvatar;
+            let deleted = value.deleted;
+            let text = value.text;
+            if (deleted=="y"){
+                    text = `<del>`+text+`</del>`
+            };
+                
             $("#comment-list").append(`
                     <div class="media-body rounded">
                         <div class="row">
@@ -310,42 +327,16 @@ function displayComm(data){
                                 </div>
                             </div>
                         </div>                      
-                        <div class="mt-2">`+value.text+`</div>
+                        <div class="mt-2">`+text+`</div>
                         <div>                                
                             <div class="reply">
-                                <div class="m-1">                    
-                                    <button onclick="doReply(`+id+`)" class="fa fa-reply">Reply</button>
+                                <div class="m-1">
                                     <a href="#" id="editSection`+id+`" onclick="editSection(event,`+id+`)" class="editFunction"><i class="fa fa-edit" aria-hidden="true"></i>Edit</a>
-                                    <a href="#" onclick="deleteC(event,`+id+`)" class="editFunction"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
+                                    <a href="#" onclick="deleteC(event,`+id+`)" class="editFunction"><i class="fa-solid fa-trash"></i>Delete</a>
+                                    <a href="#" onclick="undoC(event,`+id+`)" class="editFunction"><i class="fa-solid fa-trash-can-arrow-up"></i>Undo</a>
                                 </div>
                                 <div id="editForm`+id+`" class="editForm">
-                                </div>
-                                <div id="replySection`+id+`" class="reply-section"  style="display: none;">
-                                    <div class="reply-l bg-light p-2">
-                                        <div class="d-flex flex-row align-items-start">
-                                            <img class="rounded-circle" src="data:image/gif;base64,${memImg}" width="40">
-                                            <textarea class="form-control ml-1 shadow-none textarea" id="text-r`+id+`" tabindex="1" placeholder="Reply here..." aria-required="true">我其實也不是一定要說什麼</textarea>
-                                        </div>
-                                        <div class="mt-2 text-right">
-                                            <button class="btn btn-primary btn-sm shadow-none submit-r" type="button" onclick="reply(`+id+`)">Reply</button>
-                                            <button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button" onclick="closeEditForm()">Cancel</button>
-                                        </div>
-                                    </div>
-                                    <ul class="reply-r" style="display: none;">
-                                        <li>
-                                            <input type="text" id="userName-r`+id+`" value="${login.customizedUserName}"/>
-                                        </li>
-                                        <li>
-                                            <input type="hidden" id="articleId" value="${Article.id}" />
-                                        </li>
-                                        <li>
-                                            <input type="hidden" id="commentId`+id+`" value="`+id+`" />
-                                        </li>
-                                        <li>
-                                            <input type="text" id="userEmail-r`+id+`" size="25" tabindex="3" aria-required='true' value="${login.eMail}"/>
-                                        </li>
-                                    </ul>
-                                </div>
+                                </div>                                
                             </div>
                         </div>
                         <span onclick="loadReply(`+id+`)" id="showR`+id+`"><i class="fa fa-chevron-down"></i>See reply</span>
@@ -396,7 +387,7 @@ function loadReply(id){
         console.log(aid);
         var cid = id;
         console.log(cid);
-        fetch("http://localhost:8080/coinshell/viewReply?articleId="+aid+"&commentId="+cid).then(function(response) {
+        fetch("http://localhost:8080/coinshell/viewReplyAdmin?articleId="+aid+"&commentId="+cid).then(function(response) {
             return response.json();
             console.log(response.json())
         }).then(function(data) {
@@ -453,7 +444,12 @@ function displayReply(data, id){
                 var weekDayPrint = weekDay[weekIndex];  
                 var img = value.userAvatar;
                 var thisId = value.id;             
-                // <a class="pr-3" href="#"><img class="rounded-circle" alt="Bootstrap Media Another Preview" src="https://i.imgur.com/xELPaag.jpg" /></a>
+                let deleted = value.deleted;
+                let text = value.text;
+                if (deleted=="y"){
+                    text = `<del>`+text+`</del>`
+                };
+                console.log(text);
                 $("#reply-list"+id).append(`
                         <div class="media mt-4">
                             <div class="media-body rounded">
@@ -466,12 +462,13 @@ function displayReply(data, id){
                                         </div>
                                     </div>                                  
                                 </div>
-                                `+value.text+`
+                                `+text+`
                             </div>
                         </div>
                         <div class="m-1">
                                 <a href="#" id="editSection`+thisId+`" onclick="editSectionR(event,`+thisId+`)" class="editFunction"><i class="fa fa-edit" aria-hidden="true"></i>Edit</a>
-                                <a href="#" onclick="deleteR(event,`+thisId+`)" class="editFunction"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
+                                <a href="#" onclick="deleteR(event,`+thisId+`)" class="editFunction"><i class="fa-solid fa-trash"></i>Delete</a>
+                                <a href="#" onclick="undoR(event,`+thisId+`)" class="editFunction"><i class="fa-solid fa-trash-can-arrow-up"></i>Undo</a>
                         </div>
                         <div id="editFormR`+thisId+`" class="editForm">
                         </div>
@@ -545,7 +542,7 @@ function editSection(e, id){
                         </div>
                         <ul class="reply-r" style="display: none;">
                             <li>
-                                <input type="text" id="userName-CR`+id+`" value="${login.customizedUserName}"/>
+                                <input type="text" id="userName-CR`+id+`" value="`+value.userName+`"/>
                             </li>
                             <li>
                                 <input type="hidden" id="articleId" value="${Article.id}" />
@@ -555,10 +552,9 @@ function editSection(e, id){
                                 <input type="hidden" id="deleted`+id+`" value="`+value.deleted+`" />
                                 <input type="hidden" id="type`+id+`" value="`+value.type+`" />
                                 <input type="hidden" id="added`+id+`" value="`+addedFF+`" />
-                            </li>
-                            <li>
-                                <input type="text" id="userEmail-CR`+id+`" size="25" tabindex="3" aria-required='true' value="${login.eMail}"/>
-                            </li>
+                                <input type="hidden" id="userId`+id+`" value="`+value.userId+`" />
+                                <input type="hidden" id="userEmail-C`+id+`" value="`+value.userEmail+`"/>
+                            </li>                            
                         </ul>
                         `)                    
             })
@@ -608,9 +604,8 @@ function editSectionR(e, id){
                                 <input type="hidden" id="deleted`+id+`" value="`+value.deleted+`" />
                                 <input type="hidden" id="type`+id+`" value="`+value.type+`" />
                                 <input type="hidden" id="added`+id+`" value="`+addedFF+`" />
-                            </li>
-                            <li>
-                                <input type="text" id="userEmail-CR`+id+`" size="25" tabindex="3" aria-required='true' value="${login.eMail}"/>
+                                <input type="hidden" id="userId`+id+`" value="`+value.userId+`" />
+                                <input type="hidden" id="userEmail-R`+id+`" value="`+value.userEmail+`"/>
                             </li>
                         </ul>
                         `)                    
@@ -620,11 +615,11 @@ function editSectionR(e, id){
 
 async function postEdit(id){
     var userNameCR = document.getElementById("userName-CR"+id).value;
-    var userEmailCR = document.getElementById("userEmail-CR"+id).value;
+    var userEmailC = document.getElementById("userEmail-C"+id).value;
     var textCR = document.getElementById("text-CR"+id).value;
     var articleIdCR = document.getElementById("articleId").value; 
     var commentIdCR = document.getElementById("commentId"+id).value;
-    var userIdCR = document.getElementById("userId").value;
+    var userIdCR = document.getElementById("userId"+id).value;
     var deleted = document.getElementById("deleted"+id).value;
     var added = document.getElementById("added"+id).value;
     var type = document.getElementById("type"+id).value;
@@ -632,7 +627,7 @@ async function postEdit(id){
         "id": id,
         "added": added,
         "userName":userNameCR,
-        "userEmail":userEmailCR,
+        "userEmail":userEmailC,
         "text":textCR,
         "type":type,
         "deleted":deleted,
@@ -641,7 +636,7 @@ async function postEdit(id){
         "userId":userIdCR
     }
     var jsonReply = JSON.stringify(reply);
-    console.log("回憶"+reply.added);
+    console.log("回憶"+jsonReply);
     fetch('http://localhost:8080/coinshell/postEdit', {
         method:'POST',
         headers: {
@@ -662,11 +657,11 @@ async function postEdit(id){
 
 async function postEditR(id){
     var userNameCR = document.getElementById("userName-CR"+id).value;
-    var userEmailCR = document.getElementById("userEmail-CR"+id).value;
+    var userEmailR = document.getElementById("userEmail-R"+id).value;
     var textCR = document.getElementById("text-CR"+id).value;
     var articleIdCR = document.getElementById("articleId").value; 
     var commentIdCR = document.getElementById("commentId"+id).value;
-    var userIdCR = document.getElementById("userId").value;
+    var userIdCR = document.getElementById("userId"+id).value;
     var deleted = document.getElementById("deleted"+id).value;
     var added = document.getElementById("added"+id).value;
     var type = document.getElementById("type"+id).value;
@@ -674,7 +669,7 @@ async function postEditR(id){
         "id": id,
         "added": added,
         "userName":userNameCR,
-        "userEmail":userEmailCR,
+        "userEmail":userEmailR,
         "text":textCR,
         "type":type,
         "deleted":deleted,
@@ -705,7 +700,7 @@ async function postEditR(id){
 function deleteC(e, id){
     e.preventDefault();
     var aid = document.getElementById("aid").value;
-    if(confirm('Are you sure your want to delete?')){
+    if(confirm('Are you sure your want to delete this Comment?')){
     fetch('http://localhost:8080/coinshell/deleteCR?id='+id+"&articleId="+aid)
     .catch(error => console.log('Error:', error))
     .then(result =>{
@@ -718,8 +713,34 @@ function deleteC(e, id){
 function deleteR(e, id){
     e.preventDefault();
     var aid = document.getElementById("aid").value;
-    if(confirm('Are you sure your want to delete?')){
+    if(confirm('Are you sure your want to delete this Reply?')){
     fetch('http://localhost:8080/coinshell/deleteCR?id='+id+"&articleId="+aid)
+    .catch(error => console.log('Error:', error))
+    .then(result =>{
+            console.log(result);
+        })
+        .then(loadComment())
+}
+}
+
+function undoC(e, id){
+    e.preventDefault();
+    var aid = document.getElementById("aid").value;
+    if(confirm('Are you sure your want to Undo this Comment?')){
+    fetch('http://localhost:8080/coinshell/undoCR?id='+id+"&articleId="+aid)
+    .catch(error => console.log('Error:', error))
+    .then(result =>{
+            console.log(result);
+        })
+    .then(loadComment())
+    }
+}
+
+function undoR(e, id){
+    e.preventDefault();
+    var aid = document.getElementById("aid").value;
+    if(confirm('Are you sure your want to Undo this Reply?')){
+    fetch('http://localhost:8080/coinshell/undoCR?id='+id+"&articleId="+aid)
     .catch(error => console.log('Error:', error))
     .then(result =>{
             console.log(result);
