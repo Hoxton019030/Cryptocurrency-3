@@ -117,4 +117,19 @@ public class ArticleService {
 		return list;
 	}
 
+	public Integer getGoods(Integer id, Integer userId) {
+		Integer goods = dao.getGoods(id, userId);
+		return goods;
+	}
+
+	public void increaseGoods(Integer id, Integer userId) {
+		dao.insertGoods(id, userId);
+		dao.increaseGoods(id);
+	}
+
+	public void decreaseGoods(Integer id, Integer userId) {
+		dao.deleteGoods(id, userId);
+		dao.decreaseGoods(id);
+	}
+
 }

@@ -33,7 +33,7 @@
                                     <span class="input-group-text font-weight-bold" id="inputGroup-sizing-default"><i class="fa-solid fa-user-astronaut"></i>&nbsp;Avatar</span>
                                 </div>
                                 <div id="user-img">
-                                    <img src="${login.customizedUserAvatar }" style="border-radius: 50%; height: 100px; ">
+                                    <img src="data:image/gif;base64,${memImg}" style="border-radius: 50%; height: 100px; ">
                                 </div>
                                 <button class="btn btn-outline-primary" type="button" data-toggle="modal" data-target="#chooseAvatar">Avatar</button>
                                 <script>
@@ -42,15 +42,15 @@
 
                                     $(function() {
                                         $("#user-img").empty()
-                                        var url = "http://localhost:8080/coinshell/selectMemberAvatar?id=";
+                                        var url = "http://localhost:8080/coinshell/selectMemAvatar?id=";
                                         var id = `${login.id}`;
                                         fetch(url + id).then(function(response) {
-                                            return response.json()
-                                        }).then(function(jsonObject) {
-                                            $("#user-img").append(`<img src="` + jsonObject[0].userAvatarBase64 + `"
+                                            return response.text()
+                                        }).then(function(img) {                                            
+                                            $("#user-img").append(`<img src="data:image/gif;base64,`+img+`"
 
 										style="border-radius: 50%; height: 100px; ">`);
-                                        })
+                                        }).catch(err => console.log(err));
                                     })
                                 </script>
                             </div>

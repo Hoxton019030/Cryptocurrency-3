@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.Group1.CoinShell.model.Yiwen.Members;
@@ -172,6 +173,19 @@ public class MembersController {
 		return "redirect:/";
 	}
 	
+	@ResponseBody
+	@GetMapping("/selectMemAvatar")
+	public String selectMemAvatar(@RequestParam("id") Integer id) {
+		String img = null;
+		try {
+			byte[] imgByte = dao.getImg(id);
+			img = Base64.getEncoder().encodeToString(imgByte);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return img;
+	}
 	
 //	@GetMapping("account/resetPassword")
 //	public String resetPassword

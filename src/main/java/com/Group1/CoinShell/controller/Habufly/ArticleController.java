@@ -1,6 +1,7 @@
 package com.Group1.CoinShell.controller.Habufly;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -136,6 +137,29 @@ public class ArticleController {
 		return "redirect:/viewAllAjax";
 	}
 	
+	@ResponseBody
+	@GetMapping("/countGoods")
+	public List<Object> countGoods(@RequestParam Integer id, @RequestParam Integer userId) throws IOException {
+		Integer goods = aService.getGoods(id, userId);
+		Article atc = aService.findById(id);
+		Integer goodNum = atc.getGoodNum();
+		List<Object> list = Arrays.asList(goods, goodNum);
+		
+		return list;
+	}
+
+	@ResponseBody
+	@GetMapping("/doGoods")
+	public void doGoods(@RequestParam Integer id, @RequestParam Integer userId) throws IOException {
+		Integer goods = aService.getGoods(id, userId);
+		if(goods==0) {
+			aService.increaseGoods(id, userId);
+		}else {
+			aService.decreaseGoods(id, userId);
+		}
+		return;
+	}
+	
 //	##################################################################
 //	下方為後臺使用
 //	##################################################################
@@ -209,6 +233,14 @@ public class ArticleController {
 	public String deleteArticleAdmin(@PathVariable("id") Integer id) {
 		Article atc = aService.findById(id);
 		atc.setDeleted("y");
+		aService.save(atc);
+		return "backend/article/viewAllArticle";
+	}
+	
+	@GetMapping("/undoArticleAdmin/{id}")
+	public String undoArticleAdmin(@PathVariable("id") Integer id) {
+		Article atc = aService.findById(id);
+		atc.setDeleted("n");
 		aService.save(atc);
 		return "backend/article/viewAllArticle";
 	}

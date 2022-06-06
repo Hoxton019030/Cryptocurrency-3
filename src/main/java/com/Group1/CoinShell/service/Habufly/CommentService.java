@@ -37,6 +37,16 @@ public class CommentService {
 		return reply;
 	}
 	
+	public List<Map<String,Object>> selectCommAdmin(Integer articleId) {
+		List<Map<String,Object>> comm = dao.findCommentByAtcAndTypeAdmin(articleId);
+		return comm;
+	}
+
+	public List<Map<String,Object>> selectReplyAdmin(Integer articleId, Integer commentId) {
+		List<Map<String,Object>> reply = dao.findReplyByAtcAndTypeAdmin(articleId, commentId);
+		return reply;
+	}
+	
 	public Page<Comment> findByPage(Integer pageNumber) {
 		Pageable pgb = PageRequest.of(pageNumber-1, 10, Sort.Direction.DESC, "added");
 		Page<Comment> page = dao.findAll(pgb);
@@ -55,6 +65,10 @@ public class CommentService {
 
 	public void delete(Integer id) {
 		dao.deleteCR(id);
+	}
+
+	public void undoCR(Integer id) {
+		dao.undoCR(id);
 	}
 
 	public Comment findById(Integer id) {

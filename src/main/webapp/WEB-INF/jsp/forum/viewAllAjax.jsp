@@ -31,7 +31,7 @@ padding-top: 82px;
 			<tr>
 				<th scope="col" class="col-2">幣別</th>
 				<th scope="col" class="col-6">文章</th>
-				<th scope="col" class="col-2" style="text-align: center;">閱讀/回復</th>
+				<th scope="col" class="col-2" style="text-align: center;">讚數/閱讀/評論</th>
 				<th scope="col" class="col-2">來自</th>
 			</tr>
 		</thead>
@@ -185,7 +185,7 @@ function displayData(data){
                         <tr class="table-info">
                         <td>` + value.tag + `</td>
                         <td><a href="`+contextRoot+`/viewArticle/` + value.id + `" style="display: block;"><div class="b-list"><div>` + value.title + `</div></a><p>` + peek + `....</p></div></td>
-                        <td align="center">` + value.readNum + ` / ` + value.commentNum + `</td>
+                        <td align="center">`+value.goodNum+`/` + value.readNum + ` / ` + value.commentNum + `</td>
                         <td>
                             <div class="b-list">
                                 <span><a href="#" style="display: block;" onclick="loadAtcByAuthorId(`+value.authorId+`)">` + value.CustomizedUserName + `</a></span>                                    
