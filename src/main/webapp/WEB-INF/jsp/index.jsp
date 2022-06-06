@@ -251,10 +251,11 @@
 		var memId = '${login.id}';
 		console.log("memId=" + memId);
 	
-		$(function() {
+		$(document).ready(function() {
 	   		upCoin(memId);
 	   		setNews();
-		})
+		});
+		
 		var timeoutID;
 		function setUpCoin(){
 		timeoutID  = window.setTimeout(function(){upCoin(memId)},50000);
