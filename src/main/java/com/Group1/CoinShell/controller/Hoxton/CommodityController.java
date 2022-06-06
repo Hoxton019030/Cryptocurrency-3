@@ -5,15 +5,20 @@ import java.util.Base64;
 import java.util.Optional;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.Group1.CoinShell.model.Hoxton.Cart;
 import com.Group1.CoinShell.model.Hoxton.Commodity;
 import com.Group1.CoinShell.model.Hoxton.CommodityDao;
 import com.Group1.CoinShell.service.Hoxton.CommodityService;
@@ -83,5 +88,38 @@ public class CommodityController {
 	public String findCommodityByName(@RequestParam("name")String name) {
 		return "backend/store/ShowParticularCommodities";
 	}
+	
+	@PostMapping("addCart")
+	public String addCart(HttpSession session, @RequestParam("id")Integer id) {
+		session.setMaxInactiveInterval(600);
+		Cart cart=(Cart)session.getAttribute("cart");
+		if(cart==null) {
+			cart=new Cart();
+			session.setAttribute("cart", cart);
+		}
+		service.buyCommodity(id, cart);
+		return "/store/store";
+	}
+	
+	@GetMapping("goCart")
+	public String goCart() {
+		return "test";
+	}
+	
+//	@PostMapping("addCart")
+//	public String addCart(HttpServletRequest request) {
+//		Cookie[] cookies = request.getCookies();
+//		Cookie cart_cookie= null;
+//		if(cookies!=null) {
+//			for(Cookie cookie : cookies){
+//				if("cart".equals(cookie.getName())) {
+//					cart_cookie=cookie;
+//				}
+//			}
+//		}
+//		
+//	}
+	
+
 
 }

@@ -23,6 +23,7 @@
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
                 <script type="text/javascript" src="${contextRoot}/javascripts/store.js"></script>
                 <script type="text/javascript" src="${contextRoot}/javascripts/jquery.countdown.min.js"></script>
+                <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
             </head>
 
             <body>
@@ -51,13 +52,14 @@
                                     </ul>
                                 </li>
                             </ul>
-                            <form class="d-flex">
+                            <form action="goCart" method="get" class="d-flex">
                                 <button class="btn btn-outline-dark" type="submit">
                             <i class="bi-cart-fill me-1"></i>
                             Cart
                             <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                        </button>
+                             </button>
                             </form>
+
                         </div>
                     </div>
                 </nav>
@@ -73,22 +75,18 @@
                 <!-- Section-->
 
                 <section class="py-5">
+
                     <div class="container px-4 px-lg-5 mt-5">
                         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center" id="commodidy-zone">
 
+
+
                         </div>
                     </div>
+
                 </section>
-                <!-- Footer-->
-                <footer class="py-5 bg-dark">
-                    <div class="container">
-                        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p>
-                    </div>
-                </footer>
-                <!-- Bootstrap core JS-->
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-                <!-- Core theme JS-->
-                <script src="js/scripts.js"></script>
+
+
                 <script>
                     $(function() {
                         var url = "http://localhost:8080/coinshell/allCommodity";
@@ -101,11 +99,12 @@
                                     <div class="col mb-5">
                                 <div class="card h-100">
                                     <!-- Product image-->
-                                    <img src="data:image/gif;base64,` + value.photo + `" width=268 hight=178.66>
+                                    <img class="card-img-top" src="data:image/gif;base64,` + value.photo + `" alt="..." />
+                                    <!-- Product details-->
                                     <div class="card-body p-4">
                                         <div class="text-center">
                                             <!-- Product name-->
-                                            <h5 class="fw-bolder">` + value.commodityName + `</h5>
+                                            <h5 class="fw-bolder">Popular Item</h5>
                                             <!-- Product reviews-->
                                             <div class="d-flex justify-content-center small text-warning mb-2">
                                                 <div class="bi-star-fill"></div>
@@ -115,23 +114,45 @@
                                                 <div class="bi-star-fill"></div>
                                             </div>
                                             <!-- Product price-->
-                                            MyShell:` + value.myShell + `<br>
-                                            Coin:` + value.coin + `
+                                          $  ` + value.myShell + `
                                         </div>
-                                        <div class=" text-center discribe">` + value.discribe + `</div>
                                     </div>
                                     <!-- Product actions-->
-                                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
-                                    </div>
-                                    </div>
-                                    </div>
+                                    <form action="addCart" method="post">
+                                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                            <div><input name="id" type="text" value="` + value.id + `"></div>
+                                            <div><input name="myShell" type="text" value="` + value.myShell + `"></div>
+                                            <div><input name="commodityName" type="text" value="` + value.commodityName + `"></div>
+                                            <div><input name="quantity" type="text" value="1"></div>
+
+                                            <div class="text-center"><button type="submit" class="btn btn-outline-dark mt-auto">Add to cart</button></div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                                 `)
                             })
                         })
                     })
                 </script>
 
+                <!-- Footer-->
+                <footer class="py-5 bg-dark">
+                    <div class="container">
+                        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p>
+                    </div>
+                </footer>
+                <!-- Bootstrap core JS-->
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+                <!-- Core theme JS-->
+                <script src="js/scripts.js"></script>
+
+
+                <script>
+                    function myFunction() {
+                        alert("I am an alert box!");
+                    }
+                </script>
             </body>
 
             </html>

@@ -51,5 +51,7 @@ public interface CommodityDao extends JpaRepository<Commodity, Integer> {
 
 	@Query(value = "SELECT * FROM commodity", nativeQuery = true)
 	public List<Commodity> findAllCommodity();
+	
+
 
 }
