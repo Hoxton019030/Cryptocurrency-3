@@ -67,6 +67,8 @@ public class MembersController {
 		return "/account/set";
 	}
 	
+	
+	
 	@GetMapping("/account/referral")
 	public String getReferral(Model model) {
 		model.addAttribute("memberBean", new Members());
@@ -149,10 +151,19 @@ public class MembersController {
 	}
 	
 	
-	@PostMapping("")
-	public String selectAvatar(@Param("emotion") Integer customizedUserAvatar) {
-		return null;
-	}
+    @ResponseBody
+    @GetMapping("/selectMemAvatar")
+    public String selectMemAvatar(@RequestParam("id") Integer id) {
+        String img = null;
+        try {
+            byte[] imgByte = dao.getImg(id);
+            img = Base64.getEncoder().encodeToString(imgByte);
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+        
+        return img;
+    }
 	
 	@PostMapping("account/changeUsername")
 	public String updateCustomizedUserNameById

@@ -37,21 +37,20 @@
                                 </div>
                                 <button class="btn btn-outline-primary" type="button" data-toggle="modal" data-target="#chooseAvatar">Avatar</button>
                                 <script>
-                                    var memId = '${login.id}'
-                                    var url = "http://localhost:8080/coinshell/selectMemberAvatar?id="
+                                    var memId = '${login.id}';
+                                    var url = "http://localhost:8080/coinshell/selectMemberAvatar?id=";
+                                        $(function() {
+                                            $("#user-img").empty()
+                                            var url = "http://localhost:8080/coinshell/selectMemAvatar?id=";
+                                            var id = `${login.id}`;
+                                            fetch(url + id).then(function(response) {
+                                                return response.text()
+                                            }).then(function(img) {                                            
+                                                $("#user-img").append(`<img src="data:image/gif;base64,`+img+`"
 
-                                    $(function() {
-                                        $("#user-img").empty()
-                                        var url = "http://localhost:8080/coinshell/selectMemAvatar?id=";
-                                        var id = `${login.id}`;
-                                        fetch(url + id).then(function(response) {
-                                            return response.text()
-                                        }).then(function(img) {                                            
-                                            $("#user-img").append(`<img src="data:image/gif;base64,`+img+`"
-
-										style="border-radius: 50%; height: 100px; ">`);
-                                        }).catch(err => console.log(err));
-                                    })
+                                            style="border-radius: 50%; height: 100px; ">`);
+                                            }).catch(err => console.log(err));
+                                        })
                                 </script>
                             </div>
 
