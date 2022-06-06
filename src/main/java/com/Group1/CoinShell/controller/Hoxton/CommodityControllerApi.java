@@ -35,7 +35,7 @@ public class CommodityControllerApi {
 		return commodityLIst;
 	}
 
-	@GetMapping("test123")
+	@GetMapping("showCart")
 	public Map<Integer, CartItem> returnJson(HttpServletRequest req) {
 		HttpSession session = req.getSession();
 		String id = session.getId();
@@ -45,4 +45,6 @@ public class CommodityControllerApi {
 		String price2 = Integer.toString(price);
 		return commodityMap;
 	}
+	// http://localhost:8080/coinshell/showCart
+	
 }

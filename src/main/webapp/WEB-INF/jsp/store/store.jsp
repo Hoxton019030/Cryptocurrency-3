@@ -23,7 +23,6 @@
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
                 <script type="text/javascript" src="${contextRoot}/javascripts/store.js"></script>
                 <script type="text/javascript" src="${contextRoot}/javascripts/jquery.countdown.min.js"></script>
-                <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
             </head>
 
             <body>

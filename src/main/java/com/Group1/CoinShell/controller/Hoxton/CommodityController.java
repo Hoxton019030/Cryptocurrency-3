@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -90,7 +91,9 @@ public class CommodityController {
 	}
 	
 	@PostMapping("addCart")
-	public String addCart(HttpSession session, @RequestParam("id")Integer id) {
+	public String addCart(HttpSession session, 
+			@RequestParam("id")Integer id,
+			@RequestParam("myShell")Integer myShell) {
 		session.setMaxInactiveInterval(600);
 		Cart cart=(Cart)session.getAttribute("cart");
 		if(cart==null) {
@@ -101,9 +104,9 @@ public class CommodityController {
 		return "/store/store";
 	}
 	
-	@GetMapping("goCart")
+	@PostMapping("goCart")
 	public String goCart() {
-		return "test";
+		return "/store/cart";
 	}
 	
 //	@PostMapping("addCart")
