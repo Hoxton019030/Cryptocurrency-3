@@ -19,6 +19,12 @@
 body{
 padding-top: 82px;
 }
+.check{
+ display: none;
+}
+.check:checked + span{
+ color: rgb(255, 0, 106);
+}
 </style>
 </head>
 <body>

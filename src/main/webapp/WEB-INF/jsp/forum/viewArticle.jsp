@@ -438,7 +438,6 @@ function displayComm(data){
                     $(".editFunctionC").show()
                 }
             })
-            verifyMembershipOnload()
         }
 
 function pageBtn(page){
@@ -557,8 +556,7 @@ function displayReply(data, id){
                         `)
                     if(value.userId=="${login.id}"){
                     $(".editFunctionR").show()                    
-                }
-                verifyMembershipOnload()                 
+                }             
             })
 }
 

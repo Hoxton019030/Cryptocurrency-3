@@ -13,6 +13,12 @@
 body{
 padding-top: 82px;
 }
+.check{
+ display: none;
+}
+.check:checked + span{
+ color: rgb(255, 0, 106);
+}
 </style>
 </head>
 <body>
@@ -118,6 +124,19 @@ function loadAtcByAuthorId(authorId){
     })
 }
 
+function loadAtcByGoods(){
+    $(function() {
+        fetch("http://localhost:8080/coinshell/article/viewArticleByGoods").then(function(response) {
+            return response.json();
+            // console.log(response.json())
+        }).then(function(data) {
+            console.log(data);
+            dataNow = data;
+            pagination(data, 1)
+        })
+    })
+}
+
 pageid.addEventListener('click',switchPage);
 
 function switchPage(e){
@@ -185,7 +204,10 @@ function displayData(data){
                         <tr class="table-info">
                         <td>` + value.tag + `</td>
                         <td><a href="`+contextRoot+`/viewArticle/` + value.id + `" style="display: block;"><div class="b-list"><div>` + value.title + `</div></a><p>` + peek + `....</p></div></td>
-                        <td align="center">`+value.goodNum+`/` + value.readNum + ` / ` + value.commentNum + `</td>
+                        <td align="center">
+                            <label><input type="checkbox" class="check" checked><span class="heart"><i class="fa-solid fa-heart"></i></span>`+value.goodNum+`</label>
+                            <i class="fa fa-eye" aria-hidden="true"></i>` + value.readNum + `
+                            <i class="fa fa-commenting-o" aria-hidden="true"></i>` + value.commentNum + `</td>
                         <td>
                             <div class="b-list">
                                 <span><a href="#" style="display: block;" onclick="loadAtcByAuthorId(`+value.authorId+`)">` + value.CustomizedUserName + `</a></span>                                    

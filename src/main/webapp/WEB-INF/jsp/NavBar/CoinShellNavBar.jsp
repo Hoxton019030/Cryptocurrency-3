@@ -54,7 +54,7 @@
 				<li class="nav-item active"><a class="nav-link" href="${contextRoot}/aboutUs/intro" style="color: #3C3C3C">About-Us
 						<span class="sr-only">(current)</span></a></li>
 
-				<li class="nav-item active"><a class="nav-link"	href="${contextRoot}/viewAllAjax" style="color: #3C3C3C">BeachTown
+				<li class="nav-item active"><a class="nav-link"	href="${contextRoot}/viewAllArticle" style="color: #3C3C3C">BeachTown
 						<span class="sr-only">(current)</span></a></li>
 
 <!-- 				<li class="nav-item"><a class="nav-link" href="#" style="color: #3C3C3C">Learn </a></li> -->
