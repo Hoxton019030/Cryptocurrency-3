@@ -8,16 +8,11 @@
 <head>
 <meta charset="UTF-8">
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+<link rel="stylesheet" href="${contextRoot}/css/article.css">
 <title>討論區</title>
 <style type="text/css">
 body{
 padding-top: 82px;
-}
-.check{
- display: none;
-}
-.check:checked + span{
- color: rgb(255, 0, 106);
 }
 </style>
 </head>

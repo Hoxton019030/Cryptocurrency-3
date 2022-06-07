@@ -11,23 +11,14 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 <link rel="stylesheet" href="${contextRoot}/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="${contextRoot}/css/article.css">
 <script src="${contextRoot}/javascripts/bootstrap.bundle.min.js"></script>
 <script src="https://kit.fontawesome.com/f844132572.js" crossorigin="anonymous"></script>
 
 <title>討論區</title>
-<style type="text/css">
-body{
-padding-top: 82px;
-}
-.check{
- display: none;
-}
-.check:checked + span{
- color: rgb(255, 0, 106);
-}
-</style>
 </head>
 <body>
+<jsp:include page="../backendNavBar.jsp" />
 <div class="row justify-content-center">
 <div class="col-9">
     <form id="searchByTag">
@@ -186,7 +177,11 @@ function displayData(data){
                         <td>` + value.tag + `</td>
                         <td><a href="#" style="display: block;" onclick="loadAtcByAuthorId(`+value.authorId+`)"><div class="b-list"><div>` + value.CustomizedUserName + `</div></a><p class="text-black-50">ID:` + value.authorId + `</p></div></td>                       
                         <td><a href="`+contextRoot+`/viewArticleAdmin/` + value.id + `" style="display: block;"><div class="b-list"><div>` + value.title + `</div></a><p>` + peek + `....</p></div></td>
-                        <td align="center">`+value.goodNum+`/` + value.readNum + ` / ` + value.commentNum + `</td>
+                        <td align="center">
+                            <label><input type="checkbox" class="check" checked><span class="heart"><i class="fa-solid fa-heart"></i></span>`+value.goodNum+`</label>
+                            <i class="fa fa-eye" aria-hidden="true"></i>` + value.readNum + `
+                            <i class="fa fa-commenting-o" aria-hidden="true"></i>` + value.commentNum + `</td>
+                        </td>
                         <td>`+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</td>
                         <td><a href="${contextRoot}/editArticleAdmin/`+value.id+`"><i class="fa fa-edit" aria-hidden="true"></i></a></td>
                         <td>`+deleted+`[<a href="${contextRoot}/deleteArticleAdmin/`+value.id+`" onclick="return confirm('確認刪除嗎?')"><i class="fa-solid fa-trash"></i></a>][<a href="${contextRoot}/undoArticleAdmin/`+value.id+`"><i class="fa-solid fa-trash-can-arrow-up"></i></a>]</td>

@@ -7,30 +7,13 @@
 <html>
 <head>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+<link rel="stylesheet" href="${contextRoot}/css/article.css">
 <meta charset="UTF-8">
 <title>${Article.title}</title>
 <style type="text/css">
     body{
     padding-top: 82px;
-    }
-    #article-content {
-        font-size: 16px;
-        white-space: pre-wrap; /*css-3*/ 
-        white-space: -moz-pre-wrap; /*Mozilla,since1999*/ 
-        white-space: -pre-wrap; /*Opera4-6*/ 
-        white-space: -o-pre-wrap; /*Opera7*/ 
-        word-wrap: break-word; /*InternetExplorer5.5+*/ 
-        margin-bottom:0;
-    }
-    .heart{
-     color: rgb(206, 202, 202);
-        }
-    .check{
-     display: none;
-    }
-    .check:checked + span{
-     color: rgb(255, 0, 106);
-    }
+    }    
 </style>
 </head>
 <body>
@@ -42,6 +25,7 @@
                 <h1>${Article.title}</h1>
                 <input id="aid" type="hidden" value="${Article.id}"/>
                 <input id="authorid" type="hidden" value="${Article.authorId}"/>
+                <input id="atcAdded" type="hidden" value="${Article.added}"/>
                 <span style="display: none;" class="editFunction">
                     <a href="${contextRoot}/editArticle/${Article.id}"><i class="fa fa-edit" aria-hidden="true"></i>Edit</a>
                     <a href="${contextRoot}/deleteArticle/${Article.id}" onclick="return confirm('確認刪除嗎?')"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
@@ -50,7 +34,7 @@
                     <img class="mr-3 rounded-circle" style="display:block; width:65px; height:65px" src="data:image/gif;base64,${img}"/>
                     <div class="d-flex flex-column">
                         <span class="name"><h3>${userName}</h3></span>
-                        <span class="date text-black-50">${Article.added}</span>
+                        <span class="date text-black-50" id="added"></span>
                     </div>
                 </div>
                 <div style="align-items: center;background-color: #dbf8ff;" class="mt-2 mb-2">
@@ -108,6 +92,7 @@
 var page = 1;
 let commDataNow = {};
 let replyDataNow = {};
+getAtcTime();
 loadComment();
 verifyMembershipOnload();
 $("#submit-c").click(function(){comment()})
@@ -250,6 +235,22 @@ function switchPageR(e, id){
     console.log("現在的reply是"+replyDataNow);
 }
 
+function getAtcTime() {
+    $("#added").empty();
+    var atcAdded = document.getElementById("atcAdded").value;
+    console.log("時間是"+atcAdded);
+    var added = new Date(Date.parse(atcAdded));
+    var YYYY = added.getFullYear();
+    var MM = added.getMonth()+1;
+    var dd = added.getDate();
+    var HH = added.getHours();
+    var mm = added.getMinutes();
+    var weekIndex = added.getDay();
+    var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+    var weekDayPrint = weekDay[weekIndex];
+    $("#added").append(YYYY+`-`+MM+`-`+dd+` `+HH+`:`+mm+` `+weekDayPrint);
+}
+
 function commentTo(){
     var userNameC = document.getElementById("userName-c").value;
     var userEmailC = document.getElementById("userEmail-c").value;
@@ -363,6 +364,7 @@ function displayComm(data){
     $("#comment-list").empty();
     $.each(data, function(index, value) {
             var added = new Date(Date.parse(value.added));
+            var YYYY = added.getFullYear();
             var MM = added.getMonth()+1;
             var dd = added.getDate();
             var HH = added.getHours();
@@ -381,7 +383,7 @@ function displayComm(data){
                                 <img class="mr-3 rounded-circle" style="display:block; width:48px; height:48px" src="data:image/gif;base64,`+img+`" />
                                 <div class="d-flex flex-column">
                                     <span class="name">`+value.userName+`</span>
-                                    <span class="date"> — `+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</span>
+                                    <span class="date"> — `+YYYY+`-`+MM+`-`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</span>
                                 </div>
                             </div>
                         </div>                      
@@ -522,6 +524,7 @@ function displayReply(data, id){
     $("#reply-list"+id).empty();
     $.each(data, function(index, value) {
                 var added = new Date(Date.parse(value.added));
+                var YYYY = added.getFullYear();
                 var MM = added.getMonth()+1;
                 var dd = added.getDate();
                 var HH = added.getHours();
@@ -540,7 +543,7 @@ function displayReply(data, id){
                                         <img class="mr-3 rounded-circle" style="display:block; width:48px; height:48px" src="data:image/gif;base64,`+img+`" />
                                         <div class="d-flex flex-column">
                                             <span class="name">`+value.userName+`</span>
-                                            <span class="date"> — `+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</span>
+                                            <span class="date"> — `+YYYY+`-`+MM+`-`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</span>
                                         </div>
                                     </div>                                  
                                 </div>
@@ -604,6 +607,7 @@ function editSection(e, id){
             $.each(data, function(index, value) {
                 var added = new Date(Date.parse(value.added));
                 var addedFF = Date.parse(value.added);
+                var YYYY = added.getFullYear();
                 var MM = added.getMonth()+1;
                 var dd = added.getDate();
                 var HH = added.getHours();
@@ -657,6 +661,7 @@ function editSectionR(e, id){
             $.each(data, function(index, value) {
                 var added = new Date(Date.parse(value.added));
                 var addedFF = Date.parse(value.added);
+                var YYYY = added.getFullYear();
                 var MM = added.getMonth()+1;
                 var dd = added.getDate();
                 var HH = added.getHours();

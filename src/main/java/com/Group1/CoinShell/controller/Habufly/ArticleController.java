@@ -144,7 +144,7 @@ public class ArticleController {
 		Article atc = aService.findById(id);
 		atc.setDeleted("y");
 		aService.save(atc);
-		return "redirect:/viewAllAjax";
+		return "redirect:/viewAllArticle";
 	}
 	
 	@ResponseBody
@@ -244,7 +244,7 @@ public class ArticleController {
 		Article atc = aService.findById(id);
 		atc.setDeleted("y");
 		aService.save(atc);
-		return "backend/article/viewAllArticle";
+		return "backend/article/viewAllArticleAdmin";
 	}
 	
 	@GetMapping("/undoArticleAdmin/{id}")
@@ -252,7 +252,7 @@ public class ArticleController {
 		Article atc = aService.findById(id);
 		atc.setDeleted("n");
 		aService.save(atc);
-		return "backend/article/viewAllArticle";
+		return "backend/article/viewAllArticleAdmin";
 	}
 
 	@ModelAttribute("tagList")
