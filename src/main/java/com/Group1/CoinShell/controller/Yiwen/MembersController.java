@@ -86,6 +86,11 @@ public class MembersController {
 		return "aboutUs/intro";
 	}
 	
+	@GetMapping("/aboutUs/nice-intro")
+	public String getFancyIntro() {
+		return "aboutUs/gen2_intro";
+	}
+	
 	@GetMapping("/account/privacy")
 	public String getPrivacy() {
 		return "account/privacy";

@@ -51,7 +51,7 @@
 		
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav">
-				<li class="nav-item active"><a class="nav-link" href="${contextRoot}/aboutUs/intro" style="color: #3C3C3C">About-Us
+				<li class="nav-item active"><a class="nav-link" href="${contextRoot}/aboutUs/nice-intro" style="color: #3C3C3C">About-Us
 						<span class="sr-only">(current)</span></a></li>
 
 				<li class="nav-item active"><a class="nav-link"	href="${contextRoot}/viewAllArticle" style="color: #3C3C3C">BeachTown
