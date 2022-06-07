@@ -53,57 +53,79 @@
   </div>
 </div>
 <br />
- <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-  {
-  "symbols": [
-    {
-      "description": "",
-      "proName": "BINANCEUS:BTCUSD"
-    },
-    {
-      "description": "",
-      "proName": "BINANCEUS:ETHUSD"
-    },
-    {
-      "description": "",
-      "proName": "BINANCEUS:USDTUSD"
-    },
-    {
-      "description": "",
-      "proName": "BINANCEUS:USDCUSD"
-    },
-    {
-      "description": "",
-      "proName": "BINANCEUS:BNBUSD"
-    },
-    {
-      "description": "",
-      "proName": "FTX:XRPUSD"
-    },
-    {
-      "description": "",
-      "proName": "BINANCEUS:BUSDUSD"
-    },
-    {
-      "description": "",
-      "proName": "BINANCEUS:ADAUSD"
-    },
-    {
-      "description": "",
-      "proName": "BINANCEUS:SOLUSD"
-    },
-    {
-      "description": "",
-      "proName": "BINANCEUS:DOGEUSD"
-    }
-  ],
-  "showSymbolLogo": true,
-  "colorTheme": "light",
-  "isTransparent": false,
-  "displayMode": "adaptive",
-  "locale": "zh_TW"
-}
-  </script>
+
+            <table>
+            <tr>
+            <td class="margg">
+            <div class="marqee">
+            <ul>
+            <li id="mar1">test1</li>
+            <li id="mar2">test2</li>
+            <li id="mar3">test3</li>
+            <li id="mar4">test4</li>
+            <li id="mar5">test5</li>
+            <li id="mar6">test6</li>
+            <li id="mar7">test7</li>
+            <li id="mar8">test8</li>
+            <li id="mar9">test9</li>
+            <li id="mar10">test10</li>
+            </ul>
+            </div>
+            </td>
+             </tr>
+            </table>
+
+<!--  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async> -->
+<!--   { -->
+<!--   "symbols": [ -->
+<!--     { -->
+<!--       "description": "", -->
+<!--       "proName": "BINANCEUS:BTCUSD" -->
+<!--     }, -->
+<!--     { -->
+<!--       "description": "", -->
+<!--       "proName": "BINANCEUS:ETHUSD" -->
+<!--     }, -->
+<!--     { -->
+<!--       "description": "", -->
+<!--       "proName": "BINANCEUS:USDTUSD" -->
+<!--     }, -->
+<!--     { -->
+<!--       "description": "", -->
+<!--       "proName": "BINANCEUS:USDCUSD" -->
+<!--     }, -->
+<!--     { -->
+<!--       "description": "", -->
+<!--       "proName": "BINANCEUS:BNBUSD" -->
+<!--     }, -->
+<!--     { -->
+<!--       "description": "", -->
+<!--       "proName": "FTX:XRPUSD" -->
+<!--     }, -->
+<!--     { -->
+<!--       "description": "", -->
+<!--       "proName": "BINANCEUS:BUSDUSD" -->
+<!--     }, -->
+<!--     { -->
+<!--       "description": "", -->
+<!--       "proName": "BINANCEUS:ADAUSD" -->
+<!--     }, -->
+<!--     { -->
+<!--       "description": "", -->
+<!--       "proName": "BINANCEUS:SOLUSD" -->
+<!--     }, -->
+<!--     { -->
+<!--       "description": "", -->
+<!--       "proName": "BINANCEUS:DOGEUSD" -->
+<!--     } -->
+<!--   ], -->
+<!--   "showSymbolLogo": true, -->
+<!--   "colorTheme": "light", -->
+<!--   "isTransparent": false, -->
+<!--   "displayMode": "adaptive", -->
+<!--   "locale": "zh_TW" -->
+<!-- } -->
+<!--   </script> -->
 <br />
 
                 <div class="top-coin">

@@ -67,7 +67,89 @@ function upCoin(memId) {
                 coinList += '</tr>';
                 
                 $('#top').append(coinList);
-
+                
+                 var value1 = result[0].percentChange1h
+                 var value2 = result[1].percentChange1h
+                 var value3 = result[2].percentChange1h
+                 var value4 = result[3].percentChange1h
+                 var value5 = result[4].percentChange1h
+                 var value6 = result[5].percentChange1h
+                 var value7 = result[6].percentChange1h
+                 var value8 = result[7].percentChange1h
+                 var value9 = result[8].percentChange1h
+                 var value10 = result[9].percentChange1h
+                 
+                 if(value1 < 0){
+                 $('#mar1').html('<img class=currencyIcon src="' + contextRoot + '/images/currencyIcon/' + result[0].symbol + '.png" alt="">' + result[0].name + ' $<td><font color="red">' + result[0].price.toFixed(2)) + '</font><td>';
+                 }
+                 else{
+                 $('#mar1').html('<img class=currencyIcon src="' + contextRoot + '/images/currencyIcon/' + result[0].symbol + '.png" alt="">' + result[0].name + ' $<td><font color="green">' + result[0].price.toFixed(2)) + '</font><td>';
+				 };
+				 
+				 if(value2 < 0){
+                 $('#mar2').html('<img class=currencyIcon src="' + contextRoot + '/images/currencyIcon/' + result[1].symbol + '.png" alt="">' + result[1].name + ' $<td><font color="red">' + result[1].price.toFixed(2)) + '</font><td>';
+                 }
+                 else{
+				 $('#mar2').html('<img class=currencyIcon src="' + contextRoot + '/images/currencyIcon/' + result[1].symbol + '.png" alt="">' + result[1].name + ' $<td><font color="green">' + result[1].price.toFixed(2)) + '</font><td>';
+				 };
+				 
+				 if(value3 < 0){
+                 $('#mar3').html('<img class=currencyIcon src="' + contextRoot + '/images/currencyIcon/' + result[2].symbol + '.png" alt="">' + result[2].name + ' $<td><font color="red">' + result[2].price.toFixed(2)) + '</font><td>';
+                 }
+                 else{
+				 $('#mar3').html('<img class=currencyIcon src="' + contextRoot + '/images/currencyIcon/' + result[2].symbol + '.png" alt="">' + result[2].name + ' $<td><font color="green">' + result[2].price.toFixed(2)) + '</font><td>';
+				 };
+				 
+				 if(value4 < 0){
+                 $('#mar4').html('<img class=currencyIcon src="' + contextRoot + '/images/currencyIcon/' + result[3].symbol + '.png" alt="">' + result[3].name + ' $<td><font color="red">' + result[3].price.toFixed(2)) + '</font><td>';
+                 }
+                 else{
+				 $('#mar4').html('<img class=currencyIcon src="' + contextRoot + '/images/currencyIcon/' + result[3].symbol + '.png" alt="">' + result[3].name + ' $<td><font color="green">' + result[3].price.toFixed(2)) + '</font><td>';
+				 };
+				 
+				 if(value5 < 0){
+                 $('#mar5').html('<img class=currencyIcon src="' + contextRoot + '/images/currencyIcon/' + result[4].symbol + '.png" alt="">' + result[4].name + ' $<td><font color="red">' + result[4].price.toFixed(2)) + '</font><td>';
+                 }
+                 else{
+				 $('#mar5').html('<img class=currencyIcon src="' + contextRoot + '/images/currencyIcon/' + result[4].symbol + '.png" alt="">' + result[4].name + ' $<td><font color="green">' + result[4].price.toFixed(2)) + '</font><td>';
+				 };
+				 
+				 if(value6 < 0){
+                 $('#mar6').html('<img class=currencyIcon src="' + contextRoot + '/images/currencyIcon/' + result[5].symbol + '.png" alt="">' + result[5].name + ' $<td><font color="red">' + result[5].price.toFixed(2)) + '</font><td>';
+                 }
+                 else{
+				 $('#mar6').html('<img class=currencyIcon src="' + contextRoot + '/images/currencyIcon/' + result[5].symbol + '.png" alt="">' + result[5].name + ' $<td><font color="green">' + result[5].price.toFixed(2)) + '</font><td>';
+				 };
+				 
+				 if(value7 < 0){
+                 $('#mar7').html('<img class=currencyIcon src="' + contextRoot + '/images/currencyIcon/' + result[6].symbol + '.png" alt="">' + result[6].name + ' $<td><font color="red">' + result[6].price.toFixed(2)) + '</font><td>';
+                 }
+                 else{
+				 $('#mar7').html('<img class=currencyIcon src="' + contextRoot + '/images/currencyIcon/' + result[6].symbol + '.png" alt="">' + result[6].name + ' $<td><font color="green">' + result[6].price.toFixed(2)) + '</font><td>';
+				 };
+				 
+				 if(value8 < 0){
+                 $('#mar8').html('<img class=currencyIcon src="' + contextRoot + '/images/currencyIcon/' + result[7].symbol + '.png" alt="">' + result[7].name + ' $<td><font color="red">' + result[7].price.toFixed(2)) + '</font><td>';
+                 }
+                 else{
+				 $('#mar8').html('<img class=currencyIcon src="' + contextRoot + '/images/currencyIcon/' + result[7].symbol + '.png" alt="">' + result[7].name + ' $<td><font color="green">' + result[7].price.toFixed(2)) + '</font><td>';
+				 };
+				 
+				 if(value9 < 0){
+                 $('#mar9').html('<img class=currencyIcon src="' + contextRoot + '/images/currencyIcon/' + result[8].symbol + '.png" alt="">' + result[8].name + ' $<td><font color="red">' + result[8].price.toFixed(2)) + '</font><td>';
+                 }
+                 else{
+				 $('#mar9').html('<img class=currencyIcon src="' + contextRoot + '/images/currencyIcon/' + result[8].symbol + '.png" alt="">' + result[8].name + ' $<td><font color="green">' + result[8].price.toFixed(2)) + '</font><td>';
+				 };
+				 
+				 if(value10 < 0){
+                 $('#mar10').html('<img class=currencyIcon src="' + contextRoot + '/images/currencyIcon/' + result[9].symbol + '.png" alt="">' + result[9].name + ' $<td><font color="red">' + result[9].price.toFixed(2)) + '</font><td>';
+                 }
+                 else{
+				 $('#mar10').html('<img class=currencyIcon src="' + contextRoot + '/images/currencyIcon/' + result[9].symbol + '.png" alt="">' + result[9].name + ' $<td><font color="green">' + result[9].price.toFixed(2)) + '</font><td>';
+				 };
+				 
+				
                 //注入折線圖至id=canvas
                 var xmlHttp = new XMLHttpRequest();
                 var url = "http://localhost:8080/coinshell/historical/get30days?currencyName=" + value.symbol;
