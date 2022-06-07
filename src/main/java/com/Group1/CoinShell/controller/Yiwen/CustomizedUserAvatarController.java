@@ -29,32 +29,32 @@ public class CustomizedUserAvatarController {
 		return true;
 	}
 	
-	@PostMapping("administrator/account/uploadcua")
+	@PostMapping("uploadcua")
 	public String addNewAvatar(@RequestParam("alias")String aliasAvatar, 
 								  @RequestParam("file")MultipartFile  userAvatar) {
 		CustomizedUserAvatar cua = new CustomizedUserAvatar();
 		cua.setAliasAvatar(aliasAvatar);
 		try {
-			byte[] bytes = userAvatar.getBytes();   //如果改用 varbinary 的話, base64就要改名成 MultipartFile file(formerly userAvatarBase64)
+			byte[] bytes = userAvatar.getBytes(); 
 			cua.setUserAvatar(bytes);
 		}catch (IOException e) {
 			e.printStackTrace();
 		}
 		cuaDao.save(cua);
-		return "redirect:/administrator/account";
+		return "redirect:/adm-showAllAvatars";
 	}
 	
-	@GetMapping("administrator/account/editcua")
+	@GetMapping("/editcua")
 	public ModelAndView changePageToEditAvatar(@RequestParam("id")Integer id) {
 		CustomizedUserAvatar cua = cuaService.findAvatarById(id);
 		return new ModelAndView("backend/account/editcua","cua", cua);
 	}
 	
 	//DeletebyId
-	@GetMapping("administrator/account/deletecua")
+	@GetMapping("/deletecua")
 	public String deleteAvatar(@RequestParam("id")Integer id) {
 		cuaService.deleteAvatarById(id);
-		return "redirect:/administrator/account";
+		return "redirect:/adm-showAllAvatars";
 	}
 	
 
@@ -63,12 +63,12 @@ public class CustomizedUserAvatarController {
 		return "backend/store/one_cua";
 	}
 	
-	@PostMapping("administrator/account/editcua")
+	@PostMapping("/editcua")
 	public String editAvatar (@RequestParam("alias") String aliasAvatar, 
 							  @RequestParam("file") byte[] userAvatar,
 							  @RequestParam("id") Integer id) {
 		cuaService.updateAvatarById(aliasAvatar, userAvatar, id);
-		return "redirect:/administrator/account/showAllAvatars";
+		return "redirect:/adm-showAllAvatars";
 	}
  
 

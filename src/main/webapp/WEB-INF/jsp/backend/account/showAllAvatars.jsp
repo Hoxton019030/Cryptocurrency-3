@@ -8,33 +8,39 @@
 <head>
 <meta charset="UTF-8">
 <title>圖像管理 | CoinShell Backend</title>
+<link rel="stylesheet" href="${contextRoot}/css/backendNews.css">
 </head>
 
     <body>
         <h1>使用者頭像列表</h1>
-        <div id="text-search">
-            <form action="search" method="get">
-                搜尋:<input type="text" name="name">
-                <input type="submit" value="開始搜尋">
-            </form>
+ 		<button class="btn btn-success" ><a href="${contextRoot}/adm-addAvatar" style="color:white; text-decoration: none;">Add Avatar</a></button>
 
+    <form class="form-inline my-1 my-lg-0">
+		<div class="input-group">
+			<input id="text-search" class="form-control pl-2 p-0" type="text" aria-label="Search">
+			<div class="input-group-append">
+				<input type="button" name="submit" value="Search" id="searchNews" class="btn btn-outline-dark my-2 my-sm-0" />
+            </div>
         </div>
+    </form>
+
         <div id="cuaList">
-            <table>
-                <thead>
+            <table class="table table-hover">
+
+                <thead class="bg-primary">
                     <tr>
-                        <th>ID</th>
-                        <th>Alias avatar</th>
-                        <th>Avatar photo</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
+                        <th scope="col" class="avatarid">ID</th>
+                        <th scope="col" class="alias">Alias Avatar</th>
+                        <th scope="col" class="avatar">Avatar Photo</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Delete</th>
                     </tr>
                 </thead>
+
                 <tbody>
 
                 </tbody>
             </table>
-
 
 
         </div>
@@ -53,11 +59,10 @@
                             <td>` + value.id + `</td>
                             <td>` + value.aliasAvatar + `</td>
                             <td><img src="data:image/gif;base64,` + value.userAvatar + `" width=65px hight=65px></td>
-                            <td> <a href="editcua?id=` + value.id + `">編輯</a></td>
-                            <td ><a href="deletecua?id=` + value.id + `">刪除</a> </td> 
+                            <td> <button class="btn btn-info" ><a href="editcua?id=` + value.id + `"style="color:white; text-decoration: none;">Update</a></td>
+                            <td ><button class="btn btn-danger" ><a href="deletecua?id=` + value.id + `"style="color:white; text-decoration: none;">Delete</a> </button> </td> 
                                 </tr>
                                 `
-
                             )
                         })
                     },

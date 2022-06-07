@@ -12,11 +12,15 @@
 <body>
 <h2>修改使用者圖像</h2>
 
-<form action="editCommodity" method="post">
- <br> Avatar Id : <input type="text" name="id" value="${cua.id}">
-<br> Avatar Nickname: <input type="text" name="alias" value="${cua.aliasAvatar}">
-           
-<input type="submit" value="送出">
+<form action="editcua" method="post">
+
+Avatar Id: 
+<input type="text" name="id" value="${cua.id}">
+
+<br> 
+
+Avatar Nickname: <input type="text" name="alias" value="${cua.aliasAvatar}">   
+<input type="submit" class="btn btn-info" value="Update Alias-Avatar">
 </form>
 
 

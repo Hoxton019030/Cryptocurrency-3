@@ -13,7 +13,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="${contextRoot}/javascripts/bootstrap.bundle.min.js"></script>
 <meta charset="UTF-8">
-<title>news</title>
+<title>新聞 | CoinShell Backend</title>
 </head>
 <body>
 <p />
@@ -28,13 +28,13 @@
                 <th scope="col" style="width:20px;">Add</th>
             </tr>
         </thead>
-    </table>
             <tr>
             <td><input type="text" size="55px" id="newsAddTitle"></td>
             <td><input type="text" size="85px" id="newsAddUrl"></td>
             <td><input type="text" size="85px" id="newsAddImgUrl"></td>
             <td><input type="button" style="width:100px;"class="btn btn-success" value="Add" onClick="add()"></td>
             </tr>
+    </table>
             
     <table class="table table-hover" id="newsUpdateTable">
         <thead class="bg-info">
