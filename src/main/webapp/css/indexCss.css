@@ -195,3 +195,44 @@ th {
 	background-color: #3e5293;
 	color: #70f6df;
 }
+
+.marqee {
+ height: 1.5em;
+ margin: 0 auto;
+ overflow: hidden; 
+ position: relative;
+ height: 35px;
+ 
+}
+
+.marqee > ul {
+ padding-left: 0;
+ display: flex;
+ list-style-type: none;
+ animation: marqee 50s linear infinite;
+ position: absolute;
+}
+
+.marqee > ul > li {
+ white-space: nowrap;
+ margin-right:3em;
+ font-weight: bold;
+/*  color: yellow; */
+}
+@keyframes marqee {
+ 0% {
+  left: 100%;
+  transform: translateX(0%);
+ }
+
+ 100% {
+  left: 0;
+  transform: translateX(-100%);
+ }
+}
+
+.margg{
+width:2000px;
+height: 60px;
+background-color: rgb(255,255,255)
+}
