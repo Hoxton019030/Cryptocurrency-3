@@ -250,6 +250,7 @@
 	<script>
 		var memId = '${login.id}';
 		console.log("memId=" + memId);
+		
 			setNews();
 		$(document).ready(function() {
 	   		upCoin(memId);
@@ -443,7 +444,7 @@
 		    var n = 0;
 		    for(i=0;i<=7;i++){   
 		        n = Math.floor(Math.random()*20);  
-		        if(status.indexOf(n)>0){     
+		        if(status.indexOf(n)>1){     
 		        i-=1;
 		        continue;
 		        }

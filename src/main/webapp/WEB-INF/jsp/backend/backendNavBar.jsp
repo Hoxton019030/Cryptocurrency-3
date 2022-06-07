@@ -25,13 +25,21 @@
 <script src="https://kit.fontawesome.com/0ef2a35b44.js" crossorigin="anonymous"></script>
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+
 <style type="text/css">
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;600;700;900&display=swap');
+
 .navbar-custom{
 	background-color: black;
 }
 li{
 	font-size:40px;
+	font-weight: 350;
+	font-family: 'Noto Serif TC', serif;
 	}
+ul {
+	margin: 0 auto;
+}
 </style>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>

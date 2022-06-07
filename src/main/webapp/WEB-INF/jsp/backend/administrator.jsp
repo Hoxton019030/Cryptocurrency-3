@@ -10,23 +10,22 @@
     <link rel="stylesheet" type="text/css" href="${contextRoot}/css/backend.css">
     
         <meta charset="UTF-8">
-        <title>後台人員管理介面</title>
+        <title>Backend | Coinshell</title>
     </head>
 
     <body> 
     
 
     
-    <h1>後台人員管理介面</h1>
+    <h1>後台人員管理介面 </h1>
+    <h3>Backend Interface for Admins</h3>
+ 
 
 
        <ul>
        <li><a href="administrator/store">商店商品增刪查改頁面</a></li>
        <li><a href="administrator/news">新聞增刪查改頁面</a></li>
        <li><a href="administrator/article">文章刪查改頁面</a></li>
-       <li></li>
-       <li></li>
-       <li></li>
        <li></li>
        <li><a href="administrator/account">使用者與會員頭像增刪查詢修改</a></li>
        
