@@ -53,5 +53,12 @@ public class CommodityService {
 		Commodity commodity = dao.findCommodityById(id);
 		cart.addCommodity(commodity);
 	}
+	
+	public void deleteCommodity(Integer id,Cart cart){
+		if(cart == null) {
+			System.out.println("購物車為空");
+		}
+		cart.getCommodityMap().remove(id);
+	}
 
 }

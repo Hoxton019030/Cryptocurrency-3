@@ -104,6 +104,13 @@ public class CommodityController {
 		return "/store/store";
 	}
 	
+	@GetMapping("deleteCart")
+	public String deleteCart(HttpSession session, @RequestParam("id")Integer id) {
+		Cart cart =(Cart)session.getAttribute("cart");
+		service.deleteCommodity(id, cart);
+		return "/store/cart";
+	}
+	
 	@PostMapping("goCart")
 	public String goCart() {
 		return "/store/cart";
