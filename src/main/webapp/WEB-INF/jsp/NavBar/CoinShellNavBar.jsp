@@ -40,7 +40,7 @@
 					<!-- Start of the nv-->
 					<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
 						<a class="navbar-brand" href="${contextRoot}"><img
-								src="${contextRoot}/images/NavBarImg/CoinShell.png" style="width: 200px;"
+								src="${contextRoot}/images/NavBarImg/CoinShell.png" style="width: 150px;"
 								alt="logo"></a>
 						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
 							aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

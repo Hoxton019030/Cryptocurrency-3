@@ -231,7 +231,7 @@ function add() {
 	})
 }
  
-// function del
+// function del    // obj 是對應到 上面 function 的 this
 function del(obj) {
 	var r = confirm("確定刪除嗎?");
 	if (r == true) {
@@ -281,9 +281,69 @@ function loadAccountByName(){
 }
 
 // function update
+function update(obj) {
+	var id = $(obj).val();
+	$.ajax({
+		url: "http://localhost:8080/coinshell/memId?id=" + id,
+		contentType: 'application/json; charset=UTF-8',
+		dataType: 'json',
+		method: 'get',
+		success: function (result) {
+			$('#accountUpdateTable tr td').remove();
+			console.log(result)
+			$.each(result, function(index, value) {
+				List = '';
+
+				accountList += '<tr>'
+				accountList += '<td>' + value.id + '</td>'
+				accountList += '<td><input type="text" size="42%" id="accountUpdateTitle" value="' + value.name + '"></td>'
+				accountList += '<td><input type="text" size="81%" id="accountUpdateUrl" value="' + value.email + '"></td>'
+				accountList += '<td><input type="text" size="81%" id="accountUpdateImgUrl" value="' + value.password + '"></td>'
+
+				accountList += '<td>' + value.id + '"onClick="upSave(this)">Update</button></td>'
+				accountList += '</tr>';
+
+				$('#accountUpdateTable tr').append(accountList);
+				document.querySelector('#test').scrollIntoView();
+			})
+		},
+		error: function (err) {
+			console.log(err)
+		}
+	})
+}
 
 // function upSave
+function upSave(obj) {
+	var id = $(obj).val();
+	console.log("id====" + id)
+	var name = document.getElementById("accountUpdateName").value;
+	var email = document.getElementById("accountUpdateEmail").value;
+	var password = document.getElementById("accountUpdateImgUrl").value;
 
+	var param = {
+		"id" :  id,
+		"name" : name,
+		"email" : email,
+		"password" : password,
+		}
+	$.ajax({
+		url: 'http://localhost:8080/coinshell/account/upSave',
+		contentType: 'application/json; charset=UTF-8',
+		dataType: 'json',
+		method: 'post',
+		data: JSON.stringify(param),
+		success: function(result) {
+			console.log(result)
+			console.log("成功");
+			parent.location.reload();
+		},
+		error: function(err) {
+			console.log(err)
+			console.log("失敗");
+		}
+	})
+}
 
 
 </script>

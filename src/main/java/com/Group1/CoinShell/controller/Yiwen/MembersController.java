@@ -245,12 +245,39 @@ public class MembersController {
 		return SelectAccount;
 	}
 	
-
+	/**
+	 * 
+	 */
+	@PostMapping("/account/upSave")
+	public Map<String, String> upSaveAccount(@RequestBody OkrDTO dto){
+		Date date = new Date();
+		System.out.println("Id: " + dto.getId());
+		System.out.println("Name: " + dto.getName());
+		System.out.println("Email: " + dto.getEmail());
+		System.out.println("Password: " + dto.getPassword());
+		
+		Members mem = new Members();
+		mem.setId(dto.getId());
+		mem.setCustomizedUserName(dto.getName());
+		mem.seteMail(dto.getEmail());
+		mem.setPassword(dto.getPassword());
+		mem.setJoinTime(date);
+		mem.setCustomizedUserAvatar(5);
+		mem.setMyShell(1000);
+		mem.setCoin(1000);
+		
+		memService.save(mem);
+		
+		Map<String, String> result = new HashMap<String, String>();
+		result.put("status", "200");
+		return result;
+	}
 	
-//	@GetMapping("account/resetPassword")
-//	public String resetPassword
-//	(@RequestParam("id"))
-	
+	@GetMapping("/memId")
+	public List<Members> memList(@RequestParam Integer id){
+		List<Members> mem = memService.findMemberById2(id);
+		return mem;
+	}
 	
 
 }

@@ -12,8 +12,10 @@
 </head>
 
     <body>
-        <h1>使用者頭像列表</h1>
- 		<button class="btn btn-success" ><a href="${contextRoot}/adm-addAvatar" style="color:white; text-decoration: none;">Add Avatar</a></button>
+	<div class="jumbotron col-8 mt-2" style="margin: 0 auto;">
+		<h1 class="display-6">使用者頭像列表</h1>
+		<hr class="my-4">
+ 		<a href="${contextRoot}/adm-addAvatar" style="color:white; text-decoration: none;"><button class="btn btn-success btn-lg btn-block mb-3">Add Avatar</button></a>
 
     <form class="form-inline my-1 my-lg-0">
 		<div class="input-group">
@@ -25,7 +27,7 @@
     </form>
 
         <div id="cuaList">
-            <table class="table table-hover">
+            <table class="table table-hover table-bordered">
 
                 <thead class="bg-primary">
                     <tr>
@@ -41,7 +43,7 @@
 
                 </tbody>
             </table>
-
+</div>
 
         </div>
         <script>

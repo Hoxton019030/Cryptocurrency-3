@@ -44,10 +44,23 @@ public class CustomizedUserAvatarController {
 		return "redirect:/adm-showAllAvatars";
 	}
 	
+	/**
+	 * localhost:8080/coinshell/editcua?id=XX
+	 * @param id
+	 * @return
+	 */
 	@GetMapping("/editcua")
 	public ModelAndView changePageToEditAvatar(@RequestParam("id")Integer id) {
 		CustomizedUserAvatar cua = cuaService.findAvatarById(id);
 		return new ModelAndView("backend/account/editcua","cua", cua);
+	}
+	
+	@PostMapping("/editcua")
+	public String editAvatar (@RequestParam("alias") String aliasAvatar, 
+							  @RequestParam("file") byte[] userAvatar,
+							  @RequestParam("id") Integer id) {
+		cuaService.updateAvatarById(aliasAvatar, userAvatar, id);
+		return "redirect:/adm-showAllAvatars";
 	}
 	
 	//DeletebyId
@@ -63,13 +76,7 @@ public class CustomizedUserAvatarController {
 		return "backend/store/one_cua";
 	}
 	
-	@PostMapping("/editcua")
-	public String editAvatar (@RequestParam("alias") String aliasAvatar, 
-							  @RequestParam("file") byte[] userAvatar,
-							  @RequestParam("id") Integer id) {
-		cuaService.updateAvatarById(aliasAvatar, userAvatar, id);
-		return "redirect:/adm-showAllAvatars";
-	}
+
  
 
 }
