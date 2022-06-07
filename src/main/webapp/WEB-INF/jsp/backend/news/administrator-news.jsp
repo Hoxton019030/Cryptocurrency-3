@@ -22,36 +22,36 @@
 	<table class="table table-hover" id="newsAddTable">
         <thead class="bg-success">
             <tr>
-                <th scope="col" style="width:105px;">Title</th>
-                <th scope="col" style="width:150px;">Url</th>
-                <th scope="col" style="width:150px;">ImgUrl</th>
-                <th scope="col" style="width:20px;">Add</th>
+                <th scope="col" style="width:25%;">Title</th>
+                <th scope="col" style="width:35%;">Url</th>
+                <th scope="col" style="width:35%;">ImgUrl</th>
+                <th scope="col" style="width:5%;">Add</th>
             </tr>
         </thead>
             <tr>
-            <td><input type="text" size="55px" id="newsAddTitle"></td>
-            <td><input type="text" size="85px" id="newsAddUrl"></td>
-            <td><input type="text" size="85px" id="newsAddImgUrl"></td>
-            <td><input type="button" style="width:100px;"class="btn btn-success" value="Add" onClick="add()"></td>
+            <td style="width:25%;"><input type="text" size="55%" id="newsAddTitle"></td>
+            <td style="width:35%;"><input type="text" size="81%" id="newsAddUrl"></td>
+            <td style="width:35%;"><input type="text" size="81%" id="newsAddImgUrl"></td>
+            <td style="width:5%;"><input type="button" style="width:100%;" class="btn btn-success" value="Add" onClick="add()"></td>
             </tr>
     </table>
             
     <table class="table table-hover" id="newsUpdateTable">
         <thead class="bg-info">
             <tr>
-                <th scope="col" style="width:1px;">ID</th>
-                <th scope="col" style="width:80px;">Title</th>
-                <th scope="col" style="width:145px;">Url</th>
-                <th scope="col" style="width:145px;">ImgUrl</th>
-                <th scope="col" style="width:28px;">Update</th>
+                <th scope="col" style="width:4%;">ID</th>
+                <th scope="col" style="width:20%;">Title</th>
+                <th scope="col" style="width:35%;">Url</th>
+                <th scope="col" style="width:35%;">ImgUrl</th>
+                <th scope="col" style="width:6%;">Update</th>
             </tr>
         </thead>
         	<tr>
                <td>ID</td>
-               <td><input type="text" style="width:330px;" id="newsUpdateTitle"></td>
-               <td><input type="text" style="width:640px;" id="newsUpdateUrl"></td>
-               <td><input type="text" style="width:640px;" id="newsUpdateImgUrl"></td>
-               <td><button  style="width:100px;"class="btn btn-info" onClick="">Update</button></td>
+               <td><input type="text" size="42%" id="newsUpdateTitle"></td>
+               <td><input type="text" size="81%" id="newsUpdateUrl"></td>
+               <td><input type="text" size="81%" id="newsUpdateImgUrl"></td>
+               <td><button  style="width:100%;"class="btn btn-info" onClick="">Update</button></td>
             </tr>
     </table>
                                     
@@ -64,7 +64,7 @@
             </div>
         </div>
         <hr />
-                <nav aria-label="Page navigation example">
+         <nav aria-label="Page navigation example">
             <ul class="pagination" id="pageid">
             </ul>
         </nav>
@@ -214,15 +214,15 @@ function pageBtn (page){
             	
 //             	newsList += '<tr>'
 //             	newsList += '<td>' + value.id + '</td>'
-//                 newsList += '<td class="title">' + value.title + '</td>'
-//                 newsList += `<td><a href="" onclick="window.open('` + value.url + `')">` + value.url + `</a></td>`
+//              newsList += '<td class="title">' + value.title + '</td>'
+//              newsList += `<td><a href="" onclick="window.open('` + value.url + `')">` + value.url + `</a></td>`
 // 	            newsList += '<td><img class="newsImg" src="' + value.imgUrl + '"alt=""><a href="' + value.imgUrl + '"></a></td>'
-//                 newsList += '<td>' + value.date + '</td>'
-//                 newsList += '<td><button id="up'  + value.id + '" class="btn btn-info" value="' + value.id + '" onClick="update(this)">Update</button></td>'
-//                 newsList += '<td><button id="del' + value.id + '" class="btn btn-danger"  value="' + value.id + '" onClick="del(this)">Delete</button></td>'
-//                 newsList += '</tr>';
+//              newsList += '<td>' + value.date + '</td>'
+//              newsList += '<td><button id="up'  + value.id + '" class="btn btn-info" value="' + value.id + '" onClick="update(this)">Update</button></td>'
+//              newsList += '<td><button id="del' + value.id + '" class="btn btn-danger"  value="' + value.id + '" onClick="del(this)">Delete</button></td>'
+//              newsList += '</tr>';
                 
-//                 $('#newsTable').append(newsList);
+//              $('#newsTable').append(newsList);
 //             })
 //         },
 //         error: function(err) {
@@ -325,9 +325,9 @@ function update(obj) {
             	
             	newsList += '<tr>'
             	newsList += '<td>' + value.id + '</td>'
-                newsList += '<td><input type="text" style="width:320px;" id="newsUpdateTitle" value="' + value.title + '"></td>'
-                newsList += '<td><input type="text" style="width:620px;" id="newsUpdateUrl" value="' + value.url + '"></td>'
-	            newsList += '<td><input type="text" style="width:620px;" id="newsUpdateImgUrl" value="' + value.imgUrl + '"></td>'
+                newsList += '<td><input type="text" size="42%" id="newsUpdateTitle" value="' + value.title + '"></td>'
+                newsList += '<td><input type="text" size="81%" id="newsUpdateUrl" value="' + value.url + '"></td>'
+	            newsList += '<td><input type="text" size="81%" id="newsUpdateImgUrl" value="' + value.imgUrl + '"></td>'
                 newsList += '<td><button  style="width:100px;" class="btn btn-info" value="' + value.id + '"onClick="upSave(this)">Update</button></td>'
                 newsList += '</tr>';
                 

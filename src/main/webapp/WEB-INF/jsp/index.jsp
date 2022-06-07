@@ -444,12 +444,12 @@
 		    var n = 0;
 		    for(i=0;i<=7;i++){   
 		        n = Math.floor(Math.random()*20);  
-		        if(status.indexOf(n)>1){     
-		        i-=1;
-		        continue;
+		        if(status.indexOf(n) == -1){     
+		        status.push(n);
 		        }
 		        else{
-		        status.push(n);
+		        i-=1;
+// 		        continue;
 		        };
 		    };
 		    var num1 = status[0];
