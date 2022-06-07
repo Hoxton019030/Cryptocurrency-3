@@ -9,6 +9,20 @@
 <meta charset="UTF-8">
 <title>圖像管理 | CoinShell Backend</title>
 <link rel="stylesheet" href="${contextRoot}/css/backendNews.css">
+<style type="text/css">
+.zoom:hover {
+  -ms-transform: scale(3);
+  -webkit-transform: scale(3); 
+  transform: scale(3); 
+}
+
+td {
+	height: 150px;
+	    text-align: center; 
+    vertical-align: middle;
+}
+
+</style>
 </head>
 
     <body>
@@ -60,7 +74,7 @@
                                 `<tr>
                             <td>` + value.id + `</td>
                             <td>` + value.aliasAvatar + `</td>
-                            <td><img src="data:image/gif;base64,` + value.userAvatar + `" width=65px hight=65px></td>
+                            <td><img class="zoom" src="data:image/gif;base64,` + value.userAvatar + `" width=65px hight=65px></td>
                             <td> <button class="btn btn-info" ><a href="editcua?id=` + value.id + `"style="color:white; text-decoration: none;">Update</a></td>
                             <td ><button class="btn btn-danger" ><a href="deletecua?id=` + value.id + `"style="color:white; text-decoration: none;">Delete</a> </button> </td> 
                                 </tr>

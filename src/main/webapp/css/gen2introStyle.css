@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+
+
+body{
+    margin-top: 82px;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+ 
+
+
+
+
+
+
+
+
+.instagram_item{
+    position: relative;
+    height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+}
+
+.instagram_item:after{
+    position: absolute;
+    left: 0;
+    top: 0;
+    height:100%;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+    opacity: 0;
+    content: '';
+    z-index: 1;
+    transition: all 0.3s;
+}
+
+.instagram_text {
+    position: absolute;
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 3;
+    transition: all 0.3s;
+}
+
+.instagram_text i{
+    font-size: 50px;
+    color:#F56040;
+    cursor: pointer;
+}
+
+.instagram_text a{
+    font-size: 16px;
+    color:#0d0d0d;
+    font-weight: 500;
+    display: block;
+    margin-top: 10px;
+}
+
+.instagram_item:hover .instagram_text{
+    opacity: 1;
+    visibility: visible;
+}
+
+.instagram_item:hover:after{
+    opacity: 1;
+}
+
+.footer .footer_about p{
+    margin-bottom: 20px;
+    padding-right: 80px;
+}
+
+.footer .footer_logo{
+    margin-bottom: 20px;
+}
+
+.footer .footer_logo a{
+    font-size: 35px;
+    color: #000;
+}
+
+.footer .footer_logo a span{
+    color: #0083ce;
+    font-size: 35px;
+    font-weight: 700;
+}
+
+.footer .footer_widget{
+    margin-bottom: 30px;
+}
+
+.footer .footer_widget h6{
+    color: #111;
+    font-weight: 600;
+    text-align: uppercase;
+    margin-bottom: 12px;
+}
+
+.footer .footer_widget ul li{
+    list-style: none;
+    display: block;
+}
+
+.footer .footer_widget ul li a{
+    font-size: 14px;
+    color: #666;
+    line-height: 30px;
+}
+ 
