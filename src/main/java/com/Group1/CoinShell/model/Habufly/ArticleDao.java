@@ -118,6 +118,13 @@ public interface ArticleDao extends JpaRepository<Article, Integer> {
 	@Modifying
 	@Query(value = "update article set good_Num -= 1 where id = :id", nativeQuery = true)
 	public void decreaseGoods(@Param(value="id")Integer id);
+
+	@Query(value = "select TOP 3 a.id,added,author_Id as authorId,comment_Num as commentNum,deleted, good_Num as goodNum,read_Num as readNum,tag,text,title,userAvatar, CustomizedUserName "
+			+ "from article as a left join "
+			+ "(Members as m inner join CustomizedUserAvatar as c on m.customizedUserAvatar = c.id) "
+			+ "on a.author_Id = m.id "
+			+ "ORDER BY goodNum desc", countQuery = "select count (*) from article where deleted = 'n'", nativeQuery = true)
+	public List<Map<String, Object>> findByGoods();
 	
 //	@Query(value = "select * from article where deleted = 'n'", countQuery = "select count (*) from article", nativeQuery = true)
 //	public Page<Article> findAllOrderByAddedDesc(Pageable page);

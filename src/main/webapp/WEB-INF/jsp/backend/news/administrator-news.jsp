@@ -64,7 +64,7 @@
             </div>
         </div>
         <hr />
-         <nav aria-label="Page navigation example">
+        <nav aria-label="Page navigation example">
             <ul class="pagination newsBtn" id="pageid">
             </ul>
         </nav>

@@ -111,8 +111,18 @@ public class ArticleController {
 		allAtc = aService.findByAuthorId(authorId);
 		return allAtc;
 	}
-	// http://localhost:8080/coinshell/article/viewAllAjaxByAuthorId?authorId=btc
+	// http://localhost:8080/coinshell/article/viewAllAjaxByAuthorId?authorId=1
 
+	@ResponseBody
+	@GetMapping("/article/viewArticleByGoods")
+	public List<Map<String,Object>> viewArticleByGoods() {
+		List<Map<String,Object>> allAtc;
+		
+		allAtc = aService.findByGoods();
+		return allAtc;
+	}
+	// http://localhost:8080/coinshell/article/viewArticleByGoods
+	
 	@GetMapping("/editArticle/{id}")
 	public String editArticle(Model model, @PathVariable("id") Integer id) {
 		Article atc = aService.findById(id);
@@ -134,7 +144,7 @@ public class ArticleController {
 		Article atc = aService.findById(id);
 		atc.setDeleted("y");
 		aService.save(atc);
-		return "redirect:/viewAllAjax";
+		return "redirect:/viewAllArticle";
 	}
 	
 	@ResponseBody
@@ -234,7 +244,7 @@ public class ArticleController {
 		Article atc = aService.findById(id);
 		atc.setDeleted("y");
 		aService.save(atc);
-		return "backend/article/viewAllArticle";
+		return "backend/article/viewAllArticleAdmin";
 	}
 	
 	@GetMapping("/undoArticleAdmin/{id}")
@@ -242,7 +252,7 @@ public class ArticleController {
 		Article atc = aService.findById(id);
 		atc.setDeleted("n");
 		aService.save(atc);
-		return "backend/article/viewAllArticle";
+		return "backend/article/viewAllArticleAdmin";
 	}
 
 	@ModelAttribute("tagList")

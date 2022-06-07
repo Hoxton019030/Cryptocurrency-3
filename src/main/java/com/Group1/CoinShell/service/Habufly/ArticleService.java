@@ -132,4 +132,9 @@ public class ArticleService {
 		dao.decreaseGoods(id);
 	}
 
+	public List<Map<String, Object>> findByGoods() {
+		List<Map<String,Object>> list = dao.findByGoods();
+		return list;
+	}
+
 }
