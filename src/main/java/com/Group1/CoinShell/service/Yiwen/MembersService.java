@@ -67,6 +67,11 @@ public class MembersService {
 		Members resMem = membersDao.findMemberById(Id);
 		return resMem;
 	}
+	
+	// findById  
+	public List<Members> findMemberById2 (Integer Id) {
+		return membersDao.findMemberById2(Id);
+	}
 		
 	// updateMemberById
 	public void updateMemberById(Integer coin, Integer customizedUserAvatar, String customizedUserName,
