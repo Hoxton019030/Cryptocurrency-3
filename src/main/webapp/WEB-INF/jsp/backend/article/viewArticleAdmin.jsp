@@ -19,7 +19,7 @@
 </head>
 <body>
 <div class="container mb-5 mt-5">
-    <div class="card">
+    <div class="card article-section">
         <div class="row">
             <div class="col-md-12">
                 <h1>${Article.title}</h1>
