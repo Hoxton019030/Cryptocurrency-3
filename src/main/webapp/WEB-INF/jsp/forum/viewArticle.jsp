@@ -446,9 +446,9 @@ function pageBtn(page){
     let str = '';
     const total = page.pageTotal;
     if(page.hasPage) {
-        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)-1)+`">Previous</a></li>`;
+        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)-1)+`">«</a></li>`;
     } else {
-        str += `<li class="page-item disabled"><span class="page-link">Previous</span></li>`;
+        str += `<li class="page-item disabled"><a class="page-link">«</a></li>`;
     }
     
     for(let i = 1; i <= total; i++){
@@ -460,9 +460,9 @@ function pageBtn(page){
     };
 
     if(page.hasNext) {
-        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)+1)+`">Next</a></li>`;
+        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)+1)+`">»</a></li>`;
     } else {
-        str += `<li class="page-item disabled"><span class="page-link">Next</span></li>`;
+        str += `<li class="page-item disabled"><a class="page-link">»</a></li>`;
     }
     pageidC.innerHTML = str;
 }
@@ -570,9 +570,9 @@ function pageBtnSm(page){
     const total = page.pageTotal;
     console.log("第幾頁"+page.currentPage);
     if(page.hasPage) {
-        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)-1)+`">Previous</a></li>`;
+        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)-1)+`">«</a></li>`;
     } else {
-        str += `<li class="page-item disabled"><span class="page-link">Previous</span></li>`;
+        str += `<li class="page-item disabled"><a class="page-link">«</a></li>`;
     }
     
     for(let i = 1; i <= total; i++){
@@ -584,9 +584,9 @@ function pageBtnSm(page){
     };
 
     if(page.hasNext) {
-        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)+1)+`">Next</a></li>`;
+        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)+1)+`">»</a></li>`;
     } else {
-        str += `<li class="page-item disabled"><span class="page-link">Next</span></li>`;
+        str += `<li class="page-item disabled"><a class="page-link">»</a></li>`;
     }
     
     console.log('pageidR'+page.id);

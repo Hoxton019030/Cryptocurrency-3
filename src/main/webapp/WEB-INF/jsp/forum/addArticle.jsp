@@ -9,6 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <c:set var="contextRoot" value="${pageContext.request.contextPath}"/>
+<link rel="stylesheet" href="${contextRoot}/css/article.css">
 <title>新增留言</title>
 <style type="text/css">
 body{
@@ -37,11 +38,12 @@ padding-top: 82px;
 							<form:input path="title" placeholder="請輸入文章標題⋯"/>
 						</div>
 						<div class="input-group">
-							<form:textarea wrap="Virtual" path="text" class="form-control" id="textarea" placeholder="請輸入文章內容⋯"/>							
+							<form:textarea wrap="Virtual" path="text" class="form-control" id="article-textarea" placeholder="請輸入文章內容⋯"/>							
 						</div>
 						<div>
 						<form:input path="readNum" value="0" type="hidden"/>
 						<form:input path="commentNum" value="0" type="hidden"/>
+						<form:input path="goodNum" value="0" type="hidden"/>
 						<form:input path="deleted" value="n" type="hidden"/>
 						<form:input path="authorId" value="${login.id}" type="hidden"/>
 						</div>
