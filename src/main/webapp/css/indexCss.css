@@ -76,7 +76,7 @@ body {
 }
 
 td {
-    width: 90px;
+    width:170px;
     height: 90px;
     font-weight: 650;
     text-align: center;
@@ -84,6 +84,10 @@ td {
 
 th {
 	text-align: center;
+}
+
+#d1,#d2,#d3{
+	display:inline-block;
 }
 
 .star,.bell{

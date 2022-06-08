@@ -54,6 +54,73 @@
 </div>
 <br />
 
+<!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container">
+  <div class="tradingview-widget-container__widget"></div>
+  <div class="tradingview-widget-copyright"><a href="https://tw.tradingview.com/markets/currencies/forex-cross-rates/" rel="noopener" target="_blank"></a></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-forex-cross-rates.js" async>
+  {
+  "width": 1800,
+  "height": 400,
+  "currencies": [
+    "EUR",
+    "USD",
+    "JPY",
+    "GBP",
+    "CHF",
+    "AUD",
+    "CAD",
+    "CNY",
+    "TWD"
+  ],
+  "isTransparent": false,
+  "colorTheme": "light",
+  "locale": "zh_TW"
+}
+  </script>
+</div>
+<!-- TradingView Widget END -->
+
+<!-- TradingView Widget BEGIN -->
+<!-- <div> -->
+<!--   <div class="tradingview-widget-container__widget"></div> -->
+<!--   <div id="d1" class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/BTCUSD/?exchange=BINANCEUS" rel="noopener" target="_blank"><span class="blue-text"></span></a></div> -->
+<!--   <div id="d2" class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/ETHUSD/?exchange=BINANCEUS" rel="noopener" target="_blank"><span class="blue-text"></span></a></div> -->
+<div>
+  <div id="d1"><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-info.js" async>
+  {
+  "symbol": "BINANCEUS:BTCUSD",
+  "width": "595",
+  "height": "230",
+  "locale": "en",
+  "colorTheme": "light",
+  "isTransparent": false
+}
+  </script></div>
+  
+  <div id="d2"><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-info.js" async>
+   {
+   "symbol": "BINANCEUS:ETHUSD",
+   "width": "595",
+   "height": "230",
+   "locale": "en",
+   "colorTheme": "light",
+   "isTransparent": false
+ }
+  </script></div>
+  
+  <div id="d3"><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-info.js" async>
+  {
+  "symbol": "BINANCEUS:USDTUSD",
+  "width": "595",
+  "locale": "en",
+  "colorTheme": "light",
+  "isTransparent": false
+}
+  </script></div>
+  </div>
+  <br />
+
             <table>
             <tr>
             <td class="margg">
