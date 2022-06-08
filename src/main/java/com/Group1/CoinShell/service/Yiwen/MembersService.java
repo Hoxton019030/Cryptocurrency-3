@@ -55,7 +55,7 @@ public class MembersService {
 		membersDao.deleteMemberById(id);
 	}
 		
-	// findMemberByName
+	// findMemberByName 模糊查詢
 	public List<Members> findMemberByName(String customizedUserName){
 		List<Members> memList = membersDao.findMemberByName(customizedUserName);
 		return memList;
@@ -66,6 +66,11 @@ public class MembersService {
 	public Members findMemberById (Integer Id) {
 		Members resMem = membersDao.findMemberById(Id);
 		return resMem;
+	}
+	
+	// findById  
+	public List<Members> findMemberById2 (Integer Id) {
+		return membersDao.findMemberById2(Id);
 	}
 		
 	// updateMemberById

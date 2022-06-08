@@ -92,7 +92,7 @@ body {
 	<!-- side bar 側邊欄位 -->
 	<div class="sidebar">
 		<a href="${contextRoot}/shop/myshell">My Shell</a> <a
-			href="${contextRoot}/shop/shop">Shop</a>
+			href="#">Shop</a>
 	</div>
 
 

@@ -14,19 +14,23 @@
             <link rel="stylesheet" href="/resources/demos/style.css">
             <link href="stylesheets/jquery-ui/base/jquery-ui.min.css" rel="stylesheet" />
             <link href="stylesheets/myStyleSheet.css" rel="stylesheet" />
+            <link rel="stylesheet" href="${contextRoot}/css/article.css">
             <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
             <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
             <link rel="stylesheet" type="text/css" href="${contextRoot}/css/individualCryptocurrencyInformationCss.css">
             <script src="${contextRoot}/javascripts/individualCryptocurrencyInformationJs.js">
+                
             </script>
-            <style>
-
+            <style type="text/css">
+                body{
+                padding-top: 82px;
+                }
             </style>
         </head>
 
         <body>
-
+            ${currencyInformation.percentChange24h}
             <div id="tabs">
                 <div class="container-fluid">
                     <div class="row">
@@ -137,7 +141,8 @@
                             <a href="#historical" id="page-historical">歷史資訊</a> </li>
                         <li>
                             <a href="#news" id="page-news">新聞</a> </li>
-
+                        <li>
+                            <a href="#article" id="page-article">相關討論</a> </li>
                     </ul>
 
                     <div id="overview">
@@ -176,10 +181,164 @@
                     <div id="news">
 
                     </div>
+                    <div id="article">
+                        <input type="hidden" id="tag" value="${currencyInformation.symbolOfCryptocurrency}" />
+                        <table class="table table-hover table-primary">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col" class="col-2">幣別</th>
+                                    <th scope="col" class="col-6">文章</th>
+                                    <th scope="col" class="col-2" style="text-align: center;">讚數/閱讀/評論</th>
+                                    <th scope="col" class="col-2">來自</th>
+                                </tr>
+                            </thead>
+                            <tbody class="sel" id="atcTable">
+                                
+                            </tbody>
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination" id="pageid">
+                                </ul>
+                            </nav>
+                        </table>
+                    </div>
 
                 </div>
 
 
         </body>
+        <script>
+var contextRoot = "http://localhost:8080/coinshell";
+var tag;
+var page = 1;
+let dataNow = {};
+loadAtc();
 
+function loadAtc(){
+    $(function() {
+        var tag = document.getElementById("tag").value;
+        console.log(tag);
+        fetch("http://localhost:8080/coinshell/article/viewAllAjax?tag=BTC").then(function(response) {
+            return response.json();
+            // console.log(response.json())
+        }).then(function(data) {
+            console.log(data);
+            dataNow = data;
+            pagination(data, 1)
+        })
+    })
+}
+
+function loadAtcByAuthorId(authorId){
+    $(function() {
+        console.log(authorId);
+        fetch("http://localhost:8080/coinshell/article/viewAllAjaxByAuthorId?authorId="+authorId).then(function(response) {
+            return response.json();
+            // console.log(response.json())
+        }).then(function(data) {
+            console.log(data);
+            dataNow = data;
+            pagination(data, 1)
+        })
+    })
+}
+
+pageid.addEventListener('click',switchPage);
+
+function switchPage(e){
+e.preventDefault();
+if(e.target.nodeName !== 'A') return;
+const page = e.target.dataset.page;
+pagination(dataNow, page);
+}
+
+function pagination(array, nowPage){
+                console.log(nowPage);
+                const dataTotal = array.length;
+                const perpage = 5;
+                const pageTotal = Math.ceil(dataTotal / perpage);
+                console.log(`全部資料:`+dataTotal+` 每一頁顯示:`+perpage+`筆`);
+                let currentPage = nowPage;
+                if (currentPage > pageTotal) {currentPage = pageTotal;}
+                const minData = (currentPage * perpage) - perpage + 1 ;
+                const maxData = (currentPage * perpage) ;
+                const data = [];
+                array.forEach((item, index) => {
+                    const num = index + 1;
+                    if ( num >= minData && num <= maxData) {
+                        data.push(item);
+                    }
+                })
+                console.log(data);
+                displayData(data)
+                const page = {
+                    pageTotal,
+                    currentPage,
+                    hasPage: currentPage > 1,
+                    hasNext: currentPage < pageTotal,
+                } 
+                console.log(page);
+                pageBtn (page)
+            }
+
+function displayData(data){
+    $("#atcTable").empty();
+    $.each(data, function(index, value) {
+                const added = new Date(Date.parse(value.added));
+                const MM = added.getMonth()+1;
+                const dd = added.getDate();
+                const HH = added.getHours();
+                const mm = added.getMinutes();
+                const weekIndex = added.getDay();
+                const weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+                const weekDayPrint = weekDay[weekIndex];  
+                const peek = value.text.substr(0,100);
+                // console.log(peek);
+                // console.log(array);
+                     $("#atcTable").append(`
+                        <tr class="table-info">
+                        <td>` + value.tag + `</td>
+                        <td><a href="`+contextRoot+`/viewArticle/` + value.id + `" style="display: block;"><div class="b-list"><div>` + value.title + `</div></a><p>` + peek + `....</p></div></td>
+                        <td align="center">
+                            <label><input type="checkbox" class="check" checked><span class="heart"><i class="fa-solid fa-heart"></i></span>`+value.goodNum+`</label>
+                            <i class="fa fa-eye" aria-hidden="true"></i>` + value.readNum + `
+                            <i class="fa fa-commenting-o" aria-hidden="true"></i>` + value.commentNum + `</td>
+                        </td>
+                        <td>
+                            <div class="b-list">
+                                <span><a href="#" style="display: block;" onclick="loadAtcByAuthorId(`+value.authorId+`)">` + value.CustomizedUserName + `</a></span>                                    
+                                <span class="text-black-50">`+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</span>
+                            </div>
+                        </td>
+                        </tr>
+                    `)
+                }
+              
+            )}
+
+function pageBtn (page){
+    let str = '';
+    const total = page.pageTotal;
+    if(page.hasPage) {
+        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)-1)+`">«</a></li>`;
+    } else {
+        str += `<li class="page-item disabled"><a class="page-link">«</a></li>`;
+    }
+    
+    for(let i = 1; i <= total; i++){
+        if(Number(page.currentPage) === i) {
+            str +=`<li class="page-item active"><a class="page-link" href="#" data-page="`+i+`">`+i+`</a></li>`;
+        } else {
+            str +=`<li class="page-item"><a class="page-link" href="#" data-page="`+i+`">`+i+`</a></li>`;
+        }
+    };
+
+    if(page.hasNext) {
+        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)+1)+`">»</a></li>`;
+    } else {
+        str += `<li class="page-item disabled"><a class="page-link">»</a></li>`;
+    }
+    pageid.innerHTML = str;    
+    console.log(str);
+}
+        </script>
         </html>

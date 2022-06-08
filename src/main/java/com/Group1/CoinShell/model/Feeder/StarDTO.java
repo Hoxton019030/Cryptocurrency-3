@@ -13,6 +13,14 @@ public class StarDTO {
 	private Integer coinId;
 	@JsonProperty("setPrice")
 	private Float setPrice;
+	@JsonProperty("id")
+	private Integer newsId;
+	@JsonProperty("title")
+	private String newsTitle;
+	@JsonProperty("url")
+	private String newsUrl;
+	@JsonProperty("imgUrl")
+	private String newsImgUrl;
 	
 	private String type;
 	
@@ -40,8 +48,30 @@ public class StarDTO {
 	public void setType(String type) {
 		this.type = type;
 	}
-	
-
+	public Integer getNewsId() {
+		return newsId;
+	}
+	public void setNewsId(Integer newsId) {
+		this.newsId = newsId;
+	}
+	public String getNewsTitle() {
+		return newsTitle;
+	}
+	public void setNewsTitle(String newsTitle) {
+		this.newsTitle = newsTitle;
+	}
+	public String getNewsUrl() {
+		return newsUrl;
+	}
+	public void setNewsUrl(String newsUrl) {
+		this.newsUrl = newsUrl;
+	}
+	public String getNewsImgUrl() {
+		return newsImgUrl;
+	}
+	public void setNewsImgUrl(String newsImgUrl) {
+		this.newsImgUrl = newsImgUrl;
+	}
 	
 	
 

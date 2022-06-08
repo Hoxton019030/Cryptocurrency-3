@@ -28,25 +28,56 @@ public interface CommentDao extends JpaRepository<Comment, Integer> {
 //		@Query(value = "select * from comment where article_id = :articleId and type = 'a' and deleted = 'n' ORDER BY added asc", nativeQuery = true)
 //		public List<Comment> findCommentByAtcAndType(@Param("articleId") Integer articleId);
 
-		@Query(value = "select c.id,added,article_id as articleId,comment_id as commentId,deleted,text,type,user_name as userName,user_id as userId,ava.userAvatarBase64 "
+		@Query(value = "select c.id,added,article_id as articleId,comment_id as commentId,deleted,text,type,user_name as userName,user_id as userId,ava.userAvatar "
 				+ "from comment as c "
 				+ "left join "
 				+ "(Members as m inner join CustomizedUserAvatar as ava on m.customizedUserAvatar = ava.id) "
-				+ "on c.user_id = m.id where article_id = :articleId and type = 'a' and deleted = 'n' ORDER BY added asc", nativeQuery = true)
+				+ "on c.user_id = m.id where article_id = :articleId and type = 'a' and deleted = 'n' ORDER BY added desc", nativeQuery = true)
 		public List<Map<String,Object>> findCommentByAtcAndType(@Param("articleId") Integer articleId);
+		
+		@Query(value = "select c.id,added,article_id as articleId,comment_id as commentId,deleted,text,type,user_name as userName,user_id as userId,ava.userAvatar "
+				+ "from comment as c "
+				+ "left join "
+				+ "(Members as m inner join CustomizedUserAvatar as ava on m.customizedUserAvatar = ava.id) "
+				+ "on c.user_id = m.id where article_id = :articleId and type = 'a' ORDER BY added desc", nativeQuery = true)
+		public List<Map<String,Object>> findCommentByAtcAndTypeAdmin(@Param("articleId") Integer articleId);
 		
 //		@Query(value = "select * from comment where article_id = :articleId and comment_Id = :commentId and type = 'b' and deleted = 'n' ORDER BY added asc", nativeQuery = true)
 //		public List<Comment> findReplyByAtcAndType(@Param("articleId") Integer articleId, @Param("commentId") Integer commentId);
 
-		@Query(value = "select c.id,added,article_id as articleId,comment_id as commentId,deleted,text,type,user_name as userName,user_id as userId,ava.userAvatarBase64 "
+		@Query(value = "select c.id,added,article_id as articleId,comment_id as commentId,deleted,text,type,user_name as userName,user_id as userId,ava.userAvatar "
 				+ "from comment as c "
 				+ "left join "
 				+ "(Members as m inner join CustomizedUserAvatar as ava on m.customizedUserAvatar = ava.id) "
-				+ "on c.user_id = m.id where article_id = :articleId and comment_Id = :commentId and type = 'b' and deleted = 'n' ORDER BY added asc", nativeQuery = true)
+				+ "on c.user_id = m.id where article_id = :articleId and comment_Id = :commentId and type = 'b' and deleted = 'n' ORDER BY added desc", nativeQuery = true)
 		public List<Map<String,Object>> findReplyByAtcAndType(@Param("articleId") Integer articleId, @Param("commentId") Integer commentId);
 		
-		@Query(value = "select count( * ) as count from comment where article_id = :articleId and type = :type", nativeQuery = true)
+		@Query(value = "select c.id,added,article_id as articleId,comment_id as commentId,deleted,text,type,user_name as userName,user_id as userId,ava.userAvatar "
+				+ "from comment as c "
+				+ "left join "
+				+ "(Members as m inner join CustomizedUserAvatar as ava on m.customizedUserAvatar = ava.id) "
+				+ "on c.user_id = m.id where article_id = :articleId and comment_Id = :commentId and type = 'b' ORDER BY added desc", nativeQuery = true)
+		public List<Map<String,Object>> findReplyByAtcAndTypeAdmin(@Param("articleId") Integer articleId, @Param("commentId") Integer commentId);
+		
+		@Query(value = "select count( * ) as count from comment where article_id = :articleId and type = :type and deleted = 'n'", nativeQuery = true)
 		public Integer checkCommentNumber(@Param("articleId") Integer articleId, @Param("type") String type);
+
+		
+		@Query(value = "select c.id,added,article_id as articleId,comment_id as commentId,deleted,text,type,user_name as userName,user_id as userId,ava.userAvatar,user_email as userEmail "
+				+ "from comment as c "
+				+ "left join "
+				+ "(Members as m inner join CustomizedUserAvatar as ava on m.customizedUserAvatar = ava.id) "
+				+ "on c.user_id = m.id where c.id = :id", nativeQuery = true)
+		public List<Map<String,Object>> findCRById(@Param("id")Integer id);
+
+		@Query(value = "update comment set deleted = 'y' where id = :id", nativeQuery = true)
+		public void deleteCR(Integer id);
+
+		@Query(value = "update comment set deleted = 'n' where id = :id", nativeQuery = true)
+		public void undoCR(Integer id);
+
+		@Query(value = "select * from comment where id = :id", nativeQuery = true)
+		public Comment findCommById(Integer id);
 
 //		@Query(value = "select * from comment where deleted = 'n' ORDER BY added desc", countQuery = "select count (*) from article", nativeQuery = true)
 //		public List<Comment> findAllOrderByAddedDesc();

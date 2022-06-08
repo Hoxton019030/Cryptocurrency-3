@@ -6,22 +6,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+<link rel="stylesheet" href="${contextRoot}/css/article.css">
+<meta charset="UTF-8">
 <title>${Article.title}</title>
 <style type="text/css">
     body{
     padding-top: 82px;
-    }
-    #article-content {
-        font-size: 16px;
-        white-space: pre-wrap; /*css-3*/ 
-        white-space: -moz-pre-wrap; /*Mozilla,since1999*/ 
-        white-space: -pre-wrap; /*Opera4-6*/ 
-        white-space: -o-pre-wrap; /*Opera7*/ 
-        word-wrap: break-word; /*InternetExplorer5.5+*/ 
-        margin-bottom:0;
-    } 
+    }    
 </style>
 </head>
 <body>
@@ -33,32 +25,34 @@
                 <h1>${Article.title}</h1>
                 <input id="aid" type="hidden" value="${Article.id}"/>
                 <input id="authorid" type="hidden" value="${Article.authorId}"/>
-                <span style="display: none;" id="editList">
-                    <a href="${contextRoot}/editArticle/${Article.id}">Edit</a>
-                    <a href="${contextRoot}/deleteArticle/${Article.id}" onclick="return confirm('確認刪除嗎?')">Delete</a>
+                <input id="atcAdded" type="hidden" value="${Article.added}"/>
+                <span style="display: none;" class="editFunction">
+                    <a href="${contextRoot}/editArticle/${Article.id}"><i class="fa fa-edit" aria-hidden="true"></i>Edit</a>
+                    <a href="${contextRoot}/deleteArticle/${Article.id}" onclick="return confirm('確認刪除嗎?')"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
                 </span>
-                <div class="d-flex flex-row">
-                    <img class="mr-3 rounded-circle" style="display:block; width:65px; height:65px" src="${img}"/>
+                <div class="d-flex flex-row divToGetImg">
+                    <img class="mr-3 rounded-circle" style="display:block; width:65px; height:65px" src="data:image/gif;base64,${img}"/>
                     <div class="d-flex flex-column">
                         <span class="name"><h3>${userName}</h3></span>
-                        <span class="date text-black-50">${Article.added}</span>
+                        <span class="date text-black-50" id="added"></span>
                     </div>
                 </div>
                 <div style="align-items: center;background-color: #dbf8ff;" class="mt-2 mb-2">
                     <pre id="article-content">${Article.text}</pre>
                 </div>
                 <div class="m-1">                    
+                    <span id="goodsSection"><label><input type="checkbox" class="check" onClick="doGoods(${Article.id}, ${login.id})"><span class="heart"><i class="fa-solid fa-heart"></i></span></label>${Article.goodNum}</span>
                     <button id="doComment" class="btn btn-primary btn-sm shadow-none">Comment</button>
                 </div>
                 <div id="respond">
                     <div class="comment-l bg-light p-2" style="display: none;">
-                        <div class="d-flex flex-row align-items-start">
-                            <img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+                        <div class="d-flex flex-row align-items-start divToGetImg">
+                            <img class="rounded-circle" src="data:image/gif;base64,${memImg}" width="40">
                             <textarea class="form-control ml-1 shadow-none textarea" id="text-c" tabindex="1" placeholder="我其實也不是一定要評論"  style="resize:none;width:600px;height:90px;">我其實也不是一定要評論</textarea>
                         </div>
                         <div class="mt-2 text-right">
                             <button class="btn btn-primary btn-sm shadow-none" type="button" id="submit-c" tabindex="2">Post comment</button>
-                            <button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button" id="closeComment" style="display: none;">Cancel</button>
+                            <button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button" id="closeComment">Cancel</button>
                         </div>
                     </div>
                     <ul class="comment-r" style="display: none;">
@@ -74,6 +68,7 @@
                         <li>
                             <input type="hidden" id="articleId" value="${Article.id}" />
                             <input type="hidden" id="userId" value="${login.id}" />
+                            <input type="hidden" id="goodNum" value="${Article.goodNum}" />
                         </li>
                         <li>
                             <input type="text" id="userEmail-c" size="25" tabindex="3" aria-required='true' value="${login.eMail}"/>
@@ -97,15 +92,71 @@
 var page = 1;
 let commDataNow = {};
 let replyDataNow = {};
+getAtcTime();
 loadComment();
 verifyMembershipOnload();
 $("#submit-c").click(function(){comment()})
 doComment.addEventListener('click',verifyMembership);
 closeComment.addEventListener('click',closeCommentL);
 
+/*點讚功能：verifyMembershipOnload();goods();doGoods();afterGoods*/
+function goods(){
+        $("#goodsSection").empty();
+        let id = document.getElementById("aid").value;
+        let userId = document.getElementById("userId").value;
+        // let goodNum = Number(document.getElementById("goodNum").value);
+        fetch("http://localhost:8080/coinshell/countGoods?id="+id+"&userId="+userId).then(function(response) {
+                return response.json();
+                console.log(response);
+            }).then(function(array) {
+                let count = array[0];
+                let goodNum = array[1];
+                console.log("讚過嗎?"+count+"總讚數"+goodNum);
+            if(count==0){                
+                $("#goodsSection").append(`<label><input type="checkbox" class="check" onClick="doGoods(`+id+`,`+userId+`)"><span class="heart"><i class="fa-solid fa-heart"></i></span>`+goodNum+`</label>`)
+            }else{                
+                $("#goodsSection").append(`<label><input type="checkbox" class="check" checked onClick="doGoods(`+id+`,`+userId+`)"><span class="heart"><i class="fa-solid fa-heart"></i></span>`+goodNum+`</label>`)
+            }
+        })
+}
+
+function doGoods(id, userId) {
+    if ("${login == null }" == "true") {
+        $('#loginModal').modal("show")
+    }else{
+        fetch("http://localhost:8080/coinshell/doGoods?id="+id+"&userId="+userId)
+        .then(function(result){console.log("result====" + result.status);console.log("成功")})
+        .catch(err => console.log(err))
+        .then(function(){
+            wait(100);
+            afterGoods()
+        })
+    }
+}
+
+function afterGoods(){
+    $("#goodsSection").empty();
+    let id = document.getElementById("aid").value;
+    let userId = document.getElementById("userId").value;
+    // let goodNum = Number(document.getElementById("goodNum").value);
+    fetch("http://localhost:8080/coinshell/countGoods?id="+id+"&userId="+userId).then(function(response) {
+            return response.json();
+            console.log(response);
+        }).then(function(array) {
+            let count = array[0];
+            let goodNum = array[1];
+            console.log("讚過嗎?"+count+"總讚數"+goodNum);
+        if(count==0){                
+            $("#goodsSection").append(`<label><input type="checkbox" class="check" onClick="doGoods(`+id+`,`+userId+`)"><span class="heart"><i class="fa-solid fa-heart"></i></span>`+goodNum+`</label>`)
+        }else{                
+            $("#goodsSection").append(`<label><input type="checkbox" class="check" checked onClick="doGoods(`+id+`,`+userId+`)"><span class="heart"><i class="fa-solid fa-heart"></i></span>`+goodNum+`</label>`)
+        }
+    })
+}
+
 function verifyMembershipOnload(){
-    if ("${Article.authorId}" == "${login.id}") {
-        $("#editList").toggle()
+    if ("${login == null }" == "false") {
+        goods()
     }
 }
 
@@ -113,22 +164,27 @@ function verifyMembership(){
     if ("${login == null }" == "true") {
         $('#loginModal').modal("show")
     }else{
-        $(".comment-l").toggle();
-        $("#closeComment").toggle();
+        $(".comment-l").show();        
         $("#doComment").hide();
     }
 }
 
 function closeCommentL(){
     $(".comment-l").hide();
-    $("#doComment").toggle();
-    $("#closeComment").hide();
+    $("#doComment").show();    
+}
+
+function closeEditForm(){
+    $(".editForm").empty();
+    $(".reply-section").hide();
 }
 
 async function comment(){
     await commentTo();
     await wait(100);
-    loadComment()
+    loadComment();
+    $(".comment-l").hide();
+    $("#doComment").show(); 
 }
 
 async function wait(ms) {
@@ -141,13 +197,14 @@ async function wait(ms) {
 async function reply(id){
     await replyTo(id);
     await wait(100);
-    loadReply(id)
+    loadReply(id);
+    $("#replySection"+id).hide()
 }
 
 function closeReply(id){
     $("#reply-list"+id).empty();
     $("#pageidR"+id).empty();
-    $("#showR"+id).toggle();
+    $("#showR"+id).show();
     $("#closeR"+id).hide();
 }
 
@@ -155,7 +212,7 @@ function doReply(id){
     if ("${login == null }" == "true") {
         $('#loginModal').modal("show")
     }else{
-    $("#replySection"+id).toggle()
+    $("#replySection"+id).show()
     }
 }
 
@@ -178,6 +235,22 @@ function switchPageR(e, id){
     console.log("現在的reply是"+replyDataNow);
 }
 
+function getAtcTime() {
+    $("#added").empty();
+    var atcAdded = document.getElementById("atcAdded").value;
+    console.log("時間是"+atcAdded);
+    var added = new Date(Date.parse(atcAdded));
+    var YYYY = added.getFullYear();
+    var MM = added.getMonth()+1;
+    var dd = added.getDate();
+    var HH = added.getHours();
+    var mm = added.getMinutes();
+    var weekIndex = added.getDay();
+    var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+    var weekDayPrint = weekDay[weekIndex];
+    $("#added").append(YYYY+`-`+MM+`-`+dd+` `+HH+`:`+mm+` `+weekDayPrint);
+}
+
 function commentTo(){
     var userNameC = document.getElementById("userName-c").value;
     var userEmailC = document.getElementById("userEmail-c").value;
@@ -194,7 +267,7 @@ function commentTo(){
         "userId":userIdC
     }
     var jsonComm = JSON.stringify(comm);
-    fetch('http://localhost:8080/coinshell/editComment', {
+    fetch('http://localhost:8080/coinshell/doComment', {
         // credentials: 'include',
         method:'POST',
         headers: {
@@ -225,8 +298,9 @@ function replyTo(id){
         "commentId":commentIdR,
         "userId":userIdR
     }
+    console.log(reply);
     var jsonReply = JSON.stringify(reply);
-    fetch('http://localhost:8080/coinshell/editReply?commentId='+commentIdR, {
+    fetch('http://localhost:8080/coinshell/doReply?commentId='+commentIdR, {
         method:'POST',
         headers: {
             'Content-Type': 'application/json'    
@@ -290,7 +364,8 @@ function displayComm(data){
     $("#comment-list").empty();
     $.each(data, function(index, value) {
             var added = new Date(Date.parse(value.added));
-            var MM = added.getMonth();
+            var YYYY = added.getFullYear();
+            var MM = added.getMonth()+1;
             var dd = added.getDate();
             var HH = added.getHours();
             var mm = added.getMinutes();
@@ -299,16 +374,16 @@ function displayComm(data){
             var weekDayPrint = weekDay[weekIndex];
             var id = value.id;
             var cidForReply = value.commentId;   
-            var img = value.userAvatarBase64;        
-            // <img class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="https://i.imgur.com/stD0Q19.jpg" />
+            var img = value.userAvatar;        
+            // <img class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="https://i.imgur.com/stD0Q19.jpg" />            
             $("#comment-list").append(`
                     <div class="media-body rounded">
                         <div class="row">
                             <div class="col-8 d-flex flex-row">
-                                <img class="mr-3 rounded-circle" style="display:block; width:48px; height:48px" src="`+img+`" />
+                                <img class="mr-3 rounded-circle" style="display:block; width:48px; height:48px" src="data:image/gif;base64,`+img+`" />
                                 <div class="d-flex flex-column">
                                     <span class="name">`+value.userName+`</span>
-                                    <span class="date"> — `+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</span>
+                                    <span class="date"> — `+YYYY+`-`+MM+`-`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</span>
                                 </div>
                             </div>
                         </div>                      
@@ -317,20 +392,25 @@ function displayComm(data){
                             <div class="reply">
                                 <div class="m-1">                    
                                     <button onclick="doReply(`+id+`)" class="fa fa-reply">Reply</button>
+                                    <a href="#" id="editSection`+id+`" onclick="editSection(event,`+id+`)" class="editFunctionC" style="display: none;"><i class="fa fa-edit" aria-hidden="true"></i>Edit</a>
+                                    <a href="#" onclick="deleteC(event,`+id+`)" class="editFunctionC" style="display: none;"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
+                                </div>
+                                <div id="editForm`+id+`" class="editForm">
                                 </div>
                                 <div id="replySection`+id+`" class="reply-section"  style="display: none;">
                                     <div class="reply-l bg-light p-2">
                                         <div class="d-flex flex-row align-items-start">
-                                            <img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
-                                            <textarea class="form-control ml-1 shadow-none textarea" id="text-r`+id+`" tabindex="1" placeholder="我其實也不是一定要說什麼" aria-required="true"></textarea>
+                                            <img class="rounded-circle" src="data:image/gif;base64,${memImg}" width="40">
+                                            <textarea class="form-control ml-1 shadow-none textarea" id="text-r`+id+`" tabindex="1" placeholder="Reply here..." aria-required="true">我其實也不是一定要說什麼</textarea>
                                         </div>
                                         <div class="mt-2 text-right">
-                                            <button class="btn btn-primary btn-sm shadow-none submit-r" type="button" onclick="reply(`+id+`)">Reply</button>                                            
+                                            <button class="btn btn-primary btn-sm shadow-none submit-r" type="button" onclick="reply(`+id+`)">Reply</button>
+                                            <button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button" onclick="closeEditForm()">Cancel</button>
                                         </div>
                                     </div>
                                     <ul class="reply-r" style="display: none;">
                                         <li>
-                                            <input type="text" id="userName-r`+id+`" size="25" tabindex="2" aria-required='true' value="${login.customizedUserName}"/>
+                                            <input type="text" id="userName-r`+id+`" value="${login.customizedUserName}"/>
                                         </li>
                                         <li>
                                             <input type="hidden" id="articleId" value="${Article.id}" />
@@ -355,7 +435,10 @@ function displayComm(data){
                             </nav>                       
                         </div>
                     </div>
-                    `)                    
+                    `)
+                if(value.userId=="${login.id}"){
+                    $(".editFunctionC").show()
+                }
             })
         }
 
@@ -363,9 +446,9 @@ function pageBtn(page){
     let str = '';
     const total = page.pageTotal;
     if(page.hasPage) {
-        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)-1)+`">Previous</a></li>`;
+        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)-1)+`">«</a></li>`;
     } else {
-        str += `<li class="page-item disabled"><span class="page-link">Previous</span></li>`;
+        str += `<li class="page-item disabled"><a class="page-link">«</a></li>`;
     }
     
     for(let i = 1; i <= total; i++){
@@ -377,22 +460,22 @@ function pageBtn(page){
     };
 
     if(page.hasNext) {
-        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)+1)+`">Next</a></li>`;
+        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)+1)+`">»</a></li>`;
     } else {
-        str += `<li class="page-item disabled"><span class="page-link">Next</span></li>`;
+        str += `<li class="page-item disabled"><a class="page-link">»</a></li>`;
     }
     pageidC.innerHTML = str;
 }
 
 function loadReply(id){
+    $("#reply-list"+id).empty();
+    $("#showR"+id).hide();
+    $("#closeR"+id).show();
     $(function() {
-        var aid = document.getElementById("aid").value;
+        var aid = document.getElementById("articleId").value;
         console.log(aid);
         var cid = id;
         console.log(cid);
-        $("#reply-list"+id).empty();
-        $("#showR"+id).hide();
-        $("#closeR"+id).toggle();
         fetch("http://localhost:8080/coinshell/viewReply?articleId="+aid+"&commentId="+cid).then(function(response) {
             return response.json();
             console.log(response.json())
@@ -406,7 +489,7 @@ function loadReply(id){
 
 async function replyPagination(array, nowPage, id){
     console.log("傳過來是第幾頁"+nowPage);
-    console.log("傳過來是"+array);
+    console.log("傳過來是"+array.length);
     const dataTotal = array.length;
     const perpage = 5;
     const pageTotal = Math.ceil(dataTotal / perpage);
@@ -432,38 +515,51 @@ async function replyPagination(array, nowPage, id){
         id
     } 
     console.log(page);
-    pageBtnSm(page)
+    if(dataTotal!=0){
+        pageBtnSm(page)
+    }
 }
 
 function displayReply(data, id){
     $("#reply-list"+id).empty();
     $.each(data, function(index, value) {
                 var added = new Date(Date.parse(value.added));
-                var MM = added.getMonth();
+                var YYYY = added.getFullYear();
+                var MM = added.getMonth()+1;
                 var dd = added.getDate();
                 var HH = added.getHours();
                 var mm = added.getMinutes();
                 var weekIndex = added.getDay();
                 var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
                 var weekDayPrint = weekDay[weekIndex];  
-                var img = value.userAvatarBase64;                
+                var img = value.userAvatar;
+                var thisId = value.id;             
                 // <a class="pr-3" href="#"><img class="rounded-circle" alt="Bootstrap Media Another Preview" src="https://i.imgur.com/xELPaag.jpg" /></a>
                 $("#reply-list"+id).append(`
                         <div class="media mt-4">
                             <div class="media-body rounded">
                                 <div class="row">
                                     <div class="col-8 d-flex flex-row">
-                                        <img class="mr-3 rounded-circle" style="display:block; width:48px; height:48px" src="`+img+`" />
+                                        <img class="mr-3 rounded-circle" style="display:block; width:48px; height:48px" src="data:image/gif;base64,`+img+`" />
                                         <div class="d-flex flex-column">
                                             <span class="name">`+value.userName+`</span>
-                                            <span class="date"> — `+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</span>
+                                            <span class="date"> — `+YYYY+`-`+MM+`-`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</span>
                                         </div>
                                     </div>                                  
                                 </div>
                                 `+value.text+`
                             </div>
                         </div>
-                        `)                    
+                        <div class="m-1">
+                                <a href="#" id="editSection`+thisId+`" onclick="editSectionR(event,`+thisId+`)" class="editFunctionR" style="display: none;"><i class="fa fa-edit" aria-hidden="true"></i>Edit</a>
+                                <a href="#" onclick="deleteR(event,`+thisId+`)" class="editFunctionR" style="display: none;"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
+                        </div>
+                        <div id="editFormR`+thisId+`" class="editForm">
+                        </div>
+                        `)
+                    if(value.userId=="${login.id}"){
+                    $(".editFunctionR").show()                    
+                }             
             })
 }
 
@@ -474,9 +570,9 @@ function pageBtnSm(page){
     const total = page.pageTotal;
     console.log("第幾頁"+page.currentPage);
     if(page.hasPage) {
-        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)-1)+`">Previous</a></li>`;
+        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)-1)+`">«</a></li>`;
     } else {
-        str += `<li class="page-item disabled"><span class="page-link">Previous</span></li>`;
+        str += `<li class="page-item disabled"><a class="page-link">«</a></li>`;
     }
     
     for(let i = 1; i <= total; i++){
@@ -488,60 +584,235 @@ function pageBtnSm(page){
     };
 
     if(page.hasNext) {
-        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)+1)+`">Next</a></li>`;
+        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)+1)+`">»</a></li>`;
     } else {
-        str += `<li class="page-item disabled"><span class="page-link">Next</span></li>`;
+        str += `<li class="page-item disabled"><a class="page-link">»</a></li>`;
     }
-    // pageidR.innerHTML = str;
     
     console.log('pageidR'+page.id);
     $("#pageidR"+page.id).empty();
     $("#pageidR"+page.id).append(str);
-    // var el = document.getElementById("pageidR"+page.id);
-    // console.log("這是?????"+el);
-    // el.innerHTML = str;
-    // var listener = document.querySelector("#pageidR"+page.id);
-    // console.log(listener);
-    // listener.addEventListener('click',switchPageR);
 
     console.log("載入成功");
     console.log(str);
 }
 
-// function deleteAtc(){
-//     alert("確認刪除?")
-// }
+function editSection(e, id){
+    e.preventDefault();
+    $("#editForm"+id).empty();
+    fetch("http://localhost:8080/coinshell/editSection?cid="+id).then(function(response) {
+            return response.json();
+            console.log(response.json())
+        }).then(function(data) {
+            $.each(data, function(index, value) {
+                var added = new Date(Date.parse(value.added));
+                var addedFF = Date.parse(value.added);
+                var YYYY = added.getFullYear();
+                var MM = added.getMonth()+1;
+                var dd = added.getDate();
+                var HH = added.getHours();
+                var mm = added.getMinutes();
+                var weekIndex = added.getDay();
+                var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+                var weekDayPrint = weekDay[weekIndex];  
+                var img = value.userAvatar;                
+                // <a class="pr-3" href="#"><img class="rounded-circle" alt="Bootstrap Media Another Preview" src="https://i.imgur.com/xELPaag.jpg" /></a>
+                $("#editForm"+id).append(`
+                        <div class="reply-l bg-light p-2">
+                            <div class="d-flex flex-row align-items-start">
+                                <img class="rounded-circle" src="data:image/gif;base64,${memImg}" width="40">
+                                <textarea class="form-control ml-1 shadow-none textarea" id="text-CR`+id+`" tabindex="1" placeholder="Reply here..." aria-required="true">`+value.text+`</textarea>
+                            </div>
+                            <div class="mt-2 text-right">
+                                <button class="btn btn-primary btn-sm shadow-none submit-CR" type="button" onclick="postEdit(`+id+`)">Edit</button>
+                                <button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button" onclick="closeEditForm()">Cancel</button>
+                            </div>
+                        </div>
+                        <ul class="reply-r" style="display: none;">
+                            <li>
+                                <input type="text" id="userName-CR`+id+`" value="${login.customizedUserName}"/>
+                            </li>
+                            <li>
+                                <input type="hidden" id="articleId" value="${Article.id}" />
+                            </li>
+                            <li>
+                                <input type="hidden" id="commentId`+id+`" value="`+value.commentId+`" />
+                                <input type="hidden" id="deleted`+id+`" value="`+value.deleted+`" />
+                                <input type="hidden" id="type`+id+`" value="`+value.type+`" />
+                                <input type="hidden" id="added`+id+`" value="`+addedFF+`" />
+                            </li>
+                            <li>
+                                <input type="text" id="userEmail-CR`+id+`" size="25" tabindex="3" aria-required='true' value="${login.eMail}"/>
+                            </li>
+                        </ul>
+                        `)                    
+            })
+        })
+}
 
-   //驗證Email的正確性
-// function mail_test(thisform) {
-//     with (thisform) {
-//     user_email = commentform.user_email.value;
-//     if (!/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(user_email)) {
-//         alert("電子郵件格式錯誤");
-//         commentform.user_email.focus();
-//         return false
-//     }else{return true}
-//     }
-// }
-// $('.btn-respond').click(function(){
-//     alert(123)
-//     $(this).next('.container').css('display','block')
-// })
+function editSectionR(e, id){
+    e.preventDefault();
+    $("#editForm"+id).empty();
+    $("#editFormR"+id).empty();
+    fetch("http://localhost:8080/coinshell/editSection?cid="+id).then(function(response) {
+            return response.json();
+            console.log(response.json())
+        }).then(function(data) {
+            $.each(data, function(index, value) {
+                var added = new Date(Date.parse(value.added));
+                var addedFF = Date.parse(value.added);
+                var YYYY = added.getFullYear();
+                var MM = added.getMonth()+1;
+                var dd = added.getDate();
+                var HH = added.getHours();
+                var mm = added.getMinutes();
+                var weekIndex = added.getDay();
+                var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+                var weekDayPrint = weekDay[weekIndex];  
+                var img = value.userAvatar;                
+                // <a class="pr-3" href="#"><img class="rounded-circle" alt="Bootstrap Media Another Preview" src="https://i.imgur.com/xELPaag.jpg" /></a>
+                $("#editFormR"+id).append(`
+                        <div class="reply-l bg-light p-2">
+                            <div class="d-flex flex-row align-items-start">
+                                <img class="rounded-circle" src="data:image/gif;base64,${memImg}" width="40">
+                                <textarea class="form-control ml-1 shadow-none textarea" id="text-CR`+id+`" tabindex="1" placeholder="Reply here..." aria-required="true">`+value.text+`</textarea>
+                            </div>
+                            <div class="mt-2 text-right">
+                                <button class="btn btn-primary btn-sm shadow-none submit-CR" type="button" onclick="postEditR(`+id+`)">Edit</button>
+                                <button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button" onclick="closeEditForm()">Cancel</button>
+                            </div>
+                        </div>
+                        <ul class="reply-r" style="display: none;">
+                            <li>
+                                <input type="text" id="userName-CR`+id+`" value="${login.customizedUserName}"/>
+                            </li>
+                            <li>
+                                <input type="hidden" id="articleId" value="${Article.id}" />
+                            </li>
+                            <li>
+                                <input type="hidden" id="commentId`+id+`" value="`+value.commentId+`" />
+                                <input type="hidden" id="deleted`+id+`" value="`+value.deleted+`" />
+                                <input type="hidden" id="type`+id+`" value="`+value.type+`" />
+                                <input type="hidden" id="added`+id+`" value="`+addedFF+`" />
+                            </li>
+                            <li>
+                                <input type="text" id="userEmail-CR`+id+`" size="25" tabindex="3" aria-required='true' value="${login.eMail}"/>
+                            </li>
+                        </ul>
+                        `)                    
+            })
+        })
+}
 
+async function postEdit(id){
+    var userNameCR = document.getElementById("userName-CR"+id).value;
+    var userEmailCR = document.getElementById("userEmail-CR"+id).value;
+    var textCR = document.getElementById("text-CR"+id).value;
+    var articleIdCR = document.getElementById("articleId").value; 
+    var commentIdCR = document.getElementById("commentId"+id).value;
+    var userIdCR = document.getElementById("userId").value;
+    var deleted = document.getElementById("deleted"+id).value;
+    var added = document.getElementById("added"+id).value;
+    var type = document.getElementById("type"+id).value;
+    var reply = {
+        "id": id,
+        "added": added,
+        "userName":userNameCR,
+        "userEmail":userEmailCR,
+        "text":textCR,
+        "type":type,
+        "deleted":deleted,
+        "articleId":articleIdCR,
+        "commentId":commentIdCR,
+        "userId":userIdCR
+    }
+    var jsonReply = JSON.stringify(reply);
+    console.log("回憶"+reply.added);
+    fetch('http://localhost:8080/coinshell/postEdit', {
+        method:'POST',
+        headers: {
+            'Content-Type': 'application/json'    
+        },
+        body:jsonReply
+    }).catch(error => console.log('Error:', error))
+    .then(res => {
+            return res.json();
+        }).then(result =>{
+            console.log(result);
+        });
+    await wait(100);
+    $("#editForm"+id).empty();
+    loadComment();
+    loadReply(id)
+}
 
-//   $('.btn-respond').each(function(){
-// 	$(this).click(function(){
-//       $(this).next('.container').css('display', 'block');
-//     });
-//   });
-//   //取消回复
-//   $('.btn-revoke').each(function(){
-//     $(this).click(function(){
-//       $(this).parent().css('display','none');
-//     });
-//   });
+async function postEditR(id){
+    var userNameCR = document.getElementById("userName-CR"+id).value;
+    var userEmailCR = document.getElementById("userEmail-CR"+id).value;
+    var textCR = document.getElementById("text-CR"+id).value;
+    var articleIdCR = document.getElementById("articleId").value; 
+    var commentIdCR = document.getElementById("commentId"+id).value;
+    var userIdCR = document.getElementById("userId").value;
+    var deleted = document.getElementById("deleted"+id).value;
+    var added = document.getElementById("added"+id).value;
+    var type = document.getElementById("type"+id).value;
+    var reply = {
+        "id": id,
+        "added": added,
+        "userName":userNameCR,
+        "userEmail":userEmailCR,
+        "text":textCR,
+        "type":type,
+        "deleted":deleted,
+        "articleId":articleIdCR,
+        "commentId":commentIdCR,
+        "userId":userIdCR
+    }
+    var jsonReply = JSON.stringify(reply);
+    console.log("回憶"+reply.added);
+    fetch('http://localhost:8080/coinshell/postEdit', {
+        method:'POST',
+        headers: {
+            'Content-Type': 'application/json'    
+        },
+        body:jsonReply
+    }).catch(error => console.log('Error:', error))
+    .then(res => {
+            return res.json();
+        }).then(result =>{
+            console.log(result);
+        });
+    await wait(100);
+    $("#editForm"+id).empty();
+    loadComment();
+    loadReply(id)
+}
 
+function deleteC(e, id){
+    e.preventDefault();
+    var aid = document.getElementById("aid").value;
+    if(confirm('Are you sure your want to delete?')){
+    fetch('http://localhost:8080/coinshell/deleteCR?id='+id+"&articleId="+aid)
+    .catch(error => console.log('Error:', error))
+    .then(result =>{
+            console.log(result);
+        })
+    .then(loadComment())
+    }
+}
 
+function deleteR(e, id){
+    e.preventDefault();
+    var aid = document.getElementById("aid").value;
+    if(confirm('Are you sure your want to delete?')){
+    fetch('http://localhost:8080/coinshell/deleteCR?id='+id+"&articleId="+aid)
+    .catch(error => console.log('Error:', error))
+    .then(result =>{
+            console.log(result);
+        })
+        .then(loadComment())
+}
+}
 </script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 package com.Group1.CoinShell.service.Habufly;
 
+import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -30,22 +31,6 @@ public class ArticleService {
 	
 	public Article getFirstNewArticle() {
 		return dao.findFirstByOrderByAddedDesc();
-	}
-	
-	public List<Map<String,Object>> findAll(){
-		return dao.findAllOrderByAddedDesc();
-	}
-	
-//	public Page<Article> findAll(Integer pageNumber){
-//		Pageable pgb = PageRequest.of(pageNumber-1, 10, Sort.Direction.DESC, "added");
-//		Page<Article> page = dao.findAllOrderByAddedDesc(pgb);
-//		return page;
-//	}
-	
-	public Page<Article> findByPage(Integer pageNumber){
-		Pageable pgb = PageRequest.of(pageNumber-1, 10, Sort.Direction.DESC, "added");
-		Page<Article> page = dao.findAll(pgb);
-		return page;
 	}
 	
 	public Article findById(Integer id) {
@@ -83,6 +68,10 @@ public class ArticleService {
 //		return list;
 //	}
 	
+	public List<Map<String,Object>> findAll(){
+		return dao.findAllOrderByAddedDesc();
+	}
+	
 	public List<Map<String,Object>> findByTag(String tag) {
 		List<Map<String,Object>> list = dao.findByTag(tag);
 		return list;
@@ -93,8 +82,14 @@ public class ArticleService {
 		return list;
 	}
 
+	public List<Map<String, Object>> findByAuthorId(String authorId) {
+		List<Map<String,Object>> list = dao.findByAuthorId(authorId);
+		return list;
+	}
+	
 	public String findImg(Integer authorId) {
-		String img = dao.findImg(authorId);
+		byte[] imgByte = dao.findImg(authorId);
+		String img = Base64.getEncoder().encodeToString(imgByte);
 		return img;
 	}
 
@@ -102,7 +97,44 @@ public class ArticleService {
 		String userName = dao.getUserName(authorId);
 		return userName;
 	}
+
+	public List<Map<String,Object>> findAllAdmin(){
+		return dao.findAllOrderByAddedDescAdmin();
+	}
 	
-	
+	public List<Map<String,Object>> findByTagAdmin(String tag) {
+		List<Map<String,Object>> list = dao.findByTagAdmin(tag);
+		return list;
+	}
+
+	public List<Map<String,Object>> findByTitleAdmin(String titlePart) {
+		List<Map<String,Object>> list = dao.findByTitleAdmin(titlePart);
+		return list;
+	}
+
+	public List<Map<String, Object>> findByAuthorIdAdmin(String authorId) {
+		List<Map<String,Object>> list = dao.findByAuthorIdAdmin(authorId);
+		return list;
+	}
+
+	public Integer getGoods(Integer id, Integer userId) {
+		Integer goods = dao.getGoods(id, userId);
+		return goods;
+	}
+
+	public void increaseGoods(Integer id, Integer userId) {
+		dao.insertGoods(id, userId);
+		dao.increaseGoods(id);
+	}
+
+	public void decreaseGoods(Integer id, Integer userId) {
+		dao.deleteGoods(id, userId);
+		dao.decreaseGoods(id);
+	}
+
+	public List<Map<String, Object>> findByGoods() {
+		List<Map<String,Object>> list = dao.findByGoods();
+		return list;
+	}
 
 }

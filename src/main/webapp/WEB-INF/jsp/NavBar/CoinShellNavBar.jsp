@@ -18,7 +18,8 @@
 
 					<!-- 這裡放title Logo -->
 					<link rel="icon" href="${contextRoot}/images/NavBarImg/icon.png" type="image/x-icon">
-
+					<!-- =導覽列 效果 -->
+					<link rel="stylesheet" href="${contextRoot}/css/navBar.css">
 					<!-- FONT AWESOME: Place your kit's code here -->
 					<script src="https://kit.fontawesome.com/0ef2a35b44.js" crossorigin="anonymous"></script>
 
@@ -32,6 +33,7 @@
 					<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 					<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 					<script src="${contextRoot}/javascripts/bootstrap.bundle.min.js"></script>
+					
 				</head>
 
 				<body>
@@ -44,22 +46,27 @@
 							aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 							<span class="navbar-toggler-icon"></span>
 						</button>
-                        <div class="collapse navbar-collapse" id="navbarNav">
-                            <ul class="navbar-nav">
-                                <li class="nav-item active"><a class="nav-link" href="${contextRoot}/aboutUs/intro">About us<span
-											class="sr-only">(current)</span></a></li>
-                                <li class="nav-item active"><a class="nav-link" href="${contextRoot}/viewAllAjax">BeachTown<span
-											class="sr-only">(current)</span></a></li>
-                                <li class="nav-item active"><a class="nav-link" href="${contextRoot}/portfolio">Portfolio<span
-											class="sr-only">(current)</span></a></li>
-                                <li class="nav-item"><a class="nav-link" href="#">Learn</a></li>
-                                <li class="nav-item active"><a class="nav-link" href="${contextRoot}/shellshop">Shell Shop</a></li>
-                                <li class="nav-item active"><a class="nav-link"
-										href="${contextRoot}/shop/myshell">shop<span
-											class="sr-only">(current)</span></a></li>
-                                <li class="nav-item active"><a class="nav-link" href="http://localhost:8080/coinshell/administrator">Backend Administrator</a></li>
-                            </ul>
-                        </div>
+						
+		<!-- 導覽列 -->
+		
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item active"><a class="nav-link" href="${contextRoot}/aboutUs/nice-intro" style="color: #3C3C3C">About-Us
+						<span class="sr-only">(current)</span></a></li>
+
+				<li class="nav-item active"><a class="nav-link"	href="${contextRoot}/viewAllArticle" style="color: #3C3C3C">BeachTown
+						<span class="sr-only">(current)</span></a></li>
+
+<!-- 				<li class="nav-item"><a class="nav-link" href="#" style="color: #3C3C3C">Learn </a></li> -->
+
+				<li class="nav-item active"><a class="nav-link" href="${contextRoot}/shop/myshell" style="color: #3C3C3C">Shop
+						<span class="sr-only">(current)</span></a></li>
+
+				<li id="backend" class="nav-item active"><a class="nav-link" href="${contextRoot}/administrator"
+					style="color: #3C3C3C">Backend-Administrator </a></li>
+			</ul>
+		</div>
+
                         <!-- Button trigger modal  -->
                         <c:choose>
                             <c:when test="${login == null }">
@@ -76,7 +83,7 @@
 
 									<div class="dropdown-menu dropdown-menu-right">
 <!-- 										<button class="dropdown-item" type="button">Watchlist</button> -->
-										<button class="dropdown-item" type="button">Portfolio</button>
+<!-- 										<button class="dropdown-item" type="button">Portfolio</button> -->
 										<button class="dropdown-item" type="button"><a href="/coinshell/account/referral">Referral Program</a></button>
 										<button class="dropdown-item" type="button"><a href="/coinshell/account/set">Account Settings</a></button>
 										<button class="dropdown-item" type="button"><a href="${contextRoot}/logout">Log Out</a></button> <!-- MemController line 110 -->
@@ -86,17 +93,17 @@
 						</c:choose>
 
 						<!--Search navbar-->
-						<form class="form-inline my-1 my-lg-0">
-							<div class="input-group">
-								<input class="form-control pl-2 p-0" type="search" placeholder="Search"
-									aria-label="Search">
-								<div class="input-group-append">
-									<button class="btn btn-secondary input-group-append" type="submit">
-										<i class="fa-solid fa-magnifying-glass"></i>
-									</button>
-                                </div>
-                            </div>
-                        </form>
+<%-- 						<form class="form-inline my-1 my-lg-0"> --%>
+<!-- 							<div class="input-group"> -->
+<!-- 								<input class="form-control pl-2 p-0" type="search" placeholder="Search" -->
+<!-- 									aria-label="Search"> -->
+<!-- 								<div class="input-group-append"> -->
+<!-- 									<button class="btn btn-secondary input-group-append" type="submit"> -->
+<!-- 										<i class="fa-solid fa-magnifying-glass"></i> -->
+<!-- 									</button> -->
+<!--                                 </div> -->
+<!--                             </div> -->
+<%--                         </form> --%>
                     </nav>
                     <!-- End of the Navbar -->
 
@@ -182,8 +189,8 @@
                                                             <i class="fa-solid fa-lock"></i>
                                                         </div>
                                                     </div>
-                                                    <input type="password" required name="password" class="password form-control" placeholder="Password" id="floatingPassword2" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" title="Password should contain both letter and number, with min length of 8 characters."
-                                                    />
+                                                    <input type="password" required name="password" class="password form-control" placeholder="Password" id="floatingPassword2" 
+                                                    pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" title="Password should contain both letter and number, with min length of 8 characters." />
                                                     <div class="input-group-append">
                                                         <span class="input-group-text"> <i id="eye2"
 																class="fas fa-eye"></i>
@@ -231,6 +238,15 @@
 
 
 					<script>
+					var memId = '${login.id}';
+					
+					$(function run() {
+						if(memId != '1' && memId != '2' && memId != '3' && memId != '4' && memId != '5'){
+							console.log("成功??");
+						$("#backend").hide();
+							}
+						})
+					
 						//Password 顯示密碼
 						$(document).ready(function () {
 							$("#eye1").click(function () {
@@ -336,8 +352,6 @@
 								length.classList.add("invalid");
 							}
 						}
-
-
 					</script>
 
 				</body>

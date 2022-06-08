@@ -24,9 +24,9 @@ public class PageController {
 		return "/test";
 	}
 	
-	@GetMapping("/viewAllAjax")
+	@GetMapping("/viewAllArticle")
 	public String forum() {
-		return "forum/viewAllAjax";
+		return "forum/viewAllArticle";
 	}
 	
 	@GetMapping("/shellshop")
