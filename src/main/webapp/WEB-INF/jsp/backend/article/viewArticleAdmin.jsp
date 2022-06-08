@@ -27,8 +27,8 @@
                 <input id="authorid" type="hidden" value="${Article.authorId}"/>
                 <input id="atcAdded" type="hidden" value="${Article.added}" />
                 <span class="editFunction">
-                    <a href="${contextRoot}/editArticle/${Article.id}"><i class="fa fa-edit" aria-hidden="true"></i>Edit</a>
-                    <a href="${contextRoot}/deleteArticle/${Article.id}" onclick="return confirm('確認刪除嗎?')"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
+                    <a href="${contextRoot}/editArticleAdmin/${Article.id}"><i class="fa fa-edit" aria-hidden="true"></i>Edit</a>
+                    <a href="${contextRoot}/deleteArticleAdmin/${Article.id}" onclick="return confirm('確認刪除嗎?')"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
                 </span>
                 <div class="d-flex flex-row divToGetImg">
                     <img class="mr-3 rounded-circle" style="display:block; width:65px; height:65px" src="data:image/gif;base64,${img}"/>

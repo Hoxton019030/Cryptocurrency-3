@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+<link rel="stylesheet" href="${contextRoot}/css/article.css">
 <title>修改文章頁面</title>
 <style type="text/css">
 body{
@@ -20,7 +21,7 @@ padding-top: 82px;
 <div class="container">
 	<div class="row justify-content-center">
 		<div class="col-9">
-			<div class="card">
+			<div class="card border-info" id="edit-card">
 				<div class="card-header">修改文章</div>
 				<div class="card-body">
 					<!-- 			如果getmapping和postmapping的路徑一樣，action=""可以不用寫 -->
@@ -33,10 +34,10 @@ padding-top: 82px;
 							</form:select>
 						</div>
 						<div class="input-group">													
-							<form:input path="title"/>
+							<form:input path="title" id="edit-title"/>
 						</div>
 						<div class="input-group">
-							<form:textarea wrap="Virtual" path="text" class="form-control" id="textarea"/>							
+							<form:textarea wrap="Virtual" path="text" class="form-control" id="edit-textarea"/>							
 						</div>
 						<div>
 							<form:input path="readNum" type="hidden"/>
@@ -46,7 +47,9 @@ padding-top: 82px;
 							<form:input path="added" type="hidden"/>
 							<form:input path="authorId" type="hidden"/>
 						</div>
-						<input type="submit" name="submit" value="確認修改">
+						<div class=" text-right">							
+							<input class="btn btn-primary btn-sm shadow-none" type="submit" name="submit" value="確認修改">
+						</div>
 					</form:form>
 				</div>
 			</div>

@@ -15,21 +15,15 @@
 <meta charset="UTF-8">
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <title>修改文章頁面</title>
-<style type="text/css">
-body{
-padding-top: 82px;
-}
-</style>
 </head>
 <body>
-<a href="${contextRoot}/administrator/article">討論區刪改查頁面</a>
+<jsp:include page="../backendNavBar.jsp" />
 <div class="container">
 	<div class="row justify-content-center">
 		<div class="col-9">
-			<div class="card border-info" id="article-card">
+			<div class="card border-info" id="edit-card">
 				<div class="card-header">修改文章</div>
 				<div class="card-body">
-					<!-- 			如果getmapping和postmapping的路徑一樣，action=""可以不用寫 -->
 					<form:form action="${contextRoot}/postEditArticleAdmin" method="post"
 						modelAttribute="article">
 						<div class="input-group">
@@ -39,13 +33,13 @@ padding-top: 82px;
 								<form:options items="${tagList}"/>
 							</form:select>
 						</div>
-						<div class="input-group">
+						<div class="input-group" id="edit-title">
 							<label>標題：</label>			
-							<form:input path="title"/>
+							<form:input path="title" id="edit-title"/>
 						</div>
 						<label>內文：</label><br>
 						<div class="input-group">							
-							<form:textarea wrap="Virtual" path="text" class="form-control" id="article-textarea"/>							
+							<form:textarea wrap="Virtual" path="text" class="form-control" id="edit-textarea"/>							
 						</div>
 						<div>
 							<form:input path="readNum" type="hidden"/>

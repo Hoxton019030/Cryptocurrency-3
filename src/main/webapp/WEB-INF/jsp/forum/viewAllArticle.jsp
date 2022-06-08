@@ -20,12 +20,12 @@ padding-top: 82px;
 <jsp:include page="../NavBar/CoinShellNavBar.jsp" />
 <div class="row justify-content-center">
 <div class="col-9">
-    <form id="searchByTag">
+    <div class="row article-head" id="searchByTag">
         <select id="tag-list"></select>        
         <input id="titlePart" type="text" placeholder="關鍵字查詢(標題/內文)"/>
         <input type="button" name="submit" value="查詢" id="search"/>
-        <a href="${contextRoot}/article/add" id="addAtc" onclick="verifyMembership()">新增文章</a>
-    </form>
+        <a href="${contextRoot}/article/add" id="addAtc" onclick="verifyMembership()" class="btn btn-primary btn-sm shadow-none">新增文章</a>
+    </div>
     
 	<table class="table table-hover table-primary table-article">
 		<thead class="thead-dark">

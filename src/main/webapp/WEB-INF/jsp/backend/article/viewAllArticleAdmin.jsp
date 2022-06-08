@@ -21,12 +21,12 @@
 <jsp:include page="../backendNavBar.jsp" />
 <div class="row justify-content-center">
 <div class="col-9">
-    <form id="searchByTag">
+    <div class="row article-head" id="searchByTag">
         <select id="tag-list"></select>        
         <input id="titlePart" type="text" placeholder="關鍵字查詢(標題/內文)"/>
         <input type="button" name="submit" value="查詢" id="search"/>
         <!-- <a href="${contextRoot}/backend/article/add" id="addAtc">新增文章</a> -->
-    </form>    
+    </div>    
 	<table class="table table-hover table-primary table-article">
 		<thead class="thead-dark">
 			<tr>
