@@ -33,21 +33,37 @@
                 <!-- Navigation-->
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
                     <div class="container px-5 px-lg-5">
-                        <a class="navbar-brand" href="#!">Start Bootstrap</a>
+                        <a class="navbar-brand" href="#!"></a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                                <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
-                                <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="#!"></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#!">Shell: $ ${login.myShell}</a>
+
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="buyShell">Buy Shell</a>
+
+                                </li>
+
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li><a class="dropdown-item" href="#!">All Products</a></li>
+                                        <li>
+                                            <a class="" href="#!"></a>
+                                        </li>
                                         <li>
                                             <hr class="dropdown-divider" />
                                         </li>
-                                        <li><a class="dropdown-item" href="#!">Popular Items</a></li>
-                                        <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
+                                        <li>
+                                            <a class="dropdown-item" href="#!"></a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="#!"></a>
+                                        </li>
                                     </ul>
                                 </li>
                             </ul>
@@ -55,9 +71,27 @@
                                 <button class="btn btn-outline-dark" type="submit">
                             <i class="bi-cart-fill me-1"></i>
                             Cart
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                            <span id="count" class="badge bg-dark text-white ms-1 rounded-pill count">0</span>
                              </button>
                             </form>
+                            <script>
+                                $(function() {
+                                    $("#count").empty();
+                                    var count = parseInt(0, 10);
+                                    var url = "http://localhost:8080/coinshell/showCart";
+                                    fetch(url).then(function(response) {
+                                        return response.json();
+                                    }).then(function(array) {
+                                        $.each(array, function(index, value) {
+                                            count += 1;
+                                            // alert(count);
+                                            // $(".count").append(count);
+                                        })
+                                    }).then(function() {
+                                        $(".count").append(count);
+                                    })
+                                })
+                            </script>
 
                         </div>
                     </div>
@@ -103,7 +137,7 @@
                                     <div class="card-body p-4">
                                         <div class="text-center">
                                             <!-- Product name-->
-                                            <h5 class="fw-bolder">Popular Item</h5>
+                                            <h5 class="fw-bolder">` + value.commodityName + `</h5>
                                             <!-- Product reviews-->
                                             <div class="d-flex justify-content-center small text-warning mb-2">
                                                 <div class="bi-star-fill"></div>
@@ -113,18 +147,17 @@
                                                 <div class="bi-star-fill"></div>
                                             </div>
                                             <!-- Product price-->
-                                          $  ` + value.myShell + `
+                                          $  ` + value.shell + `
                                         </div>
                                     </div>
                                     <!-- Product actions-->
                                     <form action="addCart" method="post">
                                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                            <div><input name="id" type="text" value="` + value.id + `"></div>
-                                            <div><input name="myShell" type="text" value="` + value.myShell + `"></div>
-                                            <div><input name="commodityName" type="text" value="` + value.commodityName + `"></div>
-                                            <div><input name="quantity" type="text" value="1"></div>
-
-                                            <div class="text-center"><button type="submit" class="btn btn-outline-dark mt-auto">Add to cart</button></div>
+                                            <div><input name="id"  type="hidden" value="` + value.id + `"></div>
+                                            <div><input name="myShell" type="hidden" value="` + value.shell + `"></div>
+                                            <div class="text-center">
+                                                <button onclick="updateCart()"type="submit" class="btn btn-outline-dark mt-auto btn-add">Add to cart</button>
+                                                </div>
                                         </div>
                                     </form>
                                 </div>
@@ -147,11 +180,7 @@
                 <script src="js/scripts.js"></script>
 
 
-                <script>
-                    function myFunction() {
-                        alert("I am an alert box!");
-                    }
-                </script>
+
             </body>
 
             </html>

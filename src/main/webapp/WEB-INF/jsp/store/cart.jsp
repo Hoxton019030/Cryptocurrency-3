@@ -31,14 +31,21 @@
                         <th>ID</th>
                         <th>Commodity Name</th>
                         <th>Quantity</th>
-                        <th>Coin</th>
+                        <th>Shell</th>
+                        <th>Total Price</th>
                         <th>DELETE</th>
                     </tr>
                 </thead>
                 <tbody>
-
                 </tbody>
             </table>
+            <div>目前擁有:$ ${login.myShell} Shell</div>
+            <form action="checkout" method="post">
+                <input type="text" name="shell" id="" value="${login.myShell}">
+                <div id="total">總價: <input id="value" type="text" name="total" id=""> </div>
+                <button type="submit">CheckOut</button>
+            </form>
+
 
 
     </body>
@@ -54,10 +61,11 @@
                         <td>` + value.commodity.id + `</td>
                         <td>` + value.commodity.commodityName + `</td>
                          <td>` + value.quantity + `</td>
-                    <td>` + value.commodity.coin + `</td>
+                    <td>` + value.commodity.shell + `</td>
+                    <td>` + value.price + `</td>
                     <td>
                         <form action="deleteCart" method="get">
-                        <input name="id" value="` + value.commodity.id + `">
+                        <input  type="hidden" name="id" value="` + value.commodity.id + `">
                         <button type="submit">delete</button>
                         </td>
                         </form>
@@ -66,6 +74,23 @@
 
                     );
                 })
+            })
+        })
+        $(function() {
+            var url = "http://localhost:8080/coinshell/showCart";
+            var sum = parseInt(0, 10);
+            fetch(url).then(function(response) {
+                return response.json();
+            }).then(function(array) {
+                $.each(array, function(index, value) {
+                    sum += value.price;
+                    document.getElementById("value").value = sum;
+                })
+            }).then(function() {
+                $("#total").append(sum);
+                document.getElementById("input-value").value = 123;
+            }).then(function() {
+                document.getElementById("value").value = 123;
             })
         })
     </script>

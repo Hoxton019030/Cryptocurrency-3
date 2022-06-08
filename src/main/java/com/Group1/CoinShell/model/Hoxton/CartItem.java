@@ -20,7 +20,7 @@ public void setQuantity(Integer quantity) {
 	this.quantity = quantity;
 }
 public Integer getPrice() {
-	return commodity.getCoin()*this.quantity;
+	return commodity.getShell()*this.quantity;
 }
 public void setPrice(Integer price) {
 	this.price = price;

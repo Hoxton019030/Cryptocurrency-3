@@ -1,4 +1,4 @@
-package com.Group1.CoinShell.controller.Hoxton;
+package com.Group1.CoinShell.model.Hoxton;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
