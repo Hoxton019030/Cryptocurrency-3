@@ -90,10 +90,16 @@ public class MembersController {
 	public String getFancyIntro() {
 		return "aboutUs/gen2_intro";
 	}
+	 
 	
 	@GetMapping("/account/privacy")
 	public String getPrivacy() {
 		return "account/privacy";
+	}
+	
+	@GetMapping("/account/freAQ")
+	public String getFAQ() {
+		return "account/freAQ";
 	}
 	
 	@GetMapping("/account/cookie")

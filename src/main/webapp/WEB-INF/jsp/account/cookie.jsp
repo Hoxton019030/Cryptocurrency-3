@@ -13,9 +13,10 @@
 
 	<!-- side bar 側邊欄位 -->
 	<div class="sidebar">
-		<a href="${contextRoot}/aboutUs/intro">About Our Team</a> <a
-			href="${contextRoot}/account/cookie">Cookie Policy</a> <a
-			href="${contextRoot}/account/privacy">Privacy Policy</a> 
+		<a href="${contextRoot}/aboutUs/intro">About Our Team</a> 
+		<a href="${contextRoot}/account/cookie">Cookie Policy</a> 
+			<a href="${contextRoot}/account/privacy">Privacy Policy</a> 
+			<a href="${contextRoot}/account/freAQ">Frequently Asked Questions</a> 
 	</div>
 
 	<div class="container"  style="margin-top: 30px; background-color: #fff; border-radius: 30px;">
