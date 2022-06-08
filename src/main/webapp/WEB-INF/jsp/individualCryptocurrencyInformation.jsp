@@ -14,24 +14,17 @@
             <link rel="stylesheet" href="/resources/demos/style.css">
             <link href="stylesheets/jquery-ui/base/jquery-ui.min.css" rel="stylesheet" />
             <link href="stylesheets/myStyleSheet.css" rel="stylesheet" />
+            <link rel="stylesheet" href="${contextRoot}/css/article.css">
             <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
             <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
             <link rel="stylesheet" type="text/css" href="${contextRoot}/css/individualCryptocurrencyInformationCss.css">
             <script src="${contextRoot}/javascripts/individualCryptocurrencyInformationJs.js">
+                
             </script>
             <style type="text/css">
                 body{
                 padding-top: 82px;
-                }
-                .heart{
-                 color: rgb(206, 202, 202);
-                    }
-                .check{
-                 display: none;
-                }
-                .check:checked + span{
-                 color: rgb(255, 0, 106);
                 }
             </style>
         </head>
@@ -326,9 +319,9 @@ function pageBtn (page){
     let str = '';
     const total = page.pageTotal;
     if(page.hasPage) {
-        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)-1)+`">Previous</a></li>`;
+        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)-1)+`">«</a></li>`;
     } else {
-        str += `<li class="page-item disabled"><span class="page-link">Previous</span></li>`;
+        str += `<li class="page-item disabled"><a class="page-link">«</a></li>`;
     }
     
     for(let i = 1; i <= total; i++){
@@ -340,9 +333,9 @@ function pageBtn (page){
     };
 
     if(page.hasNext) {
-        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)+1)+`">Next</a></li>`;
+        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)+1)+`">»</a></li>`;
     } else {
-        str += `<li class="page-item disabled"><span class="page-link">Next</span></li>`;
+        str += `<li class="page-item disabled"><a class="page-link">»</a></li>`;
     }
     pageid.innerHTML = str;    
     console.log(str);

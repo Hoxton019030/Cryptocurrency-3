@@ -27,8 +27,8 @@
                 <input id="authorid" type="hidden" value="${Article.authorId}"/>
                 <input id="atcAdded" type="hidden" value="${Article.added}" />
                 <span class="editFunction">
-                    <a href="${contextRoot}/editArticle/${Article.id}"><i class="fa fa-edit" aria-hidden="true"></i>Edit</a>
-                    <a href="${contextRoot}/deleteArticle/${Article.id}" onclick="return confirm('確認刪除嗎?')"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
+                    <a href="${contextRoot}/editArticleAdmin/${Article.id}"><i class="fa fa-edit" aria-hidden="true"></i>Edit</a>
+                    <a href="${contextRoot}/deleteArticleAdmin/${Article.id}" onclick="return confirm('確認刪除嗎?')"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
                 </span>
                 <div class="d-flex flex-row divToGetImg">
                     <img class="mr-3 rounded-circle" style="display:block; width:65px; height:65px" src="data:image/gif;base64,${img}"/>
@@ -366,9 +366,9 @@ function pageBtn(page){
     let str = '';
     const total = page.pageTotal;
     if(page.hasPage) {
-        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)-1)+`">Previous</a></li>`;
+        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)-1)+`">«</a></li>`;
     } else {
-        str += `<li class="page-item disabled"><span class="page-link">Previous</span></li>`;
+        str += `<li class="page-item disabled"><a class="page-link">«</a></li>`;
     }
     
     for(let i = 1; i <= total; i++){
@@ -380,9 +380,9 @@ function pageBtn(page){
     };
 
     if(page.hasNext) {
-        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)+1)+`">Next</a></li>`;
+        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)+1)+`">»</a></li>`;
     } else {
-        str += `<li class="page-item disabled"><span class="page-link">Next</span></li>`;
+        str += `<li class="page-item disabled"><a class="page-link">»</a></li>`;
     }
     pageidC.innerHTML = str;
 }
@@ -493,9 +493,9 @@ function pageBtnSm(page){
     const total = page.pageTotal;
     console.log("第幾頁"+page.currentPage);
     if(page.hasPage) {
-        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)-1)+`">Previous</a></li>`;
+        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)-1)+`">«</a></li>`;
     } else {
-        str += `<li class="page-item disabled"><span class="page-link">Previous</span></li>`;
+        str += `<li class="page-item disabled"><a class="page-link">«</a></li>`;
     }
     
     for(let i = 1; i <= total; i++){
@@ -507,9 +507,9 @@ function pageBtnSm(page){
     };
 
     if(page.hasNext) {
-        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)+1)+`">Next</a></li>`;
+        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)+1)+`">»</a></li>`;
     } else {
-        str += `<li class="page-item disabled"><span class="page-link">Next</span></li>`;
+        str += `<li class="page-item disabled"><a class="page-link">»</a></li>`;
     }
     
     console.log('pageidR'+page.id);

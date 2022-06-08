@@ -20,14 +20,14 @@ padding-top: 82px;
 <jsp:include page="../NavBar/CoinShellNavBar.jsp" />
 <div class="row justify-content-center">
 <div class="col-9">
-    <form id="searchByTag">
+    <div class="row article-head" id="searchByTag">
         <select id="tag-list"></select>        
         <input id="titlePart" type="text" placeholder="關鍵字查詢(標題/內文)"/>
         <input type="button" name="submit" value="查詢" id="search"/>
-        <a href="${contextRoot}/article/add" id="addAtc" onclick="verifyMembership()">新增文章</a>
-    </form>
+        <a href="${contextRoot}/article/add" id="addAtc" onclick="verifyMembership()" class="btn btn-primary btn-sm shadow-none">新增文章</a>
+    </div>
     
-	<table class="table table-hover table-primary">
+	<table class="table table-hover table-primary table-article">
 		<thead class="thead-dark">
 			<tr>
 				<th scope="col" class="col-2">幣別</th>
@@ -39,7 +39,7 @@ padding-top: 82px;
 		<tbody class="sel" id="atcTable">
 		
 		</tbody>
-        <nav aria-label="Page navigation example">
+        <nav aria-label="Page navigation example pagination-outer">
             <ul class="pagination" id="pageid">
             </ul>
         </nav>
@@ -219,9 +219,9 @@ function pageBtn (page){
     let str = '';
     const total = page.pageTotal;
     if(page.hasPage) {
-        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)-1)+`">Previous</a></li>`;
+        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)-1)+`">«</a></li>`;
     } else {
-        str += `<li class="page-item disabled"><span class="page-link">Previous</span></li>`;
+        str += `<li class="page-item disabled"><a class="page-link">«</a></li>`;
     }
     
     for(let i = 1; i <= total; i++){
@@ -233,9 +233,9 @@ function pageBtn (page){
     };
 
     if(page.hasNext) {
-        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)+1)+`">Next</a></li>`;
+        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)+1)+`">»</a></li>`;
     } else {
-        str += `<li class="page-item disabled"><span class="page-link">Next</span></li>`;
+        str += `<li class="page-item disabled"><a class="page-link">»</a></li>`;
     }
     pageid.innerHTML = str;    
     console.log(str);
