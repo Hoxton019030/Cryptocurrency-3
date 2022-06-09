@@ -111,7 +111,7 @@
 										<card class="card-body">
 											<h3>Hoxton</h3>
 											<span>Technology officer</span>
-											<p>Head of backend Springboot / SQL Database</p>
+											<p>Head of backend Spring Boot / SQL Database</p>
 										</card>
 									</div>
 								</div>

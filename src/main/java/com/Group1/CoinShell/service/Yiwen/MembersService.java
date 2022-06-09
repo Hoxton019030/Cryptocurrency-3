@@ -36,7 +36,12 @@ public class MembersService {
 	
 	// findAllMembers
 	public List<Members> findAllMembers() {
-		List<Members> memList = membersDao.findAllMembers();
+		List<Members> memList = membersDao.findAll();
+		return memList;
+	}
+
+	public List<Map<String,Object>> findAllMembers2() {
+		List<Map<String,Object>> memList = membersDao.findAll2();
 		return memList;
 	}
 	
