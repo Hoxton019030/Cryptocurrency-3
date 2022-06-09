@@ -29,7 +29,7 @@ public class PageController {
 		return "forum/viewAllArticle";
 	}
 	
-	@GetMapping("/shellshop")
+	@GetMapping("shellshop")
 	public String shellshop() {
 		return "store/store";
 	}
