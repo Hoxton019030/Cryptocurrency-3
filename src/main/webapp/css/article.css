@@ -19,8 +19,11 @@ display: none;
 color: rgb(255, 0, 106);
 }
 
+.article-section{
+    border-radius: 10px !important;
+}
+
 .article-head{
-    /* display: ; */
     border-radius: 4px;
     /* padding: 6px; */
     padding-left: 15px;
