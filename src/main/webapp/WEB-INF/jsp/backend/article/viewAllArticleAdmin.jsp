@@ -174,7 +174,7 @@ function displayData(data){
                 // console.log(array);
                      $("#atcTable").append(`
                         <tr class="table-info">
-                        <td>` + value.tag + `</td>
+                        <td><img class="tagImg" src="`+contextRoot+`/images/currencyIcon/`+value.tag+`.png" alt="">` + value.tag + `</td>
                         <td><a href="#" style="display: block;" onclick="loadAtcByAuthorId(`+value.authorId+`)"><div class="b-list"><div>` + value.CustomizedUserName + `</div></a><p class="text-black-50">ID:` + value.authorId + `</p></div></td>                       
                         <td><a href="`+contextRoot+`/viewArticleAdmin/` + value.id + `" style="display: block;"><div class="b-list"><div>` + value.title + `</div></a><p>` + peek + `....</p></div></td>
                         <td align="center">
