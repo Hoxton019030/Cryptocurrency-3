@@ -30,18 +30,18 @@ padding-top: 82px;
 						modelAttribute="article" class="articleForm">
 						<div class="input-group">
 							<label>幣別：</label>						
-							<form:select path="tag">
+							<form:select path="tag" class="article-sections">
 								<form:option value="NONE" label="請選擇幣別標籤" />
 								<form:options items="${tagList}"/>
 							</form:select>
 						</div>
 						<div class="input-group">
 							<label>標題：</label>												
-							<form:input path="title"  id="edit-title" placeholder="請輸入文章標題⋯"/>
+							<form:input path="title" class="article-sections" id="edit-title" placeholder="請輸入文章標題⋯"/>
 						</div>
 						<label>內文：</label><br>
 						<div class="input-group">							
-							<form:textarea id="edit-textarea" wrap="Virtual" path="text" class="form-control" placeholder="請輸入文章內容⋯"/>							
+							<form:textarea id="edit-textarea" wrap="Virtual" path="text" class="form-control article-sections" placeholder="請輸入文章內容⋯"/>							
 						</div>
 						<div>
 						<form:input path="readNum" value="0" type="hidden"/>
