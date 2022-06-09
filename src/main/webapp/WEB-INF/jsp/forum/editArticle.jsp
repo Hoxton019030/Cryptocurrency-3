@@ -46,6 +46,7 @@ padding-top: 82px;
 							<form:input path="id" type="hidden"/>
 							<form:input path="added" type="hidden"/>
 							<form:input path="authorId" type="hidden"/>
+							<form:input path="goodNum" type="hidden"/>
 						</div>
 						<div class=" text-right">							
 							<input class="btn btn-primary btn-sm shadow-none" type="submit" name="submit" value="確認修改">
