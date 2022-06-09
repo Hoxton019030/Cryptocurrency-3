@@ -73,45 +73,45 @@
 								<span> Group one. Gruppo uno. Gruppe eins. Groupe un. Grupo um. Gruppe et.</span>
 								<hr class="my-4">
 								<div class="cards">
-									<div class="card">
+									<div class="card" style="width:20%;">
 										<div class="card-imgl"></div>
 										<card class="card-body">
 											<h3>Yiwen</h3>
-											<span>Marketing officer</span>
-											<p>Head of CSS/JS and customized Bootstrap </p>
+											<span>Marketing Officer</span>
+											<p>Head of CSS/JS and Customized Bootstrap </p>
 										</card>
 									</div>
-									<div class="card">
+									<div class="card" style="width:20%;">
 										<div class="card-img2"></div>
 										<card class="card-body">
 											<h3>Bear</h3>
-											<span>Communications officer</span>
-											<p>Head of asynchronous Javascript and XML</p>
+											<span>Communications Officer</span>
+											<p>Head of Asynchronous Javascript and XML</p>
 										</card>
 									</div>
-									<div class="card">
+									<div class="card" style="width:20%;">
 										<div class="card-img3"></div>
 										<card class="card-body">
 											<h3>Pieterzite</h3>
-											<span>Executive officer</span>
-											<p>Project inspiration</p>
-											<p>Visual design & overall planning/operation</p>
+											<span>Executive Officer</span>
+											<p>Project inspiration<br>
+											Visual design & overall planning</p>
 										</card>
 									</div>
-									<div class="card">
+									<div class="card" style="width:20%;">
 										<div class="card-img4"></div>
 										<card class="card-body">
 											<h3>Feeder</h3>
-											<span>Information officer</span>
-											<p>Head of News API / Marquee API analysis</p>
+											<span>Information Officer</span>
+											<p>Head of News API / Marquee API Analysis</p>
 										</card>
 									</div>
-									<div class="card">
+									<div class="card" style="width:20%;">
 										<div class="card-img5"></div>
 										<card class="card-body">
 											<h3>Hoxton</h3>
-											<span>Technology officer</span>
-											<p>Head of backend Springboot / SQL Database</p>
+											<span>Technology Officer</span>
+											<p>Head of Backend Spring Boot / SQL Database</p>
 										</card>
 									</div>
 								</div>
@@ -127,9 +127,9 @@
 							<div class="jumbotron col-10"
 								style=" top: 15%; bottom: -5%; margin: 0 auto;background: #d9e1fb">
 								<div style="text-align: center;">
-									<h1 class="display-6">Founder of the Coinshell Team</h1>
+									<h3 class="founder">Founder of the Coinshell Team</h3>
 
-									<canvas id="myChart" style="width:80%; height:0%"></canvas>
+									<canvas id="myChart" style="width:100%; height:24rem;"></canvas>
 								</div>
 							</div>
 						</div>
@@ -198,7 +198,7 @@
 						</script>
 						<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 						<script>
-							var xValues = ["Pieterzite", "Huginn Hoxton", "Fenrir Feeder", "Bjarki Bear", "Sváfnir"];
+							var xValues = ["Pieterzite", "Huginn Hoxton", "Fenrir Feeder", "Bjarki Bear", "Sváfnir yW"];
 							var yValues = [100, 100, 100, 100, 100];
 							var barColors = [
 								"#ffb7c5",
