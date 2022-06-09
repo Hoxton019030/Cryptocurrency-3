@@ -31,7 +31,7 @@
                 <a href="${contextRoot}/deleteArticleAdmin/${Article.id}" onclick="return confirm('確認刪除嗎?')"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
             </span>
             <div class="d-flex justify-content-between divToGetImg">
-                <div class="d-flex row">                        
+                <div class="d-flex">                        
                     <img class="mr-3 rounded-circle" style="display:block; width:56px; height:56px" src="data:image/gif;base64,${img}"/>
                     <div class="d-flex flex-column">
                         <span class="name"><h5>${userName}</h5></span>

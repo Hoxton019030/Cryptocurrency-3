@@ -30,7 +30,7 @@
                 <a href="${contextRoot}/deleteArticle/${Article.id}" onclick="return confirm('確認刪除嗎?')"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
             </span>
             <div class="d-flex justify-content-between divToGetImg">
-                <div class="d-flex row">                        
+                <div class="d-flex">                        
                     <img class="mr-3 rounded-circle" style="display:block; width:56px; height:56px" src="data:image/gif;base64,${img}"/>
                     <div class="d-flex flex-column">
                         <span class="name"><h5>${userName}</h5></span>
@@ -56,8 +56,8 @@
                         <textarea class="form-control ml-1 shadow-none textarea" id="text-c" tabindex="1" placeholder="我其實也不是一定要評論"  style="resize:none;width:600px;height:90px;">我其實也不是一定要評論</textarea>
                     </div>
                     <div class="mt-2 text-right">
-                        <button class="btn btn-primary btn-sm shadow-none" type="button" id="submit-c" tabindex="2">Post comment</button>
-                        <button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button" id="closeComment">Cancel</button>
+                        <button class="fa btn btn-primary btn-sm shadow-none" type="button" id="submit-c" tabindex="2">Post</button>
+                        <button class="fa btn btn-outline-primary btn-sm ml-1 shadow-none" type="button" id="closeComment">Cancel</button>
                     </div>
                 </div>
                 <ul class="comment-r" style="display: none;">
@@ -162,6 +162,9 @@ function afterGoods(){
 function verifyMembershipOnload(){
     if ("${login == null }" == "false") {
         goods()
+    }
+    if ("${Article.authorId}" == "${login.id}") {
+        $(".editFunction").show()
     }
 }
 
@@ -396,7 +399,7 @@ function displayComm(data){
                         <div>                                
                             <div class="reply">
                                 <div class="m-1">                    
-                                    <button onclick="doReply(`+id+`)" class="fa fa-reply">Reply</button>
+                                    <button onclick="doReply(`+id+`)" class="fa btn btn-primary btn-sm shadow-none">Reply</button>
                                     <a href="#" id="editSection`+id+`" onclick="editSection(event,`+id+`)" class="editFunctionC" style="display: none;"><i class="fa fa-edit" aria-hidden="true"></i>Edit</a>
                                     <a href="#" onclick="deleteC(event,`+id+`)" class="editFunctionC" style="display: none;"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
                                 </div>
@@ -409,8 +412,8 @@ function displayComm(data){
                                             <textarea class="form-control ml-1 shadow-none textarea" id="text-r`+id+`" tabindex="1" placeholder="Reply here..." aria-required="true">我其實也不是一定要說什麼</textarea>
                                         </div>
                                         <div class="mt-2 text-right">
-                                            <button class="btn btn-primary btn-sm shadow-none submit-r" type="button" onclick="reply(`+id+`)">Reply</button>
-                                            <button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button" onclick="closeEditForm()">Cancel</button>
+                                            <button class="fa btn btn-primary btn-sm shadow-none submit-r" type="button" onclick="reply(`+id+`)">Reply</button>
+                                            <button class="fa btn btn-outline-primary btn-sm ml-1 shadow-none" type="button" onclick="closeEditForm()">Cancel</button>
                                         </div>
                                     </div>
                                     <ul class="reply-r" style="display: none;">
