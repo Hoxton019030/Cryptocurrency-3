@@ -194,10 +194,10 @@ public class MembersController {
 		return "redirect:/";
 	}
 	
-
+	@ResponseBody
 	@GetMapping("account/getAll")
-	public List<Members> findAllMembers(){
-		List<Members> allMemList = memService.findAllMembers();
+	public List<Map<String,Object>> findAllMembers(){
+		List<Map<String,Object>> allMemList = memService.findAllMembers2();
 		return allMemList;
 	}
 	
