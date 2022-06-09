@@ -20,9 +20,9 @@
 <jsp:include page="../NavBar/CoinShellNavBar.jsp" />
 <div class="container mb-5 mt-5">
     <div class="card article-section">
-        <div class="row">
-            <div class="col-md-12">
-                <h1>${Article.title}</h1>
+        <div class="">
+            <div class="card-header">
+                <h3>${Article.title}</h3>
                 <input id="aid" type="hidden" value="${Article.id}"/>
                 <input id="authorid" type="hidden" value="${Article.authorId}"/>
                 <input id="atcAdded" type="hidden" value="${Article.added}"/>
@@ -31,15 +31,16 @@
                     <a href="${contextRoot}/deleteArticle/${Article.id}" onclick="return confirm('確認刪除嗎?')"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
                 </span>
                 <div class="d-flex flex-row divToGetImg">
-                    <img class="mr-3 rounded-circle" style="display:block; width:65px; height:65px" src="data:image/gif;base64,${img}"/>
+                    <img class="mr-3 rounded-circle" style="display:block; width:56px; height:56px" src="data:image/gif;base64,${img}"/>
                     <div class="d-flex flex-column">
-                        <span class="name"><h3>${userName}</h3></span>
+                        <span class="name"><h5>${userName}</h5></span>
                         <span class="date text-black-50" id="added"></span>
                     </div>
                 </div>
                 <div style="align-items: center;background-color: #dbf8ff;" class="mt-2 mb-2">
                     <pre id="article-content">${Article.text}</pre>
                 </div>
+            
                 <div class="m-1">                    
                     <span id="goodsSection"><label><input type="checkbox" class="check" onClick="doGoods(${Article.id}, ${login.id})"><span class="heart"><i class="fa-solid fa-heart"></i></span></label>${Article.goodNum}</span>
                     <button id="doComment" class="btn btn-primary btn-sm shadow-none">Comment</button>
@@ -75,6 +76,8 @@
                         </li>                            
                     </ul>
                 </div>
+            </div>
+            <div class="card-body viewAtc">
                 <div class="row section_title">
                     <div class="col-md-12" id="comment-list">
 

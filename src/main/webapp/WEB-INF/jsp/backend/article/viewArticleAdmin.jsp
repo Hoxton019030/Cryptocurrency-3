@@ -24,6 +24,7 @@
             <div class="col-md-12">
                 <h1>${Article.title}</h1>
                 <input id="aid" type="hidden" value="${Article.id}"/>
+                <input id="articleId" type="hidden" value="${Article.id}"/>
                 <input id="authorid" type="hidden" value="${Article.authorId}"/>
                 <input id="atcAdded" type="hidden" value="${Article.added}" />
                 <span class="editFunction">
@@ -66,7 +67,7 @@
                             <label for="userEmail">E-mail:(necessery)</label>
                         </li>
                         <li>
-                            <input type="hidden" id="articleId" value="${Article.id}" />
+                            
                             <input type="hidden" id="userId" value="${login.id}" />
                         </li>
                         <li>

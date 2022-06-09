@@ -8,6 +8,15 @@
    margin-bottom:0;
 } 
 
+.tagImg {
+    width: 32px;
+    height: 32px;
+}
+
+/* .viewAtc{
+    padding: 0px !important;
+} */
+
 /*點讚圖示*/
 .heart{
 color: rgb(206, 202, 202);
@@ -27,6 +36,7 @@ color: rgb(255, 0, 106);
     border-radius: 4px;
     /* padding: 6px; */
     padding-left: 15px;
+    /* padding-right: 15px; */
     width: auto;
     height: auto;
     box-sizing: border-box;
