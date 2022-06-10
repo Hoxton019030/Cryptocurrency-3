@@ -92,7 +92,7 @@
                     <div class="card">
                         <div class="card-title">Punch In List</div>
                         <a href="OK?Id=${sessionScope.login.id}" class="btn btn-primary">Punch In</a>
-                        <a href="OK?Id=${sessionScope.login.id}" class="btn btn-primary">Store</a>
+                        <a href="${contextRoot}/shellshop" class="btn btn-primary">Store</a>
 
                     </div>
                 </div>
