@@ -140,7 +140,7 @@ function upCoin(memId) {
 
                 //注入折線圖至id=canvas
                 var xmlHttp = new XMLHttpRequest();
-                var url = "http://localhost:8080/coinshell/historical/get7daysUsdPrice?currencyName=    " + value.symbol;
+                var url = "http://localhost:8080/coinshell/historical/get7daysUsdPrice?currencyName=" + value.symbol;
                 xmlHttp.open("GET", url, true);
                 xmlHttp.send();
                 xmlHttp.onreadystatechange = function() {
@@ -149,7 +149,7 @@ function upCoin(memId) {
                     if (this.readyState == 4 && this.status == 200) {
                         var data = JSON.parse(this.responseText);
                         var days = data.map(function(elem) {
-                            return elem.informationDate.substr(0, 14).replace('T', '').replace('-', '').replace('-', '').replace(':', '');
+                            return elem.informationDate.substr(4, 12).replace('T', '').replace('-', '').replace('-', '').replace(':', '');
                         });
                         var price = data.map(function(elem) {
                             return elem.USD_Price_of_Cryptocurrency;
@@ -174,6 +174,12 @@ function upCoin(memId) {
                                 }]
                             },
                             options: {
+                                legend: {
+                                    display: false
+                                },
+                                tooltips: {
+                                    enabled: false
+                                },
                                 plugins: {},
                                 elements: {
                                     line: {
