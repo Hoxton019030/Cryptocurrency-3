@@ -29,7 +29,6 @@
         </head>
 
         <body>
-            ${currencyInformation.percentChange24h}
             <div id="tabs">
                 <div class="container-fluid">
                     <div class="row">
