@@ -64,7 +64,7 @@ ul {
 			style="height: 70px;" alt="logo"></a>
       </li>
       <li class="nav-item active font-custom">
-        <a class="nav-link" href="administrator/store">Commodities&nbsp;&nbsp;</a>
+        <a class="nav-link" href="administrator/store">Store&nbsp;&nbsp;</a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="${contextRoot}/administrator/news">News&nbsp;&nbsp;</a>
