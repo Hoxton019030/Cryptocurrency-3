@@ -400,8 +400,8 @@ function displayComm(data){
                             <div class="reply">
                                 <div class="m-1">                    
                                     <button onclick="doReply(`+id+`)" class="fa btn btn-primary btn-sm shadow-none">Reply</button>
-                                    <a href="#" id="editSection`+id+`" onclick="editSection(event,`+id+`)" class="editFunctionC" style="display: none;"><i class="fa fa-edit" aria-hidden="true"></i>Edit</a>
-                                    <a href="#" onclick="deleteC(event,`+id+`)" class="editFunctionC" style="display: none;"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
+                                    <a href="#" id="editSection`+id+`" onclick="editSection(event,`+id+`)" class="editFunctionC`+id+`" style="display: none;"><i class="fa fa-edit" aria-hidden="true"></i>Edit</a>
+                                    <a href="#" onclick="deleteC(event,`+id+`)" class="editFunctionC`+id+`" style="display: none;"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
                                 </div>
                                 <div id="editForm`+id+`" class="editForm">
                                 </div>
@@ -445,7 +445,7 @@ function displayComm(data){
                     </div>
                     `)
                 if(value.userId=="${login.id}"){
-                    $(".editFunctionC").show()
+                    $(".editFunctionC"+id).show()
                 }
             })
         }
@@ -559,14 +559,14 @@ function displayReply(data, id){
                             </div>
                         </div>
                         <div class="m-1">
-                                <a href="#" id="editSection`+thisId+`" onclick="editSectionR(event,`+thisId+`)" class="editFunctionR" style="display: none;"><i class="fa fa-edit" aria-hidden="true"></i>Edit</a>
-                                <a href="#" onclick="deleteR(event,`+thisId+`)" class="editFunctionR" style="display: none;"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
+                                <a href="#" id="editSection`+thisId+`" onclick="editSectionR(event,`+thisId+`)" class="editFunctionR`+thisId+`" style="display: none;"><i class="fa fa-edit" aria-hidden="true"></i>Edit</a>
+                                <a href="#" onclick="deleteR(event,`+thisId+`)" class="editFunctionR`+thisId+`" style="display: none;"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
                         </div>
                         <div id="editFormR`+thisId+`" class="editForm">
                         </div>
                         `)
                     if(value.userId=="${login.id}"){
-                    $(".editFunctionR").show()                    
+                    $(".editFunctionR"+thisId).show()                    
                 }             
             })
 }

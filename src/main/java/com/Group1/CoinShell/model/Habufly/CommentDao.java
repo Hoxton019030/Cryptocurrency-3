@@ -28,14 +28,14 @@ public interface CommentDao extends JpaRepository<Comment, Integer> {
 //		@Query(value = "select * from comment where article_id = :articleId and type = 'a' and deleted = 'n' ORDER BY added asc", nativeQuery = true)
 //		public List<Comment> findCommentByAtcAndType(@Param("articleId") Integer articleId);
 
-		@Query(value = "select c.id,added,article_id as articleId,comment_id as commentId,deleted,text,type,user_name as userName,user_id as userId,ava.userAvatar "
+		@Query(value = "select c.id,added,article_id as articleId,comment_id as commentId,deleted,text,type,m.CustomizedUserName as userName,user_id as userId,ava.userAvatar "
 				+ "from comment as c "
 				+ "left join "
 				+ "(Members as m inner join CustomizedUserAvatar as ava on m.customizedUserAvatar = ava.id) "
 				+ "on c.user_id = m.id where article_id = :articleId and type = 'a' and deleted = 'n' ORDER BY added desc", nativeQuery = true)
 		public List<Map<String,Object>> findCommentByAtcAndType(@Param("articleId") Integer articleId);
 		
-		@Query(value = "select c.id,added,article_id as articleId,comment_id as commentId,deleted,text,type,user_name as userName,user_id as userId,ava.userAvatar "
+		@Query(value = "select c.id,added,article_id as articleId,comment_id as commentId,deleted,text,type,m.CustomizedUserName as userName,user_id as userId,ava.userAvatar "
 				+ "from comment as c "
 				+ "left join "
 				+ "(Members as m inner join CustomizedUserAvatar as ava on m.customizedUserAvatar = ava.id) "
@@ -45,14 +45,14 @@ public interface CommentDao extends JpaRepository<Comment, Integer> {
 //		@Query(value = "select * from comment where article_id = :articleId and comment_Id = :commentId and type = 'b' and deleted = 'n' ORDER BY added asc", nativeQuery = true)
 //		public List<Comment> findReplyByAtcAndType(@Param("articleId") Integer articleId, @Param("commentId") Integer commentId);
 
-		@Query(value = "select c.id,added,article_id as articleId,comment_id as commentId,deleted,text,type,user_name as userName,user_id as userId,ava.userAvatar "
+		@Query(value = "select c.id,added,article_id as articleId,comment_id as commentId,deleted,text,type,m.CustomizedUserName as userName,user_id as userId,ava.userAvatar "
 				+ "from comment as c "
 				+ "left join "
 				+ "(Members as m inner join CustomizedUserAvatar as ava on m.customizedUserAvatar = ava.id) "
 				+ "on c.user_id = m.id where article_id = :articleId and comment_Id = :commentId and type = 'b' and deleted = 'n' ORDER BY added desc", nativeQuery = true)
 		public List<Map<String,Object>> findReplyByAtcAndType(@Param("articleId") Integer articleId, @Param("commentId") Integer commentId);
 		
-		@Query(value = "select c.id,added,article_id as articleId,comment_id as commentId,deleted,text,type,user_name as userName,user_id as userId,ava.userAvatar "
+		@Query(value = "select c.id,added,article_id as articleId,comment_id as commentId,deleted,text,type,m.CustomizedUserName as userName,user_id as userId,ava.userAvatar "
 				+ "from comment as c "
 				+ "left join "
 				+ "(Members as m inner join CustomizedUserAvatar as ava on m.customizedUserAvatar = ava.id) "
@@ -63,7 +63,7 @@ public interface CommentDao extends JpaRepository<Comment, Integer> {
 		public Integer checkCommentNumber(@Param("articleId") Integer articleId, @Param("type") String type);
 
 		
-		@Query(value = "select c.id,added,article_id as articleId,comment_id as commentId,deleted,text,type,user_name as userName,user_id as userId,ava.userAvatar,user_email as userEmail "
+		@Query(value = "select c.id,added,article_id as articleId,comment_id as commentId,deleted,text,type,m.CustomizedUserName as userName,user_id as userId,ava.userAvatar,user_email as userEmail "
 				+ "from comment as c "
 				+ "left join "
 				+ "(Members as m inner join CustomizedUserAvatar as ava on m.customizedUserAvatar = ava.id) "
