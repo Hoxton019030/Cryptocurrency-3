@@ -3,9 +3,8 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<!DOCTYPE html>
-<html>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+<jsp:include page="../backendNavBar.jsp" />
 <head>
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -14,20 +13,19 @@
 <link rel="stylesheet" href="${contextRoot}/css/article.css">
 <script src="${contextRoot}/javascripts/bootstrap.bundle.min.js"></script>
 <script src="https://kit.fontawesome.com/f844132572.js" crossorigin="anonymous"></script>
-
 <title>討論區</title>
 </head>
 <body>
-<jsp:include page="../backendNavBar.jsp" />
+
 <div class="row justify-content-center">
 <div class="col-9">
-    <form id="searchByTag">
+    <div class="row article-head" id="searchByTag">
         <select id="tag-list"></select>        
         <input id="titlePart" type="text" placeholder="關鍵字查詢(標題/內文)"/>
         <input type="button" name="submit" value="查詢" id="search"/>
         <!-- <a href="${contextRoot}/backend/article/add" id="addAtc">新增文章</a> -->
-    </form>    
-	<table class="table table-hover table-primary">
+    </div>    
+	<table class="table table-hover table-primary table-article">
 		<thead class="thead-dark">
 			<tr>
 				<th scope="col" class="col-1">幣別</th>
@@ -42,7 +40,7 @@
 		<tbody class="sel" id="atcTable">
 		
 		</tbody>
-        <nav aria-label="Page navigation example">
+        <nav aria-label="Page navigation example pagination-outer">
             <ul class="pagination" id="pageid">
             </ul>
         </nav>
@@ -174,7 +172,7 @@ function displayData(data){
                 // console.log(array);
                      $("#atcTable").append(`
                         <tr class="table-info">
-                        <td>` + value.tag + `</td>
+                        <td><img class="tagImg" src="`+contextRoot+`/images/currencyIcon/`+value.tag+`.png" alt="">` + value.tag + `</td>
                         <td><a href="#" style="display: block;" onclick="loadAtcByAuthorId(`+value.authorId+`)"><div class="b-list"><div>` + value.CustomizedUserName + `</div></a><p class="text-black-50">ID:` + value.authorId + `</p></div></td>                       
                         <td><a href="`+contextRoot+`/viewArticleAdmin/` + value.id + `" style="display: block;"><div class="b-list"><div>` + value.title + `</div></a><p>` + peek + `....</p></div></td>
                         <td align="center">
@@ -195,9 +193,9 @@ function pageBtn (page){
     let str = '';
     const total = page.pageTotal;
     if(page.hasPage) {
-        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)-1)+`">Previous</a></li>`;
+        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)-1)+`">«</a></li>`;
     } else {
-        str += `<li class="page-item disabled"><span class="page-link">Previous</span></li>`;
+        str += `<li class="page-item disabled"><a class="page-link">«</a></li>`;
     }
     
     for(let i = 1; i <= total; i++){
@@ -209,9 +207,9 @@ function pageBtn (page){
     };
 
     if(page.hasNext) {
-        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)+1)+`">Next</a></li>`;
+        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)+1)+`">»</a></li>`;
     } else {
-        str += `<li class="page-item disabled"><span class="page-link">Next</span></li>`;
+        str += `<li class="page-item disabled"><a class="page-link">»</a></li>`;
     }
     pageid.innerHTML = str;    
     console.log(str);
@@ -312,4 +310,3 @@ function pageBtn (page){
 
 </script>
 </body>
-</html>

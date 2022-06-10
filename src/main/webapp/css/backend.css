@@ -6,6 +6,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Noto+Serif+TC:wght@300;400;500;600;700;900&display=swap');
 
 ul {
+  top:50%;
   display: table;
   margin: 0 auto;
   font-size:80px;
@@ -14,9 +15,11 @@ ul {
 }
 
 li{
+	top:50%;
 	font-size:40px;
 	font-family: 'Noto Serif TC', serif;
 	z-index:1;
+	list-style-type: none;
 	}
 	
 h1{

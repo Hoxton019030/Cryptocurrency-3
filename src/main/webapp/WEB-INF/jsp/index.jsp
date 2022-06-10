@@ -90,7 +90,7 @@
   <div id="d1"><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-info.js" async>
   {
   "symbol": "BINANCEUS:BTCUSD",
-  "width": "595",
+  "width": "592",
   "height": "230",
   "locale": "en",
   "colorTheme": "light",
@@ -101,7 +101,7 @@
   <div id="d2"><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-info.js" async>
    {
    "symbol": "BINANCEUS:ETHUSD",
-   "width": "595",
+   "width": "592",
    "height": "230",
    "locale": "en",
    "colorTheme": "light",
@@ -112,7 +112,7 @@
   <div id="d3"><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-info.js" async>
   {
   "symbol": "BINANCEUS:USDTUSD",
-  "width": "595",
+  "width": "592",
   "locale": "en",
   "colorTheme": "light",
   "isTransparent": false

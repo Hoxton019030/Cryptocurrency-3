@@ -6,7 +6,7 @@
 
 			<head>
 				<meta charset="UTF-8">
-				<title>金星または真珠 ⚓ Coinshell</title>
+				<title> About Us | Coinshell</title>
 				<link rel="stylesheet" href="${contextRoot}/css/gen2introStyle.css">
 				<link rel="stylesheet" type="text/css" href="${contextRoot}/css/fullpage.css" />
 			</head>
@@ -15,230 +15,217 @@
 				<div id="fullpage">
 					<div class="section active" id="section0">
 
-						<div class="jumbotron col-10" style=" top: 15%; bottom: -5%; margin: 0 auto;background: #9daedfe8; text-align: center">
-							<h1 class="display-6">About Coin Shell </h1>
-		<hr class="my-4">
-							<p>Coinshell is a price-tracking website for cryptoassets in
-								the rapidly growing cryptocurrency space. Its mission is to make
-								crypto discoverable and efficient globally by empowering retail
-								users with unbiased, high quality and accurate information for
-								drawing their own informed conclusions.</p>
-								<br>
-								<br>
-								<br>
-								<br>
+						<div class="jumbotron col-10" style=" top: 15%; bottom: -5%; margin: 0 auto;background: rgba(255, 255, 255, 0.5); text-align: center">
+							<div class="about-1">
+								<h1 class="display-6">About Coin Shell </h1>
+								<hr class="my-4">
+								<p>Coinshell is a price-tracking website for cryptoassets in
+									the rapidly growing cryptocurrency space. Its mission is to make
+									crypto discoverable and efficient globally by empowering retail
+									users with unbiased, high quality and accurate information for
+									drawing their own informed conclusions.</p>
+								<p>在區塊鏈高速發展的世界裡，Coinshell提供您最正確的加密貨幣價格追蹤功能以及最即時的一手訊息。</p>
 
-								<h4> 這裡放 MISSION |  VISION  |  ACHIEVEMENTS 三張 cards</h4>
-								<h4> 參考 online tricks ke 的 how to create about us page using html css and bootstrap.</h4>
+							</div>
+							<div class="about-2">
+								<div class="content-box-lg">
+									<div class="container">
+										<div class="row">
+											<div class="col-md-4">
+												<div class="about-item text-center">
+													<i class="fa fa-book"></i>
+													<h3>MISSION 使命</h3>
+													<hr>
+													<p>綜合線上各虛擬貨幣平台優勢，集結成Coinshell</p>
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="about-item text-center">
+													<i class="fa fa-globe"></i>
+													<h3>VISION 展望</h3>
+													<hr>
+													<p>成為前五大虛擬貨幣資訊平台</p>
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="about-item text-center">
+													<i class="fa fa-pencil"></i>
+													<h3>ACHIEVEMENT 成果</h3>
+													<hr>
+													<p>價格提醒、關注幣種、新聞彙整、討論社群</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<footer class="text-center">
+								<p>Copyright &copy; 2022 All rights reserved by Coin Shell.</p>
+							</footer>
 						</div>
 
 					</div>
 					<div class="section" id="section1">
 						<div class="slide active">
-							<div class="jumbotron col-10" style="top: 15%; bottom: -5%; margin: 0 auto;background: #7d8ec4; text-align: center">
-								<h1 class="display-6">Who we are </h1>
-								
-								
+							<div class="jumbotron col-10"
+								style="top: 15%; bottom: -5%; margin: 0 auto;background: #d9e1fb; text-align: center">
+								<div class="who-we-are"><h3>Who we are </h3></div>
 								<span> Group one. Gruppo uno. Gruppe eins. Groupe un. Grupo um. Gruppe et.</span>
 								<hr class="my-4">
-								<br>
-								<br>
-								<br>
-								<br>
-
-								<h4> 這裡放 (照片)/(姓名)/(職稱)/(四行內敘述) * 5 ppl</h4>
-								<h4> 參考忘記是誰教的 how to create about us page using html css and bootstrap.</h4>
-
-
+								<div class="cards">
+									<div class="card" style="width:20%;">
+										<div class="card-imgl"></div>
+										<card class="card-body">
+											<h3>Yiwen</h3>
+											<span>Marketing Officer</span>
+											<p>Head of CSS/JS and Customized Bootstrap </p>
+										</card>
+									</div>
+									<div class="card" style="width:20%;">
+										<div class="card-img2"></div>
+										<card class="card-body">
+											<h3>Bear</h3>
+											<span>Communications Officer</span>
+											<p>Head of Asynchronous Javascript and XML</p>
+										</card>
+									</div>
+									<div class="card" style="width:20%;">
+										<div class="card-img3"></div>
+										<card class="card-body">
+											<h3>Pieterzite</h3>
+											<span>Executive Officer</span>
+											<p>Project inspiration<br>
+											Visual design & overall planning</p>
+										</card>
+									</div>
+									<div class="card" style="width:20%;">
+										<div class="card-img4"></div>
+										<card class="card-body">
+											<h3>Feeder</h3>
+											<span>Information Officer</span>
+											<p>Head of News API / Marquee API Analysis</p>
+										</card>
+									</div>
+									<div class="card" style="width:20%;">
+										<div class="card-img5"></div>
+										<card class="card-body">
+											<h3>Hoxton</h3>
+											<span>Technology Officer</span>
+											<p>Head of Backend Spring Boot / SQL Database</p>
+										</card>
+									</div>
+								</div>
+								<div class="social-media">
+									<i class="fa fa-github" style="font-size:24px"></i>
+								</div>
 							</div>
 
 
 
 						</div>
 						<div class="slide">
-							<div class="jumbotron col-10" style=" top: 15%; bottom: -5%; margin: 0 auto;background: #6171a9">
+							<div class="jumbotron col-10"
+								style=" top: 15%; bottom: -5%; margin: 0 auto;background: #d9e1fb">
 								<div style="text-align: center;">
-									<h1 class="display-6">Founder of the Coinshell Team</h1>
-									<h6>下面這個 chart 的 font-size 有待調整 </h6>
-									
-									<canvas id="myChart" style="width:60%; "></canvas>
+									<h3 class="founder">Founder of the Coinshell Team</h3>
+
+									<canvas id="myChart" style="width:100%; height:24rem;"></canvas>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="section" id="section2">
-						<section class="instagram" style="background: rgba(200, 200, 200, 0.9);">
-							<div class="container-fluid">
-								<div class="row m-0">
-									<div class="col-lg-2 p-0">
-										<div class="instagram_item">
-											<img src="https://picsum.photos/300">
-											<div class="instagram_text">
-												<i class="fa fa-instagram"></i>
-											</div>
-										</div>
-									</div>
-									<div class="col-lg-2 p-0">
-										<div class="instagram_item">
-											<img src="https://picsum.photos/301">
-											<div class="instagram_text">
-												<i class="fa fa-instagram"></i>
-											</div>
-										</div>
-									</div>
-									<div class="col-lg-2 p-0">
-										<div class="instagram_item">
-											<img src="https://picsum.photos/302">
-											<div class="instagram_text">
-												<i class="fa fa-instagram"></i>
-											</div>
-										</div>
-									</div>
-									<div class="col-lg-2 p-0">
-										<div class="instagram_item">
-											<img src="https://picsum.photos/300">
-											<div class="instagram_text">
-												<i class="fa fa-instagram"></i>
-											</div>
-										</div>
-									</div>
-									<div class="col-lg-2 p-0">
-										<div class="instagram_item">
-											<img src="https://picsum.photos/301">
-											<div class="instagram_text">
-												<i class="fa fa-instagram"></i>
-											</div>
-										</div>
-									</div>
-									<div class="col-lg-2 p-0">
-										<div class="instagram_item">
-											<img src="https://picsum.photos/299">
-											<div class="instagram_text">
-												<i class="fa fa-instagram"></i>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</section>
-						<section class="footer spad" style="background: rgba(200, 200, 200, 0.9);">
+
+						<!-- footer  -->
+						<div class="main-footer">
 							<div class="container">
-								<div class="row">
-									<div class="col-lg-4 col-md-6 col-sm-12 mt-20">
-										<div class="footer_about">
-											<div class="footer_logo">
-												<a href="${contextPath}">Coin Shell<span>.</span></a>
-											</div>
-											<p> Egal ob Venus oder Barockperle, sie kommt aus einer Muschel. <br/>Non importa
-												che sia una venere o una perla barocca.</p>
-											<div class="footer-social" style="text-decoration: none; color:black;">
-												<a href="#">
-													<i class="fa fa-facebook"></i>
-												</a>
-												<a href="#">
-													<i class="fa fa-twitter"></i>
-												</a>
-												<a href="#">
-													<i class="fa fa-instagram"></i>
-												</a>
-												<a href="#">
-													<i class="fa fa-linkedin"></i>
-												</a>
-											</div>
-										</div>
-									</div>
-									<div display="hidden" class="col-lg-2 col-md-3">
-										<div class="footer_widget">
-										 
-
-										</div>
-									</div>
-									<div class="col-lg-2 col-md-3">
-										<div class="footer_widget">
-											<h6>Accounts</h6>
-											<ul>
-												<li><a href="/coinshell/account/set">Accounts</a></li>
-												<li><a href="${contextRoot}/logout">Log Out</a></li>
-												<li><a href="${contextRoot}">Watchlist</a></li>
-												<li><a href="${contextRoot}/shop/myshell">PunchList</a></li>
-												<li><a href="${contextRoot}/viewAllArticle">BeachTown</a></li>
-											</ul>
-										</div>
-									</div>
-									<div class="col-lg-4 col-md-3">
-										<div class="footer_widget">
-											<h6>Support</h6>
-											<ul>
-												<li><a href="/coinshell/account/referral">Frequently Asked Questions</a></li>
-												<li><a href="${contextRoot}/account/cookie">Cookie Policy</a></li>
-												<li><a href="${contextRoot}/account/privacy">Privacy Policy</a></li>
-												<li><a href="mailto:arriettybenjamin@gmail.com">Contact us</a></li>
-											</ul>
-										</div>
-									</div>
+								<div class="footer-item">
+									<h4>About Us</h4>
+									<nav>
+										<a href="${contextRoot}/account/freAQ"><i class="fa fa-angle-right"></i>
+											FAQs</a>
+										<a href="${contextRoot}/account/cookie"><i class="fa fa-angle-right"></i> 
+											Cookie Policy</a>
+										<a href="${contextRoot}/account/privacy"><i class="fa fa-angle-right"></i>
+											Privacy Policy</a>
+										<a href="mailto:arriettybenjamin@gmail.com"><i class="fa fa-angle-right"></i>
+											Contact us</a>
+									</nav>
+								</div>
+								<div class="footer-item">
+									<h4>Membership</h4>
+									<nav>
+										<a href="/coinshell/account/set"> <i class="fa fa-angle-right"></i> Accounts</a>
+										<a href="${contextRoot}/logout"><i class="fa fa-angle-right"></i> Log Out</a>
+										<a href="${contextRoot}"> <i class="fa fa-angle-right"></i> Watchlist</a>
+										<a href="${contextRoot}/shop/myshell"> <i
+												class="fa fa-angle-right"></i> PunchList</a>
+										<a href="${contextRoot}/viewAllArticle"><i class="fa fa-angle-right"></i>
+											BeachTown</a>
+									</nav>
+								</div>
+								<div class="footer-item">
+									<h4>Socials</h4>
+									<nav>
+										<a href="https://www.facebook.com/"><i class="fa fa-angle-right"></i>
+											Facebook&nbsp;<i class="fa fa-facebook"></i></a>
+										<a href="https://twitter.com/"><i class="fa fa-angle-right"></i> Twitter&nbsp;<i
+												class="fa fa-twitter"></i></a>
+										<a href="https://www.instagram.com/"><i class="fa fa-angle-right"></i>
+											Instagram&nbsp;<i class="fa fa-instagram"></i></a>
+										<a href="#"><i class="fa fa-angle-right"></i> Interactive Chat&nbsp;<i
+												class="fa-solid fa-comments"></i></a>
+									</nav>
+								</div>
+								<div class="footer-item footer-subs">
+									<h4>Subscribe</h4>
+									<form>
+										<input type="text" placeholder="${login.eMail}">
+										<input type="submit" value="Subscribe">
+									</form>
 								</div>
 							</div>
+							<div class="conpyright">Coin Market &copy; Coin Shell</div>
+						</div>
 
 
+						<script type="text/javascript" src="${contextRoot}/javascripts/fullpage.js"></script>
+						<script type="text/javascript">
+							// 捲動滾輪就可以拉到下一個 section
+							var myFullpage = new fullpage('#fullpage', {
+								sectionsColor: ['#C0CFFA', '#3f5494', '#oooooo']
+							});
+						</script>
+						<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+						<script>
+							var xValues = ["Pieterzite", "Huginn Hoxton", "Fenrir Feeder", "Bjarki Bear", "Sváfnir yW"];
+							var yValues = [100, 100, 100, 100, 100];
+							var barColors = [
+								"#ffb7c5",
+								"#0e1a40",
+								"#946b2d",
+								"#222f5b",
+								"#5d5d5d"
+							];
 
+							new Chart("myChart", {
+								type: "doughnut",
+								data: {
+									labels: xValues,
 
+									datasets: [{
+										backgroundColor: barColors,
+										data: yValues
+									}]
 
+								},
+								options: {
+									title: {
+										display: false,
+									}
+								}
+							});
+						</script>
 
-
-
-
-
-					</div>
-				</div>
-
-
-
-
-
-
-
-
-
-
-
-				<script type="text/javascript" src="${contextRoot}/javascripts/fullpage.js"></script>
-				<script type="text/javascript">
-					// 捲動滾輪就可以拉到下一個 section
-					var myFullpage = new fullpage('#fullpage', {
-						sectionsColor: ['#C0CFFA', '#48578e', '#212c58']
-					});
-				</script>
-				<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-				<script>
-				var xValues = ["Pieterzite", "Huginn Hoxton", "Fenrir Feeder", "Bjarki Bear", "Sváfnir"];
-				var yValues = [100, 100, 100, 100, 100];
-				var barColors = [
-				  "#ffb7c5",
-				  "#0e1a40",
-				  "#946b2d",
-				  "#222f5b",
-				  "#5d5d5d"
-				];
-
-				new Chart("myChart", {
-				  type: "doughnut",
-				  data: {
-				    labels: xValues,
-					 
-				    datasets: [{
-				      backgroundColor: barColors,
-				      data: yValues
-				    }]
-					
-				  },
-				  options: {
-				    title: {
-				      display: true,
-				      text: "Founder of the Coinshell Team"
-				    }
-				  }
-				});
-				</script>
-					
 
 			</body>

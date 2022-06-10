@@ -36,7 +36,12 @@ public class MembersService {
 	
 	// findAllMembers
 	public List<Members> findAllMembers() {
-		List<Members> memList = membersDao.findAllMembers();
+		List<Members> memList = membersDao.findAll();
+		return memList;
+	}
+
+	public List<Map<String,Object>> findAllMembers2() {
+		List<Map<String,Object>> memList = membersDao.findAll2();
 		return memList;
 	}
 	
@@ -52,12 +57,13 @@ public class MembersService {
 	
 	// deleteMemberById
 	public void deleteMemberById(Integer id) {
-		membersDao.deleteMemberById(id);
+//		membersDao.deleteMemberById(id);
+		membersDao.deleteById(id);
 	}
 		
 	// findMemberByName 模糊查詢
-	public List<Members> findMemberByName(String customizedUserName){
-		List<Members> memList = membersDao.findMemberByName(customizedUserName);
+	public List<Map<String, Object>> findMemberByName(String customizedUserName){
+		List<Map<String, Object>> memList = membersDao.findMemberByName(customizedUserName);
 		return memList;
 	}
 
@@ -71,6 +77,10 @@ public class MembersService {
 	// findById  
 	public List<Members> findMemberById2 (Integer Id) {
 		return membersDao.findMemberById2(Id);
+	}
+	
+	public List<Map<String, Object>> findMemberById3 (Integer Id) {
+		return membersDao.findMemberById3(Id);
 	}
 		
 	// updateMemberById

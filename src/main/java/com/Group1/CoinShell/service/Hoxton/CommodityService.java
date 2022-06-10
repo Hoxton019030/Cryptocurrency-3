@@ -1,11 +1,13 @@
 package com.Group1.CoinShell.service.Hoxton;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.Group1.CoinShell.model.Hoxton.Cart;
 import com.Group1.CoinShell.model.Hoxton.Commodity;
 import com.Group1.CoinShell.model.Hoxton.CommodityDao;
 
@@ -41,6 +43,22 @@ public class CommodityService {
 	public List<Commodity> findAllCommodity(){
 		List<Commodity> commodityList = dao.findAllCommodity();
 		return commodityList;
+	}
+	
+	public Map getAll() {
+		return (Map) dao.findAll();
+	}
+	
+	public void buyCommodity(Integer id , Cart cart) {
+		Commodity commodity = dao.findCommodityById(id);
+		cart.addCommodity(commodity);
+	}
+	
+	public void deleteCommodity(Integer id,Cart cart){
+		if(cart == null) {
+			System.out.println("購物車為空");
+		}
+		cart.getCommodityMap().remove(id);
 	}
 
 }
