@@ -27,7 +27,7 @@
             <input id="atcAdded" type="hidden" value="${Article.added}"/>
             <span style="display: none;" class="editFunction">
                 <a href="${contextRoot}/editArticle/${Article.id}"><i class="fa fa-edit" aria-hidden="true"></i>Edit</a>
-                <a href="${contextRoot}/deleteArticle/${Article.id}" onclick="return confirm('確認刪除嗎?')"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
+                <a href="${contextRoot}/deleteArticle/${Article.id}" onclick="return confirm('Delete it for sure? 確認刪除嗎?')"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
             </span>
             <div class="d-flex justify-content-between divToGetImg">
                 <div class="d-flex">                        
@@ -53,7 +53,7 @@
                 <div class="comment-l bg-light p-2" style="display: none;">
                     <div class="d-flex flex-row align-items-start divToGetImg">
                         <img class="rounded-circle" src="data:image/gif;base64,${memImg}" width="40">
-                        <textarea class="form-control ml-1 shadow-none textarea" id="text-c" tabindex="1" placeholder="我其實也不是一定要評論"  style="resize:none;width:600px;height:90px;">我其實也不是一定要評論</textarea>
+                        <textarea class="form-control ml-1 shadow-none textarea" id="text-c" tabindex="1" placeholder="Honestly I don't really want to comment. 我其實也不是一定要評論"  style="resize:none;width:600px;height:90px;">我其實也不是一定要評論</textarea>
                     </div>
                     <div class="mt-2 text-right">
                         <button class="fa btn btn-primary btn-sm shadow-none" type="button" id="submit-c" tabindex="2">Post</button>
@@ -254,7 +254,7 @@ function getAtcTime() {
     var HH = added.getHours();
     var mm = added.getMinutes();
     var weekIndex = added.getDay();
-    var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+    var weekDay = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
     var weekDayPrint = weekDay[weekIndex];
     $("#added").append(YYYY+`-`+MM+`-`+dd+` `+HH+`:`+mm+` `+weekDayPrint);
 }
@@ -378,7 +378,7 @@ function displayComm(data){
             var HH = added.getHours();
             var mm = added.getMinutes();
             var weekIndex = added.getDay();
-            var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+            var weekDay = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
             var weekDayPrint = weekDay[weekIndex];
             var id = value.id;
             var cidForReply = value.commentId;   
@@ -538,7 +538,7 @@ function displayReply(data, id){
                 var HH = added.getHours();
                 var mm = added.getMinutes();
                 var weekIndex = added.getDay();
-                var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+                var weekDay = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
                 var weekDayPrint = weekDay[weekIndex];  
                 var img = value.userAvatar;
                 var thisId = value.id;             

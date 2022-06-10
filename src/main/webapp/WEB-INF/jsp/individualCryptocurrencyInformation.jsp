@@ -199,7 +199,7 @@
                 $(function() {
                     var tag = document.getElementById("tag").value;
                     console.log(tag);
-                    fetch("http://localhost:8080/coinshell/article/viewAllAjax?tag=BTC").then(function(response) {
+                    fetch("http://localhost:8080/coinshell/article/viewAllAjax?tag="+tag).then(function(response) {
                         return response.json();
                         // console.log(response.json())
                     }).then(function(data) {
@@ -280,7 +280,7 @@
                         // console.log(array);
                         $("#atcTable").append(`
                         <tr class="table-info">
-                        <td>` + value.tag + `</td>
+                        <td><img class="tagImg" src="`+contextRoot+`/images/currencyIcon/`+value.tag+.`png" alt="">` + value.tag + `</td>
                         <td><a href="` + contextRoot + `/viewArticle/` + value.id + `" style="display: block;"><div class="b-list"><div>` + value.title + `</div></a><p>` + peek + `....</p></div></td>
                         <td align="center">
                             <label><input type="checkbox" class="check" checked><span class="heart"><i class="fa-solid fa-heart"></i></span>` + value.goodNum + `</label>

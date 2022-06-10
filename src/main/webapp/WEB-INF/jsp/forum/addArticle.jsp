@@ -4,13 +4,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page isELIgnored="false" %>
-<!DOCTYPE html>
-<html>
+<jsp:include page="../NavBar/CoinShellNavBar.jsp" />
 <head>
 <meta charset="UTF-8">
 <c:set var="contextRoot" value="${pageContext.request.contextPath}"/>
 <link rel="stylesheet" href="${contextRoot}/css/article.css">
-<title>新增留言</title>
+<title>New comment | Coinshell</title>
 <style type="text/css">
 body{
 padding-top: 82px;
@@ -18,30 +17,30 @@ padding-top: 82px;
 </style>
 </head>
 <body>
-<jsp:include page="../NavBar/CoinShellNavBar.jsp" />
+
 <div class="container">
 	<div class="row justify-content-center">
 		<div class="col-9">
 			<div class="card border-info" id="edit-card">
-				<div class="card-header">新增文章</div>
+				<div class="card-header">Post a new article</div>
 				<div class="card-body">
 					<!-- 			如果getmapping和postmapping的路徑一樣，action=""可以不用寫 -->
 					<form:form action="${contextRoot}/article/add" method="post"
 						modelAttribute="article" class="articleForm">
 						<div class="input-group">
-							<label>幣別：</label>						
+							<label>Type of Crypto: &nbsp;</label>						
 							<form:select path="tag" class="article-sections">
-								<form:option value="NONE" label="請選擇幣別標籤" />
+								<form:option value="NONE" label="Choose a type of currency" />
 								<form:options items="${tagList}"/>
 							</form:select>
 						</div>
 						<div class="input-group">
-							<label>標題：</label>												
-							<form:input path="title" class="article-sections" id="edit-title" placeholder="請輸入文章標題⋯"/>
+							<label>Title:&nbsp; </label>												
+							<form:input path="title" class="article-sections" id="edit-title" placeholder="Please enter title ⋯"/>
 						</div>
-						<label>內文：</label><br>
+						<label>Content:&nbsp; </label><br>
 						<div class="input-group">							
-							<form:textarea id="edit-textarea" wrap="Virtual" path="text" class="form-control article-sections" placeholder="請輸入文章內容⋯"/>							
+							<form:textarea id="edit-textarea" wrap="Virtual" path="text" class="form-control article-sections" placeholder="Please enter article content ⋯"/>							
 						</div>
 						<div>
 						<form:input path="readNum" value="0" type="hidden"/>
@@ -71,4 +70,3 @@ document.getElementById(".articleForm").submit();
 
 </script> -->
 </body>
-</html>

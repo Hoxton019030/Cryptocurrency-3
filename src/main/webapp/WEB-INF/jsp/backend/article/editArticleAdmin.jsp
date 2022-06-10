@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="${contextRoot}/css/article.css">
 <meta charset="UTF-8">
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-<title>修改文章頁面</title>
+<title>Edit Article | Coinshell Backend</title>
 </head>
 <body>
 
@@ -22,22 +22,22 @@
 	<div class="row justify-content-center">
 		<div class="col-9">
 			<div class="card border-info" id="edit-card">
-				<div class="card-header">修改文章</div>
+				<div class="card-header">Edit Article</div>
 				<div class="card-body">
 					<form:form action="${contextRoot}/postEditArticleAdmin" method="post"
 						modelAttribute="article">
 						<div class="input-group">
-							<label>幣別：</label>
+							<label>Type of Crypto: &nbsp;</label>
 							<form:select path="tag">
-								<form:option value="NONE" label="請選擇幣別標籤" />
+								<form:option value="NONE" label="Choose a type of currency"  />
 								<form:options items="${tagList}"/>
 							</form:select>
 						</div>
 						<div class="input-group" id="edit-title">
-							<label>標題：</label>			
+							<label>Title:&nbsp;</label>			
 							<form:input path="title" id="edit-title"/>
 						</div>
-						<label>內文：</label><br>
+						<label>Content:&nbsp; </label><br>
 						<div class="input-group">							
 							<form:textarea wrap="Virtual" path="text" class="form-control" id="edit-textarea"/>							
 						</div>
@@ -51,7 +51,7 @@
 							<form:input path="authorId" type="hidden"/>
 						</div>
 						<div class=" text-right">							
-							<input class="btn btn-primary btn-sm shadow-none" type="submit" name="submit" value="確認修改">
+							<input class="btn btn-primary btn-sm shadow-none" type="submit" name="submit" value="Confirm Revision">
 						</div>
 					</form:form>
 				</div>
