@@ -64,16 +64,16 @@ ul {
 			style="height: 70px;" alt="logo"></a>
       </li>
       <li class="nav-item active font-custom">
-        <a class="nav-link" href="administrator/store">商品</a>
+        <a class="nav-link" href="administrator/store">Commodities&nbsp;&nbsp;</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="${contextRoot}/administrator/news">新聞</a>
+        <a class="nav-link" href="${contextRoot}/administrator/news">News&nbsp;&nbsp;</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="${contextRoot}/administrator/article">討論</a>
+        <a class="nav-link" href="${contextRoot}/administrator/article">BeachTown&nbsp;&nbsp;</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="${contextRoot}/adm-account">會員</a>
+        <a class="nav-link" href="${contextRoot}/adm-account">Members</a>
       </li>
     </ul>
   </div>

@@ -74,7 +74,7 @@ public class ArticleController {
 		// 回傳後顯示最新的那一筆留言
 		Article lastestArticle = aService.getFirstNewArticle();
 		mav.getModel().put("lastestArticle", lastestArticle);
-		mav.setViewName("forum/addArticle");
+		mav.setViewName("forum/viewAllArticle");
 		return mav;
 	}
 
