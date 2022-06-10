@@ -20,11 +20,10 @@
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
             <link rel="stylesheet" type="text/css" href="${contextRoot}/css/individualCryptocurrencyInformationCss.css">
             <script src="${contextRoot}/javascripts/individualCryptocurrencyInformationJs.js">
-                
             </script>
             <style type="text/css">
-                body{
-                padding-top: 82px;
+                body {
+                    padding-top: 82px;
                 }
             </style>
         </head>
@@ -44,7 +43,7 @@
                                 <button type="button" class="btn btn-info d-inline-block">★</button>
                             </div>
                             <div>
-                                <a href="#" class="badge badge-secondary">Rank#${currencyInformation.id%100}</a>
+                                <a href="#" class="badge badge-secondary">${currencyInformation.id}</a>
                             </div>
 
 
@@ -89,7 +88,6 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-4">
-                            1/3佔位
                         </div>
                         <div class="col-sm-8">
                             <div class="container">
@@ -193,7 +191,7 @@
                                 </tr>
                             </thead>
                             <tbody class="sel" id="atcTable">
-                                
+
                             </tbody>
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination" id="pageid">
@@ -207,64 +205,66 @@
 
         </body>
         <script>
-var contextRoot = "http://localhost:8080/coinshell";
-var tag;
-var page = 1;
-let dataNow = {};
-loadAtc();
+            var contextRoot = "http://localhost:8080/coinshell";
+            var tag;
+            var page = 1;
+            let dataNow = {};
+            loadAtc();
 
-function loadAtc(){
-    $(function() {
-        var tag = document.getElementById("tag").value;
-        console.log(tag);
-        fetch("http://localhost:8080/coinshell/article/viewAllAjax?tag=BTC").then(function(response) {
-            return response.json();
-            // console.log(response.json())
-        }).then(function(data) {
-            console.log(data);
-            dataNow = data;
-            pagination(data, 1)
-        })
-    })
-}
+            function loadAtc() {
+                $(function() {
+                    var tag = document.getElementById("tag").value;
+                    console.log(tag);
+                    fetch("http://localhost:8080/coinshell/article/viewAllAjax?tag=BTC").then(function(response) {
+                        return response.json();
+                        // console.log(response.json())
+                    }).then(function(data) {
+                        console.log(data);
+                        dataNow = data;
+                        pagination(data, 1)
+                    })
+                })
+            }
 
-function loadAtcByAuthorId(authorId){
-    $(function() {
-        console.log(authorId);
-        fetch("http://localhost:8080/coinshell/article/viewAllAjaxByAuthorId?authorId="+authorId).then(function(response) {
-            return response.json();
-            // console.log(response.json())
-        }).then(function(data) {
-            console.log(data);
-            dataNow = data;
-            pagination(data, 1)
-        })
-    })
-}
+            function loadAtcByAuthorId(authorId) {
+                $(function() {
+                    console.log(authorId);
+                    fetch("http://localhost:8080/coinshell/article/viewAllAjaxByAuthorId?authorId=" + authorId).then(function(response) {
+                        return response.json();
+                        // console.log(response.json())
+                    }).then(function(data) {
+                        console.log(data);
+                        dataNow = data;
+                        pagination(data, 1)
+                    })
+                })
+            }
 
-pageid.addEventListener('click',switchPage);
+            pageid.addEventListener('click', switchPage);
 
-function switchPage(e){
-e.preventDefault();
-if(e.target.nodeName !== 'A') return;
-const page = e.target.dataset.page;
-pagination(dataNow, page);
-}
+            function switchPage(e) {
+                e.preventDefault();
+                if (e.target.nodeName !== 'A') return;
+                const page = e.target.dataset.page;
+                pagination(dataNow, page);
+            }
 
-function pagination(array, nowPage){
+            function pagination(array, nowPage) {
                 console.log(nowPage);
                 const dataTotal = array.length;
                 const perpage = 5;
                 const pageTotal = Math.ceil(dataTotal / perpage);
-                console.log(`全部資料:`+dataTotal+` 每一頁顯示:`+perpage+`筆`);
+                console.log(`全部資料:` + dataTotal + ` 每一頁顯示:` + perpage + `筆`);
                 let currentPage = nowPage;
-                if (currentPage > pageTotal) {currentPage = pageTotal;}
-                const minData = (currentPage * perpage) - perpage + 1 ;
-                const maxData = (currentPage * perpage) ;
+                if (currentPage > pageTotal) {
+                    currentPage = pageTotal;
+                }
+                const minData = (currentPage * perpage) - perpage + 1;
+                const maxData = (currentPage * perpage);
                 const data = [];
                 array.forEach((item, index) => {
                     const num = index + 1;
-                    if ( num >= minData && num <= maxData) {
+                    if (num >= minData && num <= maxData) {
                         data.push(item);
                     }
                 })
@@ -275,70 +275,72 @@ function pagination(array, nowPage){
                     currentPage,
                     hasPage: currentPage > 1,
                     hasNext: currentPage < pageTotal,
-                } 
+                }
                 console.log(page);
-                pageBtn (page)
+                pageBtn(page)
             }
 
-function displayData(data){
-    $("#atcTable").empty();
-    $.each(data, function(index, value) {
-                const added = new Date(Date.parse(value.added));
-                const MM = added.getMonth()+1;
-                const dd = added.getDate();
-                const HH = added.getHours();
-                const mm = added.getMinutes();
-                const weekIndex = added.getDay();
-                const weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
-                const weekDayPrint = weekDay[weekIndex];  
-                const peek = value.text.substr(0,100);
-                // console.log(peek);
-                // console.log(array);
-                     $("#atcTable").append(`
+            function displayData(data) {
+                $("#atcTable").empty();
+                $.each(data, function(index, value) {
+                        const added = new Date(Date.parse(value.added));
+                        const MM = added.getMonth() + 1;
+                        const dd = added.getDate();
+                        const HH = added.getHours();
+                        const mm = added.getMinutes();
+                        const weekIndex = added.getDay();
+                        const weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+                        const weekDayPrint = weekDay[weekIndex];
+                        const peek = value.text.substr(0, 100);
+                        // console.log(peek);
+                        // console.log(array);
+                        $("#atcTable").append(`
                         <tr class="table-info">
                         <td>` + value.tag + `</td>
-                        <td><a href="`+contextRoot+`/viewArticle/` + value.id + `" style="display: block;"><div class="b-list"><div>` + value.title + `</div></a><p>` + peek + `....</p></div></td>
+                        <td><a href="` + contextRoot + `/viewArticle/` + value.id + `" style="display: block;"><div class="b-list"><div>` + value.title + `</div></a><p>` + peek + `....</p></div></td>
                         <td align="center">
-                            <label><input type="checkbox" class="check" checked><span class="heart"><i class="fa-solid fa-heart"></i></span>`+value.goodNum+`</label>
+                            <label><input type="checkbox" class="check" checked><span class="heart"><i class="fa-solid fa-heart"></i></span>` + value.goodNum + `</label>
                             <i class="fa fa-eye" aria-hidden="true"></i>` + value.readNum + `
                             <i class="fa fa-commenting-o" aria-hidden="true"></i>` + value.commentNum + `</td>
                         </td>
                         <td>
                             <div class="b-list">
-                                <span><a href="#" style="display: block;" onclick="loadAtcByAuthorId(`+value.authorId+`)">` + value.CustomizedUserName + `</a></span>                                    
-                                <span class="text-black-50">`+MM+`/`+dd+` `+HH+`:`+mm+` `+weekDayPrint+`</span>
+                                <span><a href="#" style="display: block;" onclick="loadAtcByAuthorId(` + value.authorId + `)">` + value.CustomizedUserName + `</a></span>                                    
+                                <span class="text-black-50">` + MM + `/` + dd + ` ` + HH + `:` + mm + ` ` + weekDayPrint + `</span>
                             </div>
                         </td>
                         </tr>
                     `)
+                    }
+
+                )
+            }
+
+            function pageBtn(page) {
+                let str = '';
+                const total = page.pageTotal;
+                if (page.hasPage) {
+                    str += `<li class="page-item"><a class="page-link" href="#" data-page="` + (Number(page.currentPage) - 1) + `">«</a></li>`;
+                } else {
+                    str += `<li class="page-item disabled"><a class="page-link">«</a></li>`;
                 }
-              
-            )}
 
-function pageBtn (page){
-    let str = '';
-    const total = page.pageTotal;
-    if(page.hasPage) {
-        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)-1)+`">«</a></li>`;
-    } else {
-        str += `<li class="page-item disabled"><a class="page-link">«</a></li>`;
-    }
-    
-    for(let i = 1; i <= total; i++){
-        if(Number(page.currentPage) === i) {
-            str +=`<li class="page-item active"><a class="page-link" href="#" data-page="`+i+`">`+i+`</a></li>`;
-        } else {
-            str +=`<li class="page-item"><a class="page-link" href="#" data-page="`+i+`">`+i+`</a></li>`;
-        }
-    };
+                for (let i = 1; i <= total; i++) {
+                    if (Number(page.currentPage) === i) {
+                        str += `<li class="page-item active"><a class="page-link" href="#" data-page="` + i + `">` + i + `</a></li>`;
+                    } else {
+                        str += `<li class="page-item"><a class="page-link" href="#" data-page="` + i + `">` + i + `</a></li>`;
+                    }
+                };
 
-    if(page.hasNext) {
-        str += `<li class="page-item"><a class="page-link" href="#" data-page="`+(Number(page.currentPage)+1)+`">»</a></li>`;
-    } else {
-        str += `<li class="page-item disabled"><a class="page-link">»</a></li>`;
-    }
-    pageid.innerHTML = str;    
-    console.log(str);
-}
+                if (page.hasNext) {
+                    str += `<li class="page-item"><a class="page-link" href="#" data-page="` + (Number(page.currentPage) + 1) + `">»</a></li>`;
+                } else {
+                    str += `<li class="page-item disabled"><a class="page-link">»</a></li>`;
+                }
+                pageid.innerHTML = str;
+                console.log(str);
+            }
         </script>
+
         </html>
