@@ -8,6 +8,16 @@
    margin-bottom:0;
 } 
 
+/*文章列表幣別圖案*/
+.tagImg {
+    width: 32px;
+    height: 32px;
+}
+
+/* .viewAtc{
+    padding: 0px !important;
+} */
+
 /*點讚圖示*/
 .heart{
 color: rgb(206, 202, 202);
@@ -23,14 +33,21 @@ color: rgb(255, 0, 106);
     border-radius: 10px !important;
 }
 
+/*文章列表工具列*/
 .article-head{
-    border-radius: 4px;
+    border-radius: 10px;
     /* padding: 6px; */
     padding-left: 15px;
+    /* padding-right: 15px; */
     width: auto;
     height: auto;
     box-sizing: border-box;
     margin-top: 5px !important;
+}
+
+/*評論*/
+#comment-list>div:hover{
+    background-color: #fff8f8;
 }
 
 /*文章table*/
@@ -39,6 +56,9 @@ color: rgb(255, 0, 106);
     border-collapse: collapse !important;
     border-radius: 10px !important;
     overflow: hidden !important;
+}
+.article-sections{
+    background-color: #fff8f8 !important;
 }
 
 /*修改頁面*/

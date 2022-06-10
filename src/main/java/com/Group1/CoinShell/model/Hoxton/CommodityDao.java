@@ -38,7 +38,7 @@ public interface CommodityDao extends JpaRepository<Commodity, Integer> {
 	@Query(value = "SELECT * FROM commodity WHERE id=:id", nativeQuery = true)
 	public Commodity findCommodityById(@Param("id") Integer id);
 
-		
+		@Modifying
 	@Query(value = "UPDATE commodity SET  commodity_name=:commodity_name2, describe=:describe2, shell_or_coin=:shell_or_coin2, myshell=:myShell2, coin=:coin2, volume=:volume2 WHERE id= :id2", nativeQuery = true)
 	public void updateCommodityById
 	(@Param("commodity_name2") String commodityName,
@@ -51,5 +51,7 @@ public interface CommodityDao extends JpaRepository<Commodity, Integer> {
 
 	@Query(value = "SELECT * FROM commodity", nativeQuery = true)
 	public List<Commodity> findAllCommodity();
+	
+
 
 }

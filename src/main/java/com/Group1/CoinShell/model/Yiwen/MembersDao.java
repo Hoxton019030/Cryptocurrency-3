@@ -83,6 +83,11 @@ public interface MembersDao extends JpaRepository<Members, Integer> {
 			 					 @Param("myShell2")Integer myShell,
 			 					 @Param("password2")String password,
 			 					 @Param("id2")Integer id);
+
+	@Query(value = "select m.Id as id, m.CustomizedUserName as customizedUserName, m.CustomizedUserAvatar as customizedUserAvatar, c.userAvatar, m.E_Mail as eMail, m.Password as password, m.MyShell as myShell, m.Coin as coin, m.JoinTime as joinTime\r\n"
+			+ "from members as m left join customizedUserAvatar as c\r\n"
+			+ "on m.id = c.id", nativeQuery = true)
+	public List<Map<String, Object>> findAll2();
 	
 }
 

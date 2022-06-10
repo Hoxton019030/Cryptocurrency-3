@@ -20,11 +20,13 @@ import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.Group1.CoinShell.model.Feeder.Watch;
+import com.Group1.CoinShell.model.Hoxton.Cart;
 import com.Group1.CoinShell.model.Pieterzite.PunchList;
 
 @Entity
@@ -67,6 +69,7 @@ public class Members {
 //	@OneToOne(fetch = FetchType.EAGER, mappedBy = "members", cascade = CascadeType.ALL)
 //	private CustomizedUserAvatar customizedUserAvatar1 = new CustomizedUserAvatar();
 	
+
 	public Members() {
 	}
 

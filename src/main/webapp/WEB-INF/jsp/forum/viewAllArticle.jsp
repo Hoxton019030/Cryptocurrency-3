@@ -20,10 +20,12 @@ padding-top: 82px;
 <jsp:include page="../NavBar/CoinShellNavBar.jsp" />
 <div class="row justify-content-center">
 <div class="col-9">
-    <div class="row article-head" id="searchByTag">
-        <select id="tag-list"></select>        
-        <input id="titlePart" type="text" placeholder="關鍵字查詢(標題/內文)"/>
-        <input type="button" name="submit" value="查詢" id="search"/>
+    <div class="article-head d-flex justify-content-between" id="searchByTag">
+        <div class="row">            
+            <select id="tag-list"></select>        
+            <input id="titlePart" type="text" placeholder="關鍵字查詢(標題/內文)"/>
+            <input type="button" name="submit" value="查詢" id="search"/>
+        </div>
         <a href="${contextRoot}/article/add" id="addAtc" onclick="verifyMembership()" class="btn btn-primary btn-sm shadow-none">新增文章</a>
     </div>
     
@@ -197,7 +199,7 @@ function displayData(data){
                 // console.log(array);
                      $("#atcTable").append(`
                         <tr class="table-info">
-                        <td>` + value.tag + `</td>
+                        <td><img class="tagImg" src="`+contextRoot+`/images/currencyIcon/`+value.tag+`.png" alt="">` + value.tag + `</td>
                         <td><a href="`+contextRoot+`/viewArticle/` + value.id + `" style="display: block;"><div class="b-list"><div>` + value.title + `</div></a><p>` + peek + `....</p></div></td>
                         <td align="center">
                             <label><input type="checkbox" class="check" checked><span class="heart"><i class="fa-solid fa-heart"></i></span>`+value.goodNum+`</label>
