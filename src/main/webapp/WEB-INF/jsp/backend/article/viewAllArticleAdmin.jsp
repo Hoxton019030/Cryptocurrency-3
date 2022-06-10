@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="${contextRoot}/css/article.css">
 <script src="${contextRoot}/javascripts/bootstrap.bundle.min.js"></script>
 <script src="https://kit.fontawesome.com/f844132572.js" crossorigin="anonymous"></script>
-<title>討論區</title>
+<title>討論區 | Beach Town</title>
 </head>
 <body>
 
@@ -21,20 +21,20 @@
 <div class="col-9">
     <div class="row article-head" id="searchByTag">
         <select id="tag-list"></select>        
-        <input id="titlePart" type="text" placeholder="關鍵字查詢(標題/內文)"/>
-        <input type="button" name="submit" value="查詢" id="search"/>
+        <input id="titlePart" type="text" placeholder="Keyword (Title/Content)"/>
+        <input type="button" name="submit" value="Search" id="search"/>
         <!-- <a href="${contextRoot}/backend/article/add" id="addAtc">新增文章</a> -->
     </div>    
 	<table class="table table-hover table-primary table-article">
 		<thead class="thead-dark">
 			<tr>
-				<th scope="col" class="col-1">幣別</th>
-				<th scope="col" class="col-1">作者</th>
-				<th scope="col" class="col-4">文章</th>
-				<th scope="col" class="col-1.5" style="text-align: center;">讚數/閱讀/回復</th>
-				<th scope="col" class="col-1.5">建立時間</th>
-				<th scope="col" class="col-1.5">修改</th>
-				<th scope="col" class="col-1.5">狀態</th>
+				<th scope="col" class="col-1">Cryptocurrencies</th>
+				<th scope="col" class="col-1">Author</th>
+				<th scope="col" class="col-4">Article</th>
+				<th scope="col" class="col-1.5" style="text-align: center;">Like / Read / Comment</th>
+				<th scope="col" class="col-1.5">Post time</th>
+				<th scope="col" class="col-1.5">Update</th>
+				<th scope="col" class="col-1.5">Status</th>
 			</tr>
 		</thead>
 		<tbody class="sel" id="atcTable">
@@ -159,14 +159,14 @@ function displayData(data){
                 const HH = added.getHours();
                 const mm = added.getMinutes();
                 const weekIndex = added.getDay();
-                const weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+                const weekDay = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
                 const weekDayPrint = weekDay[weekIndex];  
                 const peek = value.text.substr(0,100);
                 let deleted = value.deleted;
                 if (deleted=="n"){
-                    deleted = "存活";
+                    deleted = "Valid";
                 }else{
-                    deleted = "刪除";
+                    deleted = "Invalid";
                 }
                 // console.log(peek);
                 // console.log(array);
@@ -231,7 +231,7 @@ function pageBtn (page){
 //                 var HH = added.getHours();
 //                 var mm = added.getMinutes();
 //                 var weekIndex = added.getDay();
-//                 var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+//                 var weekDay = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 //                 var weekDayPrint = weekDay[weekIndex];  
 //                 var peek = value.text.substr(0,100);
 //                 // console.log(peek);
@@ -263,7 +263,7 @@ function pageBtn (page){
 //                 var HH = added.getHours();
 //                 var mm = added.getMinutes();
 //                 var weekIndex = added.getDay();
-//                 var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+//                 var weekDay = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 //                 var weekDayPrint = weekDay[weekIndex];  
 //                 console.log(array);
 //                 $("#atcTable").append(`

@@ -3,39 +3,38 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<!DOCTYPE html>
-<html>
+<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+<jsp:include page="../NavBar/CoinShellNavBar.jsp" />
 <head>
 <meta charset="UTF-8">
-<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <link rel="stylesheet" href="${contextRoot}/css/article.css">
-<title>討論區</title>
+<title>Beach Town | Coinshell</title>
 <style type="text/css">
 body{
 padding-top: 82px;
 }
 </style>
 </head>
+
 <body>
-<jsp:include page="../NavBar/CoinShellNavBar.jsp" />
 <div class="row justify-content-center">
 <div class="col-9">
     <div class="article-head d-flex justify-content-between" id="searchByTag">
         <div class="row">            
             <select id="tag-list"></select>        
-            <input id="titlePart" type="text" placeholder="關鍵字查詢(標題/內文)"/>
-            <input type="button" name="submit" value="查詢" id="search"/>
+            <input id="titlePart" type="text" placeholder="Keyword (Title/Content)"/>
+            <input type="button" name="submit" value="Search" id="search"/>
         </div>
-        <a href="${contextRoot}/article/add" id="addAtc" onclick="verifyMembership()" class="btn btn-primary btn-sm shadow-none">新增文章</a>
+        <a href="${contextRoot}/article/add" id="addAtc" onclick="verifyMembership()" class="btn btn-primary btn-sm shadow-none">Post New Article</a>
     </div>
     
 	<table class="table table-hover table-primary table-article">
 		<thead class="thead-dark">
 			<tr>
-				<th scope="col" class="col-2">幣別</th>
-				<th scope="col" class="col-6">文章</th>
-				<th scope="col" class="col-2" style="text-align: center;">讚數/閱讀/評論</th>
-				<th scope="col" class="col-2">來自</th>
+				<th scope="col" class="col-2">Cryptocurrencies</th>
+				<th scope="col" class="col-6">Article</th>
+				<th scope="col" class="col-2" style="text-align: center;">Like / Read / Comment</th>
+				<th scope="col" class="col-2">Author</th>
 			</tr>
 		</thead>
 		<tbody class="sel" id="atcTable">
@@ -192,7 +191,7 @@ function displayData(data){
                 const HH = added.getHours();
                 const mm = added.getMinutes();
                 const weekIndex = added.getDay();
-                const weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+                const weekDay = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
                 const weekDayPrint = weekDay[weekIndex];  
                 const peek = value.text.substr(0,100);
                 // console.log(peek);
@@ -338,4 +337,3 @@ function pageBtn (page){
 
 </script>
 </body>
-</html>
