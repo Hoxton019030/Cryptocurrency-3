@@ -140,7 +140,7 @@ function upCoin(memId) {
 
                 //注入折線圖至id=canvas
                 var xmlHttp = new XMLHttpRequest();
-                var url = "http://localhost:8080/coinshell/historical/get30days?currencyName=" + value.symbol;
+                var url = "http://localhost:8080/coinshell/historical/get7daysUsdPrice?currencyName=    " + value.symbol;
                 xmlHttp.open("GET", url, true);
                 xmlHttp.send();
                 xmlHttp.onreadystatechange = function() {
