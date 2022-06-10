@@ -1,5 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
-
+@import 
+	url('https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import
+	url("https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css");
 
 body{
     margin-top: 82px;
@@ -8,111 +10,249 @@ body{
     margin-right: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'PT Serif', serif;
 }
 
+	/* display: flex;
+	justify-content: center;
+	align-items: center; */
+
+	.about-us{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width:100%;
+		flex-direction: column;
+	}
+
+	.who-we-are, .founder {
+		display: flex;
+		color: #3163f7;
+		font-weight: 700;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+	}
+
+	.who-we-are span {
+		width: 60%;
+		align-items: center;
+		text-align: center;
+	}
+
+	.cards{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin: 10px;
+	}
+
+	.card-img {
+		border-radius: 9px;
+	}
+	.cards .card{
+		width: 16 rem;
+		margin: 20px;
+	}
+	
+	.card span {
+		font-size: 18px;
+		font-weight: 600;
+	}
+	.card p {
+		font-size: 14px;
+	}
+	.social-media{
+		width: 90%;
+		display: flex;
+		justify-content: flex-end;
+
+	}
+
+	.social-media i {
+		margin: 10px;
+	}
+	.active{
+		border-bottom: 1px solid #fff;
+	}
+	.card-imgl{
+		width: 100%;
+		height: 16rem;
+		background-image: url("../images/about/yw.png");
+		background-size: cover;
+		background-position: center center;
+	}
+	.card-img2{
+		width: 100%;
+		height: 16rem;
+		background-image: url("../images/about/bear.png");
+		background-size: cover;
+		background-position: center center;
+	}
+	.card-img3{
+		width: 100%;
+		height: 16rem;
+		background-image: url("../images/about/pieterzite.png");
+		background-size: cover;
+		background-position: center center;
+	}
+	.card-img4{
+		width: 100%;
+		height: 16rem;
+		background-image: url("../images/about/feeder.png");
+		background-size: cover;
+		background-position: center center;
+	}
+	.card-img5{
+		width: 100%;
+		height: 16rem;
+		background-image: url("../images/about/hoxton.png");
+		background-size: cover;
+		background-position: center center;
+	}
+
+.about-1{
+	margin: 30px;
+	padding: 5px;
+}
+
+.about-1 h1{
+	text-align: center;
+	color: #3163f7;
+	font-weight: 800;
+}
+
+.about-1 p {
+	text-align: center;
+	padding: 3px;
+}
+.about-item {
+	margin-bottom:20px;
+	margin-top: 50px;
+	background-color: white;
+	padding: 80px, 30px;
+	box-shadow: 0 0 9px #aaaaff;
+}
+.about-item i{
+	font-size: 43px;
+	margin: 0;
+}
+.about-item h3 {
+	font-size: 25px;
+	margin-bottom:10px;
+}
+.about-item hr {
+	width: 46px;
+	height: 3px;
+	background-color: #0078ee;
+	margin: 0 auto;
+	border: none;
+}
+.about-item:hover i,
+.about-item:hover h3,
+.about-item:hover p {
+	color: #fff;
+}
+
+.about-item:hover hr{
+	background-color: #fff;
+}
+
+.about-item:hover i{
+	transform: translateY(-20px);
+}
+.about-item:hover i,
+.about-item:hover h3,
+.about-item:hover hr {
+	transition: all 400ms ease-in-out;
+}
+
+.footer p {
+	color: rgb(206, 206, 206);
+}
  
-
-
-
-
-
-
-
-
-.instagram_item{
-    position: relative;
-    height: 320px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 5;
+.about-item p{
+	margin-top: 20px;
+}
+.about-item:hover{
+	background-color: #0078ee;
 }
 
-.instagram_item:after{
-    position: absolute;
-    left: 0;
-    top: 0;
-    height:100%;
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.7);
-    opacity: 0;
-    content: '';
-    z-index: 1;
-    transition: all 0.3s;
+.main-footer {
+	padding: 150px 0 0 0;
+	background: linear-gradient(-20deg, #3f5494, #08c7a5);
 }
 
-.instagram_text {
-    position: absolute;
-    text-align: center;
-    opacity: 0;
-    visibility: hidden;
-    z-index: 3;
-    transition: all 0.3s;
+.main-footer .container {
+	display: flex;
+	width: 1200px;
+	margin: auto;
 }
 
-.instagram_text i{
-    font-size: 50px;
-    color:#F56040;
-    cursor: pointer;
+.footer-item {
+	width: 0;
+	flex-grow: 1;
+	margin: 0 20px;
 }
 
-.instagram_text a{
-    font-size: 16px;
-    color:#0d0d0d;
-    font-weight: 500;
-    display: block;
-    margin-top: 10px;
+.footer-item h4 {
+	font-size: 24px;
+	color: #fff;
+	border-bottom: 1px dotted #fff;
+	margin-bottom: .5em;
+	padding-bottom: .5em;
 }
 
-.instagram_item:hover .instagram_text{
-    opacity: 1;
-    visibility: visible;
+.footer-item nav {
+	display: flex;
+	flex-direction: column;
 }
 
-.instagram_item:hover:after{
-    opacity: 1;
+.footer-item nav a {
+	color: #fff;
+	line-height: 1.4;
+	text-decoration: none;
+	padding: 5px 0;
 }
 
-.footer .footer_about p{
-    margin-bottom: 20px;
-    padding-right: 80px;
+.footer-item nav a:hover {
+	color: #fa0;
 }
 
-.footer .footer_logo{
-    margin-bottom: 20px;
+.footer-subs {
+	display: flex;
+	flex-direction: column;
 }
 
-.footer .footer_logo a{
-    font-size: 35px;
-    color: #000;
+.footer-subs form {
+	display: flex;
+	width: 100%;
+	margin: auto 0px;
 }
 
-.footer .footer_logo a span{
-    color: #0083ce;
-    font-size: 35px;
-    font-weight: 700;
+.footer-subs input[type="text"], .footer-subs input[type="submit"] {
+	border: none;
+	padding: 5px 10px;
 }
 
-.footer .footer_widget{
-    margin-bottom: 30px;
+.footer-subs input[type="text"] {
+	width: 0;
+	flex-grow: 1;
+	border-radius: 10px;
 }
 
-.footer .footer_widget h6{
-    color: #111;
-    font-weight: 600;
-    text-align: uppercase;
-    margin-bottom: 12px;
+.footer-subs input[type="submit"] {
+	color: #70f6df; background-color : #3e5293;
+	border-radius: 10px 10px;
+	background-color: #3e5293;
 }
 
-.footer .footer_widget ul li{
-    list-style: none;
-    display: block;
-}
-
-.footer .footer_widget ul li a{
-    font-size: 14px;
-    color: #666;
-    line-height: 30px;
+.conpyright {
+	width: 100%;
+	text-align: center;
+	margin: 150px 0 0;
+	padding: 10px 0px;
+	background-color: #3e5293;
+	color: #70f6df;
 }
  
