@@ -70,7 +70,7 @@ ul {
         <a class="nav-link" href="${contextRoot}/administrator/news">新聞</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="${contextRoot}/administrator/article">文章</a>
+        <a class="nav-link" href="${contextRoot}/administrator/article">討論</a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="${contextRoot}/adm-account">會員</a>

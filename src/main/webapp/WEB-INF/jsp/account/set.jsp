@@ -25,7 +25,7 @@
             <body>
                 <div class="jumbotron jumbotron-fluid">
                     <div class="container">
-                        <div class="lead" style="background-color:#fff; border-radius:30px; padding: 25px;">
+                        <div class="lead" style="background-color:#fff; border-radius:30px; padding: 25px; box-shadow: 1px 4px 5px 2px #AAAAFF;">
                             <h3 class="display-5">Account Settings</h3>
 
                             <div class="input-group mb-3">

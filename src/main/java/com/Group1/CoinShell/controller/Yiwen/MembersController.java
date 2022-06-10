@@ -252,8 +252,8 @@ public class MembersController {
 	 */
 	@ResponseBody
 	@GetMapping("/account/select")
-	public List<Members> selectAccountByName(@RequestParam String name) {
-		List<Members> SelectAccount;
+	public List<Map<String, Object>> selectAccountByName(@RequestParam String name) {
+		List<Map<String, Object>> SelectAccount;
 		SelectAccount = memService.findMemberByName(name);
 		return SelectAccount;
 	}
@@ -289,8 +289,8 @@ public class MembersController {
 	
 	@ResponseBody
 	@GetMapping("/memId")
-	public List<Members> memList(@RequestParam Integer id){
-		List<Members> mem = memService.findMemberById2(id);
+	public List<Map<String, Object>> memList(@RequestParam Integer id){
+		List<Map<String, Object>> mem = memService.findMemberById3(id);
 		return mem;
 	}
 	

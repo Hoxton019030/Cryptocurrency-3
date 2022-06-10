@@ -62,8 +62,8 @@ public class MembersService {
 	}
 		
 	// findMemberByName 模糊查詢
-	public List<Members> findMemberByName(String customizedUserName){
-		List<Members> memList = membersDao.findMemberByName(customizedUserName);
+	public List<Map<String, Object>> findMemberByName(String customizedUserName){
+		List<Map<String, Object>> memList = membersDao.findMemberByName(customizedUserName);
 		return memList;
 	}
 
@@ -77,6 +77,10 @@ public class MembersService {
 	// findById  
 	public List<Members> findMemberById2 (Integer Id) {
 		return membersDao.findMemberById2(Id);
+	}
+	
+	public List<Map<String, Object>> findMemberById3 (Integer Id) {
+		return membersDao.findMemberById3(Id);
 	}
 		
 	// updateMemberById
