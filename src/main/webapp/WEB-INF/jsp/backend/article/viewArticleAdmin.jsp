@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="${contextRoot}/css/article.css">
 <script src="https://kit.fontawesome.com/0ef2a35b44.js" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
-<title>${Article.title}</title>
+<title>${Article.title} | Coinshell Backend</title>
 </head>
 
 <body>
@@ -28,7 +28,7 @@
             <input id="atcAdded" type="hidden" value="${Article.added}" />
             <span class="editFunction">
                 <a href="${contextRoot}/editArticleAdmin/${Article.id}"><i class="fa fa-edit" aria-hidden="true"></i>Edit</a>
-                <a href="${contextRoot}/deleteArticleAdmin/${Article.id}" onclick="return confirm('確認刪除嗎?')"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
+                <a href="${contextRoot}/deleteArticleAdmin/${Article.id}" onclick="return confirm('Delete it for sure? 確認刪除嗎?')"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</a>
             </span>
             <div class="d-flex justify-content-between divToGetImg">
                 <div class="d-flex">                        
@@ -304,7 +304,7 @@ function getAtcTime() {
     var HH = added.getHours();
     var mm = added.getMinutes();
     var weekIndex = added.getDay();
-    var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+    var weekDay = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
     var weekDayPrint = weekDay[weekIndex];
     $("#added").append(YYYY+`-`+MM+`-`+dd+` `+HH+`:`+mm+` `+weekDayPrint);
 }
@@ -319,7 +319,7 @@ function displayComm(data){
             var HH = added.getHours();
             var mm = added.getMinutes();
             var weekIndex = added.getDay();
-            var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+            var weekDay = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
             var weekDayPrint = weekDay[weekIndex];
             var id = value.id;
             var cidForReply = value.commentId;   
@@ -455,7 +455,7 @@ function displayReply(data, id){
                 var HH = added.getHours();
                 var mm = added.getMinutes();
                 var weekIndex = added.getDay();
-                var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+                var weekDay = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
                 var weekDayPrint = weekDay[weekIndex];  
                 var img = value.userAvatar;
                 var thisId = value.id;             
@@ -540,7 +540,7 @@ function editSection(e, id){
                 var HH = added.getHours();
                 var mm = added.getMinutes();
                 var weekIndex = added.getDay();
-                var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+                var weekDay = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
                 var weekDayPrint = weekDay[weekIndex];  
                 var img = value.userAvatar;                
                 // <a class="pr-3" href="#"><img class="rounded-circle" alt="Bootstrap Media Another Preview" src="https://i.imgur.com/xELPaag.jpg" /></a>
@@ -593,7 +593,7 @@ function editSectionR(e, id){
                 var HH = added.getHours();
                 var mm = added.getMinutes();
                 var weekIndex = added.getDay();
-                var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+                var weekDay = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
                 var weekDayPrint = weekDay[weekIndex];  
                 var img = value.userAvatar;                
                 // <a class="pr-3" href="#"><img class="rounded-circle" alt="Bootstrap Media Another Preview" src="https://i.imgur.com/xELPaag.jpg" /></a>
