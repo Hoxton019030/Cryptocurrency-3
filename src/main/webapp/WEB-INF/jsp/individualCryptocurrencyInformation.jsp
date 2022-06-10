@@ -43,7 +43,7 @@
                                 <button type="button" class="btn btn-info d-inline-block">★</button>
                             </div>
                             <div>
-                                <a href="#" class="badge badge-secondary">${currencyInformation.id}</a>
+                                <a href="#" class="badge badge-secondary">${currencyInformation.id-90976}</a>
                             </div>
 
 
