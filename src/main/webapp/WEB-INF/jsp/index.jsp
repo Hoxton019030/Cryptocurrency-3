@@ -250,7 +250,7 @@
                                         <th scope="col">30d%</th>
                                         <th scope="col">Volume24h</th>
                                         <th scope="col">Market Cap</th>
-                                        <th scope="col">Line Chart</th>
+<!--                                         <th scope="col">Line Chart</th> -->
                                     </tr>
                                 </thead>
                                 <tbody class="cointable" id="followTbody">
