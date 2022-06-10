@@ -3,9 +3,8 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<!DOCTYPE html>
-<html>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+<jsp:include page="../backendNavBar.jsp" />
 <head>
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -14,11 +13,10 @@
 <link rel="stylesheet" href="${contextRoot}/css/article.css">
 <script src="${contextRoot}/javascripts/bootstrap.bundle.min.js"></script>
 <script src="https://kit.fontawesome.com/f844132572.js" crossorigin="anonymous"></script>
-
 <title>討論區</title>
 </head>
 <body>
-<jsp:include page="../backendNavBar.jsp" />
+
 <div class="row justify-content-center">
 <div class="col-9">
     <div class="row article-head" id="searchByTag">
@@ -312,4 +310,3 @@ function pageBtn (page){
 
 </script>
 </body>
-</html>

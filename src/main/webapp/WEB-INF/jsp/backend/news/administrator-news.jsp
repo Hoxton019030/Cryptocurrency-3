@@ -84,10 +84,6 @@
         </thead>
         <tbody id="newsTbody">
         </tbody>
-<!--         <nav aria-label="Page navigation example"> -->
-<!--             <ul class="pagination" id="pageid"> -->
-<!--             </ul> -->
-<!--         </nav> -->
     </table>
      </div>
                          <div id="ttest"></div>

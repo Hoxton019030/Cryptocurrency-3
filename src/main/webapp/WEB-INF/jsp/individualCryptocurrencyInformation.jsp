@@ -176,8 +176,15 @@
 
                         </table>
                     </div>
-                    <div id="news">
 
+                    <div id="news">
+                        <input type="hidden" id="name" value="${currencyInformation.nameOfCryptocurrency}" />
+                        <div id="nn1"><img class="newsimg" src="https://picsum.photos/550/300/?random=1" alt=""></div>
+                        <div id="nn2"><img class="newsimg" src="https://picsum.photos/550/300/?random=1" alt=""></div>
+                        <div id="nn3"><img class="newsimg" src="https://picsum.photos/550/300/?random=1" alt=""></div>
+                        <div id="nn4"><img class="newsimg" src="https://picsum.photos/550/300/?random=2" alt=""></div>
+                        <div id="nn5"><img class="newsimg" src="https://picsum.photos/550/300/?random=2" alt=""></div>
+                        <div id="nn6"><img class="newsimg" src="https://picsum.photos/550/300/?random=2" alt=""></div>
                     </div>
                     <div id="article">
                         <input type="hidden" id="tag" value="${currencyInformation.symbolOfCryptocurrency}" />
@@ -210,6 +217,7 @@
             var page = 1;
             let dataNow = {};
             loadAtc();
+            setNewsbyName();
 
             function loadAtc() {
                 $(function() {
@@ -340,6 +348,33 @@
                 }
                 pageid.innerHTML = str;
                 console.log(str);
+            }
+
+
+            function setNewsbyName() {
+                var name = document.getElementById("name").value;
+                debugger
+                $.ajax({
+                    url: "http://localhost:8080/coinshell/news/select?title=" + name,
+                    contentType: 'application/json; charset=UTF-8',
+                    dataType: 'json',
+                    method: 'get',
+                    success: function(result) {
+                        console.log(result)
+                        $.each(result, function(index, value) {
+                            $('#nn1').html(`<a href="#" onclick="window.open('` + result[0].url + `')"><img class="newsimg" src="` + result[0].imgUrl + `" alt=""></a>`);
+                            $('#nn2').html(`<a href="#" onclick="window.open('` + result[1].url + `')"><img class="newsimg" src="` + result[1].imgUrl + `" alt=""></a>`);
+                            $('#nn3').html(`<a href="#" onclick="window.open('` + result[2].url + `')"><img class="newsimg" src="` + result[2].imgUrl + `" alt=""></a>`);
+                            $('#nn4').html(`<a href="#" onclick="window.open('` + result[3].url + `')"><img class="newsimg" src="` + result[3].imgUrl + `" alt=""></a>`);
+                            $('#nn5').html(`<a href="#" onclick="window.open('` + result[4].url + `')"><img class="newsimg" src="` + result[4].imgUrl + `" alt=""></a>`);
+                            $('#nn6').html(`<a href="#" onclick="window.open('` + result[5].url + `')"><img class="newsimg" src="` + result[5].imgUrl + `" alt=""></a>`);
+                        })
+                    },
+                    error: function(err) {
+                        console.log("result====" + err)
+                        console.log("失敗");
+                    }
+                })
             }
         </script>
 

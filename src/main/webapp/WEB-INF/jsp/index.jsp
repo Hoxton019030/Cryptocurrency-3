@@ -56,7 +56,7 @@
 
 <!-- TradingView Widget BEGIN -->
 <div class="tradingview-widget-container">
-  <div class="tradingview-widget-container__widget"></div>
+  <div class="tradingview-widget-container__widget" ></div>
   <div class="tradingview-widget-copyright"><a href="https://tw.tradingview.com/markets/currencies/forex-cross-rates/" rel="noopener" target="_blank"></a></div>
   <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-forex-cross-rates.js" async>
   {
@@ -82,10 +82,6 @@
 <!-- TradingView Widget END -->
 
 <!-- TradingView Widget BEGIN -->
-<!-- <div> -->
-<!--   <div class="tradingview-widget-container__widget"></div> -->
-<!--   <div id="d1" class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/BTCUSD/?exchange=BINANCEUS" rel="noopener" target="_blank"><span class="blue-text"></span></a></div> -->
-<!--   <div id="d2" class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/ETHUSD/?exchange=BINANCEUS" rel="noopener" target="_blank"><span class="blue-text"></span></a></div> -->
 <div>
   <div id="d1"><script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-info.js" async>
   {
