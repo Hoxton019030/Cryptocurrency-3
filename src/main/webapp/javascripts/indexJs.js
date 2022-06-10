@@ -274,7 +274,7 @@ function followList() {
 		coinList += '<td class="30d">' + value.percentChange30d + '</td>'
 		coinList += '<td class="vol24h">' + value.volume24h + '</td>'
 		coinList += '<td class="market">' + value.marketCap + '</td>'
-		coinList += '<td style="width:10px;height:10px"><canvas id="myChart' + value.cmcRank + '"></canvas></td>'
+//		coinList += '<td style="width:10px;height:10px"><canvas id="myChart' + value.cmcRank + '"></canvas></td>'
 		coinList += '</tr>';
 			                    
 		$('#watch').append(coinList);
