@@ -69,8 +69,10 @@ public interface MembersDao extends JpaRepository<Members, Integer> {
 	@Query(value = "DELETE FROM members WHERE id = :id2", nativeQuery = true)
 	public void deleteMemberById(@Param("id2") Integer id);
 	
-	@Query(value = "SELECT * FROM members WHERE customizedUserName LIKE '%'+:customizedUserName2+'%'", nativeQuery = true)
-	public List<Members> findMemberByName(@Param(value = "customizedUserName2") String customizedUserName);
+//	@Query(value = "SELECT * FROM members WHERE customizedUserName LIKE '%'+:customizedUserName2+'%'", nativeQuery = true)
+//	public List<Members> findMemberByName(@Param(value = "customizedUserName2") String customizedUserName);
+	@Query(value = "select * from members where customizedUserName like %?1% ORDER BY id asc", countQuery = "select count (*) from members where customizedUserName like %?1% ", nativeQuery = true)
+	public List<Members> findMemberByName(String customizedUserName);
 	
 	@Query(value = "UPDATE members SET coin = :coin2, customizedUserAvatar = :customizedUserAvatar2,"
 			+ "customizedUserName = :customizedUserName2, e_Mail = :e_Mail2, joinTime = :joinTime2,"
@@ -84,9 +86,10 @@ public interface MembersDao extends JpaRepository<Members, Integer> {
 			 					 @Param("password2")String password,
 			 					 @Param("id2")Integer id);
 
-	@Query(value = "select m.Id as id, m.CustomizedUserName as customizedUserName, m.CustomizedUserAvatar as customizedUserAvatar, c.userAvatar, m.E_Mail as eMail, m.Password as password, m.MyShell as myShell, m.Coin as coin, m.JoinTime as joinTime\r\n"
+	@Query(value = "select m.Id as id, m.CustomizedUserName as customizedUserName, m.CustomizedUserAvatar as customizedUserAvatar, "
+			+ "c.userAvatar, m.E_Mail as eMail, m.Password as password, m.MyShell as myShell, m.Coin as coin, m.JoinTime as joinTime\r\n"
 			+ "from members as m left join customizedUserAvatar as c\r\n"
-			+ "on m.id = c.id", nativeQuery = true)
+			+ "on m.customizedUserAvatar = c.id", nativeQuery = true)
 	public List<Map<String, Object>> findAll2();
 	
 }
