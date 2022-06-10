@@ -1,8 +1,6 @@
 package com.Group1.CoinShell.model.Yiwen;
 
 import java.util.Date;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,22 +9,14 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.Group1.CoinShell.model.Feeder.Watch;
-import com.Group1.CoinShell.model.Hoxton.Cart;
 import com.Group1.CoinShell.model.Pieterzite.PunchList;
 
 @Entity

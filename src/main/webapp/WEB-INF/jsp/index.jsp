@@ -56,7 +56,7 @@
 
 <!-- TradingView Widget BEGIN -->
 <div class="tradingview-widget-container">
-  <div class="tradingview-widget-container__widget"></div>
+  <div class="tradingview-widget-container__widget" ></div>
   <div class="tradingview-widget-copyright"><a href="https://tw.tradingview.com/markets/currencies/forex-cross-rates/" rel="noopener" target="_blank"></a></div>
   <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-forex-cross-rates.js" async>
   {
