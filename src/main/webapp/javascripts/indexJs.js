@@ -174,12 +174,6 @@ function upCoin(memId) {
                                 }]
                             },
                             options: {
-                                legend: {
-                                    display: false
-                                },
-                                tooltips: {
-                                    enabled: false
-                                },
                                 plugins: {},
                                 elements: {
                                     line: {
