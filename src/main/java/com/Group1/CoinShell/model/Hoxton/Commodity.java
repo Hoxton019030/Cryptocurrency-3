@@ -11,6 +11,10 @@ import javax.persistence.Table;
 @Table(name="commodity")
 public class Commodity {
 	
+	public Commodity() {
+	}
+
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -19,104 +23,62 @@ public class Commodity {
 	@Column(name="commodity_name",nullable = false)
 	private String commodityName;
 	
-	@Column(name="coin",nullable = false)
-	private Integer coin;
 	
-	@Column(name="myshell",nullable = false)
-	private Integer myShell;
 	
-	@Column(name="volume",nullable = false)
-	private Integer volume;
+	@Column(name="shell",nullable = false)
+	private Integer shell;
+	
 	
 	@Column(name="photo",columnDefinition = "VARBINARY(MAX)",nullable = false)
 	private byte[] photo;
-	
-	@Column(name="describe",nullable = false)
-	private String describe;
-	
-	@Column(name="shell_or_coin",nullable = false)
-	private String shellOrCoin;
 
-	public Commodity(Integer id, String commodityName, Integer coin, Integer myShell, Integer volume, byte[] photo,
-			String describe, String shellOrCoin) {
-		super();
-		this.id = id;
-		this.commodityName = commodityName;
-		this.coin = coin;
-		this.myShell = myShell;
-		this.volume = volume;
-		this.photo = photo;
-		this.describe = describe;
-		this.shellOrCoin = shellOrCoin;
-	}
 
 	public Integer getId() {
 		return id;
 	}
 
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 
 	public String getCommodityName() {
 		return commodityName;
 	}
 
+
 	public void setCommodityName(String commodityName) {
 		this.commodityName = commodityName;
 	}
 
-	public Integer getCoin() {
-		return coin;
+
+	public Integer getShell() {
+		return shell;
 	}
 
-	public void setCoin(Integer coin) {
-		this.coin = coin;
+
+	public void setShell(Integer shell) {
+		this.shell = shell;
 	}
 
-	public Integer getMyShell() {
-		return myShell;
-	}
-
-	public void setMyShell(Integer myShell) {
-		this.myShell = myShell;
-	}
-
-	public Integer getVolume() {
-		return volume;
-	}
-
-	public void setVolume(Integer volume) {
-		this.volume = volume;
-	}
 
 	public byte[] getPhoto() {
 		return photo;
 	}
 
+
 	public void setPhoto(byte[] photo) {
 		this.photo = photo;
 	}
 
-	public String getDiscribe() {
-		return describe;
-	}
 
-	public void setDescribe(String describe) {
-		this.describe = describe;
+	public Commodity(String commodityName, Integer shell, byte[] photo) {
+		this.commodityName = commodityName;
+		this.shell = shell;
+		this.photo = photo;
 	}
-
-	public String getShellOrCoin() {
-		return shellOrCoin;
-	}
-
-	public void setShellOrCoin(String shellOrCoin) {
-		this.shellOrCoin = shellOrCoin;
-	}
-
-	public Commodity() {
-		// TODO Auto-generated constructor stub
-	}
+	
 	
 	
 	
