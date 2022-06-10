@@ -1,6 +1,7 @@
 package com.Group1.CoinShell.controller.Yiwen;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,8 +26,8 @@ public class MembersApi {
 	}
 	
 	@GetMapping("/Mem")
-	public List<Members> findMemberByName(@RequestParam("name")String customizedUserName){
-		List<Members> memList = memService.findMemberByName(customizedUserName);
+	public List<Map<String, Object>> findMemberByName(@RequestParam("name")String customizedUserName){
+		List<Map<String, Object>> memList = memService.findMemberByName(customizedUserName);
 		return memList;
 	}
 }

@@ -3,10 +3,10 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<!DOCTYPE html>
-<html>
-<head>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+<jsp:include page="../backendNavBar.jsp" />
+
+<head>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 <script src="${contextRoot}/javascripts/bootstrap.bundle.min.js"></script>
@@ -17,7 +17,7 @@
 <title>修改文章頁面</title>
 </head>
 <body>
-<jsp:include page="../backendNavBar.jsp" />
+
 <div class="container">
 	<div class="row justify-content-center">
 		<div class="col-9">
@@ -62,4 +62,3 @@
 
 
 </body>
-</html>

@@ -36,7 +36,7 @@
 			<thead class="bg-info">
 			  <tr>
 				<th scope="col" style="width:4%;">ID</th>
-<!-- 				<th scope="col" style="width:4%;">img</th> -->
+				<th scope="col" style="width:4%;">img</th>
 				<th scope="col" style="width:20%;">CustomizedUserName</th>
 				<th scope="col" style="width:35%;">E-Mail</th>
 				<th scope="col" style="width:35%;">Password</th>
@@ -45,7 +45,7 @@
 			</thead>
 			<tr>
 				<td>ID</td>
-<!-- 				<td></td> -->
+				<td></td>
 				<td><input type="text" size="42%"  id="accountUpdateName"></td>
 				<td><input type="text" size="81%" id="accountUpdateEmail"></td>
 				<td><input type="text" size="81%" id="accountUpdatePassword"></td>
@@ -354,6 +354,7 @@ function update(obj) {
 
 				accountList += '<tr>'
 				accountList += '<td>' + value.id + '</td>'
+				accountList += '<td><img src="data:image/gif;base64,' + value.userAvatar + '"alt=""></td>'
 				accountList += '<td><input type="text" size="42%" id="accountUpdateName" value="' + value.customizedUserName + '"></td>'
 				accountList += '<td><input type="text" size="81%" id="accountUpdateEmail" value="' + value.eMail + '"></td>'
 				accountList += '<td><input type="text" size="81%" id="accountUpdatePassword" value="' + value.password + '"></td>'
