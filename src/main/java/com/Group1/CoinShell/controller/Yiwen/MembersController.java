@@ -206,6 +206,7 @@ public class MembersController {
 	 * @param dto
 	 * @return
 	 */
+	@ResponseBody
 	@PostMapping("/account/add")
 	public Map<String, String> addAccount(@RequestBody OkrDTO dto) {
 		Date date = new Date();
@@ -232,6 +233,7 @@ public class MembersController {
 	/**
 	 * 後台 AJAX 刪除: 傳會員ID回來找到對應ID刪除
 	 */
+	@ResponseBody
 	@DeleteMapping("/deleteAccount/{id}")
 	public Map<String, String> deleteAccount(@RequestBody OkrDTO dto){
 		System.out.println("delete : memId = " + dto.getId());
@@ -259,6 +261,7 @@ public class MembersController {
 	/**
 	 * 
 	 */
+	@ResponseBody
 	@PostMapping("/account/upSave")
 	public Map<String, String> upSaveAccount(@RequestBody OkrDTO dto){
 		Date date = new Date();
@@ -284,6 +287,7 @@ public class MembersController {
 		return result;
 	}
 	
+	@ResponseBody
 	@GetMapping("/memId")
 	public List<Members> memList(@RequestParam Integer id){
 		List<Members> mem = memService.findMemberById2(id);

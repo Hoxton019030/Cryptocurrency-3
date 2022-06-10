@@ -57,7 +57,8 @@ public class MembersService {
 	
 	// deleteMemberById
 	public void deleteMemberById(Integer id) {
-		membersDao.deleteMemberById(id);
+//		membersDao.deleteMemberById(id);
+		membersDao.deleteById(id);
 	}
 		
 	// findMemberByName 模糊查詢
