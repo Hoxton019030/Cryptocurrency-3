@@ -280,7 +280,7 @@
                         // console.log(array);
                         $("#atcTable").append(`
                         <tr class="table-info">
-                        <td><img class="tagImg" src="`+contextRoot+`/images/currencyIcon/`+value.tag+.`png" alt="">` + value.tag + `</td>
+                        <td><img class="tagImg" src="`+contextRoot+`/images/currencyIcon/`+value.tag+`.png" alt="">` + value.tag + `</td>
                         <td><a href="` + contextRoot + `/viewArticle/` + value.id + `" style="display: block;"><div class="b-list"><div>` + value.title + `</div></a><p>` + peek + `....</p></div></td>
                         <td align="center">
                             <label><input type="checkbox" class="check" checked><span class="heart"><i class="fa-solid fa-heart"></i></span>` + value.goodNum + `</label>
@@ -329,7 +329,6 @@
 
             function setNewsbyName() {
                 var name = document.getElementById("name").value;
-                debugger
                 $.ajax({
                     url: "http://localhost:8080/coinshell/news/select?title=" + name,
                     contentType: 'application/json; charset=UTF-8',
@@ -337,6 +336,7 @@
                     method: 'get',
                     success: function(result) {
                         console.log(result)
+                        console.log("成功");
                         $.each(result, function(index, value) {
                             $('#nn1').html(`<a href="#" onclick="window.open('` + result[0].url + `')"><img class="newsimg" src="` + result[0].imgUrl + `" alt=""></a>`);
                             $('#nn2').html(`<a href="#" onclick="window.open('` + result[1].url + `')"><img class="newsimg" src="` + result[1].imgUrl + `" alt=""></a>`);
