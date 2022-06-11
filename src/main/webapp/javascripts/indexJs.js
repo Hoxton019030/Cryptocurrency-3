@@ -260,7 +260,7 @@ function followList() {
                     coinList += '<td class="30d">' + value.percentChange30d + '</td>'
                     coinList += '<td class="vol24h">' + value.volume24h + '</td>'
                     coinList += '<td class="market">' + value.marketCap + '</td>'
-                    coinList += '<td style="width:10px;height:10px"><canvas id="myChart' + value.cmcRank + '"></canvas></td>'
+//                    coinList += '<td style="width:10px;height:10px"><canvas id="myChart' + value.cmcRank + '"></canvas></td>'
                     coinList += '</tr>';
 
                     $('#watch').append(coinList);
@@ -303,12 +303,7 @@ function followList() {
                                     }]
                                 },
                                 options: {
-                                    plugins: {
-                                        tooltip: {
-                                            mode: 'nearest',
-                                            intersect: false
-                                        }
-                                    },
+                                    plugins: {},
                                     elements: {
                                         line: {
                                             lineTension: 0
@@ -397,7 +392,7 @@ function loadCoinByName(memId) {
 
                 //注入折線圖至id=canvas
                 var xmlHttp = new XMLHttpRequest();
-                var url = "http://localhost:8080/coinshell/historical/get30days?currencyName=" + value.symbol;
+                var url = "http://localhost:8080/coinshell/historical/get7daysUsdPrice?currencyName=" + value.symbol;
                 xmlHttp.open("GET", url, true);
                 xmlHttp.send();
                 xmlHttp.onreadystatechange = function() {
@@ -406,14 +401,12 @@ function loadCoinByName(memId) {
                     if (this.readyState == 4 && this.status == 200) {
                         var data = JSON.parse(this.responseText);
                         var days = data.map(function(elem) {
-                            return elem.informationDate.substr(0, 14).replace('T', '').replace('-', '').replace('-', '').replace(':', '');
+                            return elem.informationDate.substr(4, 12).replace('T', '').replace('-', '').replace('-', '').replace(':', '');
                         });
                         var price = data.map(function(elem) {
                             return elem.USD_Price_of_Cryptocurrency;
                         });
 
-                        // const canvasTest = document.getElementById('canvasTest');
-                        // const ctx = canvasTest.getContext('2d');
                         const ctx = document.getElementById('myChart' + value.cmcRank).getContext('2d');
 
                         const myChart = new Chart(ctx, {
@@ -433,12 +426,7 @@ function loadCoinByName(memId) {
                                 }]
                             },
                             options: {
-                                plugins: {
-                                    tooltip: {
-                                        mode: 'nearest',
-                                        intersect: false
-                                    }
-                                },
+                                plugins: {},
                                 elements: {
                                     line: {
                                         lineTension: 0
@@ -448,12 +436,18 @@ function loadCoinByName(memId) {
                                     }
                                 },
                                 scales: {
+
                                     xAxes: [{
+                                        ticks: {
+                                            display: false
+                                        },
                                         type: 'time',
                                         time: {
                                             unit: 'hour',
                                         },
-
+                                        ticks: {
+                                            display: false //this will remove only the label
+                                        }
                                     }],
                                     yAxes: {
                                         beginAtZero: false
@@ -469,7 +463,7 @@ function loadCoinByName(memId) {
                 }
 
             })
-            window.clearTimeout(timeoutID);
+      		window.clearTimeout(timeoutID);
             //查詢後持續即時更新
             window.setTimeout(function() { loadCoinByName() }, 60000);
             upjquery();
